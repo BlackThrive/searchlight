@@ -1,0 +1,6 @@
+Built: 2026-09-16 07:25:30
+Archive: 2026-07.zip
+Archive SHA-256: 312e3b1533ac953df07636781588578335113ef918584de4fcdfcb014a69ca16
+Records: 4657
+Months: 2026-05, 2026-06, 2026-07
+CSV contents are unmodified, gzip-compressed. Original and stored hashes retained.

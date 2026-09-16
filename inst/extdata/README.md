@@ -14,3 +14,8 @@ Code is separately MIT licensed. Retrieved / verified on 2026-09-16.
   a crosswalk from perceived ethnicity to self-defined Census ethnicity.
 
 Full source links, semantics and verification dates are in `NOTES/data_sources.md`.
+
+The sample consists of original gzip-compressed CSVs, hashes, and a precomputed
+`sample-records.rds` for fast offline examples. The May-July 2026 request includes
+West Yorkshire and Dyfed-Powys. Only West Yorkshire submitted files in this
+window; the contract explicitly retains all three missing Dyfed-Powys months.

@@ -14,3 +14,27 @@ uncertainty and assumptions about missing data and exposure are reported separat
 MIT licensed code. Bundled public data retain their Open Government Licence v3.0
 attribution in `inst/extdata/README.md`. No code from policedatR, ExtractSS, or
 ukpolice is used or imported.
+
+## Offline quick start
+
+```r
+library(searchlight)
+records <- sl_sample()
+contract <- sl_contract(records)
+print(contract)
+summary(contract)
+contract$snapshots
+contract$versions
+contract$timestamps
+table(records$ethnicity_5)
+table(records$ethnicity_officer)
+table(records$force_id, records$month)
+head(records[, c("date", "ethnicity_5", "any_action", "arrest")])
+subset <- dplyr::filter(records, month == "2026-07")
+sl_contract(subset)$scope
+stopifnot(inherits(subset, "sl_records"))
+```
+
+The default May-July 2026 sample contains 4,657 West Yorkshire records.
+Dyfed-Powys is retained in the requested sample grid; its three missing CSVs are
+reported as missing submissions. CSV contents are unmodified and gzip-compressed.

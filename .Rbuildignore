@@ -12,3 +12,5 @@
 ^RELEASE_READY\.md$
 ^.*\.Rcheck$
 ^.*\.tar\.gz$
+^\.cache$
+^\.gitattributes$

@@ -13,10 +13,23 @@ Description: Acquire and audit public police stop and search archives for
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
+Imports:
+    cli,
+    digest,
+    dplyr,
+    httr2,
+    jsonlite,
+    readr,
+    rlang,
+    tibble,
+    xml2
 URL: https://github.com/black-thrive-global/searchlight
 BugReports: https://github.com/black-thrive-global/searchlight/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    httptest2,
+    withr,
+    zip
 Config/testthat/edition: 3

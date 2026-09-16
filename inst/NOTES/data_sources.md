@@ -24,3 +24,18 @@
 CSV layout, ONS boundary layers, NOMIS tables and Home Office benchmark values
 will be added only after direct verification at their milestone. No guessed
 endpoint or unverified benchmark is treated as a source.
+
+## Archive contents verified 2026-09-16
+
+The complete 2026-07 ZIP was downloaded from the official archive redirect to
+`https://policeuk-data.s3.amazonaws.com/archive/2026-07.zip` (1,733,868,300 bytes).
+Its published MD5 was verified and its local SHA-256 retained in the sample
+manifest. Member layout is `YYYY-MM/YYYY-MM-force-id-stop-and-search.csv`.
+The 15 CSV column names and order in the specification match the source exactly.
+The sample window is May-July 2026: West Yorkshire has 1,659, 1,466 and 1,532
+records. Dyfed-Powys has no stop-and-search CSV in this three-month window; the
+default is retained as instructed, with missing submissions, not zero counts.
+
+One historical index entry labels a multipart-style hash as MD5. The index
+retains that string and marks it invalid; acquisition chooses only entries with
+a 32-hex-digit published MD5. A multipart ETag is not silently treated as MD5.

@@ -24,3 +24,19 @@
 * The first as-CRAN check reported only an inability to verify the current time
   over the network. Set `_R_CHECK_SYSTEM_CLOCK_=FALSE` for offline local/CI checks;
   this avoids an unrelated external clock request and is disclosed in results.
+
+## 2026-09-16: M1
+
+* The latest three complete available months are May-July 2026. The requested
+  Dyfed-Powys files are absent in the latest bulk snapshot. Retain this force and
+  missingness in the contract, per the specified default; do not replace it or
+  invent records. Synthetic two-force archives independently test ingestion.
+* Bundled sample CSVs are byte-preserving gzip copies. Manifests retain both the
+  original CSV SHA-256 and the compressed-file SHA-256, plus full archive SHA-256.
+* Retain unknown outcomes as NA for each binary measure. The presence of an NFA
+  outcome does not override an independently reported linked-to-object flag.
+* Source coverage remains provenance after filtering; a separate contract scope
+  describes current rows. An analysis filter must not rewrite source submission
+  status. Retain both the requested force-month grid and selected versions.
+* Skip the malformed checksum on 2019-06.zip when choosing downloads; its
+  published multipart-style value is retained in the index for audit.

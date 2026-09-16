@@ -14,10 +14,11 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr, any::styler, any::lintr
+          extra-packages: any::covr, any::styler, any::lintr, any::pkgload
       - name: Style and lint
         run: |
           stopifnot(!any(styler::style_pkg(dry = "on")$changed))
+          pkgload::load_all(quiet = TRUE)
           stopifnot(length(lintr::lint_package()) == 0L)
         shell: Rscript {0}
       - name: Coverage gate

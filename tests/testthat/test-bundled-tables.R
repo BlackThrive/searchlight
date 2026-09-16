@@ -2,7 +2,7 @@ test_that("bundled force list contains the default forces", {
   force_text <- readLines(system.file(
     "extdata", "forces.json",
     package = "searchlight"
-  ))
+  ), warn = FALSE)
   expect_true(any(grepl("west-yorkshire", force_text, fixed = TRUE)))
   expect_true(any(grepl("dyfed-powys", force_text, fixed = TRUE)))
 })
