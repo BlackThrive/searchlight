@@ -1,0 +1,1 @@
+Milestone: M0 complete (2026-09-16).`nCompleted: package skeleton, source tables, tests, lint and local as-CRAN check (0 errors/warnings/notes; remote incoming and clock checks disabled).`nNext: M1 archive ingestion and immutable revision contracts.

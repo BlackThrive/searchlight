@@ -1,0 +1,21 @@
+police_code,census_code,ethnicity_19,ethnicity_5
+A3,1,Bangladeshi,Asian
+A4,2,Chinese,Asian
+A1,3,Indian,Asian
+A2,4,Pakistani,Asian
+A9,5,Other Asian,Asian
+B2,6,African,Black
+B1,7,Caribbean,Black
+B9,8,Other Black,Black
+M3,9,White and Asian,Mixed
+M2,10,White and Black African,Mixed
+M1,11,White and Black Caribbean,Mixed
+M9,12,Other Mixed,Mixed
+W1,13,British,White
+W2,14,Irish,White
+W3,15,Gypsy or Irish Traveller,White
+W4,16,Roma,White
+W9,17,Other White,White
+O1,18,Arab,Other
+O9,19,Other ethnic group,Other
+NS,,Unknown,Unknown

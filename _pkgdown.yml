@@ -1,0 +1,5 @@
+url: https://black-thrive-global.github.io/searchlight/
+template:
+  bootstrap: 5
+development:
+  mode: auto

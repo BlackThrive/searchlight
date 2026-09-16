@@ -1,0 +1,11 @@
+.Rproj.user/
+.Rhistory
+.RData
+*.Rcheck/
+*.tar.gz
+*.zip
+.cache/
+docs/
+data-raw/sources/
+data-raw/work/
+data-raw/checks/

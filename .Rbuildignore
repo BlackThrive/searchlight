@@ -1,0 +1,14 @@
+^LICENSE\.md$
+^AGENTS\.md$
+^\.git$
+^\.github$
+^\.gitignore$
+^\.lintr$
+^\.pre-commit-config\.yaml$
+^_pkgdown\.yml$
+^data-raw$
+^cran-comments\.md$
+^RELEASE_CHECKLIST\.md$
+^RELEASE_READY\.md$
+^.*\.Rcheck$
+^.*\.tar\.gz$

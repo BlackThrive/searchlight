@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: r-style
+        name: R style check
+        entry: Rscript -e "stopifnot(!any(styler::style_pkg(dry = 'on')$changed))"
+        language: system
+        pass_filenames: false
+        files: '\.R$'
+      - id: r-lint
+        name: R lint check
+        entry: Rscript -e "stopifnot(length(lintr::lint_package()) == 0L)"
+        language: system
+        pass_filenames: false
+        files: '\.R$'

@@ -1,0 +1,22 @@
+Package: searchlight
+Title: Audited Analysis of Police Stop and Search Records
+Version: 0.1.0
+Authors@R: 
+    c(person("Mustapha", "Wasseja", email = "mustapha.wasseja.mohammed@gmail.com",
+             role = c("aut", "cre")),
+      person("Black Thrive Global", role = c("cph", "fnd")))
+Description: Acquire and audit public police stop and search archives for
+    England and Wales, retaining provenance and explicit coverage information.
+    Designed for exposure-based ethnic disparity analysis with separately
+    reported sampling and assumption uncertainty. Contains public sector
+    information licensed under the Open Government Licence v3.0.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+URL: https://github.com/black-thrive-global/searchlight
+BugReports: https://github.com/black-thrive-global/searchlight/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
