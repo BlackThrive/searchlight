@@ -1,0 +1,8 @@
+{
+  "files": 430,
+  "events": 476738,
+  "distinct_coordinate_strings": 114223,
+  "london_month_crossings": 72,
+  "invalid_months": [],
+  "method": "Python standard-library CSV audit; no searchlight code"
+}

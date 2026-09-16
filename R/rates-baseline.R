@@ -265,6 +265,9 @@ sl_rate_ratio <- function(rates, reference = "White", comparison = "Black",
     fit$excluded_pair_events <- sum(group$n[excluded], na.rm = TRUE)
     unknown <- group$ethnicity == "Unknown"
     fit$unknown_events <- sum(group$n[unknown], na.rm = TRUE)
+    if (all(is.na(group$n))) {
+      fit$excluded_pair_events <- fit$unknown_events <- NA_real_
+    }
     dplyr::bind_cols(group[1, strata, drop = FALSE], fit)
   })
   sl_carry(dplyr::bind_rows(rows), contract, "sl_rate_ratio")
@@ -285,13 +288,16 @@ sl_validate_pair <- function(reference, comparison, level = 0.95) {
 
 #' @noRd
 sl_pair_fit <- function(d, reference, comparison, method, level) {
-  n_ref <- sum(d$n[d$ethnicity == reference])
-  n_cmp <- sum(d$n[d$ethnicity == comparison])
+  has_ref <- any(d$ethnicity == reference)
+  has_cmp <- any(d$ethnicity == comparison)
+  n_ref <- if (has_ref) sum(d$n[d$ethnicity == reference]) else NA_real_
+  n_cmp <- if (has_cmp) sum(d$n[d$ethnicity == comparison]) else NA_real_
   e_ref <- sum(d$exposure[d$ethnicity == reference])
   e_cmp <- sum(d$exposure[d$ethnicity == comparison])
   fit <- NULL
   ratio <- low <- high <- dispersion <- NA_real_
-  estimable <- e_ref > 0 && e_cmp > 0 && n_ref + n_cmp > 0
+  estimable <- has_ref && has_cmp && e_ref > 0 && e_cmp > 0 &&
+    n_ref + n_cmp > 0
   if (estimable) {
     ratio <- (n_cmp / e_cmp) / (n_ref / e_ref)
     d$group <- factor(d$ethnicity, levels = c(reference, comparison))

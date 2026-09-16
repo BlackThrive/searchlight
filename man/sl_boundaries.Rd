@@ -42,7 +42,7 @@ boundaries$lsoa21[1, "geography_code"]
 \seealso{
 \code{\link[=sl_assign_geography]{sl_assign_geography()}}, \code{\link[=sl_population]{sl_population()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

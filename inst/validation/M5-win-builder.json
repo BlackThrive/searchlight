@@ -1,0 +1,27 @@
+{
+  "attempted": "2026-09-16T14:08:10.982495+00:00",
+  "service": "https://win-builder.r-project.org/upload.aspx",
+  "target": "R-devel",
+  "transport": "HTTPS",
+  "source_file": "searchlight_0.1.0.tar.gz",
+  "source_sha256": "623aa0a80117858f19f025bcad8944e98812ec9a84018c913d17924150793028",
+  "source_bytes": 1618183,
+  "check_verified": false,
+  "previous_attempt": {
+    "attempted": "2026-09-16T14:06:25.151725+00:00",
+    "service": "https://win-builder.r-project.org/",
+    "target": "R-devel",
+    "source_file": "searchlight_0.1.0.tar.gz",
+    "source_sha256": "623aa0a80117858f19f025bcad8944e98812ec9a84018c913d17924150793028",
+    "source_bytes": 1618183,
+    "check_verified": false,
+    "transport": "FTP",
+    "transfer_started": true,
+    "status": "submission not confirmed",
+    "reason": "[WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond"
+  },
+  "status": "uploaded via HTTPS; check result pending",
+  "http_status": 200,
+  "response_confirmation": "File name: searchlight_0.1.0.tar.gz File Size: 1618183 bytes Content type: application/gzip",
+  "result_delivery": "DESCRIPTION maintainer email"
+}

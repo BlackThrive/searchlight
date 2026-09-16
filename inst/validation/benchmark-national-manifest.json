@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-16 16:20:24.17556",
+  "finished": "2026-09-16 16:29:42.288076",
+  "complete": true,
+  "exact_assignment_and_count_agreement": true,
+  "replications": 1,
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "resumed_from_saved_national_run": true,
+  "platform": "x86_64-w64-mingw32",
+  "system": {
+    "sysname": "Windows",
+    "release": "10 x64",
+    "version": "build 26200",
+    "nodename": "MUSTAPHA",
+    "machine": "x86-64",
+    "login": "musta",
+    "user": "musta",
+    "effective_user": "musta",
+    "udomain": "MUSTAPHA"
+  },
+  "events": 476738,
+  "rows": 116551,
+  "scope": "43 territorial E&W forces, August 2025-July 2026; missing files retained in coverage",
+  "comparison": "One national local spatial batch versus twelve monthly local batches",
+  "included": "ZIP and CSV hash verification, snapshot reads, schema parsing, auditing, spatial assignment and aggregation",
+  "excluded": "Initial network downloads, library loading and writing validation artifacts",
+  "cache": "ZIP, extracted CSVs and boundaries already present; OS cache and workstation load uncontrolled",
+  "interpretation": "Measured local run, not a hardware-independent performance guarantee. No API record acquisition."
+}

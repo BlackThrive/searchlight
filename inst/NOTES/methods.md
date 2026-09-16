@@ -40,6 +40,9 @@ flag, not a probability that an event belongs in another area. Published
 locations are snap points and can have systematic error. Polygon generalisation
 and coastline clipping introduce additional limitations. Missing or out-of-range
 coordinates retain NA assignment; overlapping polygon matches are flagged.
+Boundary-sensitive shares use assigned events with measured distances. Missing
+coordinate and unassigned shares use all supplied events, so the denominators
+of these diagnostics differ and remain explicit.
 
 Population exposure is usual residents at the Census 2021 reference date.
 Ethnicity derives exclusively from self-defined records; officer-defined
@@ -183,3 +186,49 @@ police deployment, reporting, time accuracy and residual daylight overlap. These
 assumptions are exposed in every result. Repeated events and unmeasured selection
 can violate independent-event inference. An undefined result is not evidence of
 no disparity.
+
+## References and their roles
+
+* Ratcliffe, J. H. and Hyland, S. S. (2025). Police stops and naive denominators.
+  *Crime Science* 14, 10. [DOI](https://doi.org/10.1186/s40163-025-00252-y).
+  Motivates explicit exposure scenarios. Alternative policing/activity measures
+  can themselves reflect selection and policy; no denominator is declared neutral.
+* Manski, C. F. (2003). *Partial Identification of Probability Distributions*.
+  Springer. [DOI](https://doi.org/10.1007/b97478). Provides the partial-identification
+  perspective. The package's finite-event allocation extrema do not automatically
+  bound a latent population parameter under sampling variation.
+* Knorr-Held, L. and Best, N. G. (2001). A shared component model for detecting
+  joint and selective clustering of two diseases. *JRSS A* 164(1), 73-85.
+  [DOI](https://doi.org/10.1111/1467-985X.00187). Context for separating shared and
+  group-specific spatial structure; the fitted bivariate MCAR parameterisation
+  and covariance assumptions are stated above.
+* Lee, D. (2013). CARBayes: An R package for Bayesian spatial modeling with
+  conditional autoregressive priors. *Journal of Statistical Software* 55(13).
+  [Article](https://www.jstatsoft.org/article/view/v055i13). Backend documentation
+  is verified against CARBayes 6.1.1 for the actual multivariate interface.
+* Riebler, A., Sorbye, S. H., Simpson, D. and Rue, H. (2016). An intuitive Bayesian
+  spatial model for disease mapping that accounts for scaling. *Statistical
+  Methods in Medical Research* 25(4), 1145-1165.
+  [DOI](https://doi.org/10.1177/0962280216660421). BYM2 background; that backend is
+  deferred beyond 0.1.0 and is not a description of the current MCAR prior.
+* Grogger, J. and Ridgeway, G. (2006). Testing for racial profiling in traffic
+  stops from behind a veil of darkness. *JASA* 101(475).
+  [Author-hosted reprint](https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf).
+  The evening overlap motivates the darkness design, subject to the transfer
+  assumptions for pedestrian search stated above.
+* Knowles, J., Persico, N. and Todd, P. (2001). Racial bias in motor vehicle
+  searches. *Journal of Political Economy* 109(1).
+  [DOI](https://doi.org/10.1086/318603). Outcome-test context; reported hit-rate
+  associations alone do not identify search thresholds or discrimination.
+* Miles-Wilson, J. and Okoroji, C. (2026). policedatR: a comprehensive R package
+  for stop and search data in England and Wales. *Crime Science* 15, 11.
+  [DOI](https://doi.org/10.1186/s40163-025-00266-6). Cited only to contrast related
+  work with this package's bulk-archive, local-geography and count/exposure design.
+  No implementation from that package, ExtractSS or ukpolice was consulted.
+* Home Office (2025). Police powers and procedures, England and Wales, year
+  ending March 2025. [Publication](https://www.gov.uk/government/statistics/stop-and-search-arrests-and-mental-health-detentions-march-2025).
+  Published force totals are a scope-sensitive benchmark, not a correction factor.
+* Office for National Statistics (2023). Ethnic group classifications: Census
+  2021. [Classification](https://www.ons.gov.uk/census/census2021dictionary/variablesbytopic/ethnicgroupnationalidentitylanguageandreligionvariablescensus2021/ethnicgroup/classifications).
+  Supplies the Census categories. Unknown police ethnicity has no corresponding
+  resident-population denominator.

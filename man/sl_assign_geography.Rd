@@ -29,6 +29,8 @@ Uses British National Grid (EPSG:27700). Missing or invalid coordinates are
 retained with NA assignments. On shared polygon edges, ties are resolved by
 code and flagged ambiguous. Boundary distances describe anonymised snap
 points, not the unknown true locations; resulting error may be systematic.
+The boundary-sensitive share uses assigned events with measured distances.
+Missing-coordinate and unassigned shares use all supplied events.
 }
 \examples{
 b <- readRDS(system.file("extdata", "sample-boundaries.rds",
@@ -41,7 +43,7 @@ sl_assign_geography(x, b, "msoa21")
 \seealso{
 \code{\link[=sl_boundaries]{sl_boundaries()}}, \code{\link[=sl_location_quality]{sl_location_quality()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

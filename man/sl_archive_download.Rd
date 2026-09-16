@@ -37,7 +37,7 @@ index$archive_file[1]
 \seealso{
 \code{\link[=sl_archive_snapshot]{sl_archive_snapshot()}}, \code{\link[=sl_list_versions]{sl_list_versions()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},
 \code{\link{sl_assign_geography}()},

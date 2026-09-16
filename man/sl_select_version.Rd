@@ -38,7 +38,7 @@ sl_select_version(v)
 \seealso{
 \code{\link[=sl_read_records]{sl_read_records()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

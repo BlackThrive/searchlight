@@ -7,6 +7,10 @@
 #' supplied UTC offsets and are displayed in Europe/London. Absent or refused
 #' ethnicity is Unknown. Missing outcome measures remain NA, not negative
 #' outcomes.
+#' The filename defines the submission month. Offset conversion can cross a
+#' month boundary; date_month_crossing records this without moving the event
+#' into another source file. A timestamp must match the filename in either its
+#' supplied clock or the London clock.
 #' @param dir Snapshot cache directory.
 #' @param versions One selected version per force-month; defaults to latest.
 #' @return An `sl_records` tibble with a validated ingestion contract.
@@ -76,7 +80,11 @@ sl_read_records <- function(dir = sl_cache_dir(), versions = NULL) {
     x$force_id <- rep(versions$force_id[i], nrow(x))
     x$month <- rep(versions$month[i], nrow(x))
     record_month <- format(x$date, "%Y-%m", tz = "Europe/London")
-    if (any(!is.na(x$date) & record_month != x$month)) {
+    source_month <- substr(x$date_raw, 1, 7)
+    x$date_month_crossing <- !is.na(x$date) & record_month != x$month
+    wrong_month <- !is.na(x$date) & record_month != x$month &
+      source_month != x$month
+    if (any(wrong_month)) {
       sl_abort(
         "Record timestamp does not belong to its filename month.", "schema"
       )
@@ -161,7 +169,8 @@ sl_time_summary <- function(records, threshold) {
     force_id = character(), month = character(),
     n_records = integer(), midnight_share = double(),
     source_midnight_share = double(), gating_midnight_share = double(),
-    missing_time_share = double(), time_reliable = logical()
+    missing_time_share = double(), london_month_mismatch_share = double(),
+    time_reliable = logical()
   )
   groups <- split(seq_len(nrow(records)), paste(
     records$force_id,
@@ -189,6 +198,9 @@ sl_time_summary <- function(records, threshold) {
       force_id = x$force_id[1], month = x$month[1], n_records = nrow(x),
       midnight_share = midnight, missing_time_share = missing,
       source_midnight_share = source_midnight, gating_midnight_share = gating,
+      london_month_mismatch_share = sl_mean(
+        format(x$date, "%Y-%m", tz = "Europe/London") != x$month
+      ),
       time_reliable = !is.na(gating) && gating < threshold && missing == 0
     )
   })) |> dplyr::bind_rows(empty)

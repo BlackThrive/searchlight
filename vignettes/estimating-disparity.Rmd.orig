@@ -11,7 +11,7 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 6,
+knitr::opts_chunk$set(error = FALSE, collapse = TRUE, comment = "#>", fig.width = 6,
   fig.height = 3.8, dpi = 96, fig.path = "figures/estimating-")
 library(searchlight)
 data_file <- function(name) system.file("extdata", name, package = "searchlight")
@@ -166,7 +166,10 @@ population summaries; standardisation does not establish a causal disparity.
 ## Rankings need uncertainty, too
 
 ```{r rankings}
-ranks <- sl_ranking_stability(ratios, n = 200, seed = 2026)
+eligible <- ratios$n_reference > 0 & ratios$n_comparison > 0
+knitr::kable(ratios[!eligible, c("geography_code", "n_reference", "n_comparison")],
+  caption = "Excluded from plug-in bootstrap: a group has zero events")
+ranks <- sl_ranking_stability(ratios[eligible, ], n = 200, seed = 2026)
 knitr::kable(as.data.frame(ranks))
 knitr::kable(attr(ranks, "pairwise"), digits = 3)
 ```
@@ -181,6 +184,28 @@ population and recording assumptions. An apparent league table is not evidence
 that every pair of areas differs.
 
 ## Validation and limits
+
+The release missingness study runs 20 independent 25-area simulations for each
+combination of MCAR, force-dependent MAR and ethnicity-dependent MNAR, at baseline
+missing probabilities 0.1, 0.3 and 0.6. The complete realised event ratio is known
+before ethnicity is hidden. Its containment is an algebraic check of the extreme
+allocations, not a claim about coverage of a latent generating rate ratio.
+
+```{r missingness-evidence}
+missingness_path <- system.file("validation", "missingness-summary.csv",
+  package = "searchlight")
+missingness <- utils::read.csv(missingness_path)
+knitr::kable(missingness[c("mechanism", "missing_rate", "replications",
+  "realised_containment", "generating_containment", "mean_median_width")],
+  digits = 3)
+```
+
+The mean of replicate median widths describes an assumption range on the ratio
+scale. Infinite-width frequency and Monte Carlo uncertainty remain in the saved
+validation tables. Force/object proportional reallocation also assumes that the
+pooled known composition transports to each area. Even MAR within force does not
+make that composition spatially homogeneous. See `inst/scripts/missingness-study.R`
+and its manifest for seeds, area-level evidence and scenario error summaries.
 
 Known-answer tests cover event counts exceeding population, missing months,
 exact zero-count intervals, analytical allocation bounds and tipping shares,

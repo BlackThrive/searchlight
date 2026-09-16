@@ -32,7 +32,7 @@ sl_list_versions(system.file("extdata", "sample", package = "searchlight"))
 \seealso{
 \code{\link[=sl_select_version]{sl_select_version()}}, \code{\link[=sl_read_records]{sl_read_records()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_assign_geography}()},

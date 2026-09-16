@@ -12,7 +12,7 @@ vignette: >
 
 ```{r setup, include=FALSE}
 library(searchlight)
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 6,
+knitr::opts_chunk$set(error = FALSE, collapse = TRUE, comment = "#>", fig.width = 6,
   fig.height = 3.6, dpi = 96, fig.path = "figures/spatial-")
 data_file <- function(name) system.file("extdata", name, package = "searchlight")
 validation_file <- function(name) system.file("validation", name, package = "searchlight")
@@ -182,7 +182,7 @@ submissions. Inspect unsmoothed counts, sensitivity bounds and convergence befor
 using a smoothed map, and report where the estimates become less accurate.
 
 The model interface and covariance structure are documented in the
-[CARBayes manual](https://cran.r-project.org/web/packages/CARBayes/CARBayes.pdf)
+[CARBayes package and manual](https://CRAN.R-project.org/package=CARBayes)
 and [Lee (2013)](https://www.jstatsoft.org/article/view/v055i13).
 The [posterior diagnostic documentation](https://mc-stan.org/posterior/reference/rhat.html)
 describes the convergence statistic used here.

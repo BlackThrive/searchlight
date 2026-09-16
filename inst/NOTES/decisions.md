@@ -193,3 +193,83 @@
   NOT_CRAN coverage run (94.7%). Retain the same disclosed offline incoming,
   clock and manual-PDF exclusions as earlier milestone checks. These local
   results do not assert that the external release matrix has run.
+
+## 2026-09-16: M5
+
+* Render an installed Markdown/Rmd report template with commonmark and inline
+  CSS. This produces offline HTML without requiring Pandoc or executing models
+  inside a report. Require explicit output paths and opt-in overwriting. Escape
+  supplied text, display result-specific scope/diagnostics, label truncation,
+  and separate sampling uncertainty from assumption ranges.
+* Preserve the filename's submission month when London conversion of an explicit
+  source offset crosses midnight into another month. Accept timestamps matching
+  either source or London clock month, flag London mismatches and retain raw
+  strings. Continue refusing dates belonging to neither month. This prevents a
+  valid late-month UTC record from blocking national archive ingestion.
+* National spatial assignment processes each exact published coordinate once,
+  then restores every event's assignment. This is computational reuse, never
+  event deduplication. Compute polygon boundaries once and point-edge distances
+  in batches of at most 2,000 points to bound temporary geometry memory. Quality
+  summaries still weight events, including repeated coordinates.
+* Independent national reproduction found that entirely unsubmitted forces had
+  undefined ratios but zero counts in the ratio summary, because summing an
+  empty model frame returned zero. Keep reference/comparison and Unknown counts
+  unavailable (NA) when no submitted data exist. Submitted zero-event groups
+  still remain zero. Add both synthetic and independent real-fixture regressions.
+* Keep independent force-ratio reference construction separate from the package:
+  Python standard-library CSV parsing, raw broad ethnicity labels, and public
+  NOMIS cells aggregated with the ONS LAD22-PFA22 lookup. Compare all monthly
+  counts before comparing ratios; flag incomplete years explicitly. This checks
+  arithmetic and ingestion, not the substantive validity of resident exposure.
+* The missingness study targets the complete realised event ratio for exact
+  containment. Latent generating ratios additionally vary through Poisson
+  sampling; report their containment separately without relabelling allocation
+  bounds as confidence intervals. Run twenty replicates per mechanism/rate cell.
+* Use the canonical R-hub v1 workflow unchanged. The mandated repository URL
+  still cannot be resolved by the authenticated GitHub account. Keep remote
+  checks and deployment pending; do not replace the repository or manufacture
+  successful external results.
+* Spelling review caught a developer-only whitespace regular expression that
+  also stripped a literal final t with R's default regex engine. Use the POSIX
+  blank-character class and regenerate help pages and vignette HTML from source.
+  Do not whitelist these damaged words. The package's analysis code is unaffected.
+* Two long-running R sessions ended unexpectedly during national benchmarking
+  and documentation generation, without a recorded R error. Preserve completed
+  missingness and coverage outputs. Restart only unfinished work sequentially,
+  add benchmark stage progress, and do not infer success from partial artifacts.
+* Treat report titles and statements as literal HTML text, including newlines.
+  Escaping angle brackets alone does not prevent a Markdown image in a title
+  from loading an external asset. Wrap the title and encode line breaks before
+  Markdown rendering; extend the offline-report regression with image syntax.
+* A local TinyTeX installation is now available. Include PDF-manual generation
+  in the final M5 check; earlier milestones retain their disclosed no-manual
+  exception. Keep the local check offline, with incoming and clock probes
+  excluded. These remain distinct from the pending external check matrix.
+* National assignment equality passed, but the benchmark's whole-object count
+  comparison also compared ingestion metadata such as creation timestamps.
+  Compare every aggregate column exactly, retain assignment checks, checkpoint
+  diagnostics, and rerun the monthly method against the saved national result.
+  Disclose this resumed comparison and uncontrolled OS cache/workstation load.
+* Build pkgdown in a temporary source copy outside Dropbox, then copy finished
+  pages back. The first in-workspace build encountered a locked temporary
+  --find-assets.html file; completed statistical outputs were unaffected.
+* Final visual review found a printed bootstrap error in the assumptions
+  vignette: one example area has zero Black events. Display that exclusion and
+  rank the three eligible areas; retain all four in rates and sensitivity.
+  Correct the quick start and make vignette generation fail on unexpected errors.
+* On Windows, R CMD build copies the source tree before applying .Rbuildignore.
+  The national cache now exceeds 2 GB. Stage only standard package inputs into
+  a temporary directory for local checks and source builds, retaining all R,
+  help, tests, vignettes and installed resources. This avoids copying research
+  caches and avoids Dropbox locks without weakening any check.
+* Final local M5 check passed with PDF/HTML manuals: zero errors, warnings and
+  notes, 392 assertions, maximum example time 2.25 seconds, installed size
+  2,943,212 bytes and extdata 810,818 bytes. Full developer recovery/snapshot
+  tests passed under coverage (94.9358%). Style, lint and spelling are clean.
+  R-hub was attempted and returned Not Found for the required repository.
+  Keep the external matrix, URL failures, deployment and hosted-check results
+  explicit; do not create RELEASE_READY.md or submit to CRAN.
+* Win-builder's FTP data connection timed out without confirmation. The official
+  HTTPS R-devel form then acknowledged searchlight_0.1.0.tar.gz and its exact
+  1,618,183-byte size. Save both attempts with the archive SHA-256; the emailed
+  check result remains unverified. An upload receipt is not a passing check.

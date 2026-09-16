@@ -161,3 +161,19 @@ notices require resolution before they can be treated as current issues.
   Searchlight documents additional assumptions for pedestrian searches.
 * [Knowles, Persico and Todd (2001)](https://www.journals.uchicago.edu/doi/10.1086/318603)
   is cited for outcome-test interpretation; no package implementation was used.
+
+## Release validation sources verified 2026-09-16
+
+* [ONS LAD22-CSP22-PFA22 lookup](https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/LAD22_CSP22_PFA22_EW_LU/FeatureServer/0)
+  item `4206337e432b45f686e29ac31d731765` supplies LAD22CD and PFA22CD for
+  331 local authorities and 43 territorial forces. This matches the Census
+  hierarchy vintage and avoids silently joining restructured LAD25 codes.
+  Its metadata links to the [ONS geography licences](https://www.ons.gov.uk/methodology/geography/licences),
+  which explicitly license non-postcode/non-UPRN lookup products under OGL v3.
+* The independent reproduction downloads all 6,289 TS021 cells (331 x 19),
+  validates geography completeness and normal observation status, and groups
+  using published label prefixes rather than the package's mapping table.
+  Raw source URLs and SHA-256 hashes are in `reproduction-manifest.json`.
+* [commonmark reference](https://r-lib.r-universe.dev/commonmark/doc/manual.html)
+  documents `markdown_html()` for the offline report template renderer. Reports
+  use inline CSS and escaped user text, with no runtime asset downloads.

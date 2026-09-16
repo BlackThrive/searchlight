@@ -106,7 +106,8 @@ Equal hit rates need not imply equal decision thresholds, and differing hit rate
 do not by themselves establish discrimination. Repeated searches also challenge
 independent-event intervals when identifiers for clustering are unavailable.
 These interpretation limits are related to the outcome-test framework of
-[Knowles, Persico and Todd (2001)](https://www.journals.uchicago.edu/doi/10.1086/318603).
+Knowles, Persico and Todd (2001), doi:10.1086/318603
+([open working-paper version](https://www.nber.org/system/files/working_papers/w7449/w7449.pdf)).
 
 ## A time-quality screen is mandatory
 
@@ -292,4 +293,4 @@ and selection or reporting can change. These observational diagnostics do not
 establish a causal effect or, alone, establish discrimination.
 
 Astronomical field names and the time-zone interface were verified against the
-[suncalc manual](https://cran.r-project.org/web/packages/suncalc/suncalc.pdf).
+[suncalc package and manual](https://CRAN.R-project.org/package=suncalc).

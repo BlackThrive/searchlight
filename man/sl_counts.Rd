@@ -41,7 +41,7 @@ head(counts)
 \seealso{
 \code{\link[=sl_rates]{sl_rates()}}, \code{\link[=sl_coverage]{sl_coverage()}}
 
-Other rates: 
+Other rates:
 \code{\link{sl_rate_ratio}()},
 \code{\link{sl_rates}()}
 }

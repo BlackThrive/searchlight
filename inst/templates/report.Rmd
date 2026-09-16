@@ -1,0 +1,76 @@
+<p class="eyebrow">BLACK THRIVE GLOBAL / SEARCHLIGHT</p>
+
+# Evidence and assumptions
+
+{{title}}
+
+{{summary}}
+
+Recorded searches are events, not unique people. An event-rate ratio is not a
+person's probability of being searched. Unknown ethnicity remains visible.
+
+## Submission coverage
+
+This table describes the selected source files, including after records are
+filtered. A missing submission is unavailable data, never zero searches. The
+event count above describes the records supplied to this report. Suspected
+partial submissions and revisions remain flagged.
+
+{{coverage}}
+
+## Time and location quality
+
+Timestamp diagnostics are screening rules, not proof that times are accurate.
+Darkness analysis excludes force-months that fail or lack a reliable-time flag.
+
+{{timestamps}}
+
+Coordinates are anonymised snap points. Boundary sensitivity measures proximity
+to a geography edge; it does not measure or correct true location error.
+The boundary-sensitive share uses assigned events with measured distances.
+Missing-coordinate and unassigned shares use all supplied events.
+
+{{geography}}
+
+## Estimates
+
+Each supplied analysis retains its own scope, exposures and exclusions. Rates
+use submitted population-time. Sampling intervals condition on the model and
+denominator. They do not quantify uncertainty about unobserved ethnicity,
+population movement, Census measurement or incomplete submissions.
+
+{{estimates}}
+
+## Assumptions
+
+Resident Census population is an exposure choice. It may differ from the people
+present or exposed to police activity. Missing-ethnicity allocations are stated
+scenarios. Their ranges are not confidence intervals and are not combined with
+sampling uncertainty. Spatial smoothing stabilises under its model assumptions;
+inspect unsmoothed data, local changes and convergence diagnostics.
+
+{{assumptions}}
+
+## Limitations
+
+Repeated events, deployment, activity, selection and measurement can affect
+comparisons. Hit rates condition on being searched and do not by themselves
+establish discrimination. Darkness associations require assumptions about
+visibility and comparable activity and deployment. The method originated for
+vehicle stops; its transfer to pedestrian searches requires justification.
+Neither an undefined result nor a wide interval establishes absence of disparity.
+
+{{limitations}}
+
+## Sources and reproducibility
+
+[data.police.uk archive](https://data.police.uk/data/archive/),
+[ONS geography](https://geoportal.statistics.gov.uk/) and
+[NOMIS Census data](https://www.nomisweb.co.uk/) supply the public inputs.
+
+Public archive and ONS/NOMIS data retain their Open Government Licence v3.0
+attribution. The following metadata identify snapshots, source hashes, geography
+vintages, population sources and classification. No external assets or scripts
+are loaded when this report is viewed.
+
+{{sources}}

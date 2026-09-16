@@ -48,6 +48,14 @@ test_that("time exposure excludes absent months and retains warnings", {
   )
   expect_equal(sum(r$exposure[r$ethnicity == "White"]), 1000 / 12)
   expect_equal(sl_rate_ratio(r)$ratio, 2.5)
+  expect_warning(unavailable <- sl_rates(absent, fixture_population()),
+    class = "searchlight_warning_coverage"
+  )
+  unavailable <- sl_rate_ratio(unavailable)
+  expect_true(is.na(unavailable$n_reference))
+  expect_true(is.na(unavailable$n_comparison))
+  expect_true(is.na(unavailable$unknown_events))
+  expect_false(unavailable$estimable)
   x$status[1:3] <- "partial_suspected"
   expect_warning(sl_rates(x[1:3, ], fixture_population()), "partial")
   bad <- fixture_population()

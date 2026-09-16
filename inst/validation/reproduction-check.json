@@ -1,0 +1,10 @@
+{
+  "all_monthly_count_cells_exact": true,
+  "cells": 3096,
+  "max_absolute_ratio_difference": 1.7764e-15,
+  "ratio_tolerance": 1e-12,
+  "forces": 43,
+  "complete_year_forces": 28,
+  "missing_years": 2,
+  "interpretation": "Independent Python reference agrees with parsed archive counts and package event-rate ratios."
+}

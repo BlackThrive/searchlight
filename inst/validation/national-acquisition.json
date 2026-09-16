@@ -1,0 +1,19 @@
+{
+  "months": ["2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07"],
+  "requested_forces": ["avon-and-somerset", "bedfordshire", "cambridgeshire", "cheshire", "city-of-london", "cleveland", "cumbria", "derbyshire", "devon-and-cornwall", "dorset", "durham", "essex", "gloucestershire", "greater-manchester", "gwent", "hampshire", "dyfed-powys", "hertfordshire", "humberside", "kent", "lancashire", "leicestershire", "lincolnshire", "merseyside", "metropolitan", "norfolk", "north-wales", "north-yorkshire", "northamptonshire", "northumbria", "nottinghamshire", "south-wales", "south-yorkshire", "staffordshire", "suffolk", "surrey", "sussex", "thames-valley", "warwickshire", "west-mercia", "west-midlands", "west-yorkshire", "wiltshire"],
+  "files": 430,
+  "events": 476738,
+  "snapshot_seconds": [49.83, 18.97, 96.19],
+  "boundaries": 7264,
+  "boundary_source": {
+    "type": "msoa21",
+    "layer_id": "6b282db29762450881ed5159259a6e4e",
+    "service_layer": 0,
+    "vintage": "2021-12",
+    "crs": "WGS 84",
+    "retrieved": "2026-09-16 14:41:37",
+    "url": "https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Middle_layer_Super_Output_Areas_December_2021_Boundaries_EW_BGC_V3/FeatureServer/0",
+    "generalisation_m": 20
+  },
+  "note": "Network and initial snapshot preparation are outside cached benchmarks."
+}

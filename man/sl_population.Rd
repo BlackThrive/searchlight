@@ -33,7 +33,7 @@ head(p$msoa21)
 \seealso{
 \code{\link[=sl_exposure]{sl_exposure()}}, \code{\link[=sl_population_crosstab]{sl_population_crosstab()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

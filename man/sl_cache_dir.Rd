@@ -21,7 +21,7 @@ sl_cache_dir()
 \seealso{
 \code{\link[=sl_archive_index]{sl_archive_index()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

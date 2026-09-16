@@ -143,7 +143,7 @@ pre, code {
 background-color: #f7f7f7;
 border-radius: 3px;
 color: #333;
-white-space: pre-wrap; 
+white-space: pre-wrap;
 }
 pre {
 border-radius: 3px;
@@ -211,18 +211,18 @@ text-decoration: underline; }
 a[href^="https:"] {
 text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
+code > span.kw { color: #555; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #d14; }
+code > span.fl { color: #d14; }
+code > span.ch { color: #d14; }
+code > span.st { color: #d14; }
+code > span.co { color: #888888; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #900; font-weight: bold; }
+code > span.er { color: #a61717; background-color: #e3d2d2; }
 </style>
 
 
@@ -978,15 +978,106 @@ not establish a causal disparity.</p>
 </div>
 <div id="rankings-need-uncertainty-too" class="section level2">
 <h2>Rankings need uncertainty, too</h2>
-<pre class="r"><code>ranks &lt;- sl_ranking_stability(ratios, n = 200, seed = 2026)
-#&gt; Error in `sl_abort()` at searchlight/R/sens-ranking.R:93:9:
-#&gt; ! Bootstrap needs positive groups and a count distribution.
-knitr::kable(as.data.frame(ranks))
-#&gt; Error:
-#&gt; ! object &#39;ranks&#39; not found
-knitr::kable(attr(ranks, &quot;pairwise&quot;), digits = 3)
-#&gt; Error:
-#&gt; ! object &#39;ranks&#39; not found</code></pre>
+<pre class="r"><code>eligible &lt;- ratios$n_reference &gt; 0 &amp; ratios$n_comparison &gt; 0
+knitr::kable(ratios[!eligible, c(&quot;geography_code&quot;, &quot;n_reference&quot;, &quot;n_comparison&quot;)],
+  caption = &quot;Excluded from plug-in bootstrap: a group has zero events&quot;)</code></pre>
+<table>
+<caption>Excluded from plug-in bootstrap: a group has zero
+events</caption>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="right">n_reference</th>
+<th align="right">n_comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="right">18</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>ranks &lt;- sl_ranking_stability(ratios[eligible, ], n = 200, seed = 2026)
+knitr::kable(as.data.frame(ranks))</code></pre>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="12%" />
+<col width="13%" />
+<col width="22%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="right">median_rank</th>
+<th align="right">rank_low</th>
+<th align="right">rank_high</th>
+<th align="right">effective_draws</th>
+<th align="left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002454</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">200</td>
+<td align="left">bootstrap</td>
+</tr>
+<tr class="even">
+<td align="left">E02006875</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">200</td>
+<td align="left">bootstrap</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006948</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">200</td>
+<td align="left">bootstrap</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(attr(ranks, &quot;pairwise&quot;), digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">area_a</th>
+<th align="left">area_b</th>
+<th align="right">probability_a_higher</th>
+<th align="left">stable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002454</td>
+<td align="left">E02006875</td>
+<td align="right">0.350</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">E02006948</td>
+<td align="right">0.522</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">E02006948</td>
+<td align="right">0.767</td>
+<td align="left">FALSE</td>
+</tr>
+</tbody>
+</table>
 <p>The bootstrap simulates counts from the fitted count models. A
 quasi-Poisson fit does not define a sampling distribution and cannot be
 used for this bootstrap. A zero observed group count makes a plug-in
@@ -999,6 +1090,121 @@ areas differs.</p>
 </div>
 <div id="validation-and-limits" class="section level2">
 <h2>Validation and limits</h2>
+<p>The release missingness study runs 20 independent 25-area simulations
+for each combination of MCAR, force-dependent MAR and
+ethnicity-dependent MNAR, at baseline missing probabilities 0.1, 0.3 and
+0.6. The complete realised event ratio is known before ethnicity is
+hidden. Its containment is an algebraic check of the extreme
+allocations, not a claim about coverage of a latent generating rate
+ratio.</p>
+<pre class="r"><code>missingness_path &lt;- system.file(&quot;validation&quot;, &quot;missingness-summary.csv&quot;,
+  package = &quot;searchlight&quot;)
+missingness &lt;- utils::read.csv(missingness_path)
+knitr::kable(missingness[c(&quot;mechanism&quot;, &quot;missing_rate&quot;, &quot;replications&quot;,
+  &quot;realised_containment&quot;, &quot;generating_containment&quot;, &quot;mean_median_width&quot;)],
+  digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="13%" />
+<col width="13%" />
+<col width="21%" />
+<col width="23%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">mechanism</th>
+<th align="right">missing_rate</th>
+<th align="right">replications</th>
+<th align="right">realised_containment</th>
+<th align="right">generating_containment</th>
+<th align="right">mean_median_width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mar</td>
+<td align="right">0.1</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.776</td>
+<td align="right">2.545</td>
+</tr>
+<tr class="even">
+<td align="left">mar</td>
+<td align="right">0.3</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.906</td>
+<td align="right">8.916</td>
+</tr>
+<tr class="odd">
+<td align="left">mar</td>
+<td align="right">0.6</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.994</td>
+<td align="right">26.989</td>
+</tr>
+<tr class="even">
+<td align="left">mcar</td>
+<td align="right">0.1</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.768</td>
+<td align="right">1.045</td>
+</tr>
+<tr class="odd">
+<td align="left">mcar</td>
+<td align="right">0.3</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.992</td>
+<td align="right">3.772</td>
+</tr>
+<tr class="even">
+<td align="left">mcar</td>
+<td align="right">0.6</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">1.000</td>
+<td align="right">12.333</td>
+</tr>
+<tr class="odd">
+<td align="left">mnar</td>
+<td align="right">0.1</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.754</td>
+<td align="right">0.875</td>
+</tr>
+<tr class="even">
+<td align="left">mnar</td>
+<td align="right">0.3</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">0.988</td>
+<td align="right">2.403</td>
+</tr>
+<tr class="odd">
+<td align="left">mnar</td>
+<td align="right">0.6</td>
+<td align="right">20</td>
+<td align="right">1</td>
+<td align="right">1.000</td>
+<td align="right">5.525</td>
+</tr>
+</tbody>
+</table>
+<p>The mean of replicate median widths describes an assumption range on
+the ratio scale. Infinite-width frequency and Monte Carlo uncertainty
+remain in the saved validation tables. Force/object proportional
+reallocation also assumes that the pooled known composition transports
+to each area. Even MAR within force does not make that composition
+spatially homogeneous. See <code>inst/scripts/missingness-study.R</code>
+and its manifest for seeds, area-level evidence and scenario error
+summaries.</p>
 <p>Known-answer tests cover event counts exceeding population, missing
 months, exact zero-count intervals, analytical allocation bounds and
 tipping shares, direct standardisation, and rank probability sums.

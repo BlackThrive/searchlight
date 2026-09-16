@@ -1,0 +1,48 @@
+{
+  "started": "2026-09-16 15:01:19.248559",
+  "finished": "2026-09-16 15:29:02.604882",
+  "replications": 20,
+  "areas_per_replication": 25,
+  "conditions": [
+    {
+      "mechanism": "mcar",
+      "missing_rate": 0.1
+    },
+    {
+      "mechanism": "mar",
+      "missing_rate": 0.1
+    },
+    {
+      "mechanism": "mnar",
+      "missing_rate": 0.1
+    },
+    {
+      "mechanism": "mcar",
+      "missing_rate": 0.3
+    },
+    {
+      "mechanism": "mar",
+      "missing_rate": 0.3
+    },
+    {
+      "mechanism": "mnar",
+      "missing_rate": 0.3
+    },
+    {
+      "mechanism": "mcar",
+      "missing_rate": 0.6
+    },
+    {
+      "mechanism": "mar",
+      "missing_rate": 0.6
+    },
+    {
+      "mechanism": "mnar",
+      "missing_rate": 0.6
+    }
+  ],
+  "area_scenario_rows": 18000,
+  "seed_rule": "9000 + 1000*condition_index + replicate",
+  "all_realised_ratios_contained": true,
+  "interpretation": "Bounds identify reallocations of recorded events. Generating rate ratios also have Poisson sampling variation and need not be inside those bounds. Force/object MAR allocation additionally transports composition across areas."
+}

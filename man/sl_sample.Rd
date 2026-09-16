@@ -19,7 +19,7 @@ table(x$force_id, x$month)
 \seealso{
 \code{\link[=sl_read_records]{sl_read_records()}}, \code{\link[=sl_contract]{sl_contract()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

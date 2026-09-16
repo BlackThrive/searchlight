@@ -27,7 +27,7 @@ sl_coverage_compare(sl_coverage(sl_sample()), "2026-05", "2026-06")
 \seealso{
 \code{\link[=sl_coverage]{sl_coverage()}}
 
-Other audit: 
+Other audit:
 \code{\link{sl_benchmark}()},
 \code{\link{sl_coverage}()},
 \code{\link{sl_location_quality}()},

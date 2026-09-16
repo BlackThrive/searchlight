@@ -153,6 +153,8 @@ sl_lookups <- function(dir) {
 #' retained with NA assignments. On shared polygon edges, ties are resolved by
 #' code and flagged ambiguous. Boundary distances describe anonymised snap
 #' points, not the unknown true locations; resulting error may be systematic.
+#' The boundary-sensitive share uses assigned events with measured distances.
+#' Missing-coordinate and unassigned shares use all supplied events.
 #' @param records Contract-bearing records.
 #' @param boundaries A named list of sf layers, or one sf layer with metadata.
 #' @param types Names of the layers to assign; defaults to supplied layers.
@@ -189,9 +191,17 @@ sl_assign_geography <- function(records, boundaries,
   sl_require_columns(records, c("latitude", "longitude"))
   valid <- sl_valid_coordinates(records)
   result <- records
+  coordinates <- as.data.frame(records[valid, c("longitude", "latitude")])
+  # Work once per exact published point; never remove repeated search events.
+  key <- paste(sprintf("%.17g", coordinates$longitude),
+    sprintf("%.17g", coordinates$latitude),
+    sep = ","
+  )
+  first <- !duplicated(key)
+  point_index <- match(key, key[first])
   points <- if (any(valid)) {
     sf::st_transform(sf::st_as_sf(
-      as.data.frame(records[valid, ]),
+      coordinates[first, , drop = FALSE],
       coords = c("longitude", "latitude"),
       crs = 4326
     ), 27700)
@@ -217,15 +227,20 @@ sl_assign_geography <- function(records, boundaries,
         hits, function(x) if (length(x)) x[1] else NA_integer_,
         integer(1)
       )
-      codes[valid] <- polygons$geography_code[match]
-      ambiguous[valid] <- lengths(hits) > 1L
+      codes[valid] <- polygons$geography_code[match[point_index]]
+      ambiguous[valid] <- lengths(hits)[point_index] > 1L
       inside <- which(!is.na(match))
       if (length(inside)) {
-        edge <- sf::st_boundary(sf::st_geometry(polygons[match[inside], ]))
-        distance[which(valid)[inside]] <- as.numeric(sf::st_distance(
-          points[inside, ], edge,
-          by_element = TRUE
-        ))
+        edges <- sf::st_boundary(sf::st_geometry(polygons))
+        point_distance <- rep(NA_real_, nrow(points))
+        chunks <- split(inside, ceiling(seq_along(inside) / 2000))
+        for (chunk in chunks) {
+          point_distance[chunk] <- as.numeric(sf::st_distance(
+            points[chunk, ], edges[match[chunk]],
+            by_element = TRUE
+          ))
+        }
+        distance[valid] <- point_distance[point_index]
       }
     }
     result[[type]] <- codes

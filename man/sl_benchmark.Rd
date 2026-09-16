@@ -32,7 +32,7 @@ sl_benchmark(sl_sample(), ppap)
 \seealso{
 \code{\link[=sl_coverage]{sl_coverage()}}
 
-Other audit: 
+Other audit:
 \code{\link{sl_coverage}()},
 \code{\link{sl_coverage_compare}()},
 \code{\link{sl_location_quality}()},

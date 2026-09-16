@@ -22,6 +22,24 @@ test_that("missing ethnicity bounds and tipping have analytical answers", {
   expect_true(is.na(b$ratio))
 })
 
+test_that("wholly missing submissions have unavailable allocation counts", {
+  counts <- fixture_counts(n = rep(NA_real_, 3))
+  counts$status <- "missing"
+  counts$months_submitted <- 0L
+  attr(counts, "contract")$coverage$status <- "missing"
+  expect_warning(
+    bounds <- sl_missing_ethnicity_bounds(counts,
+      fixture_population(),
+      scenarios = c("all_to_reference", "proportional")
+    ),
+    class = "searchlight_warning_coverage"
+  )
+  expect_true(all(is.na(bounds$unknown)))
+  expect_true(all(is.na(bounds$allocated_reference)))
+  expect_true(all(is.na(bounds$ratio)))
+  expect_false(any(bounds$available))
+})
+
 test_that("MAR pools force-object shares without repeating exposure", {
   a <- fixture_counts(c(18, 2, 0))
   a$object_group <- "Drugs"

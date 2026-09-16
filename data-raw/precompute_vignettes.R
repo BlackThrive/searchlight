@@ -2,7 +2,14 @@
 Sys.setenv(NO_INTERNET_TEST = "true", VROOM_THREADS = "2")
 source("data-raw/runtime.R")
 pkgload::load_all(quiet = TRUE)
+knitr::opts_chunk$set(error = FALSE)
 originals <- list.files("vignettes", pattern = "\\.Rmd\\.orig$", full.names = TRUE)
+selected <- Sys.getenv("SEARCHLIGHT_VIGNETTES", "")
+if (nzchar(selected)) {
+  chosen <- paste0(strsplit(selected, ",", fixed = TRUE)[[1]], ".Rmd.orig")
+  originals <- originals[basename(originals) %in% chosen]
+  stopifnot(length(originals) == length(chosen))
+}
 for (original in originals) {
   input <- basename(original)
   output <- sub("\\.orig$", "", input)
@@ -11,7 +18,7 @@ for (original in originals) {
   })
   path <- file.path("vignettes", output)
   lines <- readLines(path, warn = FALSE)
-  lines <- sub("^(#>|#&gt;)[ \\t]+$", "\\1", lines)
+  lines <- sub("[[:blank:]]+$", "", lines)
   writeLines(lines, path, useBytes = TRUE)
   rmarkdown::render(file.path("vignettes", output),
     quiet = TRUE,
@@ -19,7 +26,7 @@ for (original in originals) {
     output_file = sub("\\.Rmd$", ".html", output)
   )
   html <- file.path("inst/validation", sub("\\.Rmd$", ".html", output))
-  writeLines(sub("[ \\t]+$", "", readLines(html, warn = FALSE)), html,
+  writeLines(sub("[[:blank:]]+$", "", readLines(html, warn = FALSE)), html,
     useBytes = TRUE
   )
 }

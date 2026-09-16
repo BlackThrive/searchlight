@@ -38,7 +38,7 @@ head(sl_denominator_scenarios(c, list(resident = p)))
 \seealso{
 \code{\link[=sl_exposure]{sl_exposure()}}, \code{\link[=sl_missing_ethnicity_bounds]{sl_missing_ethnicity_bounds()}}
 
-Other sensitivity: 
+Other sensitivity:
 \code{\link{sl_missing_ethnicity_bounds}()},
 \code{\link{sl_ranking_stability}()},
 \code{\link{sl_standardise}()}

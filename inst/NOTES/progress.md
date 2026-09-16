@@ -17,3 +17,7 @@ Next: M4 count and spatial inference, simulation recovery, separate outcome diag
 Milestone: M4 complete (2026-09-16).
 Completed: count/spatial/outcome/darkness inference, 18-fit simulation pilot, corrected sample classification, rendered vignettes, 94.7% coverage, clean lint and local as-CRAN check; slowest example 1.68 seconds.
 Next: M5 offline report, remaining validation studies, national benchmark and release evidence; external checks depend on a reachable repository.
+
+Milestone: M5 implemented and verified locally; external release gates pending (2026-09-16).
+Completed: offline report, four vignettes, local pkgdown, all four validation studies, clean manual-inclusive local as-CRAN check, 94.9358% coverage, style/lint/spelling and example/size gates.
+Next: make the configured GitHub repository accessible, verify the full CI/R-hub/win-builder results, resolve URL checks and deploy pkgdown; the maintainer decides CRAN submission.

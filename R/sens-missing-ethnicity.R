@@ -4,10 +4,11 @@
 #' Proportional allocation uses all known groups, not only the comparison pair.
 #' force_object_mar uses known-group shares within force and object, pooled over
 #' areas and months; it refuses strata with no known ethnicity. These are
-#' assumptions, not confidence intervals. The tipping share solves the equation
+#' assumptions, not confidence intervals.
 #' Force/object allocation also assumes pooled known composition applies to each
 #' recipient area/month; MAR alone does not establish that transportability.
-#' where the ratio equals one, with all remaining Unknown sent to the reference.
+#' The tipping share solves the equation where the ratio equals one, with all
+#' remaining Unknown sent to the reference.
 #' A tipping value outside zero to one means no feasible tipping allocation.
 #' @param counts Contract-bearing event counts.
 #' @param population Marginal ethnic-group exposure table.
@@ -85,8 +86,9 @@ sl_missing_ethnicity_bounds <- function(counts, population,
     }
     ix <- data$force_id == b$force_id & same_area
     d <- data[which(ix), ]
-    unknown <- sum(d$n[d$ethnicity == "Unknown"])
-    known <- sum(d$n[d$ethnicity != "Unknown"])
+    seen <- nrow(d) > 0L
+    unknown <- if (seen) sum(d$n[d$ethnicity == "Unknown"]) else NA_real_
+    known <- if (seen) sum(d$n[d$ethnicity != "Unknown"]) else NA_real_
     nr <- b$n_reference
     nc <- b$n_comparison
     er <- b$exposure_reference
@@ -100,7 +102,7 @@ sl_missing_ethnicity_bounds <- function(counts, population,
     }
     lower <- ratio(nr + unknown, nc)
     upper <- ratio(nr, nc + unknown)
-    tipping <- if (unknown > 0 && er > 0 && ec > 0) {
+    tipping <- if (is.finite(unknown) && unknown > 0 && er > 0 && ec > 0) {
       (ec * (nr + unknown) - er * nc) / (unknown * (er + ec))
     } else {
       NA_real_
@@ -109,7 +111,7 @@ sl_missing_ethnicity_bounds <- function(counts, population,
       shares <- switch(scenario,
         all_to_reference = c(1, 0),
         all_to_comparison = c(0, 1),
-        proportional = if (known > 0) {
+        proportional = if (is.finite(known) && known > 0) {
           c(nr, nc) / known
         } else {
           c(NA_real_, NA_real_)
@@ -119,7 +121,7 @@ sl_missing_ethnicity_bounds <- function(counts, population,
             c(NA_real_, NA_real_)
           } else {
             u <- d[d$ethnicity == "Unknown" & d$n > 0, ]
-            if (unknown > 0) {
+            if (is.finite(unknown) && unknown > 0) {
               c(
                 sum(u$n * u$reference_share),
                 sum(u$n * u$comparison_share)
@@ -131,7 +133,7 @@ sl_missing_ethnicity_bounds <- function(counts, population,
         }
       )
       allocated <- unknown * shares
-      if (unknown == 0) allocated <- c(0, 0)
+      if (isTRUE(unknown == 0)) allocated <- c(0, 0)
       tibble::tibble(
         force_id = b$force_id, geography_code = b$geography_code,
         scenario = scenario,
@@ -139,7 +141,7 @@ sl_missing_ethnicity_bounds <- function(counts, population,
         unknown = unknown, allocated_reference = allocated[1],
         allocated_comparison = allocated[2], lower_bound = lower,
         upper_bound = upper, tipping_allocation = tipping,
-        available = scenario != "force_object_mar" || mar_available,
+        available = seen && (scenario != "force_object_mar" || mar_available),
         tipping_feasible = is.finite(tipping) && tipping >= 0 && tipping <= 1,
         observed_ratio = b$ratio, conf_low = b$conf_low, conf_high = b$conf_high
       )

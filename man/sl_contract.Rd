@@ -25,7 +25,7 @@ sl_contract(sl_sample())
 \seealso{
 \code{\link[=sl_read_records]{sl_read_records()}}, \code{\link[=sl_sample]{sl_sample()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

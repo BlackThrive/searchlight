@@ -3,3 +3,45 @@ template:
   bootstrap: 5
 development:
   mode: auto
+reference:
+  - title: Archive, provenance and exposure
+    contents:
+      - starts_with("sl_archive")
+      - sl_list_versions
+      - sl_select_version
+      - sl_read_records
+      - sl_sample
+      - sl_contract
+      - sl_boundaries
+      - sl_assign_geography
+      - sl_population
+      - sl_population_crosstab
+      - sl_exposure
+      - starts_with("sl_cache")
+  - title: Coverage and quality
+    contents:
+      - starts_with("sl_coverage")
+      - sl_benchmark
+      - sl_quality
+      - sl_timestamp_quality
+      - sl_location_quality
+  - title: Event rates and sensitivity
+    contents:
+      - sl_counts
+      - sl_rates
+      - sl_rate_ratio
+      - sl_missing_ethnicity_bounds
+      - sl_denominator_scenarios
+      - sl_standardise
+      - sl_ranking_stability
+  - title: Inference and simulation
+    contents:
+      - sl_count_model
+      - sl_spatial_disparity
+      - sl_spatial_map
+      - sl_hit_rates
+      - sl_veil_of_darkness
+      - sl_simulate
+  - title: Reporting
+    contents:
+      - sl_report

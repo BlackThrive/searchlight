@@ -15,6 +15,11 @@ MIT licensed code. Bundled public data retain their Open Government Licence v3.0
 attribution in `inst/extdata/README.md`. No code from policedatR, ExtractSS, or
 ukpolice is used or imported.
 
+This is a development package. To install a locally built source archive, run
+`R CMD INSTALL searchlight_0.1.0.tar.gz` after installing the dependencies listed
+in `DESCRIPTION`. Network access is needed for explicit data acquisition;
+the bundled examples, vignettes and report run offline.
+
 ## Offline quick start
 
 ```r
@@ -31,8 +36,8 @@ rates <- readRDS(data_file("example-rates.rds"))
 ratios <- sl_rate_ratio(rates)
 ratios[c("geography_code", "ratio", "conf_low", "conf_high")]
 sl_missing_ethnicity_bounds(counts, population)
-sl_ranking_stability(ratios, n = 200)
-vignette("estimating-disparity")
+sl_ranking_stability(ratios[ratios$n_comparison > 0, ], n = 200)
+sl_report(records, tempfile(fileext = ".html"), list(ratios = ratios))
 ```
 
 The default May-July 2026 sample contains 4,657 West Yorkshire records.
@@ -49,3 +54,57 @@ The quick-start rate tables contain four MSOAs selected to keep the examples
 small. Their ratio is an event-rate ratio with submitted population-time exposure.
 Poisson sampling intervals and missing-ethnicity allocation ranges answer different
 questions; neither corrects an unsuitable denominator or establishes discrimination.
+The bootstrap example ranks the three MSOAs with positive Black counts. The
+zero-count area remains in the rate and sensitivity tables; ranking it requires
+an appropriate posterior model, as demonstrated in the spatial vignette.
+
+Four offline vignettes cover the archive audit, explicit assumptions, replicated
+spatial smoothing evidence, and outcome/darkness diagnostics. Start with
+`vignette("archive-to-audit")`. `sl_report()` creates a self-contained HTML report
+with coverage, result-specific scope, diagnostics, sources and limitations.
+
+## Validation evidence
+
+The missing-ethnicity study ran 180 independent 25-area simulations: 20 per
+combination of mechanism and baseline missingness. All 4,500 complete realised
+event ratios lay within the extreme-allocation bounds. Under MCAR, the mean
+replicate median width increased from 1.05 at 10% missingness to 3.77 at 30% and
+12.33 at 60%. These are assumption ranges on the ratio scale, not confidence
+intervals for the generating process. The vignette reports MAR and MNAR results
+and the saved tables include Monte Carlo uncertainty.
+
+The spatial pilot retains all 18 fits, including one sparse-population fit that
+failed the predeclared convergence screen. Its area-level evidence shows both
+improvements and local losses from smoothing. Neither the pilot nor an average
+error improvement establishes that every local estimate is better.
+
+Scripts and measured outputs are in `inst/scripts/` and `inst/validation/`.
+The independent national reference covers August 2025-July 2026: 43 territorial
+forces, 430 submitted files and 476,738 events. Only 28 forces supplied all twelve
+months; missing and partial years remain explicit. British Transport Police is
+outside this archive force-list scope.
+
+<!-- BENCHMARK:START -->
+
+## Measured national benchmark
+
+The local 12-month build processed 476,738 events against 7,264 MSOAs.
+Both methods produced the same event assignments and aggregate counts.
+Elapsed and CPU times are measured seconds; CPU combines user and system time.
+
+| Run | Method | Total elapsed | Spatial elapsed | Total CPU |
+|---|---|---:|---:|---:|
+| 1 | One national batch | 1042.7 | 575.7 | 368.0 |
+| 1 | Twelve monthly batches | 544.1 | 433.1 | 523.4 |
+
+The comparison includes ZIP/CSV verification, parsing, coverage audit, local
+spatial assignment and aggregation. Initial downloads, library loading and
+writing validation artifacts are excluded. The ZIP, extracted CSVs and ONS
+boundaries were already cached. OS caching and concurrent workstation load
+were uncontrolled; these timings are not a hardware-independent guarantee.
+The monthly comparison resumed in a new R process against the saved national result.
+The alternative repeats boundary preparation and assignment each month.
+Stage timings, environment and scope are retained in
+`inst/validation/benchmark-national.csv` and its manifest.
+
+<!-- BENCHMARK:END -->

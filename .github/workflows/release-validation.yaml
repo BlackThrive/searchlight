@@ -1,0 +1,49 @@
+name: Archive and sensitivity validation
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 4 2 * *'
+permissions:
+  contents: read
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      VROOM_THREADS: 2
+      OMP_NUM_THREADS: 2
+      OPENBLAS_NUM_THREADS: 2
+      SEARCHLIGHT_REPLICATIONS: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::devtools
+      - name: Install package
+        run: Rscript -e 'devtools::install(upgrade = "never")'
+      - name: Acquire pinned public archive and geography
+        run: Rscript -e 'source("data-raw/acquire-national.R")'
+      - name: Independent CSV and Census reference
+        run: |
+          python data-raw/audit-national.py
+          python inst/scripts/independent-reproduction.py
+      - name: Offline benchmark, reproduction and missingness study
+        env:
+          NO_INTERNET_TEST: true
+        run: |
+          library(searchlight)
+          source("inst/scripts/benchmark-national.R")
+          source("inst/scripts/validate-reproduction.R")
+          source("inst/scripts/missingness-study.R")
+        shell: Rscript {0}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: archive-sensitivity-validation
+          path: inst/validation/

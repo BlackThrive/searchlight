@@ -26,7 +26,7 @@ unlink(d, recursive = TRUE)
 \seealso{
 \code{\link[=sl_cache_dir]{sl_cache_dir()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

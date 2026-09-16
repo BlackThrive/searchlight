@@ -1,0 +1,12 @@
+{
+  "checked": "2026-09-16 16:58:54.429392",
+  "installed_bytes": 2943212,
+  "extdata_bytes": 810818,
+  "maximum_example_seconds": 2.25,
+  "check_errors": 0,
+  "check_warnings": 0,
+  "check_notes": 0,
+  "local_environment": "R version 4.5.2 (2025-10-31 ucrt)",
+  "manual_pdf_checked": true,
+  "exceptions": ["offline incoming checks", "network system-clock probe disabled"]
+}

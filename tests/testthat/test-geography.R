@@ -25,6 +25,19 @@ test_that("ten-metre boundary distance is measured in projected coordinates", {
   expect_equal(quality$missing_coordinate_share[quality$type == "lsoa21"], 0.5)
   metadata <- sl_contract(result)$geography$lsoa21
   expect_equal(metadata$assignment_crs, "EPSG:27700")
+  repeated <- sl_assign_geography(x[c(1, 1, 1, 2, 2), ], list(lsoa21 = b))
+  expect_equal(nrow(repeated), 5L)
+  expect_equal(
+    repeated$lsoa21,
+    c(rep("E01000001", 3), NA, NA)
+  )
+  expect_equal(repeated$lsoa21_boundary_distance_m[1:3], rep(10, 3),
+    tolerance = 0.02
+  )
+  repeated_quality <- sl_contract(repeated)$assignment_quality
+  expect_equal(repeated_quality$missing_coordinate_share[
+    repeated_quality$type == "lsoa21"
+  ], 0.4)
   expect_error(sl_assign_geography(x, b), "metadata")
   attr(b, "geography_metadata") <- list(type = "lsoa21")
   expect_equal(sl_assign_geography(x, b)$lsoa21, result$lsoa21)

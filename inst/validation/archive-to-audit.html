@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>From archive to audited dataset</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap;
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #d14; }
+code > span.fl { color: #d14; }
+code > span.ch { color: #d14; }
+code > span.st { color: #d14; }
+code > span.co { color: #888888; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #900; font-weight: bold; }
+code > span.er { color: #a61717; background-color: #e3d2d2; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">From archive to audited dataset</h1>
+
+
+
+<p>This walkthrough is precomputed from bundled public data. Viewing it,
+running installed examples and checking the package require no internet
+connection. The source archive describes search <strong>events</strong>,
+not unique people.</p>
+<div id="acquire-a-snapshot-then-choose-whole-files" class="section level2">
+<h2>Acquire a snapshot, then choose whole files</h2>
+<p>The archive is the unit of acquisition. A rolling monthly ZIP may
+contain years of files. A later archive can revise an earlier
+force-month. Searchlight records both publisher MD5 verification and a
+local SHA-256 integrity manifest. The latter detects later changes; it
+is not a publisher signature.</p>
+<p>The following acquisition code is displayed but never run during a
+package check:</p>
+<pre class="r"><code>cache &lt;- sl_cache_dir()
+months &lt;- c(&quot;2026-05&quot;, &quot;2026-06&quot;, &quot;2026-07&quot;)
+forces &lt;- c(&quot;west-yorkshire&quot;, &quot;dyfed-powys&quot;)
+sl_archive_download(months, forces = forces, dir = cache)
+versions &lt;- sl_archive_snapshot(cache, months = months, forces = forces)
+versions &lt;- sl_select_version(versions, rule = &quot;latest&quot;)
+records &lt;- sl_read_records(cache, versions)</code></pre>
+<p>No function deduplicates individual searches across archive versions.
+It selects one entire CSV per force-month and retains the alternatives.
+Even identical event rows can represent distinct reported searches.
+Original CSV bytes remain intact.</p>
+<p>The bundled sample permits the same selection and parsing steps
+offline:</p>
+<pre class="r"><code>sample_dir &lt;- data_file(&quot;sample&quot;)
+versions &lt;- sl_select_version(sl_list_versions(sample_dir))
+knitr::kable(versions[c(&quot;force_id&quot;, &quot;month&quot;, &quot;n_records&quot;, &quot;selection_rule&quot;)])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="right">n_records</th>
+<th align="left">selection_rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-05</td>
+<td align="right">1659</td>
+<td align="left">latest</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-06</td>
+<td align="right">1466</td>
+<td align="left">latest</td>
+</tr>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-07</td>
+<td align="right">1532</td>
+<td align="left">latest</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>parsed &lt;- sl_read_records(sample_dir, versions[1, ])
+knitr::kable(summary(sl_contract(parsed))[c(&quot;force_id&quot;, &quot;month&quot;, &quot;status&quot;, &quot;n_records&quot;)])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="left">status</th>
+<th align="right">n_records</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-05</td>
+<td align="left">submitted</td>
+<td align="right">1659</td>
+</tr>
+<tr class="even">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-05</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-06</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-06</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-07</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-07</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<p>The filename defines the submission month. Parsed instants display
+London time, including British summer time. Conversion of a late-month
+UTC timestamp can cross into the next calendar month; this is flagged
+without moving it to a different source submission. Raw timestamp and
+ethnicity strings remain available.</p>
+</div>
+<div id="coverage-comes-before-comparison" class="section level2">
+<h2>Coverage comes before comparison</h2>
+<p>The requested sample is May-July 2026 for West Yorkshire and
+Dyfed-Powys. The latter has no source file in these three months; it
+remains in the audit.</p>
+<pre class="r"><code>coverage &lt;- sl_coverage(x)
+knitr::kable(coverage[c(&quot;force_id&quot;, &quot;month&quot;, &quot;status&quot;, &quot;n_records&quot;)])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="left">status</th>
+<th align="right">n_records</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-05</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-06</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-07</td>
+<td align="left">missing</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-05</td>
+<td align="left">submitted</td>
+<td align="right">1659</td>
+</tr>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-06</td>
+<td align="left">submitted</td>
+<td align="right">1466</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-07</td>
+<td align="left">submitted</td>
+<td align="right">1532</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>plot(coverage)</code></pre>
+<div class="float">
+<img role="img" aria-label="plot of chunk coverage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAEgCAMAAABcujGyAAABIFBMVEUAAAAAADoAAGYAOmYAOpAAZpAAZrYWfY06AAA6ADo6AGY6OpA6kJA6kNtNTU1NTW5NTY5Nbo5NbqtNjshmAABmADpmAGZmOgBmOjpmOpBmZmZmtrZmtttmtv9uTU1uTW5uTY5ubk1ubm5ubo5ubqtujshuq6tuq+SOTU2OTW6OTY6Obk2ObquOjk2Ojm6Ojo6Oq6uOyP+QOgCQOjqQOmaQZgCQkGaQtpCQ2/+rbk2rbm6rbo6rjk2rq26rq46r5Mir5OSr5P+2ZgC2Zjq22/+2/7a2/9u2///Ijk3Ijm7I5KvI/8jI/+TI///Y29/bkDrbtmbb/7bb///kq27k///r6+v/tmb/yI7/25D/27b/5Kv//7b//8j//9v//+T///8yuj09AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAPzUlEQVR4nO2dD1vb1hlHnYwx0g43CzRb25FmWzMozdaabinQLq3pNpxmjBWI8QxY3/9b7N5X17YMtnNxLd1j9jsPQbYkjzPf8+ifEa1lQoCppRYQYhoKVKBRoAKNAhVoFKhAo0AFmjsQ6JvUAn0kUgIKdH5IpAQU6PyQSAko0PkhkRJQoPNDIiWgQOeHREpAgc4PiZSAAp0fEikBBTo/JFICCnR+SKQEFOj8kEgJ3IFAxV0mdaC/YEDxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAuHWg3adH42b39ps31pmw6gipxyFA8QCJQCgz0BhSj0OA4gESgTAx0N5eI+t+3MzOH51dbtUfuuLO624SHmctt/STsKT7h88e/mu/2dt7dGbruED/VK83fKd+0eA140g9DgGKB0gEwuQt6Olmduoqc5OWe7SWXW4f+UnYOp5v+i+3xAXcfdJwW9Dv9jYH6zzJ57tA3aLw+sCbESjjQfEAiYyOUzImB+o2kK9errld9+WnTV+en2SD3ffl87NXTd+jm+1n9fZ/t5llhXV8nfaVhdeP/ympxyFA8QCJQJgc6OX26+0fnr7e9nvoev29ptsu2venR6163YX77fOzvMw80L0/Pj/LhusUAw2vH0vqcQhQPEAiEKacJLW+eNbbf7lW3Prl+217ePp5vkcfbEGb7mCgsE4h0ElbT0/qcQhQPEAiEKYEel7Pj0LDkab7KgbqT6D6x6B5oO6rsM4w0LDW+B+SehwCFA+QCIQpgdo5vD/9dvtov4du2Rl6by8/I+99nS+xk3YLNOz9w4xCoOH1Y0k9DgGKB0gEwsyfJHWfzeXnpx6HAMUDJAJh1kBPJ24Tb0fqcQhQPEAiEPRZvEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiURzXarV7u8PnnQe7N1caM3PsemNRoAbFAyQSw/H9wyxr1zYGM+LDi0WBGhQPkEgEVzuW5sHSSX+OAi0JigdIJIKrndXwyMJ03zoPXtRqrtfOg69WarXVjvu2YQv9I7+lDVM/62qnVlvOwqobk36GAjUoHiCRGNouQnswCHRl6eRqZznzU3eA6r/dP7Rw/fKVjcLUrzZc1R8rjEWBGhQPkEgc/ixpuRjoRmHaf+K+3skDHEwf7Lbt+NXlG9aa8AMUqEHxAIlEc7G+dDII1Ad4sb7Rf94PNDuwjrP+1Afqj1wHG1cFOh2KB0gknkJlEwP1c2u2H7epAr0lFA+QSAQhq2Kg16aFQC3c/tQH6q+ftq1VBfpWKB4gkRgOfGT+TOdifdVN7w1Pkq4FagechWnxJEmBRkDxAIlE4c+R7ETeXz766P38MlPhpGmwBW2Hj5zCdOQykwJ9OxQPkAgEBWpQPEAiEEYDdVvsjePhB1cVkHocAhQPkAiEkUAPln5c3/AHrtWRehwCFA+QCIRioO70318JaE/82KkEUo9DgOIBEoGgQA2KB0gEwsgu/tjv4v0lrepIPQ4BigdIBMLoSVK7f1mrMlKPQ4DiARKBoMtMBsUDJAJBgRoUD5BIDP8ex3wDGQnU/4Z0tVeZKONB8QCJxFB1oAe+TV0HTQlHJIaKAw2/DqXLTAnhiMSgQKuC4gESiaHqXbzduqTroCnhiMRQdaC6DpocjkgMlQdaPanHIUDxAInEUHGg4Q9FVErqcQhQPEAiMcQG2r/bePKMiYw5SaqU1OMQoHiARGKo/CSp0t9VNlKPQ4DiARKJYWqgV1++cCc09sdH/AbTPcj/1JifuBmdd/9qf/HmYr32s99M/otOo1vQmlHlZSaxyEwP1P6uzbLF+M7hxePD7Hg5CxM/b2U18/fGH7jJvbhAUzD2/2L1UDxAIjOPXn/h1Ze79u/iff/3HNx3PzNM8mizEK5faxIK1KB4gERmHr3+wtFA/Y3J9+wvh9ltx4NAO++e3CLQ48qvg1b8tk+C4gESmXn0+guvBepo5+c4bjLjFjTBJ0kVv+2ToHiARGYevf7C0UB9nO5fmAwDvc0xaIrP4it+2ydB8QCJzDx6/YXXtqAH+dn3weAsPgTqTs1/HrkFVaDp4YjMPHq3j2DaZXvt4g2KB0hk5tG7XQD+LzRN2cPrJCmH4gESmXn05huILjMZFA+QyMyjN99AFKhB8QCJzDx68w1kEGiK3xTJFOh1OCIQRgOt9ATeSD0OAYoHSCSG2X/NJBoFalA8QCIxKNCqoHiARGJQoFVB8QCJxKBAq4LiARKJodpAa330UWc6OCIxVBloIlKPQ4DiARKJQYFWBcUDJBKDAq0KigdIJIbbBHpw/YOg/FfuRn+T6ead7wrUoHiARGL4SYFmg1uThijQCVA8QCIxTA90cIdx/pvzH/q7jEfuRf7Hen5OHv5DyP4G5F8r0LFQPEAiMUwNdHiHcR6o3egxei9y2IIerPoV7eaPmgIdC8UDJBLD9EAHdxjngW743fzofSDhlnm3oqvZbp/TLn48FA+QSAzTd/GDO4zt3/e7EwNdt/8Esh2N3jhSVaAGxQMkEsNbT5LyGzj7W1C3fRwb6GM7T9IWdAoUD5BIDFMDDXcY+x24v9ntwA48xwVqB5/hj+DoGHQ8FA+QSAzTt6DhRuPjWu2Xj+0s/t7utXuRr3bu/3PHzuL9fXNXOzqLnwTFAyQSw1t38T8dBWpQPEAiMSjQqqB4gERiUKBVQfEAicSgQKuC4gESiUGBVgXFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAIhPtDeXiNM65s3585K6nEIUDxAIhBuH2j36dGYubOSehwCFA+QCITIQC+36r/6rNFqZN3fP6m/13RPHx7159ry7b+52Tbn4ZGPtvtxMzt/9I178MnZed3WHkvqcQhQPEAiECIDbW1m5/XGufu+6beg7unpWn+uX3659ejs/KEtOH90duoWu/mnm/aCy+0jWzvnzQiU8aB4gERGxykZcYH6xtx28fL52aumC/Ty06afFebaCluNrLff9HPcQrfVfPVyzT/3L/BrTyT1OAQoHiARCHGB2nFnq9Hb//b5mQ90q153e/Qwt1Wvr1mErYafY52+3v7h6evtI3tB1n1iu/+xpB6HAMUDJALhVlvQ7PTzTR+rf1qY6x+6QIdb0Kz1xbPe/ku3W/cv8Lj9/vj/5dTjEKB4gEQg3OoY1E59wjGoT654DLo2mOMm5/X8KDScK50p0Fg4IhAiA+3t2fl67+sjC9Tt4/1OO8zN/Bb0z8Oz+NClf+BfkLV0Fh8NRwTC7T5J6j6bsGDSidDEF/RJPQ4BigdIBMKtAj2deK4zIdDJL+iTehwCFA+QCAR9Fm9QPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhAUqEHxAIlAUKAGxQMkAkGBGhQPkAgEBWpQPEAiEBSoQfEAiUBQoAbFAyQCQYEaFA+QCAQFalA8QCIQFKhB8QCJQFCgBsUDJAJBgRoUD5AIBAVqUDxAIhBSByrEVO5AoG9SC/SRSAko0PkhkRJQoPNDIiWgQOeHREpAgc4PiZSAAp0fEikBBTo/JFICCnR+SKQEFOj8kEgJKND5IZESuAOBiruMAhVoFKhAo0AFGgUq0ChQgUaBCjQKVKBRoALNQgXafVKvN7Lscqv+6GzwrLdXf6+ZLw8LTuv1+sMjgEhhTlIR/4bYkgVkkQK9/LSZdT9u9vYa2ela/1nWamTnfnT8wNgCPwcjEuYkFnGUK1IeixTouX+rW43L7aOs+/So8CwQFvT2y91qRYsU5qQVyfKUF5JFCtTj3ujuJ2f999uefdPfoYUFbrdWwf4sQqQwJ62IexS2o4vHggXa29u0nVX+rvtn3ScNG4cs6y/we7nSt6JRIsM5aUUWeAO6YIFebm0WNgvFZ616fa2wISn7ODRKpOiTVGRxj0AXLFC/bRgeWIVnz4e7t8ERV9mBxokU5qQVcW/HZpkWZbJIgebvv+3G3CFVeOZTDDu0sMBvLXpfl3l+EilSmJNYpPzzxtJYpED7l/NGL+65Z/2LnsProOWem8SKFOYkFlnYQ9CFClT8H6JABRoFKtAoUIFGgQo0ClSgUaCz0Vm5f+gmF+tLJzeW/ffvWefBbvVOdxIFOhudlXu7NrkZqI9Tgc4LBTobnZUPV93k+EMFWi4KdDY6Kx99cJJdffnCBXq1U6st+zC/WqnVNjru22rnwYuae5za8g6gQGejs/LbvxxmnXf/s3RytbOc+X+2uz++f2hb0PA4tebio0Bno7OycbyRtVfbSydt36H75mbZ/j0PNH+cWnPxUaCz4QpsL2cHGz5QfxgawhwEGh6n1lx8FOhsuEAvPvjx8aECLRkFOht+H/79i+XMB+ovOLXzY08FOm8U6Gz4QI9rqz7QwUlSiPJifUOBzg0FOhs+UB9gu3iZKUR5UFtWoPNCgQo0ClSgUaACjQIVaBSoQKNABRoFKtAoUIFGgQo0ClSg+R9Os6exRhtG7gAAAABJRU5ErkJggg==" alt="plot of chunk coverage" />
+<div class="figcaption">plot of chunk coverage</div>
+</div>
+<p>Missing is unavailable, not zero. A submitted zero-row file is
+distinguishable from an absent file. A suspected partial submission
+remains flagged, and reported events are not inflated to estimate the
+missing events. Revisions describe whole-file changes and never trigger
+row-level deduplication.</p>
+<p>Filtering events preserves source coverage. The contract’s scope
+records the visible rows; rates must explicitly select the force/month
+analysis window.</p>
+<pre class="r"><code>subset &lt;- x[x$ethnicity_5 == &quot;Black&quot;, ]
+c(source_events = nrow(x), visible_black_events = nrow(subset),
+  source_force_months = nrow(sl_contract(subset)$coverage))
+#&gt;        source_events visible_black_events  source_force_months
+#&gt;                 4657                   58                    6</code></pre>
+</div>
+<div id="attach-geography-locally" class="section level2">
+<h2>Attach geography locally</h2>
+<p>After download, coordinates can be joined to any suitable ONS
+boundary without reacquiring events. Searchlight uses British National
+Grid for spatial assignment and distances. It reuses exact coordinate
+calculations while preserving every event and its contribution to
+quality summaries.</p>
+<pre class="r"><code>knitr::kable(sl_contract(x)$assignment_quality, digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="6%" />
+<col width="24%" />
+<col width="16%" />
+<col width="24%" />
+<col width="15%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">type</th>
+<th align="right">missing_coordinate_share</th>
+<th align="right">unassigned_share</th>
+<th align="right">boundary_sensitive_share</th>
+<th align="right">ambiguous_share</th>
+<th align="right">threshold_m</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">lsoa21</td>
+<td align="right">0.035</td>
+<td align="right">0.038</td>
+<td align="right">0.493</td>
+<td align="right">0</td>
+<td align="right">50</td>
+</tr>
+<tr class="even">
+<td align="left">msoa21</td>
+<td align="right">0.035</td>
+<td align="right">0.038</td>
+<td align="right">0.244</td>
+<td align="right">0</td>
+<td align="right">50</td>
+</tr>
+</tbody>
+</table>
+<p>These are anonymised street-level snap points. Near-boundary
+locations can be systematically misassigned; distance is a sensitivity
+diagnostic, not a correction. Records without coordinates remain
+unassigned and are counted. Shared-edge ties use the first geography
+code and remain flagged as ambiguous. The boundary-sensitive share uses
+assigned events with measured distances; missing-coordinate and
+unassigned shares use all supplied events.</p>
+<p>The sample uses original ONS BGC polygons for assignment and
+separately simplified polygons for compact mapping. It retains whole
+Census units within the two force areas, so a clipped fragment never
+receives an entire unit’s population.</p>
+</div>
+<div id="inspect-timestamp-quality-and-exposures" class="section level2">
+<h2>Inspect timestamp quality and exposures</h2>
+<pre class="r"><code>times &lt;- sl_timestamp_quality(x)
+knitr::kable(times[c(&quot;force_id&quot;, &quot;month&quot;, &quot;source_midnight_share&quot;,
+  &quot;midnight_share&quot;, &quot;time_reliable&quot;)], digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="10%" />
+<col width="29%" />
+<col width="20%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="right">source_midnight_share</th>
+<th align="right">midnight_share</th>
+<th align="left">time_reliable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-05</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-06</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-07</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-05</td>
+<td align="right">0.010</td>
+<td align="right">0.010</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-06</td>
+<td align="right">0.010</td>
+<td align="right">0.008</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-07</td>
+<td align="right">0.014</td>
+<td align="right">0.011</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>Midnight heaping is checked in both the original clock string and
+London time. Passing this screen does not prove timestamps are accurate.
+The darkness model excludes force-months that fail or lack the screen,
+retaining an exclusion table.</p>
+<p>Census TS021 supplies marginal ethnicity populations; RM032 supplies
+age/sex cross-tabs. The package matches stable classification codes and
+carries source metadata. Self-defined and officer-defined ethnicity are
+never silently merged. An exposure is a denominator choice, not a count
+of people actually available to be searched at the recorded location and
+time.</p>
+</div>
+<div id="export-a-reviewable-report" class="section level2">
+<h2>Export a reviewable report</h2>
+<pre class="r"><code>rates &lt;- readRDS(data_file(&quot;example-rates.rds&quot;))
+counts &lt;- readRDS(data_file(&quot;example-counts.rds&quot;))
+population &lt;- readRDS(data_file(&quot;sample-population.rds&quot;))$msoa21
+estimates &lt;- list(
+  ratios = sl_rate_ratio(rates),
+  missing_ethnicity = sl_missing_ethnicity_bounds(counts, population)
+)
+report_file &lt;- tempfile(fileext = &quot;.html&quot;)
+sl_report(x, report_file, estimates,
+  limitations = &quot;Rate examples cover four West Yorkshire MSOAs, not the whole sample.&quot;)
+file.exists(report_file)
+#&gt; [1] TRUE</code></pre>
+<p>The HTML report contains coverage, quality, sources, result-specific
+scope and limitations. It keeps sampling uncertainty separate from
+assumption ranges and requires no web assets or Pandoc. It displays
+supplied results; it does not fit new models during rendering. Existing
+files require explicit overwrite permission.</p>
+<p>Continue with <code>vignette(&quot;estimating-disparity&quot;)</code> for rates
+and sensitivity, <code>vignette(&quot;spatial-simulation&quot;)</code> for
+replicated spatial evidence, and
+<code>vignette(&quot;outcomes-and-darkness&quot;)</code> for the outcome and
+darkness designs.</p>
+<p>Sources: <a href="https://data.police.uk/data/archive/">data.police.uk archive</a>,
+<a href="https://data.police.uk/docs/">field documentation</a>, <a href="https://geoportal.statistics.gov.uk/">ONS Open Geography</a>, and
+<a href="https://www.nomisweb.co.uk/">NOMIS</a>. See the installed
+<code>NOTES/data_sources.md</code> for verified endpoints, vintages and
+table identifiers.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

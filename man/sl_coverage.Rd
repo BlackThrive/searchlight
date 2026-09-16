@@ -42,7 +42,7 @@ audit
 \seealso{
 \code{\link[=sl_quality]{sl_quality()}}, \code{\link[=sl_coverage_compare]{sl_coverage_compare()}}, \code{\link[=sl_benchmark]{sl_benchmark()}}
 
-Other audit: 
+Other audit:
 \code{\link{sl_benchmark}()},
 \code{\link{sl_coverage_compare}()},
 \code{\link{sl_location_quality}()},

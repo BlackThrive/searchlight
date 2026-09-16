@@ -36,7 +36,7 @@ index[, c("archive_file", "month_start", "month_end")]
 \seealso{
 \code{\link[=sl_archive_download]{sl_archive_download()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_snapshot}()},
 \code{\link{sl_assign_geography}()},

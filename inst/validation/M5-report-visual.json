@@ -1,0 +1,22 @@
+{
+  "checked": "2026-09-16T13:30:38.799Z",
+  "externalRequests": [],
+  "errors": [],
+  "desktop": {
+    "width": 1365,
+    "documentWidth": 1365,
+    "tables": 10,
+    "headings": [
+      "Submission coverage",
+      "Time and location quality",
+      "Estimates",
+      "Assumptions",
+      "Limitations",
+      "Sources and reproducibility"
+    ]
+  },
+  "mobile": {
+    "width": 390,
+    "documentWidth": 390
+  }
+}

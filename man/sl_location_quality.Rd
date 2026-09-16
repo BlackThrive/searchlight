@@ -25,7 +25,7 @@ sl_location_quality(sl_sample()[1:100, ])
 \seealso{
 \code{\link[=sl_assign_geography]{sl_assign_geography()}}, \code{\link[=sl_timestamp_quality]{sl_timestamp_quality()}}
 
-Other audit: 
+Other audit:
 \code{\link{sl_benchmark}()},
 \code{\link{sl_coverage}()},
 \code{\link{sl_coverage_compare}()},

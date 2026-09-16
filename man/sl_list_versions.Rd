@@ -21,7 +21,7 @@ sl_list_versions(system.file("extdata", "sample", package = "searchlight"))
 \seealso{
 \code{\link[=sl_archive_snapshot]{sl_archive_snapshot()}}, \code{\link[=sl_select_version]{sl_select_version()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

@@ -1,0 +1,6 @@
+{
+  "checked": "2026-09-16T13:47:45.433541+00:00",
+  "pages": 51,
+  "missing_local_targets": [],
+  "method": "Python HTMLParser; relative href and src targets checked across all generated HTML pages"
+}

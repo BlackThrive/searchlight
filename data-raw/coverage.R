@@ -9,4 +9,5 @@ jsonlite::write_json(list(
   checked = as.character(Sys.time()),
   r_version = R.version.string,
   line_coverage_percent = percentage
-), "inst/validation/M4-coverage.json", pretty = TRUE, auto_unbox = TRUE)
+), "inst/validation/M5-coverage.json", pretty = TRUE, auto_unbox = TRUE)
+stopifnot(percentage >= 85)

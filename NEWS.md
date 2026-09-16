@@ -1,5 +1,12 @@
 # searchlight 0.1.0 (in development)
 
+* Add an offline HTML report with source coverage, analysis scope, diagnostics,
+  separate uncertainty sections and an installed Markdown/Rmd template.
+* Preserve submission months across valid UTC-to-London calendar crossings and
+  keep wholly missing force counts unavailable in ratio summaries.
+* Bound national spatial-assignment memory by reusing exact coordinate work
+  without removing repeated events.
+
 * Establish an independent R package, source register, and milestone checks.
 * Bundle the public force list and Census 2021 / PACE 2023 classification tables.
 * Add bulk archive discovery, verified caching, immutable snapshots and whole-file

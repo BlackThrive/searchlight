@@ -17,6 +17,7 @@ and verified sources.
 Useful links:
 \itemize{
   \item \url{https://github.com/black-thrive-global/searchlight}
+  \item \url{https://black-thrive-global.github.io/searchlight/}
   \item Report bugs at \url{https://github.com/black-thrive-global/searchlight/issues}
 }
 

@@ -30,7 +30,7 @@ sl_contract(records)$timestamps
 \seealso{
 \code{\link[=sl_coverage]{sl_coverage()}}, \code{\link[=sl_timestamp_quality]{sl_timestamp_quality()}}, \code{\link[=sl_location_quality]{sl_location_quality()}}
 
-Other audit: 
+Other audit:
 \code{\link{sl_benchmark}()},
 \code{\link{sl_coverage}()},
 \code{\link{sl_coverage_compare}()},

@@ -1,0 +1,64 @@
+{
+  "checked": "2026-09-16 16:48:59.272204",
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "spelling_items": 0,
+  "lint_items": 0,
+  "urls": [
+    {
+      "URL": "https://black-thrive-global.github.io/searchlight/",
+      "From": [
+        "DESCRIPTION",
+        "man/searchlight-package.Rd"
+      ],
+      "Status": "404",
+      "Message": "Not Found",
+      "New": "",
+      "CRAN": "",
+      "Spaces": "",
+      "R": "",
+      "root": "C:\\Users\\musta\\Dropbox\\stop and search\\searchlight"
+    },
+    {
+      "URL": "https://github.com/black-thrive-global/searchlight",
+      "From": [
+        "DESCRIPTION",
+        "man/searchlight-package.Rd"
+      ],
+      "Status": "404",
+      "Message": "Not Found",
+      "New": "",
+      "CRAN": "",
+      "Spaces": "",
+      "R": "",
+      "root": "C:\\Users\\musta\\Dropbox\\stop and search\\searchlight"
+    },
+    {
+      "URL": "https://github.com/black-thrive-global/searchlight/issues",
+      "From": [
+        "DESCRIPTION",
+        "man/searchlight-package.Rd"
+      ],
+      "Status": "404",
+      "Message": "Not Found",
+      "New": "",
+      "CRAN": "",
+      "Spaces": "",
+      "R": "",
+      "root": "C:\\Users\\musta\\Dropbox\\stop and search\\searchlight"
+    },
+    {
+      "URL": "https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf",
+      "From": "C:/Users/musta/Dropbox/stop and search/searchlight/vignettes/outcomes-and-darkness.Rmd",
+      "Status": "403",
+      "Message": "Forbidden",
+      "New": "",
+      "CRAN": "",
+      "Spaces": "",
+      "R": "",
+      "root": "C:\\Users\\musta\\Dropbox\\stop and search\\searchlight"
+    }
+  ],
+  "style_checked": "2026-09-16 17:06:36.952395",
+  "style_files": 106,
+  "style_changed": 0
+}

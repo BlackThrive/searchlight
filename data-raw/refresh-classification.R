@@ -10,8 +10,10 @@ contract <- sl_contract(records)
 contract$classification$mapping_version <-
   "PACE-2023/archive-labels-2026-09-16"
 records <- sl_carry(records, contract)
-stopifnot(sum(records$ethnicity_5 == "Black") == 58L,
-  sum(records$ethnicity_5 == "Unknown") == 2280L)
+stopifnot(
+  sum(records$ethnicity_5 == "Black") == 58L,
+  sum(records$ethnicity_5 == "Unknown") == 2280L
+)
 audit <- dplyr::count(tibble::tibble(
   raw = records$self_defined_ethnicity_raw,
   ethnicity_19 = records$ethnicity_19, ethnicity_5 = records$ethnicity_5

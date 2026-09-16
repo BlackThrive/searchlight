@@ -27,7 +27,7 @@ sl_timestamp_quality(sl_sample())
 \seealso{
 \code{\link[=sl_quality]{sl_quality()}}, \code{\link[=sl_location_quality]{sl_location_quality()}}
 
-Other audit: 
+Other audit:
 \code{\link{sl_benchmark}()},
 \code{\link{sl_coverage}()},
 \code{\link{sl_coverage_compare}()},

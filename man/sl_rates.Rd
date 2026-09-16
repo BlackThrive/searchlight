@@ -35,7 +35,7 @@ head(sl_rates(c, p))
 \seealso{
 \code{\link[=sl_counts]{sl_counts()}}, \code{\link[=sl_rate_ratio]{sl_rate_ratio()}}, \code{\link[=sl_exposure]{sl_exposure()}}
 
-Other rates: 
+Other rates:
 \code{\link{sl_counts}()},
 \code{\link{sl_rate_ratio}()}
 }

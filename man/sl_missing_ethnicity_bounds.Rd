@@ -31,10 +31,11 @@ Extreme allocations send every Unknown event to one of the two groups.
 Proportional allocation uses all known groups, not only the comparison pair.
 force_object_mar uses known-group shares within force and object, pooled over
 areas and months; it refuses strata with no known ethnicity. These are
-assumptions, not confidence intervals. The tipping share solves the equation
+assumptions, not confidence intervals.
 Force/object allocation also assumes pooled known composition applies to each
 recipient area/month; MAR alone does not establish that transportability.
-where the ratio equals one, with all remaining Unknown sent to the reference.
+The tipping share solves the equation where the ratio equals one, with all
+remaining Unknown sent to the reference.
 A tipping value outside zero to one means no feasible tipping allocation.
 }
 \examples{
@@ -49,7 +50,7 @@ head(sl_missing_ethnicity_bounds(c, p))
 \seealso{
 \code{\link[=sl_rates]{sl_rates()}}, \code{\link[=sl_denominator_scenarios]{sl_denominator_scenarios()}}
 
-Other sensitivity: 
+Other sensitivity:
 \code{\link{sl_denominator_scenarios}()},
 \code{\link{sl_ranking_stability}()},
 \code{\link{sl_standardise}()}

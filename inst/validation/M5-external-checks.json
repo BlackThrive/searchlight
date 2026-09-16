@@ -1,0 +1,9 @@
+{
+  "attempted": "2026-09-16 17:00:55.858334",
+  "rhub": {
+    "status": "blocked",
+    "reason": "! :( Failed to start check: Not Found.\nℹ If you think this is a bug in the rhub package, please open an issues at\n  <https://github.com/r-hub/rhub/issues>."
+  },
+  "ci_matrix": "Pending: specified GitHub repository is unavailable",
+  "pkgdown_deployment": "Pending: specified GitHub repository is unavailable"
+}

@@ -37,7 +37,7 @@ sl_exposure(data.frame(
 \seealso{
 \code{\link[=sl_population]{sl_population()}}, \code{\link[=sl_population_crosstab]{sl_population_crosstab()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

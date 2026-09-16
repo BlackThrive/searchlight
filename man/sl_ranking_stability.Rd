@@ -45,7 +45,7 @@ sl_ranking_stability(x, "posterior", n = 3)
 \seealso{
 \code{\link[=sl_rate_ratio]{sl_rate_ratio()}}, \code{\link[=sl_denominator_scenarios]{sl_denominator_scenarios()}}
 
-Other sensitivity: 
+Other sensitivity:
 \code{\link{sl_denominator_scenarios}()},
 \code{\link{sl_missing_ethnicity_bounds}()},
 \code{\link{sl_standardise}()}

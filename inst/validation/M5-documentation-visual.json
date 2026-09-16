@@ -1,0 +1,115 @@
+{
+  "checked": "2026-09-16T13:44:54.255Z",
+  "pages": [
+    {
+      "file": "inst/validation/archive-to-audit.html",
+      "title": "From archive to audited dataset",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 6,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "inst/validation/estimating-disparity.html",
+      "title": "Estimating disparity with explicit assumptions",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 7,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "inst/validation/spatial-simulation.html",
+      "title": "Small-area disparity with spatial smoothing: simulation evidence",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 4,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "inst/validation/outcomes-and-darkness.html",
+      "title": "Outcome tests and veil of darkness",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 4,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "data-raw/pkgdown/index.html",
+      "title": "Audited Analysis of Police Stop and Search Records • searchlight",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 8,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "data-raw/pkgdown/reference/sl_report.html",
+      "title": "Write an offline report of audited records and analysis results — sl_report • searchlight",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 7,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "data-raw/pkgdown/articles/archive-to-audit.html",
+      "title": "From archive to audited dataset • searchlight",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 7,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "data-raw/pkgdown/articles/estimating-disparity.html",
+      "title": "Estimating disparity with explicit assumptions • searchlight",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 8,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "data-raw/pkgdown/articles/spatial-simulation.html",
+      "title": "Small-area disparity with spatial smoothing: simulation evidence • searchlight",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 5,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    },
+    {
+      "file": "data-raw/pkgdown/articles/outcomes-and-darkness.html",
+      "title": "Outcome tests and veil of darkness • searchlight",
+      "width": 1365,
+      "documentWidth": 1365,
+      "headings": 5,
+      "executionErrors": false,
+      "brokenImages": [],
+      "errors": [],
+      "external": []
+    }
+  ]
+}

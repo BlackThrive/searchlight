@@ -43,7 +43,7 @@ head(sl_rate_ratio(r))
 \seealso{
 \code{\link[=sl_rates]{sl_rates()}}, \code{\link[=sl_missing_ethnicity_bounds]{sl_missing_ethnicity_bounds()}}
 
-Other rates: 
+Other rates:
 \code{\link{sl_counts}()},
 \code{\link{sl_rates}()}
 }

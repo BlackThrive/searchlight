@@ -42,6 +42,32 @@ test_that("bundled sample retains the missing requested force", {
   expect_true(all(grepl("^[a-f0-9]{64}$", sl_contract(x)$snapshots$sha256)))
 })
 
+test_that("offset conversion retains filename month at calendar boundaries", {
+  d <- withr::local_tempdir()
+  records <- fixture_records(d)
+  versions <- sl_contract(records)$versions[1, ]
+  path <- file.path(d, versions$csv_path)
+  raw <- fixture_rows()
+  raw$Date[1] <- "2026-06-30T23:30:00+00:00"
+  readr::write_csv(raw, path)
+  versions$csv_sha256 <- sl_hash(path)
+  parsed <- sl_read_records(d, versions)
+  expect_equal(parsed$month, rep("2026-06", 3))
+  expect_equal(format(
+    parsed$date[1], "%Y-%m-%d %H:%M",
+    tz = "Europe/London"
+  ), "2026-07-01 00:30")
+  expect_equal(parsed$date_month_crossing, c(TRUE, FALSE, FALSE))
+  expect_equal(
+    sl_contract(parsed)$timestamps$london_month_mismatch_share,
+    1 / 3
+  )
+  raw$Date[1] <- "2026-07-12T12:30:00+00:00"
+  readr::write_csv(raw, path)
+  versions$csv_sha256 <- sl_hash(path)
+  expect_error(sl_read_records(d, versions), "filename month")
+})
+
 test_that("an explicitly empty CSV is different from an absent CSV", {
   d <- withr::local_tempdir()
   fixture_zip(d, n = 0L)

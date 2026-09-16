@@ -22,6 +22,10 @@ retain their
 supplied UTC offsets and are displayed in Europe/London. Absent or refused
 ethnicity is Unknown. Missing outcome measures remain NA, not negative
 outcomes.
+The filename defines the submission month. Offset conversion can cross a
+month boundary; date_month_crossing records this without moving the event
+into another source file. A timestamp must match the filename in either its
+supplied clock or the London clock.
 }
 \examples{
 d <- system.file("extdata", "sample", package = "searchlight")
@@ -32,7 +36,7 @@ summary(sl_contract(records))
 \seealso{
 \code{\link[=sl_contract]{sl_contract()}}, \code{\link[=sl_select_version]{sl_select_version()}}, \code{\link[=sl_sample]{sl_sample()}}
 
-Other ingest: 
+Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},

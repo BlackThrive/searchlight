@@ -45,7 +45,7 @@ head(suppressWarnings(sl_standardise(c, p)))
 \seealso{
 \code{\link[=sl_population_crosstab]{sl_population_crosstab()}}, \code{\link[=sl_rates]{sl_rates()}}
 
-Other sensitivity: 
+Other sensitivity:
 \code{\link{sl_denominator_scenarios}()},
 \code{\link{sl_missing_ethnicity_bounds}()},
 \code{\link{sl_ranking_stability}()}
