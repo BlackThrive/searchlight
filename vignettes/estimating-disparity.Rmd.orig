@@ -58,6 +58,17 @@ or missing-ethnicity assumptions. With replicated cells, `method = "quasipoisson
 estimates dispersion; `method = "negbin"` estimates extra count variation. Neither
 turns residence into the population exposed to police activity.
 
+For a pooled regression with additional covariates, `sl_count_model()` accepts
+an explicit formula and exposure column. A population offset uses submitted
+months to form population-time. Optional random effects use lme4; residual
+Moran diagnostics require compatible boundaries and remain exploratory.
+
+```{r count-regression}
+model <- sl_count_model(rates, n ~ ethnicity + factor(geography_code))
+knitr::kable(as.data.frame(model), digits = 3)
+attr(model, "excluded")
+```
+
 ## Missing ethnicity changes the estimand
 
 Unknown ethnicity is kept in the numerator table and has no Census population
@@ -73,6 +84,9 @@ These bounds allocate every Unknown to one of the pair. Proportional allocation
 uses all known ethnicity groups. MAR by force and object assumes missingness is
 independent of ethnicity conditional on those variables; it cannot be evaluated
 if object grouping has been discarded or a required stratum has no known records.
+Allocating pooled force/object shares to individual areas also assumes those
+shares describe each recipient area's unknown records. MAR by force/object alone
+does not guarantee this when local ethnicity composition varies.
 The tipping allocation assumes the fraction q of U goes to the comparison group
 and the remainder goes to the reference. Values outside [0,1] cannot tip the ratio.
 

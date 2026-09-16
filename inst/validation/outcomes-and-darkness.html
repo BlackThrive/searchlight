@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Outcome tests and veil of darkness</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap;
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #d14; }
+code > span.fl { color: #d14; }
+code > span.ch { color: #d14; }
+code > span.st { color: #d14; }
+code > span.co { color: #888888; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #900; font-weight: bold; }
+code > span.er { color: #a61717; background-color: #e3d2d2; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Outcome tests and veil of darkness</h1>
+
+
+
+<p>This vignette uses the real May-July 2026 sample offline. Its three
+missing Dyfed-Powys submissions remain missing. Observed outcomes
+describe West Yorkshire records only; neither missing submissions nor
+missing outcome values are failures.</p>
+<div id="three-separate-meanings-of-an-outcome" class="section level2">
+<h2>Three separate meanings of an outcome</h2>
+<p><code>any_action</code>, <code>arrest</code> and
+<code>outcome_linked_to_object</code> measure different things. An
+action need not be an arrest, and a recorded link to the search object
+is a separate source field. Searchlight preserves disagreements and
+unknown values. Wilson intervals describe a binary outcome among
+searches with that outcome observed. Unknown ethnicity appears in the
+descriptive table.</p>
+<pre class="r"><code>hits &lt;- sl_hit_rates(records, by = character())
+display &lt;- hits[hits$ethnicity_5 %in% c(&quot;Black&quot;, &quot;White&quot;, &quot;Unknown&quot;), ]
+knitr::kable(as.data.frame(display)[c(&quot;ethnicity_5&quot;, &quot;outcome&quot;, &quot;observed&quot;,
+  &quot;missing_outcome&quot;, &quot;hit_rate&quot;, &quot;conf_low&quot;, &quot;conf_high&quot;)], digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="27%" />
+<col width="10%" />
+<col width="17%" />
+<col width="10%" />
+<col width="10%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">ethnicity_5</th>
+<th align="left">outcome</th>
+<th align="right">observed</th>
+<th align="right">missing_outcome</th>
+<th align="right">hit_rate</th>
+<th align="right">conf_low</th>
+<th align="right">conf_high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black</td>
+<td align="left">any_action</td>
+<td align="right">58</td>
+<td align="right">0</td>
+<td align="right">0.379</td>
+<td align="right">0.266</td>
+<td align="right">0.508</td>
+</tr>
+<tr class="even">
+<td align="left">Unknown</td>
+<td align="left">any_action</td>
+<td align="right">2226</td>
+<td align="right">54</td>
+<td align="right">0.357</td>
+<td align="right">0.337</td>
+<td align="right">0.377</td>
+</tr>
+<tr class="odd">
+<td align="left">White</td>
+<td align="left">any_action</td>
+<td align="right">2138</td>
+<td align="right">3</td>
+<td align="right">0.355</td>
+<td align="right">0.335</td>
+<td align="right">0.376</td>
+</tr>
+<tr class="even">
+<td align="left">Black</td>
+<td align="left">arrest</td>
+<td align="right">58</td>
+<td align="right">0</td>
+<td align="right">0.190</td>
+<td align="right">0.109</td>
+<td align="right">0.309</td>
+</tr>
+<tr class="odd">
+<td align="left">Unknown</td>
+<td align="left">arrest</td>
+<td align="right">2226</td>
+<td align="right">54</td>
+<td align="right">0.132</td>
+<td align="right">0.119</td>
+<td align="right">0.147</td>
+</tr>
+<tr class="even">
+<td align="left">White</td>
+<td align="left">arrest</td>
+<td align="right">2138</td>
+<td align="right">3</td>
+<td align="right">0.196</td>
+<td align="right">0.179</td>
+<td align="right">0.213</td>
+</tr>
+<tr class="odd">
+<td align="left">Black</td>
+<td align="left">outcome_linked_to_object</td>
+<td align="right">58</td>
+<td align="right">0</td>
+<td align="right">0.862</td>
+<td align="right">0.751</td>
+<td align="right">0.928</td>
+</tr>
+<tr class="even">
+<td align="left">Unknown</td>
+<td align="left">outcome_linked_to_object</td>
+<td align="right">2234</td>
+<td align="right">46</td>
+<td align="right">0.941</td>
+<td align="right">0.931</td>
+<td align="right">0.950</td>
+</tr>
+<tr class="odd">
+<td align="left">White</td>
+<td align="left">outcome_linked_to_object</td>
+<td align="right">2141</td>
+<td align="right">0</td>
+<td align="right">0.917</td>
+<td align="right">0.904</td>
+<td align="right">0.928</td>
+</tr>
+</tbody>
+</table>
+<p>Each outcome has a separate logistic comparison of Black versus White
+searches, with force and object fixed effects. A constant control is
+omitted and named in the output. Other ethnicities and unknown ethnicity
+are excluded only from this specified pairwise model, with counts
+retained in the exclusion table. An unstable, aliased or separated model
+withholds its Wald interval instead of printing a misleading extreme
+estimate.</p>
+<pre class="r"><code>coefficients &lt;- attr(hits, &quot;coefficients&quot;)
+knitr::kable(coefficients[c(&quot;outcome&quot;, &quot;odds_ratio&quot;, &quot;conf_low&quot;, &quot;conf_high&quot;,
+  &quot;n&quot;, &quot;status&quot;)], digits = 3)</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="35%" />
+<col width="15%" />
+<col width="12%" />
+<col width="14%" />
+<col width="7%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">outcome</th>
+<th align="right">odds_ratio</th>
+<th align="right">conf_low</th>
+<th align="right">conf_high</th>
+<th align="right">n</th>
+<th align="left">status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">any_action</td>
+<td align="right">1.082</td>
+<td align="right">0.630</td>
+<td align="right">1.858</td>
+<td align="right">2196</td>
+<td align="left">estimable</td>
+</tr>
+<tr class="even">
+<td align="left">arrest</td>
+<td align="right">0.991</td>
+<td align="right">0.506</td>
+<td align="right">1.942</td>
+<td align="right">2196</td>
+<td align="left">estimable</td>
+</tr>
+<tr class="odd">
+<td align="left">outcome_linked_to_object</td>
+<td align="right">0.585</td>
+<td align="right">0.271</td>
+<td align="right">1.263</td>
+<td align="right">2199</td>
+<td align="left">estimable</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(coefficients[c(&quot;outcome&quot;, &quot;omitted_constant_controls&quot;)])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">outcome</th>
+<th align="left">omitted_constant_controls</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">any_action</td>
+<td align="left">force_id</td>
+</tr>
+<tr class="even">
+<td align="left">arrest</td>
+<td align="left">force_id</td>
+</tr>
+<tr class="odd">
+<td align="left">outcome_linked_to_object</td>
+<td align="left">force_id</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(attr(hits, &quot;exclusions&quot;))</code></pre>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="9%" />
+<col width="18%" />
+<col width="16%" />
+<col width="32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">outcome</th>
+<th align="right">included</th>
+<th align="right">unknown_ethnicity</th>
+<th align="right">other_ethnicity</th>
+<th align="right">pair_missing_outcome_or_control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">any_action</td>
+<td align="right">2196</td>
+<td align="right">2280</td>
+<td align="right">178</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">arrest</td>
+<td align="right">2196</td>
+<td align="right">2280</td>
+<td align="right">178</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">outcome_linked_to_object</td>
+<td align="right">2199</td>
+<td align="right">2280</td>
+<td align="right">178</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>Hit rates condition on being searched. Differences in selection, the
+distribution of unobserved risk, recording and the meaning of outcomes
+can all affect them. Equal hit rates need not imply equal decision
+thresholds, and differing hit rates do not by themselves establish
+discrimination. Repeated searches also challenge independent-event
+intervals when identifiers for clustering are unavailable. These
+interpretation limits are related to the outcome-test framework of <a href="https://www.journals.uchicago.edu/doi/10.1086/318603">Knowles,
+Persico and Todd (2001)</a>.</p>
+</div>
+<div id="a-time-quality-screen-is-mandatory" class="section level2">
+<h2>A time-quality screen is mandatory</h2>
+<p>The darkness design excludes every force-month marked unreliable or
+lacking a timestamp audit. Source-clock midnight and London-clock
+midnight are both checked upstream, so a date-only UTC timestamp shifted
+to 01:00 in summer cannot pass. Passing this screen does not prove that
+times are accurate.</p>
+<pre class="r"><code>knitr::kable(sl_timestamp_quality(records)[c(&quot;force_id&quot;, &quot;month&quot;,
+  &quot;gating_midnight_share&quot;, &quot;time_reliable&quot;)], digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="right">gating_midnight_share</th>
+<th align="left">time_reliable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-05</td>
+<td align="right">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-06</td>
+<td align="right">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">dyfed-powys</td>
+<td align="left">2026-07</td>
+<td align="right">NA</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-05</td>
+<td align="right">0.010</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-06</td>
+<td align="right">0.010</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-07</td>
+<td align="right">0.014</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>date_only &lt;- records[1:10, ]
+day &lt;- as.Date(date_only$date, tz = &quot;Europe/London&quot;)
+date_only$date &lt;- as.POSIXct(paste(day, &quot;00:00:00&quot;), tz = &quot;Europe/London&quot;)
+date_only$date_raw &lt;- format(date_only$date, &quot;%Y-%m-%dT%H:%M:%S%z&quot;)
+attr(date_only, &quot;contract&quot;)$timestamps &lt;- sl_timestamp_quality(date_only)
+refused &lt;- sl_veil_of_darkness(date_only)
+#&gt; Excluded 1 unreliable force-month(s).
+knitr::kable(as.data.frame(refused)[c(&quot;odds_ratio&quot;, &quot;n&quot;, &quot;status&quot;)])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">odds_ratio</th>
+<th align="right">n</th>
+<th align="left">status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="left">insufficient outcome/predictor variation</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(attr(refused, &quot;excluded_force_months&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="left">time_reliable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">west-yorkshire</td>
+<td align="left">2026-05</td>
+<td align="left">FALSE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="local-clock-time-sunset-and-civil-twilight" class="section level2">
+<h2>Local clock time, sunset and civil twilight</h2>
+<p>Solar events are calculated for the published location and date with
+<code>suncalc</code>, using Europe/London. For each distinct location
+and year, the annual earliest and latest evening twilight define the
+intertwilight clock window. This permits both daylight and darkness at
+comparable clock times across the year. The default defines darkness
+after civil dusk and removes the ambiguous sunset-to-dusk interval.
+<code>twilight = &quot;sunset&quot;</code> provides an explicit alternative.
+Missing locations are excluded, never imputed from a force centroid.</p>
+<p>The logistic outcome is membership of the comparison ethnicity among
+the selected pair. Predictors include darkness, a natural spline of
+clock time (or a linear term with too few distinct times), weekday,
+calendar month and force where these vary. Every exclusion step and the
+final analysed rows can be inspected.</p>
+<pre class="r"><code>darkness &lt;- sl_veil_of_darkness(records)
+knitr::kable(as.data.frame(darkness)[c(&quot;odds_ratio&quot;, &quot;conf_low&quot;, &quot;conf_high&quot;,
+  &quot;n&quot;, &quot;dark_stops&quot;, &quot;daylight_stops&quot;, &quot;status&quot;)], digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="14%" />
+<col width="5%" />
+<col width="15%" />
+<col width="21%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">odds_ratio</th>
+<th align="right">conf_low</th>
+<th align="right">conf_high</th>
+<th align="right">n</th>
+<th align="right">dark_stops</th>
+<th align="right">daylight_stops</th>
+<th align="left">status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">593.664</td>
+<td align="right">0.295</td>
+<td align="right">1195173</td>
+<td align="right">648</td>
+<td align="right">36</td>
+<td align="right">612</td>
+<td align="left">estimable</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(attr(darkness, &quot;steps&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">stage</th>
+<th align="right">remaining</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">input</td>
+<td align="right">4657</td>
+</tr>
+<tr class="even">
+<td align="left">reliable force-month time</td>
+<td align="right">4657</td>
+</tr>
+<tr class="odd">
+<td align="left">valid location and instant</td>
+<td align="right">4496</td>
+</tr>
+<tr class="even">
+<td align="left">known comparison pair</td>
+<td align="right">2122</td>
+</tr>
+<tr class="odd">
+<td align="left">annual intertwilight clock window</td>
+<td align="right">747</td>
+</tr>
+<tr class="even">
+<td align="left">unambiguous daylight or darkness</td>
+<td align="right">648</td>
+</tr>
+<tr class="odd">
+<td align="left">design window</td>
+<td align="right">648</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(attr(darkness, &quot;excluded_force_months&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">force_id</th>
+<th align="left">month</th>
+<th align="left">time_reliable</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>This short summer sample offers a restricted seasonal comparison and
+may have few Black records in parts of the design. A finite fitted
+interval is not evidence that activity patterns, daylight overlap or
+model controls are adequate. An undefined result reports a limitation of
+the available design, not no disparity. In this sample, only 36 of 648
+retained searches occur in darkness. The extremely wide adjusted
+interval makes the point estimate unsuitable as a stable substantive
+finding; more seasonal coverage and an explicit assessment of daylight
+overlap are needed before interpreting this design.</p>
+<pre class="r"><code>cat(paste(&quot;-&quot;, attr(darkness, &quot;assumptions&quot;)), sep = &quot;\n&quot;)
+#&gt; - Darkness reduces visibility of ethnicity before the stop.
+#&gt; - Activity, exposure and police deployment are comparable after controls.
+#&gt; - Reporting does not vary differentially by darkness and ethnicity.
+#&gt; - Times, locations and self-defined ethnicity are measured adequately.
+#&gt; - Enough daylight/darkness overlap remains after controls.
+#&gt; - Repeated events and unmeasured selection can violate model independence.
+#&gt; - A vehicle-stop method needs justification for pedestrian searches.</code></pre>
+<p>The optional <code>design = &quot;dst&quot;</code> restricts observations to
+three weeks on each side of the UK clock changes, adding transition and
+running-day controls. Clock-change dates come from the Europe/London
+time-zone rules, not fixed calendar dates. The tests verify 29 March and
+25 October 2026 and the one-hour local-clock change. The bundled
+May-July sample has no observations in these windows, so it cannot
+support a DST comparison.</p>
+<pre class="r"><code>dst &lt;- sl_veil_of_darkness(records, design = &quot;dst&quot;)
+knitr::kable(as.data.frame(dst)[c(&quot;odds_ratio&quot;, &quot;n&quot;, &quot;status&quot;)])</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">odds_ratio</th>
+<th align="right">n</th>
+<th align="left">status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="left">insufficient outcome/predictor variation</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>knitr::kable(attr(dst, &quot;steps&quot;))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">stage</th>
+<th align="right">remaining</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">input</td>
+<td align="right">4657</td>
+</tr>
+<tr class="even">
+<td align="left">reliable force-month time</td>
+<td align="right">4657</td>
+</tr>
+<tr class="odd">
+<td align="left">valid location and instant</td>
+<td align="right">4496</td>
+</tr>
+<tr class="even">
+<td align="left">known comparison pair</td>
+<td align="right">2122</td>
+</tr>
+<tr class="odd">
+<td align="left">annual intertwilight clock window</td>
+<td align="right">747</td>
+</tr>
+<tr class="even">
+<td align="left">unambiguous daylight or darkness</td>
+<td align="right">648</td>
+</tr>
+<tr class="odd">
+<td align="left">design window</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf">Grogger
+and Ridgeway (2006)</a> developed the veil-of-darkness approach for
+vehicle stops. Its use for pedestrian stop and search requires separate
+justification: ethnicity may be visible before the decision despite
+darkness, pedestrian and police activity can vary by light, and
+selection or reporting can change. These observational diagnostics do
+not establish a causal effect or, alone, establish discrimination.</p>
+<p>Astronomical field names and the time-zone interface were verified
+against the <a href="https://cran.r-project.org/web/packages/suncalc/suncalc.pdf">suncalc
+manual</a>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

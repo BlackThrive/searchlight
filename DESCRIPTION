@@ -14,6 +14,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
 Imports:
+    CARBayes (>= 6.1.1),
     cli,
     digest,
     dplyr (>= 1.1.1),
@@ -23,6 +24,10 @@ Imports:
     readr,
     rlang,
     sf,
+    spdep,
+    splines,
+    suncalc,
+    posterior,
     ggplot2,
     tidyr,
     tibble,
@@ -37,6 +42,8 @@ Suggests:
     httptest2,
     knitr,
     rmarkdown,
+    lme4,
+    vdiffr,
     zip
 VignetteBuilder: knitr
 Config/testthat/edition: 3

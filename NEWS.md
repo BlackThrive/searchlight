@@ -16,3 +16,12 @@
   standardisation and count-model bootstrap or posterior rank uncertainty.
 * Render an offline assumptions vignette with separately labelled sampling
   intervals and allocation ranges, and verified hand-calculated examples.
+* Add Poisson/negative-binomial count models, optional lme4 random effects and
+  exploratory residual Moran diagnostics.
+* Add multivariate CAR disparity with separate ethnicity fields, full joint
+  posterior ratios, exceedance probabilities, convergence diagnostics and maps.
+* Add a synthetic lattice generator and replicated spatial recovery evidence.
+* Add three separate hit-rate diagnostics and a time-quality-gated darkness
+  design with explicit UK daylight-saving transitions and exclusion audits.
+* Correct the published Other Black archive label, audit every raw sample
+  ethnicity label, and warn on unrecognised future source classifications.

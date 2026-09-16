@@ -1,0 +1,37 @@
+name: Inference validation
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 3 1 * *'
+permissions:
+  contents: read
+jobs:
+  inference:
+    runs-on: ubuntu-latest
+    env:
+      NOT_CRAN: true
+      NO_INTERNET_TEST: true
+      VROOM_THREADS: 2
+      OMP_NUM_THREADS: 2
+      OPENBLAS_NUM_THREADS: 2
+      SEARCHLIGHT_REPLICATIONS: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::devtools, any::pkgload
+      - name: Full recovery and visual tests
+        run: Rscript -e 'devtools::test()'
+      - name: Replicated spatial study
+        run: Rscript inst/scripts/simulation-study.R
+      - name: Offline inference vignettes and audit outputs
+        run: Rscript data-raw/validate-inference.R
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: inference-validation
+          path: inst/validation/

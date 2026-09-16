@@ -24,7 +24,10 @@ The benchmark is not an equality guarantee: scope of powers, event versus
 person/vehicle reporting, publication cut-offs and revisions can differ.
 }
 \examples{
-sl_benchmark(sl_sample())
+ppap <- utils::read.csv(system.file("extdata", "ppap-totals.csv",
+  package = "searchlight"
+))
+sl_benchmark(sl_sample(), ppap)
 }
 \seealso{
 \code{\link[=sl_coverage]{sl_coverage()}}

@@ -1,0 +1,4 @@
+term,odds_ratio,conf_low,conf_high,log_std_error,n,status,model_warnings,outcome,omitted_constant_controls
+.comparison,1.0815732327051857,0.6295784392046506,1.858069757252425,0.276087474103049,2196,estimable,,any_action,force_id
+.comparison,0.9911346988340094,0.5059221803241856,1.9416978132947487,0.34310201049442574,2196,estimable,,arrest,force_id
+.comparison,0.5853504117953465,0.27138160014036317,1.262558347403675,0.3921932849184829,2199,estimable,,outcome_linked_to_object,force_id

@@ -8,7 +8,10 @@ sl_map_ethnicity <- function(raw) {
     Bangladeshi = "bangladeshi", Chinese = "chinese", Indian = "indian",
     Pakistani = "pakistani", `Other Asian` = "any other asian background",
     African = "african", Caribbean = "caribbean",
-    `Other Black` = "any other black background",
+    `Other Black` = c(
+      "any other black background",
+      "any other black/african/caribbean background"
+    ),
     `White and Asian` = "white and asian",
     `White and Black African` = "white and black african",
     `White and Black Caribbean` = "white and black caribbean",
@@ -32,6 +35,15 @@ sl_map_ethnicity <- function(raw) {
     "ns", "refused"
   ) |
     grepl("not stated|not defined|not known|refused", value)
+  unmapped <- !unknown & is.na(mapped)
+  if (any(unmapped)) {
+    labels <- unique(raw[unmapped])
+    sl_warn(paste0(
+      "Unrecognised self-defined ethnicity labels retained as Unknown: ",
+      paste(utils::head(labels, 5), collapse = "; "),
+      ". Review the source classification."
+    ), "classification")
+  }
   mapped[unknown | is.na(mapped)] <- "Unknown"
   broad <- table$ethnicity_5[match(mapped, table$ethnicity_19)]
   tibble::tibble(

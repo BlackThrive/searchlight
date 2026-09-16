@@ -42,10 +42,20 @@ All retrieved 2026-09-16; source IDs, fields and vintage details are recorded in
 
 Builders: `data-raw/sample-audit.R`, `data-raw/audit-sources.py`.
 No acquisition happens when loading these files or running examples.
-# Derived rate examples
+
+## Derived rate examples
 
 `example-counts.rds`, `example-rates.rds` and
 `example-demographic-counts.rds` retain four West Yorkshire MSOAs with the most
 sample events, all three months, unknown ethnicity and the full ingestion
 contract. They are built by `data-raw/sample-rates.R` from the attributed real
-sample below and are used to keep installed examples fast and network-free.
+sample above and are used to keep installed examples fast and network-free.
+
+## Synthetic spatial example
+
+`example-spatial.rds` is wholly synthetic, created by
+`inst/scripts/simulation-study.R` from a 25-area lattice with known independent
+disparity and total-intensity surfaces. It is not police or Census data. Its
+contract states that origin. The compact file retains posterior summaries,
+full-chain diagnostics, settings, truth and 1,000 evenly spaced joint draws;
+the large backend fit is omitted. Simulation outputs are under `inst/validation`.

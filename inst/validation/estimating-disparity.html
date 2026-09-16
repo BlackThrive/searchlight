@@ -292,8 +292,8 @@ knitr::kable(ratios[c(&quot;geography_code&quot;, &quot;ratio&quot;, &quot;conf_
 <tbody>
 <tr class="odd">
 <td align="left">E02002237</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
 <td align="right">7.451</td>
 <td align="right">18</td>
 <td align="right">0</td>
@@ -301,30 +301,30 @@ knitr::kable(ratios[c(&quot;geography_code&quot;, &quot;ratio&quot;, &quot;conf_
 </tr>
 <tr class="even">
 <td align="left">E02002454</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.761</td>
+<td align="right">0.201</td>
+<td align="right">0.005</td>
+<td align="right">1.157</td>
 <td align="right">72</td>
-<td align="right">0</td>
-<td align="right">NA</td>
+<td align="right">1</td>
+<td align="right">2.396</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.349</td>
+<td align="right">0.281</td>
+<td align="right">0.057</td>
+<td align="right">0.833</td>
 <td align="right">196</td>
-<td align="right">0</td>
-<td align="right">NA</td>
+<td align="right">3</td>
+<td align="right">2.957</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.138</td>
+<td align="right">0.147</td>
+<td align="right">0.039</td>
+<td align="right">0.390</td>
 <td align="right">84</td>
-<td align="right">0</td>
-<td align="right">NA</td>
+<td align="right">4</td>
+<td align="right">0.500</td>
 </tr>
 </tbody>
 </table>
@@ -337,6 +337,125 @@ missing-ethnicity assumptions. With replicated cells,
 <code>method = &quot;quasipoisson&quot;</code> estimates dispersion;
 <code>method = &quot;negbin&quot;</code> estimates extra count variation. Neither
 turns residence into the population exposed to police activity.</p>
+<p>For a pooled regression with additional covariates,
+<code>sl_count_model()</code> accepts an explicit formula and exposure
+column. A population offset uses submitted months to form
+population-time. Optional random effects use lme4; residual Moran
+diagnostics require compatible boundaries and remain exploratory.</p>
+<pre class="r"><code>model &lt;- sl_count_model(rates, n ~ ethnicity + factor(geography_code))
+knitr::kable(as.data.frame(model), digits = 3)</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="31%" />
+<col width="8%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="12%" />
+<col width="8%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std_error</th>
+<th align="right">statistic</th>
+<th align="right">p_value</th>
+<th align="right">exp_estimate</th>
+<th align="right">conf_low</th>
+<th align="right">conf_high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">-6.758</td>
+<td align="right">0.306</td>
+<td align="right">-22.116</td>
+<td align="right">0.000</td>
+<td align="right">0.001</td>
+<td align="right">0.001</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="even">
+<td align="left">ethnicityBlack</td>
+<td align="right">0.974</td>
+<td align="right">0.418</td>
+<td align="right">2.329</td>
+<td align="right">0.020</td>
+<td align="right">2.650</td>
+<td align="right">1.167</td>
+<td align="right">6.016</td>
+</tr>
+<tr class="odd">
+<td align="left">ethnicityMixed</td>
+<td align="right">-16.173</td>
+<td align="right">1414.463</td>
+<td align="right">-0.011</td>
+<td align="right">0.991</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">Inf</td>
+</tr>
+<tr class="even">
+<td align="left">ethnicityOther</td>
+<td align="right">1.404</td>
+<td align="right">0.357</td>
+<td align="right">3.931</td>
+<td align="right">0.000</td>
+<td align="right">4.073</td>
+<td align="right">2.022</td>
+<td align="right">8.205</td>
+</tr>
+<tr class="odd">
+<td align="left">ethnicityWhite</td>
+<td align="right">2.636</td>
+<td align="right">0.235</td>
+<td align="right">11.222</td>
+<td align="right">0.000</td>
+<td align="right">13.957</td>
+<td align="right">8.807</td>
+<td align="right">22.118</td>
+</tr>
+<tr class="even">
+<td align="left">factor(geography_code)E02002454</td>
+<td align="right">1.113</td>
+<td align="right">0.235</td>
+<td align="right">4.745</td>
+<td align="right">0.000</td>
+<td align="right">3.043</td>
+<td align="right">1.922</td>
+<td align="right">4.820</td>
+</tr>
+<tr class="odd">
+<td align="left">factor(geography_code)E02006875</td>
+<td align="right">2.049</td>
+<td align="right">0.216</td>
+<td align="right">9.501</td>
+<td align="right">0.000</td>
+<td align="right">7.758</td>
+<td align="right">5.084</td>
+<td align="right">11.838</td>
+</tr>
+<tr class="even">
+<td align="left">factor(geography_code)E02006948</td>
+<td align="right">2.488</td>
+<td align="right">0.229</td>
+<td align="right">10.872</td>
+<td align="right">0.000</td>
+<td align="right">12.034</td>
+<td align="right">7.685</td>
+<td align="right">18.845</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>attr(model, &quot;excluded&quot;)
+#&gt; $rows
+#&gt; [1] 12
+#&gt;
+#&gt; $events
+#&gt; [1] 358</code></pre>
 </div>
 <div id="missing-ethnicity-changes-the-estimand" class="section level2">
 <h2>Missing ethnicity changes the estimand</h2>
@@ -349,10 +468,13 @@ H = ((C+U)/E_C) / (R/E_R)</code></pre>
 allocation uses all known ethnicity groups. MAR by force and object
 assumes missingness is independent of ethnicity conditional on those
 variables; it cannot be evaluated if object grouping has been discarded
-or a required stratum has no known records. The tipping allocation
-assumes the fraction q of U goes to the comparison group and the
-remainder goes to the reference. Values outside [0,1] cannot tip the
-ratio.</p>
+or a required stratum has no known records. Allocating pooled
+force/object shares to individual areas also assumes those shares
+describe each recipient area’s unknown records. MAR by force/object
+alone does not guarantee this when local ethnicity composition varies.
+The tipping allocation assumes the fraction q of U goes to the
+comparison group and the remainder goes to the reference. Values outside
+[0,1] cannot tip the ratio.</p>
 <pre class="r"><code>bounds &lt;- sl_missing_ethnicity_bounds(counts, population)
 knitr::kable(bounds[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ratio&quot;, &quot;unknown&quot;,
   &quot;lower_bound&quot;, &quot;upper_bound&quot;, &quot;tipping_allocation&quot;)], digits = 3)</code></pre>
@@ -383,7 +505,7 @@ knitr::kable(bounds[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ra
 <td align="left">all_to_reference</td>
 <td align="right">0.000</td>
 <td align="right">47</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
 <td align="right">85.533</td>
 <td align="right">0.041</td>
 </tr>
@@ -392,7 +514,7 @@ knitr::kable(bounds[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ra
 <td align="left">all_to_comparison</td>
 <td align="right">85.533</td>
 <td align="right">47</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
 <td align="right">85.533</td>
 <td align="right">0.041</td>
 </tr>
@@ -401,126 +523,126 @@ knitr::kable(bounds[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ra
 <td align="left">proportional</td>
 <td align="right">0.000</td>
 <td align="right">47</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
 <td align="right">85.533</td>
 <td align="right">0.041</td>
 </tr>
 <tr class="even">
 <td align="left">E02002237</td>
 <td align="left">force_object_mar</td>
-<td align="right">0.000</td>
+<td align="right">0.486</td>
 <td align="right">47</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
 <td align="right">85.533</td>
 <td align="right">0.041</td>
 </tr>
 <tr class="odd">
 <td align="left">E02002454</td>
 <td align="left">all_to_reference</td>
-<td align="right">0.000</td>
-<td align="right">32</td>
-<td align="right">0</td>
+<td align="right">0.141</td>
+<td align="right">31</td>
+<td align="right">0.141</td>
 <td align="right">6.438</td>
-<td align="right">0.210</td>
+<td align="right">0.184</td>
 </tr>
 <tr class="even">
 <td align="left">E02002454</td>
 <td align="left">all_to_comparison</td>
 <td align="right">6.438</td>
-<td align="right">32</td>
-<td align="right">0</td>
+<td align="right">31</td>
+<td align="right">0.141</td>
 <td align="right">6.438</td>
-<td align="right">0.210</td>
+<td align="right">0.184</td>
 </tr>
 <tr class="odd">
 <td align="left">E02002454</td>
 <td align="left">proportional</td>
-<td align="right">0.000</td>
-<td align="right">32</td>
-<td align="right">0</td>
+<td align="right">0.201</td>
+<td align="right">31</td>
+<td align="right">0.141</td>
 <td align="right">6.438</td>
-<td align="right">0.210</td>
+<td align="right">0.184</td>
 </tr>
 <tr class="even">
 <td align="left">E02002454</td>
 <td align="left">force_object_mar</td>
-<td align="right">0.000</td>
-<td align="right">32</td>
-<td align="right">0</td>
+<td align="right">0.232</td>
+<td align="right">31</td>
+<td align="right">0.141</td>
 <td align="right">6.438</td>
-<td align="right">0.210</td>
+<td align="right">0.184</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
 <td align="left">all_to_reference</td>
-<td align="right">0.000</td>
-<td align="right">156</td>
-<td align="right">0</td>
+<td align="right">0.158</td>
+<td align="right">153</td>
+<td align="right">0.158</td>
 <td align="right">14.609</td>
-<td align="right">0.117</td>
+<td align="right">0.099</td>
 </tr>
 <tr class="even">
 <td align="left">E02006875</td>
 <td align="left">all_to_comparison</td>
 <td align="right">14.609</td>
-<td align="right">156</td>
-<td align="right">0</td>
+<td align="right">153</td>
+<td align="right">0.158</td>
 <td align="right">14.609</td>
-<td align="right">0.117</td>
+<td align="right">0.099</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
 <td align="left">proportional</td>
-<td align="right">0.000</td>
-<td align="right">156</td>
-<td align="right">0</td>
+<td align="right">0.281</td>
+<td align="right">153</td>
+<td align="right">0.158</td>
 <td align="right">14.609</td>
-<td align="right">0.117</td>
+<td align="right">0.099</td>
 </tr>
 <tr class="even">
 <td align="left">E02006875</td>
 <td align="left">force_object_mar</td>
-<td align="right">0.000</td>
-<td align="right">156</td>
-<td align="right">0</td>
+<td align="right">0.362</td>
+<td align="right">153</td>
+<td align="right">0.158</td>
 <td align="right">14.609</td>
-<td align="right">0.117</td>
+<td align="right">0.099</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006948</td>
 <td align="left">all_to_reference</td>
-<td align="right">0.000</td>
-<td align="right">131</td>
-<td align="right">0</td>
+<td align="right">0.058</td>
+<td align="right">127</td>
+<td align="right">0.058</td>
 <td align="right">4.805</td>
-<td align="right">0.402</td>
+<td align="right">0.383</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
 <td align="left">all_to_comparison</td>
 <td align="right">4.805</td>
-<td align="right">131</td>
-<td align="right">0</td>
+<td align="right">127</td>
+<td align="right">0.058</td>
 <td align="right">4.805</td>
-<td align="right">0.402</td>
+<td align="right">0.383</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006948</td>
 <td align="left">proportional</td>
-<td align="right">0.000</td>
-<td align="right">131</td>
-<td align="right">0</td>
+<td align="right">0.147</td>
+<td align="right">127</td>
+<td align="right">0.058</td>
 <td align="right">4.805</td>
-<td align="right">0.402</td>
+<td align="right">0.383</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
 <td align="left">force_object_mar</td>
-<td align="right">0.000</td>
-<td align="right">131</td>
-<td align="right">0</td>
+<td align="right">0.106</td>
+<td align="right">127</td>
+<td align="right">0.058</td>
 <td align="right">4.805</td>
-<td align="right">0.402</td>
+<td align="right">0.383</td>
 </tr>
 </tbody>
 </table>
@@ -528,7 +650,7 @@ knitr::kable(bounds[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ra
 assumption range asks what different allocations would imply. They are
 displayed separately and are never combined into one interval.</p>
 <div class="float">
-<img role="img" aria-label="plot of chunk separate-uncertainty" src="data:image/png;base64,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" alt="plot of chunk separate-uncertainty" />
+<img role="img" aria-label="plot of chunk separate-uncertainty" src="data:image/png;base64,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" alt="plot of chunk separate-uncertainty" />
 <div class="figcaption">plot of chunk separate-uncertainty</div>
 </div>
 </div>
@@ -574,74 +696,74 @@ knitr::kable(denominators[c(&quot;geography_code&quot;, &quot;scenario&quot;, &q
 <tr class="odd">
 <td align="left">E02002237</td>
 <td align="left">resident</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
 <td align="right">7.451</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
 </tr>
 <tr class="even">
 <td align="left">E02002454</td>
 <td align="left">resident</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.761</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.201</td>
+<td align="right">0.005</td>
+<td align="right">1.157</td>
+<td align="right">0.101</td>
+<td align="right">0.201</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
 <td align="left">resident</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.349</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.281</td>
+<td align="right">0.057</td>
+<td align="right">0.833</td>
+<td align="right">0.140</td>
+<td align="right">0.281</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
 <td align="left">resident</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.138</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.147</td>
+<td align="right">0.039</td>
+<td align="right">0.390</td>
+<td align="right">0.073</td>
+<td align="right">0.147</td>
 </tr>
 <tr class="odd">
 <td align="left">E02002237</td>
 <td align="left">hypothetical</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
 <td align="right">3.725</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
 </tr>
 <tr class="even">
 <td align="left">E02002454</td>
 <td align="left">hypothetical</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.381</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.101</td>
+<td align="right">0.003</td>
+<td align="right">0.579</td>
+<td align="right">0.101</td>
+<td align="right">0.201</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
 <td align="left">hypothetical</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.174</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.140</td>
+<td align="right">0.029</td>
+<td align="right">0.417</td>
+<td align="right">0.140</td>
+<td align="right">0.281</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
 <td align="left">hypothetical</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.069</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">0.073</td>
+<td align="right">0.020</td>
+<td align="right">0.195</td>
+<td align="right">0.073</td>
+<td align="right">0.147</td>
 </tr>
 </tbody>
 </table>
@@ -772,15 +894,15 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">12.63</td>
 <td align="right">38.25</td>
 <td align="left">TRUE</td>
-<td align="right">167</td>
+<td align="right">164</td>
 </tr>
 <tr class="even">
 <td align="left">E02006875</td>
 <td align="left">Black</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
+<td align="right">34.88</td>
+<td align="right">44.62</td>
 <td align="left">TRUE</td>
-<td align="right">167</td>
+<td align="right">164</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
@@ -788,7 +910,7 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="left">TRUE</td>
-<td align="right">167</td>
+<td align="right">164</td>
 </tr>
 <tr class="even">
 <td align="left">E02006875</td>
@@ -796,7 +918,7 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">24.69</td>
 <td align="right">12.77</td>
 <td align="left">TRUE</td>
-<td align="right">167</td>
+<td align="right">164</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006875</td>
@@ -804,7 +926,7 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">118.25</td>
 <td align="right">163.29</td>
 <td align="left">TRUE</td>
-<td align="right">167</td>
+<td align="right">164</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
@@ -812,15 +934,15 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">8.78</td>
 <td align="right">7.61</td>
 <td align="left">TRUE</td>
-<td align="right">144</td>
+<td align="right">142</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006948</td>
 <td align="left">Black</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
+<td align="right">15.12</td>
+<td align="right">12.61</td>
 <td align="left">TRUE</td>
-<td align="right">144</td>
+<td align="right">142</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
@@ -828,7 +950,7 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">0.00</td>
 <td align="right">0.00</td>
 <td align="left">TRUE</td>
-<td align="right">144</td>
+<td align="right">142</td>
 </tr>
 <tr class="odd">
 <td align="left">E02006948</td>
@@ -836,7 +958,7 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">39.80</td>
 <td align="right">48.74</td>
 <td align="left">TRUE</td>
-<td align="right">144</td>
+<td align="right">142</td>
 </tr>
 <tr class="even">
 <td align="left">E02006948</td>
@@ -844,7 +966,7 @@ knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &
 <td align="right">181.60</td>
 <td align="right">201.86</td>
 <td align="left">TRUE</td>
-<td align="right">144</td>
+<td align="right">142</td>
 </tr>
 </tbody>
 </table>

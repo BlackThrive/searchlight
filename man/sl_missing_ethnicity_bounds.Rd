@@ -32,6 +32,8 @@ Proportional allocation uses all known groups, not only the comparison pair.
 force_object_mar uses known-group shares within force and object, pooled over
 areas and months; it refuses strata with no known ethnicity. These are
 assumptions, not confidence intervals. The tipping share solves the equation
+Force/object allocation also assumes pooled known composition applies to each
+recipient area/month; MAR alone does not establish that transportability.
 where the ratio equals one, with all remaining Unknown sent to the reference.
 A tipping value outside zero to one means no feasible tipping allocation.
 }

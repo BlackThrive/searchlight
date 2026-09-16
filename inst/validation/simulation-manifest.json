@@ -1,0 +1,14 @@
+{
+  "started": "2026-09-16 12:55:34.675831",
+  "finished": "2026-09-16 13:07:47.460701",
+  "seed_rule": "1200 + condition_index*100 + replicate",
+  "lattice_side": 5,
+  "replications_per_condition": 6,
+  "completed_replicates": 18,
+  "complete": true,
+  "resumed": true,
+  "inference": "Poisson MCAR; 2 chains, one core; extend on convergence failure",
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "package_version": "6.1.1",
+  "interpretation": "Finite pilot study. Report Monte Carlo error and failed convergence; no universal guarantee."
+}

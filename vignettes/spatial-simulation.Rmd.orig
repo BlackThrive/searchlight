@@ -1,0 +1,188 @@
+---
+title: "Small-area disparity with spatial smoothing: simulation evidence"
+output:
+  rmarkdown::html_vignette:
+    mathjax: null
+    highlight: null
+vignette: >
+  %\VignetteIndexEntry{Small-area disparity with spatial smoothing: simulation evidence}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(searchlight)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 6,
+  fig.height = 3.6, dpi = 96, fig.path = "figures/spatial-")
+data_file <- function(name) system.file("extdata", name, package = "searchlight")
+validation_file <- function(name) system.file("validation", name, package = "searchlight")
+fit <- readRDS(data_file("example-spatial.rds"))
+summary <- readr::read_csv(validation_file("simulation-summary.csv"), show_col_types = FALSE)
+replicates <- readr::read_csv(validation_file("simulation-replicates.csv"), show_col_types = FALSE)
+areas <- readr::read_csv(validation_file("simulation-areas.csv"), show_col_types = FALSE)
+```
+
+Small-area ratios are noisy when counts or comparison populations are small.
+Spatial smoothing borrows information under a prior about neighbouring areas.
+It can stabilise estimates, but cannot correct an inappropriate population
+denominator, missing submissions, unknown ethnicity or anonymised snap points.
+This vignette reports an explicitly limited, replicated simulation study rather
+than treating smooth-looking maps as evidence of accuracy.
+
+## A spatial model of disparity
+
+`sl_spatial_disparity()` fits two Poisson responses using
+`CARBayes::MVS.CARleroux`, with a separate population-time offset for each group.
+Its linear predictor is
+
+```
+N_ig ~ Poisson(E_ig * theta_ig)
+log(theta_ig) = alpha_g + phi_ig
+log(disparity_i) = alpha_comparison - alpha_reference
+                   + phi_i,comparison - phi_i,reference
+```
+
+The multivariate CAR prior allows spatial correlation and correlation between
+group effects. For two groups it has an equivalent shared/contrast decomposition:
+`u_i = (phi_ir + phi_ic)/2`, `v_ir = (phi_ir - phi_ic)/2`, `v_ic = -v_ir`.
+Thus `phi_ig = u_i + v_ig` and the shared part cancels from disparity. These
+components inherit the multivariate covariance; searchlight does not claim to fit
+three separately identifiable independent spatial fields from two responses.
+This differs fundamentally from assigning one shared spatial effect to both groups,
+which would cancel and leave no local disparity surface.
+
+Rook adjacency is the default. Islands require a justified explicit `adjacency`
+matrix; they are never silently linked to a convenient neighbour. Unknown events
+are counted in the output but excluded from the known-group likelihood. Areas
+without usable exposure are listed separately. Missing months contribute no time.
+Spatial models on records with many points near boundaries raise a warning.
+
+```{r example-code, eval=FALSE}
+simulation <- sl_simulate(side = 5, seed = 1301)
+fit <- sl_spatial_disparity(simulation$counts, simulation$population,
+  simulation$boundaries, burnin = 2000, n.sample = 12000, thin = 10,
+  chains = 2, seed = 1351)
+```
+
+For a real analysis, inspect diagnostics and extend the chains when necessary.
+The saved example uses the final run selected by the reproducible simulation
+script. It retains 1,000 joint draws for compact offline demonstrations; its
+diagnostics describe the full final chains.
+
+```{r diagnostics}
+settings <- attr(fit, "mcmc_settings")
+settings[c("burnin", "n.sample", "thin", "chains", "seed")]
+diagnostics <- attr(fit, "diagnostics")
+knitr::kable(diagnostics, digits = 2)
+```
+
+The convergence screen requires rank-normalised split R-hat at most 1.01 and
+bulk and tail effective sample sizes at least 400 for all area log-ratios and
+monitored global parameters. These are useful checks, not proof of convergence.
+The short tests deliberately fail this screen and emit a warning; they test
+implementation and rough recovery, not reliable production inference.
+
+```{r maps, echo=FALSE}
+plot(fit)
+```
+
+Both maps use the same colour scale. Intervals and exceedance probabilities,
+rather than only posterior medians, are available for every area.
+
+```{r posterior}
+knitr::kable(head(as.data.frame(fit)[c("geography_code", "ratio",
+  "credible_low_95", "credible_high_95", "probability_above_1",
+  "probability_above_k")]), digits = 3)
+ranks <- sl_ranking_stability(fit, "posterior", n = 500)
+knitr::kable(head(as.data.frame(ranks)))
+```
+
+## Recovery independent of total intensity
+
+The generator varies disparity east-west and expected total event intensity
+north-south. Their correlation is zero on the lattice. Reference and comparison
+rates are solved jointly to preserve that total intensity while changing disparity.
+Recovering this pattern therefore tests the group-specific component, rather than
+merely reproducing a map of all searches.
+
+```{r truth, echo=FALSE}
+truth <- attr(fit, "truth")
+comparison <- data.frame(truth = truth$ratio, estimate = fit$ratio,
+  low = fit$credible_low_95, high = fit$credible_high_95)
+ggplot2::ggplot(comparison, ggplot2::aes(truth, estimate)) +
+  ggplot2::geom_abline(slope = 1, intercept = 0, linetype = 2, colour = "grey50") +
+  ggplot2::geom_linerange(ggplot2::aes(ymin = low, ymax = high), colour = "#B5CDD1") +
+  ggplot2::geom_point(colour = "#167D8D", size = 1.5) +
+  ggplot2::labs(x = "Generating disparity", y = "Posterior median and 95% interval") +
+  ggplot2::theme_minimal()
+```
+
+The full recovery test also checks that posterior ratios reconstructed from
+group-specific spatial effects equal ratios reconstructed independently from
+posterior fitted event means and exposures. This detects swapped area/group axes.
+
+## Replicated evidence, including failure modes
+
+`inst/scripts/simulation-study.R` runs three settings on 25-area lattices:
+smooth variation, a sharp east-west discontinuity, and comparison populations
+reduced from 1,000 to 50 per area. Each replicate generates fresh Poisson counts.
+The study extends unsuccessful chains up to 80,000 iterations and retains any
+remaining convergence failures in the output. No simulation chooses a seed based
+on whether smoothing beats the crude estimator.
+
+```{r simulation-summary}
+knitr::kable(summary, digits = 3)
+```
+
+RMSE measures error on the ratio scale. Coverage is the fraction of generating
+area ratios in nominal 95% intervals, averaged over replicates. Rank recovery is
+Spearman correlation; ties in a discontinuous truth surface remain ties. MCSE is
+the standard deviation of replicate metrics divided by the square root of the
+replication count. This small pilot does not establish general nominal coverage.
+Rows with failed convergence must be inspected before substantive interpretation.
+The table includes every attempted replicate. Metrics from failed chains, if
+any, describe an unsuccessful fit and are not validated posterior inference.
+
+```{r unsuccessful-fits}
+failed <- replicates[replicates$method == "smoothed" & !replicates$converged,
+  c("condition", "replicate", "seed", "model_iterations")]
+knitr::kable(failed, caption = "Fits still failing the convergence screen at the iteration limit")
+```
+
+```{r rmse-variation, echo=FALSE}
+ggplot2::ggplot(replicates, ggplot2::aes(method, rmse, group = replicate)) +
+  ggplot2::geom_line(colour = "#B5CDD1") +
+  ggplot2::geom_point(ggplot2::aes(shape = converged), colour = "#167D8D", size = 1.5) +
+  ggplot2::facet_wrap(~condition, scales = "free_y") +
+  ggplot2::labs(x = NULL, y = "Ratio RMSE", shape = "Convergence screen",
+    caption = "Each line is one replicated lattice; failed fits remain visible.") +
+  ggplot2::theme_minimal() + ggplot2::theme(legend.position = "bottom")
+```
+
+Lower average RMSE does not mean every area improves. The following table reports
+the fraction of individual area estimates with greater absolute error after
+smoothing, and the signed average change in absolute error.
+
+```{r local-harm}
+wide <- tidyr::pivot_wider(areas[c("condition", "replicate", "geography_code",
+  "truth", "method", "estimate", "model_converged")],
+  names_from = "method", values_from = "estimate")
+wide$error_change <- abs(wide$smoothed - wide$truth) - abs(wide$crude - wide$truth)
+harm <- dplyr::summarise(dplyr::group_by(wide, .data$condition, .data$model_converged),
+  share_with_greater_error = mean(.data$error_change > 0),
+  mean_absolute_error_change = mean(.data$error_change), .groups = "drop")
+knitr::kable(harm, digits = 3)
+```
+
+Neighbour borrowing can blur discontinuities; sparse populations can leave large
+prior influence. The study quantifies performance only for these generators,
+populations, priors and count sizes. It does not include location error, unmeasured
+mobility, changing Census populations, repeated-person dependence or missing
+submissions. Inspect unsmoothed counts, sensitivity bounds and convergence before
+using a smoothed map, and report where the estimates become less accurate.
+
+The model interface and covariance structure are documented in the
+[CARBayes manual](https://cran.r-project.org/web/packages/CARBayes/CARBayes.pdf)
+and [Lee (2013)](https://www.jstatsoft.org/article/view/v055i13).
+The [posterior diagnostic documentation](https://mc-stan.org/posterior/reference/rhat.html)
+describes the convergence statistic used here.

@@ -2,6 +2,13 @@
 
 ## Verified 2026-09-16
 
+* Re-audited all distinct self-defined ethnicity strings directly in the three
+  immutable bundled archive CSVs during M4. The full label
+  "Black/African/Caribbean/Black British - Any other Black/African/Caribbean background"
+  occurs 58 times and maps to Other Black / Black. There are 2,077 blank and 203
+  not-stated labels, which remain Unknown. `M4-classification-audit.csv` records
+  every observed raw label and its counts; a regression test checks this wording.
+
 * https://data.police.uk/data/archive/ (HTML retrieved): archives are complete
   rolling snapshots, not one-month-only datasets. The latest is `2026-07.zip`,
   covering August 2023 through July 2026, about 1.6 GB. Published checksums are
@@ -131,3 +138,26 @@ retrieved 2026-09-16, is stored compressed. The sample extract includes the
 explicit missing Dyfed-Powys stop-and-search notices for May, June, July 2026.
 Crime-only notices are not stop-and-search quality flags. Historical refresh
 notices require resolution before they can be treated as current issues.
+
+## Statistical backend interfaces verified 2026-09-16
+
+* [CARBayes 6.1.1 manual](https://cran.r-project.org/web/packages/CARBayes/CARBayes.pdf)
+  and installed help confirm MVS.CARleroux matrix responses/offsets, separate group
+  coefficients and an unstructured between-group covariance with Leroux spatial
+  precision. The numerical probe confirms area-major posterior sample ordering.
+  [Lee (2013)](https://www.jstatsoft.org/article/view/v055i13) describes the package.
+* [posterior R-hat](https://mc-stan.org/posterior/reference/rhat.html) and
+  [bulk ESS](https://mc-stan.org/posterior/reference/ess_bulk.html) accept matrices
+  with iterations in rows and independent chains in columns. Use log-ratio draws
+  and retain both bulk and tail diagnostics.
+* [lme4 glmer](https://lme4.github.io/lme4/reference/glmer.html) and its glmer.nb
+  companion implement optional random effects. [spdep moran.mc](https://r-spatial.github.io/spdep/reference/moran.mc.html)
+  supplies the exploratory residual permutation diagnostic.
+* [suncalc 0.5.1 manual](https://cran.r-project.org/web/packages/suncalc/suncalc.pdf)
+  confirms getSunlightTimes date/lat/lon data and explicit time-zone arguments;
+  `sunset` and `dusk` are distinct fields, with dusk ending civil twilight.
+* [Grogger and Ridgeway (2006), author-hosted reprint](https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf)
+  motivates the evening overlap and clock-time controls for vehicle stops.
+  Searchlight documents additional assumptions for pedestrian searches.
+* [Knowles, Persico and Todd (2001)](https://www.journals.uchicago.edu/doi/10.1086/318603)
+  is cited for outcome-test interpretation; no package implementation was used.

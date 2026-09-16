@@ -36,7 +36,8 @@ observed files. A changelog issue does not create a nonexistent submission.
 }
 \examples{
 audit <- sl_coverage(sl_sample())
-plot(audit)
+audit
+# plot(audit) displays the submission heatmap.
 }
 \seealso{
 \code{\link[=sl_quality]{sl_quality()}}, \code{\link[=sl_coverage_compare]{sl_coverage_compare()}}, \code{\link[=sl_benchmark]{sl_benchmark()}}

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Small-area disparity with spatial smoothing: simulation evidence</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap;
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #d14; }
+code > span.fl { color: #d14; }
+code > span.ch { color: #d14; }
+code > span.st { color: #d14; }
+code > span.co { color: #888888; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #900; font-weight: bold; }
+code > span.er { color: #a61717; background-color: #e3d2d2; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Small-area disparity with spatial
+smoothing: simulation evidence</h1>
+
+
+
+<p>Small-area ratios are noisy when counts or comparison populations are
+small. Spatial smoothing borrows information under a prior about
+neighbouring areas. It can stabilise estimates, but cannot correct an
+inappropriate population denominator, missing submissions, unknown
+ethnicity or anonymised snap points. This vignette reports an explicitly
+limited, replicated simulation study rather than treating smooth-looking
+maps as evidence of accuracy.</p>
+<div id="a-spatial-model-of-disparity" class="section level2">
+<h2>A spatial model of disparity</h2>
+<p><code>sl_spatial_disparity()</code> fits two Poisson responses using
+<code>CARBayes::MVS.CARleroux</code>, with a separate population-time
+offset for each group. Its linear predictor is</p>
+<pre><code>N_ig ~ Poisson(E_ig * theta_ig)
+log(theta_ig) = alpha_g + phi_ig
+log(disparity_i) = alpha_comparison - alpha_reference
+                   + phi_i,comparison - phi_i,reference</code></pre>
+<p>The multivariate CAR prior allows spatial correlation and correlation
+between group effects. For two groups it has an equivalent
+shared/contrast decomposition: <code>u_i = (phi_ir + phi_ic)/2</code>,
+<code>v_ir = (phi_ir - phi_ic)/2</code>, <code>v_ic = -v_ir</code>. Thus
+<code>phi_ig = u_i + v_ig</code> and the shared part cancels from
+disparity. These components inherit the multivariate covariance;
+searchlight does not claim to fit three separately identifiable
+independent spatial fields from two responses. This differs
+fundamentally from assigning one shared spatial effect to both groups,
+which would cancel and leave no local disparity surface.</p>
+<p>Rook adjacency is the default. Islands require a justified explicit
+<code>adjacency</code> matrix; they are never silently linked to a
+convenient neighbour. Unknown events are counted in the output but
+excluded from the known-group likelihood. Areas without usable exposure
+are listed separately. Missing months contribute no time. Spatial models
+on records with many points near boundaries raise a warning.</p>
+<pre class="r"><code>simulation &lt;- sl_simulate(side = 5, seed = 1301)
+fit &lt;- sl_spatial_disparity(simulation$counts, simulation$population,
+  simulation$boundaries, burnin = 2000, n.sample = 12000, thin = 10,
+  chains = 2, seed = 1351)</code></pre>
+<p>For a real analysis, inspect diagnostics and extend the chains when
+necessary. The saved example uses the final run selected by the
+reproducible simulation script. It retains 1,000 joint draws for compact
+offline demonstrations; its diagnostics describe the full final
+chains.</p>
+<pre class="r"><code>settings &lt;- attr(fit, &quot;mcmc_settings&quot;)
+settings[c(&quot;burnin&quot;, &quot;n.sample&quot;, &quot;thin&quot;, &quot;chains&quot;, &quot;seed&quot;)]
+#&gt; $burnin
+#&gt; [1] 2000
+#&gt;
+#&gt; $n.sample
+#&gt; [1] 12000
+#&gt;
+#&gt; $thin
+#&gt; [1] 10
+#&gt;
+#&gt; $chains
+#&gt; [1] 2
+#&gt;
+#&gt; $seed
+#&gt; [1] 1351
+diagnostics &lt;- attr(fit, &quot;diagnostics&quot;)
+knitr::kable(diagnostics, digits = 2)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">parameter</th>
+<th align="right">rhat</th>
+<th align="right">ess_bulk</th>
+<th align="right">ess_tail</th>
+<th align="left">converged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SIM0001</td>
+<td align="right">1</td>
+<td align="right">971.49</td>
+<td align="right">1260.72</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0002</td>
+<td align="right">1</td>
+<td align="right">1148.12</td>
+<td align="right">1321.58</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0003</td>
+<td align="right">1</td>
+<td align="right">1295.30</td>
+<td align="right">1780.36</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0004</td>
+<td align="right">1</td>
+<td align="right">1331.49</td>
+<td align="right">1582.54</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0005</td>
+<td align="right">1</td>
+<td align="right">1397.86</td>
+<td align="right">1716.21</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0006</td>
+<td align="right">1</td>
+<td align="right">1042.90</td>
+<td align="right">1315.01</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0007</td>
+<td align="right">1</td>
+<td align="right">1500.59</td>
+<td align="right">1540.46</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0008</td>
+<td align="right">1</td>
+<td align="right">1428.32</td>
+<td align="right">1628.19</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0009</td>
+<td align="right">1</td>
+<td align="right">1447.12</td>
+<td align="right">1779.91</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0010</td>
+<td align="right">1</td>
+<td align="right">1266.36</td>
+<td align="right">1352.44</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0011</td>
+<td align="right">1</td>
+<td align="right">1335.58</td>
+<td align="right">1571.31</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0012</td>
+<td align="right">1</td>
+<td align="right">1246.02</td>
+<td align="right">1399.45</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0013</td>
+<td align="right">1</td>
+<td align="right">1482.70</td>
+<td align="right">1589.48</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0014</td>
+<td align="right">1</td>
+<td align="right">1516.09</td>
+<td align="right">1701.91</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0015</td>
+<td align="right">1</td>
+<td align="right">1555.46</td>
+<td align="right">1437.39</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0016</td>
+<td align="right">1</td>
+<td align="right">1316.30</td>
+<td align="right">1502.72</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0017</td>
+<td align="right">1</td>
+<td align="right">1575.98</td>
+<td align="right">1687.12</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0018</td>
+<td align="right">1</td>
+<td align="right">1601.04</td>
+<td align="right">1736.74</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0019</td>
+<td align="right">1</td>
+<td align="right">1409.12</td>
+<td align="right">1840.78</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0020</td>
+<td align="right">1</td>
+<td align="right">1180.97</td>
+<td align="right">1802.26</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0021</td>
+<td align="right">1</td>
+<td align="right">1266.16</td>
+<td align="right">1544.43</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0022</td>
+<td align="right">1</td>
+<td align="right">1695.60</td>
+<td align="right">1664.20</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0023</td>
+<td align="right">1</td>
+<td align="right">1721.59</td>
+<td align="right">1661.11</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0024</td>
+<td align="right">1</td>
+<td align="right">1578.17</td>
+<td align="right">1654.03</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0025</td>
+<td align="right">1</td>
+<td align="right">1388.27</td>
+<td align="right">1749.30</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">alpha_reference</td>
+<td align="right">1</td>
+<td align="right">1273.71</td>
+<td align="right">1276.21</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">alpha_comparison</td>
+<td align="right">1</td>
+<td align="right">1514.46</td>
+<td align="right">1748.83</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Sigma11</td>
+<td align="right">1</td>
+<td align="right">1720.19</td>
+<td align="right">1783.74</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Sigma12</td>
+<td align="right">1</td>
+<td align="right">2020.84</td>
+<td align="right">1875.66</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Sigma22</td>
+<td align="right">1</td>
+<td align="right">1754.14</td>
+<td align="right">1924.99</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">rho</td>
+<td align="right">1</td>
+<td align="right">1813.22</td>
+<td align="right">1814.69</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<p>The convergence screen requires rank-normalised split R-hat at most
+1.01 and bulk and tail effective sample sizes at least 400 for all area
+log-ratios and monitored global parameters. These are useful checks, not
+proof of convergence. The short tests deliberately fail this screen and
+emit a warning; they test implementation and rough recovery, not
+reliable production inference.</p>
+<div class="float">
+<img role="img" aria-label="plot of chunk maps" src="data:image/png;base64,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" alt="plot of chunk maps" />
+<div class="figcaption">plot of chunk maps</div>
+</div>
+<p>Both maps use the same colour scale. Intervals and exceedance
+probabilities, rather than only posterior medians, are available for
+every area.</p>
+<pre class="r"><code>knitr::kable(head(as.data.frame(fit)[c(&quot;geography_code&quot;, &quot;ratio&quot;,
+  &quot;credible_low_95&quot;, &quot;credible_high_95&quot;, &quot;probability_above_1&quot;,
+  &quot;probability_above_k&quot;)]), digits = 3)</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="15%" />
+<col width="6%" />
+<col width="17%" />
+<col width="18%" />
+<col width="21%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="right">ratio</th>
+<th align="right">credible_low_95</th>
+<th align="right">credible_high_95</th>
+<th align="right">probability_above_1</th>
+<th align="right">probability_above_k</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SIM0001</td>
+<td align="right">0.786</td>
+<td align="right">0.441</td>
+<td align="right">1.314</td>
+<td align="right">0.183</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0002</td>
+<td align="right">1.101</td>
+<td align="right">0.689</td>
+<td align="right">1.762</td>
+<td align="right">0.655</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0003</td>
+<td align="right">1.669</td>
+<td align="right">1.110</td>
+<td align="right">2.491</td>
+<td align="right">0.992</td>
+<td align="right">0.203</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0004</td>
+<td align="right">2.675</td>
+<td align="right">1.776</td>
+<td align="right">3.911</td>
+<td align="right">1.000</td>
+<td align="right">0.923</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0005</td>
+<td align="right">5.250</td>
+<td align="right">3.686</td>
+<td align="right">7.854</td>
+<td align="right">1.000</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0006</td>
+<td align="right">0.765</td>
+<td align="right">0.470</td>
+<td align="right">1.139</td>
+<td align="right">0.106</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>ranks &lt;- sl_ranking_stability(fit, &quot;posterior&quot;, n = 500)
+knitr::kable(head(as.data.frame(ranks)))</code></pre>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="12%" />
+<col width="13%" />
+<col width="22%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="right">median_rank</th>
+<th align="right">rank_low</th>
+<th align="right">rank_high</th>
+<th align="right">effective_draws</th>
+<th align="left">method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SIM0001</td>
+<td align="right">23</td>
+<td align="right">19</td>
+<td align="right">25</td>
+<td align="right">500</td>
+<td align="left">posterior</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0002</td>
+<td align="right">20</td>
+<td align="right">14</td>
+<td align="right">25</td>
+<td align="right">500</td>
+<td align="left">posterior</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0003</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">20</td>
+<td align="right">500</td>
+<td align="left">posterior</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0004</td>
+<td align="right">10</td>
+<td align="right">6</td>
+<td align="right">14</td>
+<td align="right">500</td>
+<td align="left">posterior</td>
+</tr>
+<tr class="odd">
+<td align="left">SIM0005</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">500</td>
+<td align="left">posterior</td>
+</tr>
+<tr class="even">
+<td align="left">SIM0006</td>
+<td align="right">24</td>
+<td align="right">20</td>
+<td align="right">25</td>
+<td align="right">500</td>
+<td align="left">posterior</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="recovery-independent-of-total-intensity" class="section level2">
+<h2>Recovery independent of total intensity</h2>
+<p>The generator varies disparity east-west and expected total event
+intensity north-south. Their correlation is zero on the lattice.
+Reference and comparison rates are solved jointly to preserve that total
+intensity while changing disparity. Recovering this pattern therefore
+tests the group-specific component, rather than merely reproducing a map
+of all searches.</p>
+<div class="float">
+<img role="img" aria-label="plot of chunk truth" src="data:image/png;base64,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" alt="plot of chunk truth" />
+<div class="figcaption">plot of chunk truth</div>
+</div>
+<p>The full recovery test also checks that posterior ratios
+reconstructed from group-specific spatial effects equal ratios
+reconstructed independently from posterior fitted event means and
+exposures. This detects swapped area/group axes.</p>
+</div>
+<div id="replicated-evidence-including-failure-modes" class="section level2">
+<h2>Replicated evidence, including failure modes</h2>
+<p><code>inst/scripts/simulation-study.R</code> runs three settings on
+25-area lattices: smooth variation, a sharp east-west discontinuity, and
+comparison populations reduced from 1,000 to 50 per area. Each replicate
+generates fresh Poisson counts. The study extends unsuccessful chains up
+to 80,000 iterations and retains any remaining convergence failures in
+the output. No simulation chooses a seed based on whether smoothing
+beats the crude estimator.</p>
+<pre class="r"><code>knitr::kable(summary, digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="7%" />
+<col width="11%" />
+<col width="8%" />
+<col width="11%" />
+<col width="16%" />
+<col width="8%" />
+<col width="11%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">condition</th>
+<th align="left">method</th>
+<th align="right">replications</th>
+<th align="right">mean_rmse</th>
+<th align="right">mean_coverage</th>
+<th align="right">mean_rank_recovery</th>
+<th align="right">mcse_rmse</th>
+<th align="right">mcse_coverage</th>
+<th align="right">converged_fits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">discontinuous</td>
+<td align="left">crude</td>
+<td align="right">6</td>
+<td align="right">0.647</td>
+<td align="right">0.960</td>
+<td align="right">0.849</td>
+<td align="right">0.079</td>
+<td align="right">0.025</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">discontinuous</td>
+<td align="left">smoothed</td>
+<td align="right">6</td>
+<td align="right">0.558</td>
+<td align="right">0.967</td>
+<td align="right">0.849</td>
+<td align="right">0.059</td>
+<td align="right">0.012</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">small</td>
+<td align="left">crude</td>
+<td align="right">6</td>
+<td align="right">1.592</td>
+<td align="right">0.980</td>
+<td align="right">0.669</td>
+<td align="right">0.147</td>
+<td align="right">0.014</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">small</td>
+<td align="left">smoothed</td>
+<td align="right">6</td>
+<td align="right">0.733</td>
+<td align="right">0.993</td>
+<td align="right">0.862</td>
+<td align="right">0.102</td>
+<td align="right">0.007</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">smooth</td>
+<td align="left">crude</td>
+<td align="right">6</td>
+<td align="right">0.447</td>
+<td align="right">0.993</td>
+<td align="right">0.955</td>
+<td align="right">0.029</td>
+<td align="right">0.007</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">smooth</td>
+<td align="left">smoothed</td>
+<td align="right">6</td>
+<td align="right">0.353</td>
+<td align="right">0.993</td>
+<td align="right">0.976</td>
+<td align="right">0.027</td>
+<td align="right">0.007</td>
+<td align="right">6</td>
+</tr>
+</tbody>
+</table>
+<p>RMSE measures error on the ratio scale. Coverage is the fraction of
+generating area ratios in nominal 95% intervals, averaged over
+replicates. Rank recovery is Spearman correlation; ties in a
+discontinuous truth surface remain ties. MCSE is the standard deviation
+of replicate metrics divided by the square root of the replication
+count. This small pilot does not establish general nominal coverage.
+Rows with failed convergence must be inspected before substantive
+interpretation. The table includes every attempted replicate. Metrics
+from failed chains, if any, describe an unsuccessful fit and are not
+validated posterior inference.</p>
+<pre class="r"><code>failed &lt;- replicates[replicates$method == &quot;smoothed&quot; &amp; !replicates$converged,
+  c(&quot;condition&quot;, &quot;replicate&quot;, &quot;seed&quot;, &quot;model_iterations&quot;)]
+knitr::kable(failed, caption = &quot;Fits still failing the convergence screen at the iteration limit&quot;)</code></pre>
+<table>
+<caption>Fits still failing the convergence screen at the iteration
+limit</caption>
+<thead>
+<tr class="header">
+<th align="left">condition</th>
+<th align="right">replicate</th>
+<th align="right">seed</th>
+<th align="right">model_iterations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">small</td>
+<td align="right">1</td>
+<td align="right">1501</td>
+<td align="right">80000</td>
+</tr>
+</tbody>
+</table>
+<div class="float">
+<img role="img" aria-label="plot of chunk rmse-variation" src="data:image/png;base64,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" alt="plot of chunk rmse-variation" />
+<div class="figcaption">plot of chunk rmse-variation</div>
+</div>
+<p>Lower average RMSE does not mean every area improves. The following
+table reports the fraction of individual area estimates with greater
+absolute error after smoothing, and the signed average change in
+absolute error.</p>
+<pre class="r"><code>wide &lt;- tidyr::pivot_wider(areas[c(&quot;condition&quot;, &quot;replicate&quot;, &quot;geography_code&quot;,
+  &quot;truth&quot;, &quot;method&quot;, &quot;estimate&quot;, &quot;model_converged&quot;)],
+  names_from = &quot;method&quot;, values_from = &quot;estimate&quot;)
+wide$error_change &lt;- abs(wide$smoothed - wide$truth) - abs(wide$crude - wide$truth)
+harm &lt;- dplyr::summarise(dplyr::group_by(wide, .data$condition, .data$model_converged),
+  share_with_greater_error = mean(.data$error_change &gt; 0),
+  mean_absolute_error_change = mean(.data$error_change), .groups = &quot;drop&quot;)
+knitr::kable(harm, digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="19%" />
+<col width="30%" />
+<col width="32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">condition</th>
+<th align="left">model_converged</th>
+<th align="right">share_with_greater_error</th>
+<th align="right">mean_absolute_error_change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">discontinuous</td>
+<td align="left">TRUE</td>
+<td align="right">0.387</td>
+<td align="right">-0.043</td>
+</tr>
+<tr class="even">
+<td align="left">small</td>
+<td align="left">FALSE</td>
+<td align="right">0.280</td>
+<td align="right">-0.605</td>
+</tr>
+<tr class="odd">
+<td align="left">small</td>
+<td align="left">TRUE</td>
+<td align="right">0.160</td>
+<td align="right">-0.681</td>
+</tr>
+<tr class="even">
+<td align="left">smooth</td>
+<td align="left">TRUE</td>
+<td align="right">0.280</td>
+<td align="right">-0.071</td>
+</tr>
+</tbody>
+</table>
+<p>Neighbour borrowing can blur discontinuities; sparse populations can
+leave large prior influence. The study quantifies performance only for
+these generators, populations, priors and count sizes. It does not
+include location error, unmeasured mobility, changing Census
+populations, repeated-person dependence or missing submissions. Inspect
+unsmoothed counts, sensitivity bounds and convergence before using a
+smoothed map, and report where the estimates become less accurate.</p>
+<p>The model interface and covariance structure are documented in the <a href="https://cran.r-project.org/web/packages/CARBayes/CARBayes.pdf">CARBayes
+manual</a> and <a href="https://www.jstatsoft.org/article/view/v055i13">Lee (2013)</a>.
+The <a href="https://mc-stan.org/posterior/reference/rhat.html">posterior
+diagnostic documentation</a> describes the convergence statistic used
+here.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

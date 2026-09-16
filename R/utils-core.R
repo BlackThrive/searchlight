@@ -10,11 +10,11 @@ sl_warn <- function(message, subclass = "input") {
 
 #' @noRd
 sl_table <- function(name) {
-  readr::read_csv(
+  tibble::as_tibble(utils::read.csv(
     system.file("extdata", name, package = "searchlight"),
-    col_types = readr::cols(.default = readr::col_character()),
-    show_col_types = FALSE
-  )
+    colClasses = "character", na.strings = c("", "NA"),
+    check.names = FALSE, strip.white = TRUE, fileEncoding = "UTF-8"
+  ))
 }
 
 #' @noRd

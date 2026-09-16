@@ -47,10 +47,10 @@ knitr::kable(ratios[c("geography_code", "ratio", "conf_low", "conf_high",
 
 |geography_code | ratio| conf_low| conf_high| n_reference| n_comparison| dispersion|
 |:--------------|-----:|--------:|---------:|-----------:|------------:|----------:|
-|E02002237      |     0|        0|     7.451|          18|            0|         NA|
-|E02002454      |     0|        0|     0.761|          72|            0|         NA|
-|E02006875      |     0|        0|     0.349|         196|            0|         NA|
-|E02006948      |     0|        0|     0.138|          84|            0|         NA|
+|E02002237      | 0.000|    0.000|     7.451|          18|            0|         NA|
+|E02002454      | 0.201|    0.005|     1.157|          72|            1|      2.396|
+|E02006875      | 0.281|    0.057|     0.833|         196|            3|      2.957|
+|E02006948      | 0.147|    0.039|     0.390|          84|            4|      0.500|
 
 
 
@@ -61,6 +61,41 @@ Dispersion is a Pearson residual diagnostic, not a correction for denominator
 or missing-ethnicity assumptions. With replicated cells, `method = "quasipoisson"`
 estimates dispersion; `method = "negbin"` estimates extra count variation. Neither
 turns residence into the population exposed to police activity.
+
+For a pooled regression with additional covariates, `sl_count_model()` accepts
+an explicit formula and exposure column. A population offset uses submitted
+months to form population-time. Optional random effects use lme4; residual
+Moran diagnostics require compatible boundaries and remain exploratory.
+
+
+``` r
+model <- sl_count_model(rates, n ~ ethnicity + factor(geography_code))
+knitr::kable(as.data.frame(model), digits = 3)
+```
+
+
+
+|term                            | estimate| std_error| statistic| p_value| exp_estimate| conf_low| conf_high|
+|:-------------------------------|--------:|---------:|---------:|-------:|------------:|--------:|---------:|
+|(Intercept)                     |   -6.758|     0.306|   -22.116|   0.000|        0.001|    0.001|     0.002|
+|ethnicityBlack                  |    0.974|     0.418|     2.329|   0.020|        2.650|    1.167|     6.016|
+|ethnicityMixed                  |  -16.173|  1414.463|    -0.011|   0.991|        0.000|    0.000|       Inf|
+|ethnicityOther                  |    1.404|     0.357|     3.931|   0.000|        4.073|    2.022|     8.205|
+|ethnicityWhite                  |    2.636|     0.235|    11.222|   0.000|       13.957|    8.807|    22.118|
+|factor(geography_code)E02002454 |    1.113|     0.235|     4.745|   0.000|        3.043|    1.922|     4.820|
+|factor(geography_code)E02006875 |    2.049|     0.216|     9.501|   0.000|        7.758|    5.084|    11.838|
+|factor(geography_code)E02006948 |    2.488|     0.229|    10.872|   0.000|       12.034|    7.685|    18.845|
+
+
+
+``` r
+attr(model, "excluded")
+#> $rows
+#> [1] 12
+#>
+#> $events
+#> [1] 358
+```
 
 ## Missing ethnicity changes the estimand
 
@@ -77,6 +112,9 @@ These bounds allocate every Unknown to one of the pair. Proportional allocation
 uses all known ethnicity groups. MAR by force and object assumes missingness is
 independent of ethnicity conditional on those variables; it cannot be evaluated
 if object grouping has been discarded or a required stratum has no known records.
+Allocating pooled force/object shares to individual areas also assumes those
+shares describe each recipient area's unknown records. MAR by force/object alone
+does not guarantee this when local ethnicity composition varies.
 The tipping allocation assumes the fraction q of U goes to the comparison group
 and the remainder goes to the reference. Values outside [0,1] cannot tip the ratio.
 
@@ -91,22 +129,22 @@ knitr::kable(bounds[c("geography_code", "scenario", "ratio", "unknown",
 
 |geography_code |scenario          |  ratio| unknown| lower_bound| upper_bound| tipping_allocation|
 |:--------------|:-----------------|------:|-------:|-----------:|-----------:|------------------:|
-|E02002237      |all_to_reference  |  0.000|      47|           0|      85.533|              0.041|
-|E02002237      |all_to_comparison | 85.533|      47|           0|      85.533|              0.041|
-|E02002237      |proportional      |  0.000|      47|           0|      85.533|              0.041|
-|E02002237      |force_object_mar  |  0.000|      47|           0|      85.533|              0.041|
-|E02002454      |all_to_reference  |  0.000|      32|           0|       6.438|              0.210|
-|E02002454      |all_to_comparison |  6.438|      32|           0|       6.438|              0.210|
-|E02002454      |proportional      |  0.000|      32|           0|       6.438|              0.210|
-|E02002454      |force_object_mar  |  0.000|      32|           0|       6.438|              0.210|
-|E02006875      |all_to_reference  |  0.000|     156|           0|      14.609|              0.117|
-|E02006875      |all_to_comparison | 14.609|     156|           0|      14.609|              0.117|
-|E02006875      |proportional      |  0.000|     156|           0|      14.609|              0.117|
-|E02006875      |force_object_mar  |  0.000|     156|           0|      14.609|              0.117|
-|E02006948      |all_to_reference  |  0.000|     131|           0|       4.805|              0.402|
-|E02006948      |all_to_comparison |  4.805|     131|           0|       4.805|              0.402|
-|E02006948      |proportional      |  0.000|     131|           0|       4.805|              0.402|
-|E02006948      |force_object_mar  |  0.000|     131|           0|       4.805|              0.402|
+|E02002237      |all_to_reference  |  0.000|      47|       0.000|      85.533|              0.041|
+|E02002237      |all_to_comparison | 85.533|      47|       0.000|      85.533|              0.041|
+|E02002237      |proportional      |  0.000|      47|       0.000|      85.533|              0.041|
+|E02002237      |force_object_mar  |  0.486|      47|       0.000|      85.533|              0.041|
+|E02002454      |all_to_reference  |  0.141|      31|       0.141|       6.438|              0.184|
+|E02002454      |all_to_comparison |  6.438|      31|       0.141|       6.438|              0.184|
+|E02002454      |proportional      |  0.201|      31|       0.141|       6.438|              0.184|
+|E02002454      |force_object_mar  |  0.232|      31|       0.141|       6.438|              0.184|
+|E02006875      |all_to_reference  |  0.158|     153|       0.158|      14.609|              0.099|
+|E02006875      |all_to_comparison | 14.609|     153|       0.158|      14.609|              0.099|
+|E02006875      |proportional      |  0.281|     153|       0.158|      14.609|              0.099|
+|E02006875      |force_object_mar  |  0.362|     153|       0.158|      14.609|              0.099|
+|E02006948      |all_to_reference  |  0.058|     127|       0.058|       4.805|              0.383|
+|E02006948      |all_to_comparison |  4.805|     127|       0.058|       4.805|              0.383|
+|E02006948      |proportional      |  0.147|     127|       0.058|       4.805|              0.383|
+|E02006948      |force_object_mar  |  0.106|     127|       0.058|       4.805|              0.383|
 
 
 
@@ -141,14 +179,14 @@ knitr::kable(denominators[c("geography_code", "scenario", "ratio",
 
 |geography_code |scenario     | ratio| conf_low| conf_high| lower_bound| upper_bound|
 |:--------------|:------------|-----:|--------:|---------:|-----------:|-----------:|
-|E02002237      |resident     |     0|        0|     7.451|           0|           0|
-|E02002454      |resident     |     0|        0|     0.761|           0|           0|
-|E02006875      |resident     |     0|        0|     0.349|           0|           0|
-|E02006948      |resident     |     0|        0|     0.138|           0|           0|
-|E02002237      |hypothetical |     0|        0|     3.725|           0|           0|
-|E02002454      |hypothetical |     0|        0|     0.381|           0|           0|
-|E02006875      |hypothetical |     0|        0|     0.174|           0|           0|
-|E02006948      |hypothetical |     0|        0|     0.069|           0|           0|
+|E02002237      |resident     | 0.000|    0.000|     7.451|       0.000|       0.000|
+|E02002454      |resident     | 0.201|    0.005|     1.157|       0.101|       0.201|
+|E02006875      |resident     | 0.281|    0.057|     0.833|       0.140|       0.281|
+|E02006948      |resident     | 0.147|    0.039|     0.390|       0.073|       0.147|
+|E02002237      |hypothetical | 0.000|    0.000|     3.725|       0.000|       0.000|
+|E02002454      |hypothetical | 0.101|    0.003|     0.579|       0.101|       0.201|
+|E02006875      |hypothetical | 0.140|    0.029|     0.417|       0.140|       0.281|
+|E02006948      |hypothetical | 0.073|    0.020|     0.195|       0.073|       0.147|
 
 
 
@@ -190,16 +228,16 @@ knitr::kable(standardised[c("geography_code", "ethnicity", "crude_rate",
 |E02002454      |Mixed     |       0.00|              0.00|TRUE            |              35|
 |E02002454      |Other     |      12.94|             10.24|TRUE            |              35|
 |E02002454      |White     |      48.12|             47.96|TRUE            |              35|
-|E02006875      |Asian     |      12.63|             38.25|TRUE            |             167|
-|E02006875      |Black     |       0.00|              0.00|TRUE            |             167|
-|E02006875      |Mixed     |       0.00|              0.00|TRUE            |             167|
-|E02006875      |Other     |      24.69|             12.77|TRUE            |             167|
-|E02006875      |White     |     118.25|            163.29|TRUE            |             167|
-|E02006948      |Asian     |       8.78|              7.61|TRUE            |             144|
-|E02006948      |Black     |       0.00|              0.00|TRUE            |             144|
-|E02006948      |Mixed     |       0.00|              0.00|TRUE            |             144|
-|E02006948      |Other     |      39.80|             48.74|TRUE            |             144|
-|E02006948      |White     |     181.60|            201.86|TRUE            |             144|
+|E02006875      |Asian     |      12.63|             38.25|TRUE            |             164|
+|E02006875      |Black     |      34.88|             44.62|TRUE            |             164|
+|E02006875      |Mixed     |       0.00|              0.00|TRUE            |             164|
+|E02006875      |Other     |      24.69|             12.77|TRUE            |             164|
+|E02006875      |White     |     118.25|            163.29|TRUE            |             164|
+|E02006948      |Asian     |       8.78|              7.61|TRUE            |             142|
+|E02006948      |Black     |      15.12|             12.61|TRUE            |             142|
+|E02006948      |Mixed     |       0.00|              0.00|TRUE            |             142|
+|E02006948      |Other     |      39.80|             48.74|TRUE            |             142|
+|E02006948      |White     |     181.60|            201.86|TRUE            |             142|
 
 
 

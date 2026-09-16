@@ -1,0 +1,10 @@
+{
+  "location_years": 1279,
+  "max_locations_per_batch": 64,
+  "timing_fields": ["user.self", "sys.self", "elapsed", "user.child", "sys.child"],
+  "seconds": [21.02, 1.09, 79.75, "NA", "NA"],
+  "independent_location_year_comparisons_passed": 6,
+  "sample_retained": 648,
+  "sample_dark": 36,
+  "interpretation": "Full sample agrees with original rowwise calculation at displayed precision."
+}

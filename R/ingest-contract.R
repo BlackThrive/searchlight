@@ -47,7 +47,7 @@ sl_new_contract <- function() {
     population = list(),
     classification = list(
       scheme = "self-defined",
-      mapping_version = "PACE-2023"
+      mapping_version = "PACE-2023/archive-labels-2026-09-16"
     ),
     created = list(
       timestamp = Sys.time(), package_version = "0.1.0",

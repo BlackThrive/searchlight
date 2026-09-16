@@ -17,7 +17,8 @@
 #' @export
 #' @examples
 #' audit <- sl_coverage(sl_sample())
-#' plot(audit)
+#' audit
+#' # plot(audit) displays the submission heatmap.
 sl_coverage <- function(records, forces = NULL, months = NULL,
                         changelog = NULL, partial_threshold = 0.2) {
   contract <- sl_contract(records)
@@ -154,7 +155,10 @@ sl_coverage_compare <- function(coverage, period_a, period_b) {
 #' @seealso [sl_coverage()]
 #' @export
 #' @examples
-#' sl_benchmark(sl_sample())
+#' ppap <- utils::read.csv(system.file("extdata", "ppap-totals.csv",
+#'   package = "searchlight"
+#' ))
+#' sl_benchmark(sl_sample(), ppap)
 sl_benchmark <- function(records, ppap_table = NULL, tolerance = 0.1) {
   contract <- sl_contract(records)
   if (is.null(ppap_table)) ppap_table <- sl_table("ppap-totals.csv")

@@ -1,0 +1,2 @@
+term,odds_ratio,conf_low,conf_high,log_std_error,n,status,model_warnings,reference,comparison,design,twilight,dark_stops,daylight_stops
+dark,593.6640478718132,0.29488372552655007,1195172.7790546196,3.8814426155252555,648,estimable,,White,Black,intertwilight,civil,36,612

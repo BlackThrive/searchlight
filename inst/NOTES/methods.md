@@ -96,6 +96,10 @@ feasibility flag indicates whether equality is attainable. Proportional allocati
 uses every known ethnicity, while force-object MAR estimates known shares within
 force and search-object strata. MAR without an object variable is labelled
 unavailable; a stratum containing unknown events but no known ethnicity is refused.
+Applying these pooled shares locally also assumes that the force/object known
+composition applies to each recipient area and month. Missingness depending only
+on force/object does not itself imply that composition is homogeneous across
+areas; the scenario can still distort local disparity when it is not.
 The extrema bound reallocation of recorded events, not latent population-rate
 truth under sampling variation or missing submissions.
 
@@ -118,3 +122,64 @@ effective draw count. Posterior ranks use supplied joint draws. Pairwise orderin
 probabilities above 0.95 (or below 0.05) are flagged, without a simultaneous
 multiple-comparison guarantee. Scenarios are evaluated separately. Rank intervals
 and assumption ranges are never pooled into one uncertainty distribution.
+
+## Count and spatial inference
+
+Count regression uses log exposure offsets with Poisson or negative-binomial
+likelihoods; optional group random effects use lme4. Coefficient intervals are
+Wald intervals on the log scale, exponentiated. Population offsets incorporate
+submitted months when available; an alternative exposure column must already
+cover the observation period. Invalid exposures, unknown ethnicity and incomplete
+model cells are counted as exclusions. Pearson dispersion and Moran's I on mean
+area residuals are diagnostic, not automatic model corrections. The Moran
+permutation p-value ignores uncertainty from model fitting and is exploratory.
+
+For spatial inference, N_ig ~ Poisson(E_ig*exp(alpha_g+phi_ig)). The MCAR prior
+has covariance Sigma across groups and a Leroux spatial precision Q(rho) =
+rho*(D-W)+(1-rho)*I across areas. For a pair of groups define u_i as their mean
+field and v_ig as the deviation from that mean. Then log(theta_ig)=alpha_g+u_i+v_ig
+and the disparity surface exp(alpha_c-alpha_r+v_ic-v_ir) uses the full joint
+posterior. This constrained shared/contrast representation is equivalent to the
+fitted bivariate MCAR and does not assert independent component priors.
+
+Rook adjacency is binary and symmetric. Unconnected areas require an explicit
+decision rather than silently invented neighbours. The documented CARBayes
+priors apply unless overridden, and arguments are recorded with the fit. Two
+chains and rank-normalised split R-hat plus bulk/tail ESS are retained. The
+diagnostic threshold is R-hat <=1.01 and both ESS >=400; warnings are not suppressed
+in the public function. Exceedance probabilities and 90/95% credible intervals
+condition on the model and exposure, and are not missing-data assumption ranges.
+Smoothing can blur local jumps or impose prior structure when populations are
+small. The replicated simulation vignette reports error, coverage, rank recovery
+and individual areas made worse by smoothing, not a claim of general correction.
+
+## Outcome and darkness diagnostics
+
+Outcome proportions divide successes by searches with the particular outcome
+observed. Wilson limits invert the binomial score test. Three source outcomes
+remain separate; NA is not a failure. Pairwise logistic comparisons condition on
+searches with known ethnicity and outcome, adjusting force and object fixed
+effects. Constant controls are labelled, and numerically unstable or separated
+fits have intervals withheld. Hit rates condition on selection into being
+searched; infra-marginality and unobserved risk distributions prevent a simple
+interpretation as discrimination. Neither equality nor inequality of hit rates
+alone establishes equal or unequal treatment thresholds.
+
+Darkness models additionally require the contract's force-month time gate. The
+annual minimum and maximum local evening twilight at each observed location
+define the intertwilight clock-time window. Civil darkness begins at dusk and
+sunset-to-dusk rows are removed; the alternative sunset definition is explicit.
+Logistic comparison-group membership is modelled by darkness, natural cubic
+clock-time spline (3 df when enough times exist), weekday, calendar month and
+force. Constant factors are omitted. The DST design restricts to +/-3 weeks
+around Europe/London clock changes and adds a linear day-distance term plus
+transition fixed effects where they vary. It is a local conditional association,
+not an automatic causal discontinuity estimate. Record each exclusion and the
+final design rows. Missing locations are never assigned to a force centroid.
+
+The method originated for vehicle stops. Applying it to pedestrian searches
+requires defensible assumptions about pre-stop visibility, activity by ethnicity,
+police deployment, reporting, time accuracy and residual daylight overlap. These
+assumptions are exposed in every result. Repeated events and unmeasured selection
+can violate independent-event inference. An undefined result is not evidence of
+no disparity.
