@@ -11,3 +11,8 @@
   code matching, age/sex cross-tabs and explicit user exposures.
 * Add full-grid coverage, financial-year benchmarks, midnight and snap-point
   diagnostics. Date-only UTC strings cannot evade the summer midnight screen.
+* Add event rates with submitted population-time, exact Poisson ratio intervals,
+  missing-ethnicity bounds, comparable exposure scenarios, age-sex direct
+  standardisation and count-model bootstrap or posterior rank uncertainty.
+* Render an offline assumptions vignette with separately labelled sampling
+  intervals and allocation ranges, and verified hand-calculated examples.

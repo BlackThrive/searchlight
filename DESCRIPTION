@@ -16,15 +16,17 @@ Depends: R (>= 4.1.0)
 Imports:
     cli,
     digest,
-    dplyr,
+    dplyr (>= 1.1.1),
     httr2,
     jsonlite,
+    MASS,
     readr,
     rlang,
     sf,
     ggplot2,
     tidyr,
     tibble,
+    withr,
     xml2
 URL: https://github.com/black-thrive-global/searchlight
 BugReports: https://github.com/black-thrive-global/searchlight/issues
@@ -33,6 +35,8 @@ RoxygenNote: 7.3.3
 Suggests: 
     testthat (>= 3.0.0),
     httptest2,
-    withr,
+    knitr,
+    rmarkdown,
     zip
+VignetteBuilder: knitr
 Config/testthat/edition: 3

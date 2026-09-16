@@ -15,3 +15,4 @@
 ^\.cache$
 ^\.gitattributes$
 ^Rplots\.pdf$
+^vignettes/.*\.Rmd\.orig$

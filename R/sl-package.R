@@ -10,4 +10,5 @@
 #' @keywords internal
 #' @importFrom rlang .data
 #' @importFrom sf st_as_sf
+#' @importFrom stats offset
 "_PACKAGE"

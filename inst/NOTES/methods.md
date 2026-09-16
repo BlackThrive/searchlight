@@ -31,9 +31,6 @@ Times retain supplied offsets and are displayed in Europe/London. Location
 coordinates are anonymised snap points; later spatial assignment is assignment
 of those points, not recovery of the original location.
 
-Rates, sensitivity and inference definitions will be added with their tested
-implementations. The current development package does not claim those methods
-are implemented or validated.
 ## Geography, exposure and audit
 
 Point assignment intersects anonymised published coordinates with valid ONS
@@ -71,3 +68,53 @@ Home Office financial-year benchmarks require all twelve April-March months
 and all ingested rows in those months. Missing, suspected partial and filtered
 years withhold ratios. Even complete years can differ because of included
 powers, person/vehicle reporting, source revisions and publication cut-offs.
+
+## Event rates and sensitivity
+
+For count N, resident population P and m submitted months, exposure E is P*m/12
+person-years. The annualised event rate is 1000*N/E; period_rate is 1000*N/P.
+Missing submission months have NA counts and zero exposure. Partial submissions
+remain flagged and estimate reported events only. Analysis subsets retain the
+source coverage window unless months are selected explicitly. The complete area
+universe must be supplied or retained in the contract to represent zero-event
+areas. An observed-only universe is labelled as such.
+
+The comparison/reference stop-rate ratio is (Nc/Ec)/(Nr/Er), not a probability
+ratio for people. Poisson inference uses the exact conditional two-count interval.
+Zero counts need no arbitrary pseudocount; both groups zero is uninformative.
+Quasi-Poisson uses a Student t interval with residual degrees of freedom; negative
+binomial uses a log-scale Wald interval. Both need replicated cells and positive
+group totals. Pearson residual dispersion is reported where degrees of freedom
+permit. Model intervals remain conditional on the exposure and independence
+assumptions, and are not adjusted for multiple comparisons.
+
+For U unknown-ethnicity events, marginal extreme ratios are
+L = (Nc/Ec)/((Nr+U)/Er) and H = ((Nc+U)/Ec)/(Nr/Er).
+The fraction allocated to the comparison group at equality is
+q = [Ec*(Nr+U)-Er*Nc]/[U*(Er+Ec)]. It is not clipped to [0,1]: the separate
+feasibility flag indicates whether equality is attainable. Proportional allocation
+uses every known ethnicity, while force-object MAR estimates known shares within
+force and search-object strata. MAR without an object variable is labelled
+unavailable; a stratum containing unknown events but no known ethnicity is refused.
+The extrema bound reallocation of recorded events, not latent population-rate
+truth under sampling variation or missing submissions.
+
+Alternative exposure scenarios must have identical geography, classification and
+cell keys. Their range contains scenario point estimates only. Sampling intervals
+are conditional on each scenario and remain separately labelled.
+
+Direct standardisation uses the same age-sex weights for every ethnicity: either
+all England and Wales residents or the summed study population. Weighted rates
+sum stratum event counts divided by submitted population-time. Required strata
+with zero population make the standardised result undefined. Unknown age, sex and
+ethnicity exclusions are counted per area. Confidence limits weight Bonferroni
+simultaneous exact Poisson stratum intervals; these are conservative, including
+for zero events, and do not quantify denominator or measurement uncertainty.
+
+Rank bootstrap draws counts from fitted Poisson/negative-binomial cell means,
+recomputes ratios and ranks the largest first. It requires positive observed
+group totals, and omits draws with an undefined zero/zero ratio, reporting the
+effective draw count. Posterior ranks use supplied joint draws. Pairwise ordering
+probabilities above 0.95 (or below 0.05) are flagged, without a simultaneous
+multiple-comparison guarantee. Scenarios are evaluated separately. Rank intervals
+and assumption ranges are never pooled into one uncertainty distribution.

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Estimating disparity with explicit assumptions</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Estimating disparity with explicit
+assumptions</h1>
+
+
+
+<p>This vignette is precomputed from bundled public records, Census
+populations and verified geography. Package checks need no network. The
+four example MSOAs are the areas with the most records in the May-July
+2026 West Yorkshire sample; this selection illustrates methods and does
+not represent England and Wales.</p>
+<div id="events-reporting-coverage-and-exposure" class="section level2">
+<h2>Events, reporting coverage and exposure</h2>
+<p>A stop is an event, not a unique person. A person may contribute
+several events. No analysis creates a population-minus-stops cell.
+Self-defined ethnicity and officer-defined ethnicity describe different
+measurements and remain separate.</p>
+<p><code>sl_counts()</code> keeps force and month as reporting strata. A
+submitted zero is zero; an absent force-month is NA. Use
+<code>months</code> and <code>forces</code> to narrow the source
+coverage grid explicitly. Filtering by an event characteristic does not
+change the number of months during which those events could have been
+observed. The <code>units</code> mapping supplies areas with no events,
+and the full sample includes this mapping in its contract. Without one,
+the area universe is observed areas.</p>
+<p>For population P and m submitted months, exposure E = P * m / 12
+person-years. The annualised event rate is 1,000 * n / E.
+<code>period_rate</code> is the separately named rate n / P * 1,000 for
+the observed cell. Missing submission months contribute neither events
+nor exposure time. Suspected partial submissions need scrutiny; their
+recorded counts are not estimates of unreported events.</p>
+<pre class="r"><code>ratios &lt;- sl_rate_ratio(rates)
+knitr::kable(ratios[c(&quot;geography_code&quot;, &quot;ratio&quot;, &quot;conf_low&quot;, &quot;conf_high&quot;,
+  &quot;n_reference&quot;, &quot;n_comparison&quot;, &quot;dispersion&quot;)], digits = 3)</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="19%" />
+<col width="7%" />
+<col width="11%" />
+<col width="13%" />
+<col width="15%" />
+<col width="17%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="right">ratio</th>
+<th align="right">conf_low</th>
+<th align="right">conf_high</th>
+<th align="right">n_reference</th>
+<th align="right">n_comparison</th>
+<th align="right">dispersion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">7.451</td>
+<td align="right">18</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.761</td>
+<td align="right">72</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.349</td>
+<td align="right">196</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.138</td>
+<td align="right">84</td>
+<td align="right">0</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<p>These are Black-White <strong>stop-rate ratios</strong>, not
+person-level probability ratios. They come from a Poisson count model
+with a log exposure offset and ethnicity indicator. Confidence intervals
+are exact conditional Poisson intervals. Dispersion is a Pearson
+residual diagnostic, not a correction for denominator or
+missing-ethnicity assumptions. With replicated cells,
+<code>method = &quot;quasipoisson&quot;</code> estimates dispersion;
+<code>method = &quot;negbin&quot;</code> estimates extra count variation. Neither
+turns residence into the population exposed to police activity.</p>
+</div>
+<div id="missing-ethnicity-changes-the-estimand" class="section level2">
+<h2>Missing ethnicity changes the estimand</h2>
+<p>Unknown ethnicity is kept in the numerator table and has no Census
+population denominator. If R and C are the recorded reference and
+comparison counts and U are Unknown events, extreme ratio bounds are</p>
+<pre><code>L = (C/E_C) / ((R+U)/E_R)
+H = ((C+U)/E_C) / (R/E_R)</code></pre>
+<p>These bounds allocate every Unknown to one of the pair. Proportional
+allocation uses all known ethnicity groups. MAR by force and object
+assumes missingness is independent of ethnicity conditional on those
+variables; it cannot be evaluated if object grouping has been discarded
+or a required stratum has no known records. The tipping allocation
+assumes the fraction q of U goes to the comparison group and the
+remainder goes to the reference. Values outside [0,1] cannot tip the
+ratio.</p>
+<pre class="r"><code>bounds &lt;- sl_missing_ethnicity_bounds(counts, population)
+knitr::kable(bounds[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ratio&quot;, &quot;unknown&quot;,
+  &quot;lower_bound&quot;, &quot;upper_bound&quot;, &quot;tipping_allocation&quot;)], digits = 3)</code></pre>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="19%" />
+<col width="7%" />
+<col width="8%" />
+<col width="13%" />
+<col width="13%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="left">scenario</th>
+<th align="right">ratio</th>
+<th align="right">unknown</th>
+<th align="right">lower_bound</th>
+<th align="right">upper_bound</th>
+<th align="right">tipping_allocation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">all_to_reference</td>
+<td align="right">0.000</td>
+<td align="right">47</td>
+<td align="right">0</td>
+<td align="right">85.533</td>
+<td align="right">0.041</td>
+</tr>
+<tr class="even">
+<td align="left">E02002237</td>
+<td align="left">all_to_comparison</td>
+<td align="right">85.533</td>
+<td align="right">47</td>
+<td align="right">0</td>
+<td align="right">85.533</td>
+<td align="right">0.041</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">proportional</td>
+<td align="right">0.000</td>
+<td align="right">47</td>
+<td align="right">0</td>
+<td align="right">85.533</td>
+<td align="right">0.041</td>
+</tr>
+<tr class="even">
+<td align="left">E02002237</td>
+<td align="left">force_object_mar</td>
+<td align="right">0.000</td>
+<td align="right">47</td>
+<td align="right">0</td>
+<td align="right">85.533</td>
+<td align="right">0.041</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002454</td>
+<td align="left">all_to_reference</td>
+<td align="right">0.000</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">6.438</td>
+<td align="right">0.210</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">all_to_comparison</td>
+<td align="right">6.438</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">6.438</td>
+<td align="right">0.210</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002454</td>
+<td align="left">proportional</td>
+<td align="right">0.000</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">6.438</td>
+<td align="right">0.210</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">force_object_mar</td>
+<td align="right">0.000</td>
+<td align="right">32</td>
+<td align="right">0</td>
+<td align="right">6.438</td>
+<td align="right">0.210</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">all_to_reference</td>
+<td align="right">0.000</td>
+<td align="right">156</td>
+<td align="right">0</td>
+<td align="right">14.609</td>
+<td align="right">0.117</td>
+</tr>
+<tr class="even">
+<td align="left">E02006875</td>
+<td align="left">all_to_comparison</td>
+<td align="right">14.609</td>
+<td align="right">156</td>
+<td align="right">0</td>
+<td align="right">14.609</td>
+<td align="right">0.117</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">proportional</td>
+<td align="right">0.000</td>
+<td align="right">156</td>
+<td align="right">0</td>
+<td align="right">14.609</td>
+<td align="right">0.117</td>
+</tr>
+<tr class="even">
+<td align="left">E02006875</td>
+<td align="left">force_object_mar</td>
+<td align="right">0.000</td>
+<td align="right">156</td>
+<td align="right">0</td>
+<td align="right">14.609</td>
+<td align="right">0.117</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006948</td>
+<td align="left">all_to_reference</td>
+<td align="right">0.000</td>
+<td align="right">131</td>
+<td align="right">0</td>
+<td align="right">4.805</td>
+<td align="right">0.402</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">all_to_comparison</td>
+<td align="right">4.805</td>
+<td align="right">131</td>
+<td align="right">0</td>
+<td align="right">4.805</td>
+<td align="right">0.402</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006948</td>
+<td align="left">proportional</td>
+<td align="right">0.000</td>
+<td align="right">131</td>
+<td align="right">0</td>
+<td align="right">4.805</td>
+<td align="right">0.402</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">force_object_mar</td>
+<td align="right">0.000</td>
+<td align="right">131</td>
+<td align="right">0</td>
+<td align="right">4.805</td>
+<td align="right">0.402</td>
+</tr>
+</tbody>
+</table>
+<p>Sampling uncertainty is conditional on a recorded-count model. The
+assumption range asks what different allocations would imply. They are
+displayed separately and are never combined into one interval.</p>
+<div class="float">
+<img role="img" aria-label="plot of chunk separate-uncertainty" src="data:image/png;base64,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" alt="plot of chunk separate-uncertainty" />
+<div class="figcaption">plot of chunk separate-uncertainty</div>
+</div>
+</div>
+<div id="denominator-scenarios-require-comparable-cells" class="section level2">
+<h2>Denominator scenarios require comparable cells</h2>
+<p>Residence is one possible exposure definition. Workday, visitor and
+mobility exposures require independent justification and compatible
+geography and ethnicity definitions. There is no built-in workday
+exposure in version 0.1.0. The example below deliberately doubles the
+Black exposure as a transparent hypothetical scenario; it is not a
+measured mobility adjustment.</p>
+<pre class="r"><code>hypothetical &lt;- as.data.frame(population)
+hypothetical$population[hypothetical$ethnicity == &quot;Black&quot;] &lt;-
+  hypothetical$population[hypothetical$ethnicity == &quot;Black&quot;] * 2
+hypothetical &lt;- sl_exposure(hypothetical, geography = &quot;msoa21&quot;,
+  source = &quot;Hypothetical double Black exposure; not measured data&quot;)
+denominators &lt;- sl_denominator_scenarios(counts,
+  list(resident = population, hypothetical = hypothetical))
+knitr::kable(denominators[c(&quot;geography_code&quot;, &quot;scenario&quot;, &quot;ratio&quot;,
+  &quot;conf_low&quot;, &quot;conf_high&quot;, &quot;lower_bound&quot;, &quot;upper_bound&quot;)], digits = 3)</code></pre>
+<table style="width:100%;">
+<colgroup>
+<col width="19%" />
+<col width="16%" />
+<col width="7%" />
+<col width="11%" />
+<col width="12%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="left">scenario</th>
+<th align="right">ratio</th>
+<th align="right">conf_low</th>
+<th align="right">conf_high</th>
+<th align="right">lower_bound</th>
+<th align="right">upper_bound</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">resident</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">7.451</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">resident</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.761</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">resident</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.349</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">resident</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.138</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">hypothetical</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3.725</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">hypothetical</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.381</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">hypothetical</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.174</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">hypothetical</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.069</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="direct-age-sex-standardisation" class="section level2">
+<h2>Direct age-sex standardisation</h2>
+<p>RM032 provides Census 2021 ethnicity by age and sex at MSOA and LSOA.
+Combining published bands gives under 25, 25-34 and 35+, matching a
+common partition of police age bands. Equating police-recorded gender
+with Census sex is an explicit measurement assumption. Unknown age,
+gender and ethnicity appear in exclusion diagnostics, rather than being
+recoded to a known category.</p>
+<p>The same age-sex weights apply to every ethnicity group. For stratum
+h, weights w_h sum to one and the standardised rate is 1,000 * sum_h w_h
+n_h/E_h. A stratum with positive weight and zero exposure prevents
+direct standardisation. Sampling intervals combine exact stratum Poisson
+intervals using a Bonferroni correction; they are conservative and treat
+Census weights as fixed. Different Census tables may differ slightly
+because of disclosure control.</p>
+<pre class="r"><code>demographic &lt;- readRDS(data_file(&quot;example-demographic-counts.rds&quot;))
+crosstab &lt;- readRDS(data_file(&quot;sample-crosstab.rds&quot;))
+standardised &lt;- sl_standardise(demographic, crosstab)
+knitr::kable(standardised[c(&quot;geography_code&quot;, &quot;ethnicity&quot;, &quot;crude_rate&quot;,
+  &quot;standardised_rate&quot;, &quot;complete_strata&quot;, &quot;excluded_events&quot;)], digits = 2)</code></pre>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="12%" />
+<col width="20%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">geography_code</th>
+<th align="left">ethnicity</th>
+<th align="right">crude_rate</th>
+<th align="right">standardised_rate</th>
+<th align="left">complete_strata</th>
+<th align="right">excluded_events</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">Asian</td>
+<td align="right">4.69</td>
+<td align="right">3.40</td>
+<td align="left">TRUE</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">E02002237</td>
+<td align="left">Black</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">47</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">Mixed</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">E02002237</td>
+<td align="left">Other</td>
+<td align="right">83.33</td>
+<td align="right">67.65</td>
+<td align="left">TRUE</td>
+<td align="right">47</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002237</td>
+<td align="left">White</td>
+<td align="right">12.71</td>
+<td align="right">12.95</td>
+<td align="left">TRUE</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">Asian</td>
+<td align="right">1.58</td>
+<td align="right">1.19</td>
+<td align="left">TRUE</td>
+<td align="right">35</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002454</td>
+<td align="left">Black</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">35</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">Mixed</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">35</td>
+</tr>
+<tr class="odd">
+<td align="left">E02002454</td>
+<td align="left">Other</td>
+<td align="right">12.94</td>
+<td align="right">10.24</td>
+<td align="left">TRUE</td>
+<td align="right">35</td>
+</tr>
+<tr class="even">
+<td align="left">E02002454</td>
+<td align="left">White</td>
+<td align="right">48.12</td>
+<td align="right">47.96</td>
+<td align="left">TRUE</td>
+<td align="right">35</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">Asian</td>
+<td align="right">12.63</td>
+<td align="right">38.25</td>
+<td align="left">TRUE</td>
+<td align="right">167</td>
+</tr>
+<tr class="even">
+<td align="left">E02006875</td>
+<td align="left">Black</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">167</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">Mixed</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">167</td>
+</tr>
+<tr class="even">
+<td align="left">E02006875</td>
+<td align="left">Other</td>
+<td align="right">24.69</td>
+<td align="right">12.77</td>
+<td align="left">TRUE</td>
+<td align="right">167</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006875</td>
+<td align="left">White</td>
+<td align="right">118.25</td>
+<td align="right">163.29</td>
+<td align="left">TRUE</td>
+<td align="right">167</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">Asian</td>
+<td align="right">8.78</td>
+<td align="right">7.61</td>
+<td align="left">TRUE</td>
+<td align="right">144</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006948</td>
+<td align="left">Black</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">144</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">Mixed</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="left">TRUE</td>
+<td align="right">144</td>
+</tr>
+<tr class="odd">
+<td align="left">E02006948</td>
+<td align="left">Other</td>
+<td align="right">39.80</td>
+<td align="right">48.74</td>
+<td align="left">TRUE</td>
+<td align="right">144</td>
+</tr>
+<tr class="even">
+<td align="left">E02006948</td>
+<td align="left">White</td>
+<td align="right">181.60</td>
+<td align="right">201.86</td>
+<td align="left">TRUE</td>
+<td align="right">144</td>
+</tr>
+</tbody>
+</table>
+<p>The test suite separately reproduces a worked two-age example. A
+group with monthly counts 18 and 1 and populations 900 and 100 has an
+annual crude rate of 228 per 1,000. Equal standard weights give 180 per
+1,000. These are different population summaries; standardisation does
+not establish a causal disparity.</p>
+</div>
+<div id="rankings-need-uncertainty-too" class="section level2">
+<h2>Rankings need uncertainty, too</h2>
+<pre class="r"><code>ranks &lt;- sl_ranking_stability(ratios, n = 200, seed = 2026)
+#&gt; Error in `sl_abort()` at searchlight/R/sens-ranking.R:93:9:
+#&gt; ! Bootstrap needs positive groups and a count distribution.
+knitr::kable(as.data.frame(ranks))
+#&gt; Error:
+#&gt; ! object &#39;ranks&#39; not found
+knitr::kable(attr(ranks, &quot;pairwise&quot;), digits = 3)
+#&gt; Error:
+#&gt; ! object &#39;ranks&#39; not found</code></pre>
+<p>The bootstrap simulates counts from the fitted count models. A
+quasi-Poisson fit does not define a sampling distribution and cannot be
+used for this bootstrap. A zero observed group count makes a plug-in
+bootstrap degenerate; use an appropriate posterior model for those
+cases. Draws where both group counts are zero have no defined rate ratio
+and are reported as omitted. Rank probabilities and pairwise ordering
+are conditional on the stated model, population and recording
+assumptions. An apparent league table is not evidence that every pair of
+areas differs.</p>
+</div>
+<div id="validation-and-limits" class="section level2">
+<h2>Validation and limits</h2>
+<p>Known-answer tests cover event counts exceeding population, missing
+months, exact zero-count intervals, analytical allocation bounds and
+tipping shares, direct standardisation, and rank probability sums.
+Public sample diagnostics also flag missing coordinates and systematic
+snap-point proximity to boundaries. These checks do not establish that a
+causal interpretation is appropriate.</p>
+<p>Methods use the R Core <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html">GLM
+documentation</a>, <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/poisson.test.html">exact
+Poisson test documentation</a>, and <a href="https://stat.ethz.ch/R-manual/R-devel/library/MASS/html/glm.nb.html">MASS
+negative-binomial documentation</a>. Source tables, licences and
+vintages are recorded in <code>inst/NOTES/data_sources.md</code>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+
+</body>
+</html>

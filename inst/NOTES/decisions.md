@@ -87,3 +87,31 @@
   back. A reused directory under Dropbox produced an intermittent Windows
   staged-install rename denial. This is a filesystem warning, not suppressed;
   the isolated check must pass normally before accepting the milestone.
+
+## 2026-09-16: M3
+
+* Use submitted population-years for annualised rates, and retain period_rate
+  separately. Keep force and month in count grids even when not requested in by;
+  additional event characteristics must be collapsed before reusing exposure.
+* Use exact conditional Poisson ratio intervals, including zero-group limits.
+  Do not add pseudocounts. Quasi-Poisson uses residual-df Student t intervals.
+* Direct standardisation uses conservative simultaneous exact Poisson stratum
+  limits, avoiding a misleading zero-width interval when no events are observed.
+  Unknown age/sex exclusions and zero-population strata remain explicit.
+* Preserve complete force-area lookup units in the sample contract. A filtered
+  event subset retains the original time window, unless months are passed.
+* Force-object MAR is explicitly unavailable if object_group was not counted;
+  extreme and proportional scenarios remain usable. Positive unknown-only MAR
+  strata require more information and are refused rather than guessed.
+* Bootstrap ranks use the fitted count distribution and retain scenario models.
+  Quasi-Poisson has no count distribution and is refused for this bootstrap.
+  Delegate temporary random seed handling to withr so RNG state is restored
+  without package-level assignments to the global environment.
+* Bundle small derived example tables for four sample MSOAs so every example
+  stays under five seconds without concealing the full sample or its missing force.
+* Downloaded official Pandoc 3.11 portable Windows build for local vignette QA;
+  SHA-256 2ab72baf2399450e148ddf7a2a8689806c42e1bba71862b57e220fd9b8456d3d
+  matches the publisher. Binary lives only in the ignored project cache. The
+  developer runtime helper selects it if no Pandoc is installed; package runtime
+  never downloads executables. Precomputed vignettes contain static results and
+  embedded figures, with no remote MathJax or syntax-highlighting dependency.

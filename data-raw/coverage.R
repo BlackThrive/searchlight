@@ -9,4 +9,4 @@ jsonlite::write_json(list(
   checked = as.character(Sys.time()),
   r_version = R.version.string,
   line_coverage_percent = percentage
-), "inst/validation/M2-coverage.json", pretty = TRUE, auto_unbox = TRUE)
+), "inst/validation/M3-coverage.json", pretty = TRUE, auto_unbox = TRUE)

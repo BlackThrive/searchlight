@@ -20,19 +20,19 @@ ukpolice is used or imported.
 ```r
 library(searchlight)
 records <- sl_sample()
-contract <- sl_contract(records)
-print(contract)
-summary(contract)
+print(sl_contract(records))
 coverage <- sl_coverage(records)
 plot(coverage)
 sl_timestamp_quality(records)
-head(sl_location_quality(records))
-sl_benchmark(records)
-population <- readRDS(system.file("extdata", "sample-population.rds",
-                                 package = "searchlight"))
-head(population$msoa21)
-sl_contract(records)$assignment_quality
-table(records$ethnicity_5)
+data_file <- function(x) system.file("extdata", x, package = "searchlight")
+counts <- readRDS(data_file("example-counts.rds"))
+population <- readRDS(data_file("sample-population.rds"))$msoa21
+rates <- readRDS(data_file("example-rates.rds"))
+ratios <- sl_rate_ratio(rates)
+ratios[c("geography_code", "ratio", "conf_low", "conf_high")]
+sl_missing_ethnicity_bounds(counts, population)
+sl_ranking_stability(ratios, n = 200)
+vignette("estimating-disparity")
 ```
 
 The default May-July 2026 sample contains 4,657 West Yorkshire records.
@@ -44,3 +44,8 @@ Geographical diagnostics use the original ONS BGC boundaries; compact example
 polygons are simplified. Almost half the assigned sample points lie within 50 m
 of an LSOA boundary. These are anonymised snap points, so geographical error can
 be systematic. The coverage audit does not turn missing submissions into zeros.
+
+The quick-start rate tables contain four MSOAs selected to keep the examples
+small. Their ratio is an event-rate ratio with submitted population-time exposure.
+Poisson sampling intervals and missing-ethnicity allocation ranges answer different
+questions; neither corrects an unsuitable denominator or establishes discrimination.

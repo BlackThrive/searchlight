@@ -1,5 +1,6 @@
 # Local check driver. Run explicitly from the repository root.
 dir.create("data-raw/checks", recursive = TRUE, showWarnings = FALSE)
+source("data-raw/runtime.R")
 roxygen2::roxygenise()
 check_workspace <- tempfile("searchlight-check-")
 dir.create(check_workspace)
