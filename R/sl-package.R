@@ -8,4 +8,6 @@
 #' and verified sources.
 #'
 #' @keywords internal
+#' @importFrom rlang .data
+#' @importFrom sf st_as_sf
 "_PACKAGE"

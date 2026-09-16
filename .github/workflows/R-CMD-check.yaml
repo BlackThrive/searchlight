@@ -15,6 +15,9 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
       NOT_CRAN: false
       NO_INTERNET_TEST: true
+      VROOM_THREADS: 2
+      OMP_NUM_THREADS: 2
+      OPENBLAS_NUM_THREADS: 2
       _R_CHECK_SYSTEM_CLOCK_: false
     steps:
       - uses: actions/checkout@v4

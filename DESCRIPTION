@@ -21,6 +21,9 @@ Imports:
     jsonlite,
     readr,
     rlang,
+    sf,
+    ggplot2,
+    tidyr,
     tibble,
     xml2
 URL: https://github.com/black-thrive-global/searchlight

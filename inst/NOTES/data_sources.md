@@ -39,3 +39,95 @@ default is retained as instructed, with missing submissions, not zero counts.
 One historical index entry labels a multipart-style hash as MD5. The index
 retains that string and marks it invalid; acquisition chooses only entries with
 a 32-hex-digit published MD5. A multipart ETag is not silently treated as MD5.
+# M2 sources verified 2026-09-16
+
+## ONS boundaries and lookup licences
+
+[ONS licence guidance](https://www.ons.gov.uk/methodology/geography/licences)
+confirms digital boundaries and these non-postcode, non-UPRN lookups are OGL v3.
+Attribution: Source Office for National Statistics licensed under the Open
+Government Licence v3. Contains OS data Crown copyright and database right 2026.
+
+All boundary services below use layer 0 of the stable base
+`https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/`, followed by
+`SERVICE/FeatureServer/0`. Metadata and GeoJSON were queried live. Geometry is
+BGC: generalised to 20 m and coast clipped. Queries request EPSG:4326; point
+assignment and boundary distances use EPSG:27700. Full catalogue and portal
+item identifiers are in `inst/extdata/ons-layers.csv`.
+
+| Type | Verified service | Fields | Vintage |
+|---|---|---|---|
+| LSOA | Lower_layer_Super_Output_Areas_December_2021_Boundaries_EW_BGC_V5 | LSOA21CD, LSOA21NM | 2021-12 |
+| MSOA | Middle_layer_Super_Output_Areas_December_2021_Boundaries_EW_BGC_V3 | MSOA21CD, MSOA21NM | 2021-12 |
+| Ward | WD_MAY_2026_UK_BGC | WD26CD, WD26NM | 2026-05 |
+| LAD | Local_Authority_Districts_May_2026_Boundaries_UK_BGC | LAD26CD, LAD26NM | 2026-05 |
+| PFA | Police_Force_Areas_Dec_2024_EW_BGC | PFA24CD, PFA24NM | 2024-12 |
+| Region | Regions_December_2025_Boundaries_EN_BGC | RGN25CD, RGN25NM | 2025-12 |
+
+Region polygons cover England only. Wales must not be invented as an English
+region. Latest verified PFA boundaries are December 2024 even though newer
+names/codes and administrative lookup products exist. Newly advertised EU1
+services carry an alpha warning recommending the existing portal until March
+2027; this implementation uses the published stable services above.
+
+Verified lookup services, each layer 0:
+
+* `OA_LSOA_MSOA_EW_DEC_2021_LU_v3`: LSOA21CD, MSOA21CD, **LAD22CD**.
+  Portal item b9ca90c10aaa4b8d9791e9859a38ca67. The title says December 2021,
+  but the actual LAD field is 2022. Distinct rows acquired: 35,672.
+* `LAD25_CSP25_PFA25_EW_LU`: LAD25CD, PFA25CD, PFA25NM. April 2025,
+  item 8f77bda25c124e43aca5f3b90494e405. Distinct rows: 318.
+* `WD26_LAD26_UK_LU`: WD26CD, LAD26CD. May 2026,
+  item 7447015a1f2f4332807d7341a636f95d. E/W rows: 7,596.
+* `LSOA21_BUA22_LAD22_RGN22_EW_LU_v2`: LSOA21CD, LAD22CD, RGN22CD.
+  December 2022 best fit, item 0352e811ec2c4fc5917f39aea2d1b8a3.
+  Distinct rows: 35,672. Administrative vintages remain separate in output.
+
+## Census 2021 via NOMIS
+
+Verified against the official [API documentation](https://www.nomisweb.co.uk/api/v01/help),
+live dataset metadata, codelists and CSV responses. Discovery uses
+`/api/v01/dataset/def.sdmx.json?search=name-*TS021*` and `?search=*RM032*`.
+Mnemonic dataset URLs did not work reliably for machine metadata, so API calls
+use the returned numeric IDs:
+
+* [TS021](https://www.nomisweb.co.uk/datasets/c2021ts021) is **NM_2041_1**:
+  GEOGRAPHY, C2021_ETH_20, MEASURES, FREQ, TIME. Requested measures 20100
+  are counts, not percentages. Request numeric category IDs 1...19.
+* [RM032](https://www.nomisweb.co.uk/datasets/c2021rm032) is **NM_2132_1**:
+  GEOGRAPHY, C2021_ETH_20, C2021_AGE_6, C_SEX, MEASURES, FREQ. Metadata
+  lists OA2021, LSOA2021, MSOA2021, LAD2021 and ward2021 availability.
+  Live MSOA and national England/Wales requests succeeded. Sex IDs 1 female,
+  2 male; ages 1 under 25, 2 age 25-34, 3 age 35-49, 4 age 50-64, 5 age 65+.
+* Geography accepts ONS code strings. `GEOGRAPHY_CODE`, `C2021_ETH_20_CODE`,
+  `C2021_AGE_6_CODE`, `C_SEX_CODE`, `OBS_VALUE` are verified CSV fields.
+  Category CODE fields have an underscore prefix. Crucially, the numeric
+  `C2021_ETH_20` field is not consistently ordered across the two tables.
+  Stable code _13 is British, _1 Bangladeshi, etc.; the mapping file retains
+  the exact source labels as well as harmonised labels.
+* 2021 usual-resident Census exposure, reference date 21 March 2021. Each
+  request is validated for expected area/category/age/sex cells. Unknown
+  ethnicity is an analytical record category with no Census exposure.
+* Workday and mobility exposures are deferred per the first-release scope;
+  `sl_exposure()` accepts independently justified user exposure tables.
+
+Real MSOA CSV responses are retained as offline httptest2 fixtures. Metadata
+responses and original downloads remain under ignored `data-raw/sources`.
+
+## Home Office benchmark and changelog
+
+[Police powers and procedures, year ending March 2025](https://www.gov.uk/government/statistics/stop-and-search-arrests-and-mental-health-detentions-march-2025)
+links to the verified workbook
+`https://assets.publishing.service.gov.uk/media/6909d5489456634d9795fd2f/stop-search-data-tables-summary-mar25.ods`.
+Table **SS_20**, row 6 headings, column 8 (one based) is All stop and searches.
+The extract has 44 force totals summing to 528,582, including BTP. West Yorkshire
+18,039; Dyfed-Powys 3,696. Scope includes PACE/associated legislation, s60, s47A,
+s342E and s11. Financial year is April 2024-March 2025. Parsing is reproducible
+with `data-raw/audit-sources.py`; counts are taken from cell contents, never
+calculated from population-based rates.
+
+The complete [data.police.uk changelog](https://data.police.uk/changelog/),
+retrieved 2026-09-16, is stored compressed. The sample extract includes the
+explicit missing Dyfed-Powys stop-and-search notices for May, June, July 2026.
+Crime-only notices are not stop-and-search quality flags. Historical refresh
+notices require resolution before they can be treated as current issues.

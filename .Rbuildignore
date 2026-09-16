@@ -14,3 +14,4 @@
 ^.*\.tar\.gz$
 ^\.cache$
 ^\.gitattributes$
+^Rplots\.pdf$

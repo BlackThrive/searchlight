@@ -1,0 +1,3 @@
+force_id,pfa_code,year_end,published_total,scope,retrieved,source,observed_total,submitted_months,complete,ratio,beyond_tolerance,reason
+west-yorkshire,E23000010,2025,18039,All relevant legislation; SS_20,2026-09-16,https://www.gov.uk/government/statistics/stop-and-search-arrests-and-mental-health-detentions-march-2025,NA,0,FALSE,NA,NA,"incomplete year, suspect coverage or filtered records"
+dyfed-powys,W15000004,2025,3696,All relevant legislation; SS_20,2026-09-16,https://www.gov.uk/government/statistics/stop-and-search-arrests-and-mental-health-detentions-march-2025,NA,0,FALSE,NA,NA,"incomplete year, suspect coverage or filtered records"

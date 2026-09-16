@@ -23,18 +23,24 @@ records <- sl_sample()
 contract <- sl_contract(records)
 print(contract)
 summary(contract)
-contract$snapshots
-contract$versions
-contract$timestamps
+coverage <- sl_coverage(records)
+plot(coverage)
+sl_timestamp_quality(records)
+head(sl_location_quality(records))
+sl_benchmark(records)
+population <- readRDS(system.file("extdata", "sample-population.rds",
+                                 package = "searchlight"))
+head(population$msoa21)
+sl_contract(records)$assignment_quality
 table(records$ethnicity_5)
-table(records$ethnicity_officer)
-table(records$force_id, records$month)
-head(records[, c("date", "ethnicity_5", "any_action", "arrest")])
-subset <- dplyr::filter(records, month == "2026-07")
-sl_contract(subset)$scope
-stopifnot(inherits(subset, "sl_records"))
 ```
 
 The default May-July 2026 sample contains 4,657 West Yorkshire records.
 Dyfed-Powys is retained in the requested sample grid; its three missing CSVs are
 reported as missing submissions. CSV contents are unmodified and gzip-compressed.
+
+Matching LSOA/MSOA boundaries and Census populations are bundled for both forces.
+Geographical diagnostics use the original ONS BGC boundaries; compact example
+polygons are simplified. Almost half the assigned sample points lie within 50 m
+of an LSOA boundary. These are anonymised snap points, so geographical error can
+be systematic. The coverage audit does not turn missing submissions into zeros.

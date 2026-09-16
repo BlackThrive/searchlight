@@ -5,3 +5,9 @@
 * Add bulk archive discovery, verified caching, immutable snapshots and whole-file
   revision selection with provenance contracts.
 * Bundle the May-July 2026 sample, retaining missing Dyfed-Powys submissions.
+* Add versioned ONS boundaries, projected point assignment and boundary-distance
+  diagnostics; preserve records without coordinates.
+* Add verified Census TS021 and RM032 exposure tables with stable ethnicity
+  code matching, age/sex cross-tabs and explicit user exposures.
+* Add full-grid coverage, financial-year benchmarks, midnight and snap-point
+  diagnostics. Date-only UTC strings cannot evade the summer midnight screen.

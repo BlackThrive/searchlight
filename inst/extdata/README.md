@@ -19,3 +19,26 @@ The sample consists of original gzip-compressed CSVs, hashes, and a precomputed
 `sample-records.rds` for fast offline examples. The May-July 2026 request includes
 West Yorkshire and Dyfed-Powys. Only West Yorkshire submitted files in this
 window; the contract explicitly retains all three missing Dyfed-Powys months.
+## Geography and population sample (M2)
+
+Contains ONS data licensed under the Open Government Licence v3. Contains OS
+data Crown copyright and database right 2026. Census data: Crown copyright,
+ONS Census 2021 via NOMIS. Home Office benchmark data: Crown copyright, OGL v3.
+All retrieved 2026-09-16; source IDs, fields and vintage details are recorded in
+`inst/NOTES/data_sources.md`.
+
+* `sample-boundaries.rds`: 1,710 LSOA21 and 370 MSOA21 polygons across the whole
+  nine LADs of West Yorkshire and Dyfed-Powys, mapshaper keep=0.2, keep_shapes.
+  These compact polygons are for examples. Sample record assignments and their
+  distances were calculated on the original ONS BGC 20 m polygons.
+* `sample-population.rds`: matching TS021 counts (five groups plus Unknown NA).
+* `sample-crosstab.rds`: RM032 counts at MSOA, five groups by harmonised age and
+  sex; under 25, 25-34, 35+, Female/Male. Unknown exposure is NA.
+* `standard-population.rds`: RM032 England/Wales reference population.
+* `sample-lookups.rds`: official whole-unit membership; no partial-area exposure.
+* `ppap-totals.csv`: all 44 SS_20 force totals, year ending March 2025.
+* `changelog-2026-09-16.html.gz`: full original retrieved changelog.
+  `changelog.csv` is a conservative unresolved-issue extract for this sample.
+
+Builders: `data-raw/sample-audit.R`, `data-raw/audit-sources.py`.
+No acquisition happens when loading these files or running examples.

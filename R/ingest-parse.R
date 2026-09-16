@@ -157,6 +157,12 @@ sl_sample <- function() {
 
 #' @noRd
 sl_time_summary <- function(records, threshold) {
+  empty <- tibble::tibble(
+    force_id = character(), month = character(),
+    n_records = integer(), midnight_share = double(),
+    source_midnight_share = double(), gating_midnight_share = double(),
+    missing_time_share = double(), time_reliable = logical()
+  )
   groups <- split(seq_len(nrow(records)), paste(
     records$force_id,
     records$month
@@ -173,10 +179,17 @@ sl_time_summary <- function(records, threshold) {
         na.rm = TRUE
       )
     }
+    source_midnight <- if ("date_raw" %in% names(x)) {
+      sl_mean(grepl("[T ]00:00:00", x$date_raw))
+    } else {
+      midnight
+    }
+    gating <- max(midnight, source_midnight)
     tibble::tibble(
       force_id = x$force_id[1], month = x$month[1], n_records = nrow(x),
       midnight_share = midnight, missing_time_share = missing,
-      time_reliable = !is.na(midnight) && midnight < threshold && missing == 0
+      source_midnight_share = source_midnight, gating_midnight_share = gating,
+      time_reliable = !is.na(gating) && gating < threshold && missing == 0
     )
-  }))
+  })) |> dplyr::bind_rows(empty)
 }

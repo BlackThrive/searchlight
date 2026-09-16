@@ -1,0 +1,20 @@
+nomis_code,ethnicity_19,ethnicity_5,source_label
+_13,British,White,"White: English, Welsh, Scottish, Northern Irish or British"
+_14,Irish,White,White: Irish
+_15,Gypsy or Irish Traveller,White,White: Gypsy or Irish Traveller
+_16,Roma,White,White: Roma
+_17,Other White,White,White: Other White
+_11,White and Black Caribbean,Mixed,Mixed or Multiple ethnic groups: White and Black Caribbean
+_10,White and Black African,Mixed,Mixed or Multiple ethnic groups: White and Black African
+_9,White and Asian,Mixed,Mixed or Multiple ethnic groups: White and Asian
+_12,Other Mixed,Mixed,Mixed or Multiple ethnic groups: Other Mixed or Multiple ethnic groups
+_3,Indian,Asian,"Asian, Asian British or Asian Welsh: Indian"
+_4,Pakistani,Asian,"Asian, Asian British or Asian Welsh: Pakistani"
+_1,Bangladeshi,Asian,"Asian, Asian British or Asian Welsh: Bangladeshi"
+_2,Chinese,Asian,"Asian, Asian British or Asian Welsh: Chinese"
+_5,Other Asian,Asian,"Asian, Asian British or Asian Welsh: Other Asian"
+_7,Caribbean,Black,"Black, Black British, Black Welsh, Caribbean or African: Caribbean"
+_6,African,Black,"Black, Black British, Black Welsh, Caribbean or African: African"
+_8,Other Black,Black,"Black, Black British, Black Welsh, Caribbean or African: Other Black"
+_18,Arab,Other,Other ethnic group: Arab
+_19,Other ethnic group,Other,Other ethnic group: Any other ethnic group

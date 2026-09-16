@@ -36,10 +36,15 @@ Other ingest:
 \code{\link{sl_archive_download}()},
 \code{\link{sl_archive_index}()},
 \code{\link{sl_archive_snapshot}()},
+\code{\link{sl_assign_geography}()},
+\code{\link{sl_boundaries}()},
 \code{\link{sl_cache_clear}()},
 \code{\link{sl_cache_dir}()},
 \code{\link{sl_contract}()},
+\code{\link{sl_exposure}()},
 \code{\link{sl_list_versions}()},
+\code{\link{sl_population}()},
+\code{\link{sl_population_crosstab}()},
 \code{\link{sl_sample}()},
 \code{\link{sl_select_version}()}
 }

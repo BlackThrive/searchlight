@@ -42,7 +42,8 @@ sl_cache_clear <- function(dir = sl_cache_dir()) {
   owned <- grepl(
     paste0(
       "^([0-9]{4}-[0-9]{2}\\.zip|archive-index\\.rds|",
-      "archive-manifest\\.rds|snapshots|snapshot-manifest\\.rds)$"
+      "archive-manifest\\.rds|snapshots|snapshot-manifest\\.rds|",
+      "ons-lookups\\.rds|(boundaries|population)-[a-f0-9]{64}\\.rds)$"
     ),
     basename(entries)
   )
