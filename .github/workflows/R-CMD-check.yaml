@@ -26,7 +26,6 @@ jobs:
       OMP_NUM_THREADS: 2
       OPENBLAS_NUM_THREADS: 2
       _R_CHECK_SYSTEM_CLOCK_: false
-      R_TEXI2DVICMD: emulation
     steps:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-pandoc@v2
@@ -50,6 +49,25 @@ jobs:
       - name: Install CRAN macOS gettext headers
         if: runner.os == 'macOS'
         run: sudo Rscript -e 'source("https://mac.r-project.org/bin/install.R"); install.libs("gettext")'
+      - name: Verify Windows manual toolchain
+        if: runner.os == 'Windows'
+        shell: Rscript {0}
+        run: |
+          print(Sys.which(c("pdflatex", "makeindex", "texi2dvi")))
+          package_dir <- normalizePath(".", winslash = "/")
+          manual_dir <- file.path(Sys.getenv("RUNNER_TEMP"), "manual-diagnostics")
+          dir.create(manual_dir, showWarnings = FALSE)
+          setwd(manual_dir)
+          status <- system2(file.path(R.home("bin"), "R.exe"), c(
+            "CMD", "Rd2pdf", "--no-preview", "--force", "--no-clean",
+            "--output=searchlight.pdf", shQuote(package_dir)
+          ))
+          stopifnot(status == 0L, file.exists("searchlight.pdf"))
+      - uses: actions/upload-artifact@v4
+        if: failure() && runner.os == 'Windows'
+        with:
+          name: manual-diagnostics-${{ matrix.r }}
+          path: ${{ runner.temp }}/manual-diagnostics/
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck

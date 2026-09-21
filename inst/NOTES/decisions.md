@@ -322,3 +322,9 @@
   errors, but the external manual driver returns failure. Use R's documented
   texi2dvi emulation, which directly runs LaTeX and indexing until references
   resolve. This changes the driver, not the manual checks or their pass criteria.
+* The emulation attempt did not resolve the Windows failure and introduced the
+  same manual-driver symptom on macOS. Restore the default driver and add a
+  direct Windows Rd2pdf preflight with retained intermediate files, so the
+  underlying error is visible before installing the full dependency tree.
+* Install the local package explicitly in the documentation workflow before
+  rendering reference examples. Keep example acquisition offline and cap threads.
