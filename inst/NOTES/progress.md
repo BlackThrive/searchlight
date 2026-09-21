@@ -37,3 +37,7 @@ Next: verify the remaining macOS R-devel CI/R-hub results and release review bef
 Milestone: M5 macOS build correction and full-matrix verification (2026-09-21).
 Completed: matched s2's macOS Abseil headers/libraries; all nine manual-inclusive CI jobs and Quality pass; clean CI and R-hub Linux/Windows logs preserved; source archive and human authorship technically reviewed.
 Next: finish the active Intel macOS R-hub validation and finalize RELEASE_READY.md; the maintainer submits the preserved archive to CRAN.
+
+Milestone: M5 technical release readiness complete (2026-09-21).
+Completed: all nine full CI checks, Quality and all three R-hub platforms pass; win-builder has only the permitted New submission NOTE; exact archive and check evidence preserved; release checklist and submission notes complete.
+Next: maintainer review of pull request 1 and CRAN submission of the checked source archive; retain the agreed human authorship.

@@ -23,7 +23,7 @@
 - [x] Win-builder R-devel result retrieved: 0 errors, 0 warnings, 1 incoming NOTE
 - [x] Corrected archive rebuilt, checked locally (0/0/0), and accepted by win-builder
 - [x] Win-builder incoming URL issues resolved; corrected archive has only New submission NOTE
-- [ ] Full R/OS CI matrix and rhub verified
+- [x] Full R/OS CI matrix and rhub verified
 - [x] pkgdown deployed; all 51 published HTML pages return HTTP 200
 - [x] Hosted release pull request technically reviewed; package implementation and author credits unchanged
 
@@ -32,13 +32,14 @@ The public repository https://github.com/BlackThrive/searchlight has been create
 and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Source and
 documentation are published. Release fixes are in pull request 1. All nine
 manual-inclusive CI jobs passed in run 35636569788 after the Abseil fix (the
-earlier runs 35628215618 and 35634359155 also passed). R-hub Windows and Linux
-R-devel pass with --no-manual --as-cran. Its Intel macOS runner exposed an s2
-Abseil header/library mismatch. The workflows now select matching CRAN system
-libraries; R-hub macOS run 35636576062 is verifying that fix on Intel macOS.
+earlier runs 35628215618 and 35634359155 also passed). The subsequent
+release-evidence commit also passed all nine checks in run 35639959856.
+R-hub Windows, Linux and Intel macOS R-devel pass with --no-manual --as-cran.
+Selecting matching CRAN Abseil headers and libraries resolved the Intel macOS
+s2 dependency failure; R-hub run 35636576062 completed with Status: OK.
 BlackThrive-ci-matrix.json and ci-2026-09-21 contain all nine clean check logs
 and their hashes. BlackThrive-rhub.json and rhub-2026-09-21 preserve the clean
-R-hub Linux/Windows logs, with their --no-manual scope stated explicitly.
+R-hub logs for all three platforms, with their --no-manual scope stated explicitly.
 See M5-external-checks.json for run URLs
 and the status snapshot. The earlier R-hub attempts and failed runner checks are
 retained as historical evidence, not treated as passing checks.
@@ -63,7 +64,9 @@ the same archive's local manual-inclusive check (0/0/0). The earlier result is
 retained separately in M5-win-builder.json. The checked archive is unchanged.
 An archive comparison verified 222 matching files, including normalized
 DESCRIPTION fields; only three existing decision/progress/evidence files differ.
-The review found no remaining implementation or authorship issues. External
-validation remains pending; this technical review is not a maintainer approval.
+The review found no remaining implementation or authorship issues. All required
+technical release gates now pass. This technical review is not a maintainer
+approval or a CRAN submission.
 
-No release-ready assertion is made until every required check has evidence.
+RELEASE_READY.md identifies the checked archive and summarizes the completed
+evidence. The maintainer submits the package to CRAN.

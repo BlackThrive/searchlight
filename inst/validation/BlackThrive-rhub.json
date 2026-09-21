@@ -1,6 +1,6 @@
 {
-  "checked_utc": "2026-09-21T18:36:11.281419+00:00",
-  "macos_verified": false,
+  "checked_utc": "2026-09-21T19:34:35.072651+00:00",
+  "macos_verified": true,
   "checks": [
     {
       "platform": "windows-devel",
@@ -31,6 +31,21 @@
       ],
       "log": "inst/validation/rhub-2026-09-21/linux-devel.log",
       "sha256": "8f51b019089a648863ca2761c821f80504de5ab0dc1bff977fef32467a9873f7"
+    },
+    {
+      "platform": "macos-devel",
+      "run": 35636576062,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35636576062",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "flags": [
+        "--no-manual",
+        "--as-cran"
+      ],
+      "log": "inst/validation/rhub-2026-09-21/macos-devel.log",
+      "sha256": "eb0547f4d70a7cffa184b4c01b9b33a16c095caad992f1b7da1464451c28685c"
     }
   ]
 }

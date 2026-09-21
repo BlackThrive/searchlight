@@ -77,6 +77,6 @@
   },
   "source_archive_preserved_path": "data-raw/work/win-builder-2026-09-21/searchlight_0.1.0.tar.gz",
   "release_gate_satisfied": true,
-  "follow_up": "Win-builder gate passed. Complete remaining macOS R-devel CI/R-hub validation and release review.",
+  "follow_up": "All required technical release checks pass. Maintainer review and CRAN submission use the preserved checked archive.",
   "cran_submitted": false
 }

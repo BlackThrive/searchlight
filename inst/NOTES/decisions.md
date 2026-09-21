@@ -399,3 +399,16 @@
   and decision/progress files. The archived source hash and all five preserved
   win-builder log hashes match. No analysis implementation or author-credit
   changes are required; retain the checked archive as the submission candidate.
+
+## 2026-09-21: Final R-hub validation and release readiness
+
+* R-hub Intel macOS run 35636576062 completed successfully. Both dependency
+  installation and the OpenMP rebuild passed; the package's --no-manual
+  --as-cran check reports Status: OK, with no errors, warnings or notes.
+  Preserve its actual 00check.log and hash alongside the clean Linux/Windows
+  results in BlackThrive-rhub.json. This closes the final external release gate.
+* All nine full checks and Quality also pass on the release-evidence commit
+  9fa60cc. Preserve the checked source archive without rebuilding it; its local
+  and win-builder results apply to that exact SHA-256. Complete cran-comments
+  and RELEASE_READY.md with the verified scope and results. The maintainer
+  reviews the release pull request and submits to CRAN; no submission was made.
