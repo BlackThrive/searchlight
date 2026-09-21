@@ -88,9 +88,13 @@ jobs:
       - name: Install CRAN macOS system libraries
         if: runner.os == 'macOS'
         run: |
-          sudo Rscript -e 'source("https://mac.r-project.org/bin/install.R"); install.libs(c("gettext", "gdal", "udunits"))'
+          sudo Rscript -e 'source("https://mac.r-project.org/bin/install.R"); install.libs(c("gettext", "gdal", "udunits", "absl"))'
           echo "/opt/R/$(uname -m)/bin" >> "$GITHUB_PATH"
           echo "PKG_CONFIG_PATH=/opt/R/$(uname -m)/lib/pkgconfig" >> "$GITHUB_ENV"
+          # s2 1.1.12 bundles Abseil by default; use matching CRAN headers/libraries.
+          echo "S2_FORCE_BUNDLED_ABSEIL=false" >> "$GITHUB_ENV"
+          echo "MAKEFLAGS=-j2" >> "$GITHUB_ENV"
+          echo "PKG_BUILD_NCPUS=2" >> "$GITHUB_ENV"
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}

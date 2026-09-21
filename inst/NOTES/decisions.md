@@ -373,3 +373,18 @@
   and Linux also pass. The macOS R-devel jobs remain in progress. Update the
   checklist and CRAN comments, but retain the pending release status until those
   checks complete. This result is a pre-submission check, not a CRAN submission.
+
+## 2026-09-21: Match macOS Abseil headers and libraries
+
+* All nine manual-inclusive hosted R/OS checks passed in run 35628215618.
+  R-hub's Intel macOS runner separately failed loading s2 1.1.12: its compile
+  command selected CRAN's Abseil 20250127 headers ahead of the bundled headers,
+  then linked the bundled libraries, leaving DoIgnoreLeak unresolved.
+* Install CRAN's absl system library and use s2 1.1.12's documented configure
+  switch S2_FORCE_BUNDLED_ABSEIL=false on macOS. This keeps the headers and
+  static libraries from the same CRAN toolchain. Retain every package check,
+  and verify the correction with another R-hub macOS run. Bound its source
+  builds to two workers and two make jobs to reduce the long serial install.
+* Preserve normalized win-builder evidence with LF checkout attributes so its
+  recorded hashes remain reproducible on Windows. The checked source archive
+  and package implementation remain unchanged.
