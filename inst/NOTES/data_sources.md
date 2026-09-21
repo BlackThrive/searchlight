@@ -156,9 +156,13 @@ notices require resolution before they can be treated as current issues.
 * [suncalc 0.5.1 manual](https://cran.r-project.org/web/packages/suncalc/suncalc.pdf)
   confirms getSunlightTimes date/lat/lon data and explicit time-zone arguments;
   `sunset` and `dusk` are distinct fields, with dusk ending civil twilight.
-* [Grogger and Ridgeway (2006), author-hosted reprint](https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf)
+* Grogger and Ridgeway (2006), doi:10.1198/016214506000000168, listed in
+  [Ridgeway's selected publications](https://crim.sas.upenn.edu/people/greg-ridgeway),
   motivates the evening overlap and clock-time controls for vehicle stops.
   Searchlight documents additional assumptions for pedestrian searches.
+  On 2026-09-21 the RAND RP-1253 reprint server returned HTTP 403 to automated
+  checks; the university bibliography returned HTTP 200. The publisher's
+  metadata independently confirms the title, year, authors and DOI.
 * [Knowles, Persico and Todd (2001)](https://www.journals.uchicago.edu/doi/10.1086/318603)
   is cited for outcome-test interpretation; no package implementation was used.
 

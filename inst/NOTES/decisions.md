@@ -328,3 +328,9 @@
   underlying error is visible before installing the full dependency tree.
 * Install the local package explicitly in the documentation workflow before
   rendering reference examples. Keep example acquisition offline and cap threads.
+* The direct Windows manual preflight identifies the actual failure: makeindex
+  is absent from TinyTeX. Install its TeX Live package along with the fonts,
+  keeping PDF manual checks enabled on every OS and R version.
+* Replace the inaccessible RAND reprint link with the author's verified
+  university bibliography and retain the full paper citation and publisher-
+  verified DOI. This is a bibliography link, not a claim to host the paper.
