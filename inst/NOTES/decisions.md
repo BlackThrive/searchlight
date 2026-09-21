@@ -345,3 +345,9 @@
 * Let an active check matrix finish before the next revision starts. R-devel
   compiles dependencies from source, and repeatedly cancelling it for evidence
   or documentation commits discards that installation work before caching.
+* The corrected 1,635,822-byte source archive passed its own manual-inclusive
+  as-CRAN check (0/0/0), maximum example 2.21 seconds, installed 3,039,622 bytes.
+  Win-builder acknowledged that exact archive over HTTPS; its SHA-256 and
+  receipt are retained separately from the earlier September 16 result. Await
+  the maintainer's new result email and the outstanding hosted R-devel checks.
+  No CRAN submission or release-ready assertion has been made.

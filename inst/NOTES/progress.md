@@ -25,3 +25,7 @@ Next: make the configured GitHub repository accessible, verify the full CI/R-hub
 Milestone: M5 GitHub publication (2026-09-21).
 Completed: confirmed BlackThrive as owner, created its public searchlight repository, corrected metadata and README links, preserved win-builder evidence, and passed the local manual-inclusive as-CRAN check with no errors, warnings or notes.
 Next: publish source, verify hosted checks and documentation, then rebuild the source artifact; retain human authorship and leave CRAN submission to the maintainer.
+
+Milestone: M5 hosted validation and release evidence (2026-09-21).
+Completed: published BlackThrive/searchlight and its 51-page site; seven matrix jobs pass; spelling/lint/URLs and exact source archive check pass; fresh win-builder upload acknowledged; no AI co-author credits.
+Next: verify the remaining Linux/macOS R-devel and R-hub jobs, review pull request 1, and inspect the new win-builder email before declaring release readiness; CRAN submission remains with the maintainer.

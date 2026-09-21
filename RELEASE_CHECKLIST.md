@@ -21,6 +21,7 @@
 - [x] Local pkgdown site built and inspected; 51 pages have valid local links
 - [x] Win-builder R-devel upload acknowledged over HTTPS; receipt and hash saved
 - [x] Win-builder R-devel result retrieved: 0 errors, 0 warnings, 1 incoming NOTE
+- [x] Corrected archive rebuilt, checked locally (0/0/0), and accepted by win-builder
 - [ ] Win-builder incoming URL issues resolved and corrected archive rechecked
 - [ ] Full R/OS CI matrix and rhub verified
 - [x] pkgdown deployed; all 51 published HTML pages return HTTP 200
@@ -47,8 +48,11 @@ vignettes and PDF/HTML manuals passed. The incoming NOTE groups the expected
 new-submission notice, three URLs using the old placeholder owner, and README
 file links to AGENTS.md and RELEASE_CHECKLIST.md, which are excluded from the
 source archive. The two README links are now plain filename references and all
-current package URLs pass. The corrected source still requires a fresh
-win-builder result. The exact previously checked source
+current package URLs pass. The corrected archive passed a local manual-inclusive
+check (0/0/0) and win-builder acknowledged its 1,635,822-byte upload on 2026-09-21.
+Its SHA-256 is recorded in BlackThrive-source-check.json and
+BlackThrive-win-builder.json. The fresh win-builder result is pending delivery
+to the maintainer email. The exact previously checked source
 hash and preserved logs are recorded in `inst/validation/M5-win-builder.json`.
 
 No release-ready assertion is made until every required check has evidence.

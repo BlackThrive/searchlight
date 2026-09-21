@@ -1,0 +1,15 @@
+{
+  "attempted": "2026-09-21T16:40:29.653789+00:00",
+  "service": "https://win-builder.r-project.org/upload.aspx",
+  "target": "R-devel",
+  "transport": "HTTPS",
+  "source_file": "searchlight_0.1.0.tar.gz",
+  "source_sha256": "4a57eee0d39888ff514f87cb7d0adcf3e12bea8a6809e0bfdbc725edc5006a45",
+  "source_bytes": 1635822,
+  "check_verified": false,
+  "previous_attempt": null,
+  "status": "uploaded via HTTPS; check result pending",
+  "http_status": 200,
+  "response_confirmation": "File name: searchlight_0.1.0.tar.gz File Size: 1635822 bytes Content type: application/gzip",
+  "result_delivery": "DESCRIPTION maintainer email"
+}
