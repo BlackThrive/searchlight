@@ -1,0 +1,256 @@
+# Outcome tests and veil of darkness
+
+This vignette uses the real May-July 2026 sample offline. Its three
+missing Dyfed-Powys submissions remain missing. Observed outcomes
+describe West Yorkshire records only; neither missing submissions nor
+missing outcome values are failures.
+
+## Three separate meanings of an outcome
+
+`any_action`, `arrest` and `outcome_linked_to_object` measure different
+things. An action need not be an arrest, and a recorded link to the
+search object is a separate source field. Searchlight preserves
+disagreements and unknown values. Wilson intervals describe a binary
+outcome among searches with that outcome observed. Unknown ethnicity
+appears in the descriptive table.
+
+``` r
+
+hits <- sl_hit_rates(records, by = character())
+display <- hits[hits$ethnicity_5 %in% c("Black", "White", "Unknown"), ]
+knitr::kable(as.data.frame(display)[c("ethnicity_5", "outcome", "observed",
+  "missing_outcome", "hit_rate", "conf_low", "conf_high")], digits = 3)
+```
+
+| ethnicity_5 | outcome | observed | missing_outcome | hit_rate | conf_low | conf_high |
+|:---|:---|---:|---:|---:|---:|---:|
+| Black | any_action | 58 | 0 | 0.379 | 0.266 | 0.508 |
+| Unknown | any_action | 2226 | 54 | 0.357 | 0.337 | 0.377 |
+| White | any_action | 2138 | 3 | 0.355 | 0.335 | 0.376 |
+| Black | arrest | 58 | 0 | 0.190 | 0.109 | 0.309 |
+| Unknown | arrest | 2226 | 54 | 0.132 | 0.119 | 0.147 |
+| White | arrest | 2138 | 3 | 0.196 | 0.179 | 0.213 |
+| Black | outcome_linked_to_object | 58 | 0 | 0.862 | 0.751 | 0.928 |
+| Unknown | outcome_linked_to_object | 2234 | 46 | 0.941 | 0.931 | 0.950 |
+| White | outcome_linked_to_object | 2141 | 0 | 0.917 | 0.904 | 0.928 |
+
+Each outcome has a separate logistic comparison of Black versus White
+searches, with force and object fixed effects. A constant control is
+omitted and named in the output. Other ethnicities and unknown ethnicity
+are excluded only from this specified pairwise model, with counts
+retained in the exclusion table. An unstable, aliased or separated model
+withholds its Wald interval instead of printing a misleading extreme
+estimate.
+
+``` r
+
+coefficients <- attr(hits, "coefficients")
+knitr::kable(coefficients[c("outcome", "odds_ratio", "conf_low", "conf_high",
+  "n", "status")], digits = 3)
+```
+
+| outcome                  | odds_ratio | conf_low | conf_high |    n | status    |
+|:-------------------------|-----------:|---------:|----------:|-----:|:----------|
+| any_action               |      1.082 |    0.630 |     1.858 | 2196 | estimable |
+| arrest                   |      0.991 |    0.506 |     1.942 | 2196 | estimable |
+| outcome_linked_to_object |      0.585 |    0.271 |     1.263 | 2199 | estimable |
+
+``` r
+
+knitr::kable(coefficients[c("outcome", "omitted_constant_controls")])
+```
+
+| outcome                  | omitted_constant_controls |
+|:-------------------------|:--------------------------|
+| any_action               | force_id                  |
+| arrest                   | force_id                  |
+| outcome_linked_to_object | force_id                  |
+
+``` r
+
+knitr::kable(attr(hits, "exclusions"))
+```
+
+| outcome | included | unknown_ethnicity | other_ethnicity | pair_missing_outcome_or_control |
+|:---|---:|---:|---:|---:|
+| any_action | 2196 | 2280 | 178 | 3 |
+| arrest | 2196 | 2280 | 178 | 3 |
+| outcome_linked_to_object | 2199 | 2280 | 178 | 0 |
+
+Hit rates condition on being searched. Differences in selection, the
+distribution of unobserved risk, recording and the meaning of outcomes
+can all affect them. Equal hit rates need not imply equal decision
+thresholds, and differing hit rates do not by themselves establish
+discrimination. Repeated searches also challenge independent-event
+intervals when identifiers for clustering are unavailable. These
+interpretation limits are related to the outcome-test framework of
+Knowles, Persico and Todd (2001), <doi:10.1086/318603> ([open
+working-paper
+version](https://www.nber.org/system/files/working_papers/w7449/w7449.pdf)).
+
+## A time-quality screen is mandatory
+
+The darkness design excludes every force-month marked unreliable or
+lacking a timestamp audit. Source-clock midnight and London-clock
+midnight are both checked upstream, so a date-only UTC timestamp shifted
+to 01:00 in summer cannot pass. Passing this screen does not prove that
+times are accurate.
+
+``` r
+
+knitr::kable(sl_timestamp_quality(records)[c("force_id", "month",
+  "gating_midnight_share", "time_reliable")], digits = 3)
+```
+
+| force_id       | month   | gating_midnight_share | time_reliable |
+|:---------------|:--------|----------------------:|:--------------|
+| dyfed-powys    | 2026-05 |                    NA | FALSE         |
+| dyfed-powys    | 2026-06 |                    NA | FALSE         |
+| dyfed-powys    | 2026-07 |                    NA | FALSE         |
+| west-yorkshire | 2026-05 |                 0.010 | TRUE          |
+| west-yorkshire | 2026-06 |                 0.010 | TRUE          |
+| west-yorkshire | 2026-07 |                 0.014 | TRUE          |
+
+``` r
+
+date_only <- records[1:10, ]
+day <- as.Date(date_only$date, tz = "Europe/London")
+date_only$date <- as.POSIXct(paste(day, "00:00:00"), tz = "Europe/London")
+date_only$date_raw <- format(date_only$date, "%Y-%m-%dT%H:%M:%S%z")
+attr(date_only, "contract")$timestamps <- sl_timestamp_quality(date_only)
+refused <- sl_veil_of_darkness(date_only)
+#> Excluded 1 unreliable force-month(s).
+knitr::kable(as.data.frame(refused)[c("odds_ratio", "n", "status")])
+```
+
+| odds_ratio |   n | status                                   |
+|-----------:|----:|:-----------------------------------------|
+|         NA |   0 | insufficient outcome/predictor variation |
+
+``` r
+
+knitr::kable(attr(refused, "excluded_force_months"))
+```
+
+| force_id       | month   | time_reliable |
+|:---------------|:--------|:--------------|
+| west-yorkshire | 2026-05 | FALSE         |
+
+## Local clock time, sunset and civil twilight
+
+Solar events are calculated for the published location and date with
+`suncalc`, using Europe/London. For each distinct location and year, the
+annual earliest and latest evening twilight define the intertwilight
+clock window. This permits both daylight and darkness at comparable
+clock times across the year. The default defines darkness after civil
+dusk and removes the ambiguous sunset-to-dusk interval.
+`twilight = "sunset"` provides an explicit alternative. Missing
+locations are excluded, never imputed from a force centroid.
+
+The logistic outcome is membership of the comparison ethnicity among the
+selected pair. Predictors include darkness, a natural spline of clock
+time (or a linear term with too few distinct times), weekday, calendar
+month and force where these vary. Every exclusion step and the final
+analysed rows can be inspected.
+
+``` r
+
+darkness <- sl_veil_of_darkness(records)
+knitr::kable(as.data.frame(darkness)[c("odds_ratio", "conf_low", "conf_high",
+  "n", "dark_stops", "daylight_stops", "status")], digits = 3)
+```
+
+| odds_ratio | conf_low | conf_high |   n | dark_stops | daylight_stops | status    |
+|-----------:|---------:|----------:|----:|-----------:|---------------:|:----------|
+|    593.664 |    0.295 |   1195173 | 648 |         36 |            612 | estimable |
+
+``` r
+
+knitr::kable(attr(darkness, "steps"))
+```
+
+| stage                             | remaining |
+|:----------------------------------|----------:|
+| input                             |      4657 |
+| reliable force-month time         |      4657 |
+| valid location and instant        |      4496 |
+| known comparison pair             |      2122 |
+| annual intertwilight clock window |       747 |
+| unambiguous daylight or darkness  |       648 |
+| design window                     |       648 |
+
+``` r
+
+knitr::kable(attr(darkness, "excluded_force_months"))
+```
+
+| force_id | month | time_reliable |
+|----------|-------|---------------|
+
+This short summer sample offers a restricted seasonal comparison and may
+have few Black records in parts of the design. A finite fitted interval
+is not evidence that activity patterns, daylight overlap or model
+controls are adequate. An undefined result reports a limitation of the
+available design, not no disparity. In this sample, only 36 of 648
+retained searches occur in darkness. The extremely wide adjusted
+interval makes the point estimate unsuitable as a stable substantive
+finding; more seasonal coverage and an explicit assessment of daylight
+overlap are needed before interpreting this design.
+
+``` r
+
+cat(paste("-", attr(darkness, "assumptions")), sep = "\n")
+#> - Darkness reduces visibility of ethnicity before the stop.
+#> - Activity, exposure and police deployment are comparable after controls.
+#> - Reporting does not vary differentially by darkness and ethnicity.
+#> - Times, locations and self-defined ethnicity are measured adequately.
+#> - Enough daylight/darkness overlap remains after controls.
+#> - Repeated events and unmeasured selection can violate model independence.
+#> - A vehicle-stop method needs justification for pedestrian searches.
+```
+
+The optional `design = "dst"` restricts observations to three weeks on
+each side of the UK clock changes, adding transition and running-day
+controls. Clock-change dates come from the Europe/London time-zone
+rules, not fixed calendar dates. The tests verify 29 March and 25
+October 2026 and the one-hour local-clock change. The bundled May-July
+sample has no observations in these windows, so it cannot support a DST
+comparison.
+
+``` r
+
+dst <- sl_veil_of_darkness(records, design = "dst")
+knitr::kable(as.data.frame(dst)[c("odds_ratio", "n", "status")])
+```
+
+| odds_ratio |   n | status                                   |
+|-----------:|----:|:-----------------------------------------|
+|         NA |   0 | insufficient outcome/predictor variation |
+
+``` r
+
+knitr::kable(attr(dst, "steps"))
+```
+
+| stage                             | remaining |
+|:----------------------------------|----------:|
+| input                             |      4657 |
+| reliable force-month time         |      4657 |
+| valid location and instant        |      4496 |
+| known comparison pair             |      2122 |
+| annual intertwilight clock window |       747 |
+| unambiguous daylight or darkness  |       648 |
+| design window                     |         0 |
+
+[Grogger and Ridgeway
+(2006)](https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf)
+developed the veil-of-darkness approach for vehicle stops. Its use for
+pedestrian stop and search requires separate justification: ethnicity
+may be visible before the decision despite darkness, pedestrian and
+police activity can vary by light, and selection or reporting can
+change. These observational diagnostics do not establish a causal effect
+or, alone, establish discrimination.
+
+Astronomical field names and the time-zone interface were verified
+against the [suncalc package and
+manual](https://CRAN.R-project.org/package=suncalc).
