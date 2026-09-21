@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  # Let source installations on R-devel finish and populate dependency caches.
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:

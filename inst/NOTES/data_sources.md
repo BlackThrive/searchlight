@@ -157,7 +157,7 @@ notices require resolution before they can be treated as current issues.
   confirms getSunlightTimes date/lat/lon data and explicit time-zone arguments;
   `sunset` and `dusk` are distinct fields, with dusk ending civil twilight.
 * Grogger and Ridgeway (2006), doi:10.1198/016214506000000168, listed in
-  [Ridgeway's selected publications](https://crim.sas.upenn.edu/people/greg-ridgeway),
+  [selected publications by Ridgeway](https://crim.sas.upenn.edu/people/greg-ridgeway),
   motivates the evening overlap and clock-time controls for vehicle stops.
   Searchlight documents additional assumptions for pedestrian searches.
   On 2026-09-21 the RAND RP-1253 reprint server returned HTTP 403 to automated

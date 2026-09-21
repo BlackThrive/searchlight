@@ -7,8 +7,11 @@ release gates remain pending and no RELEASE_READY.md has been produced.
 
 Local: Windows 11 x64, R 4.5.2 (ucrt). This is not a substitute for the required
 release/devel/oldrel checks on Linux, macOS and Windows. The nine-job workflow is
-prepared; the BlackThrive/searchlight repository was created on 2026-09-21 and
-its hosted checks are being verified.
+running in BlackThrive/searchlight, published on 2026-09-21. Seven jobs pass:
+Windows release/devel/oldrel, Linux release/oldrel and macOS release/oldrel.
+Linux/macOS R-devel dependency installations remain in progress. All nine jobs
+include PDF manuals and treat check notes as failures. R-hub Windows R-devel
+passes --no-manual --as-cran; its Linux/macOS jobs are still running.
 
 M0-M4 local `--as-cran --no-manual` checks: 0 errors, 0 warnings, 0 notes.
 M5 local `--as-cran`, including PDF and HTML manuals: 0 errors, 0 warnings,
@@ -34,14 +37,17 @@ installation, examples, tests, vignettes and PDF/HTML manuals passed. The incomi
 NOTE includes "New submission", three unavailable GitHub/site URLs, and two
 README file links to excluded repository files (AGENTS.md and
 RELEASE_CHECKLIST.md). The README links have since been replaced with plain
-filename references; that edit has not been rechecked by win-builder. Logs and
+filename references, and all current package URLs pass the URL checker. A fresh
+win-builder result for the corrected archive is still required. Logs and
 the checked source hash are retained in `inst/validation/M5-win-builder.json`.
 
-Spelling and lint are clean in the recorded local validation. R-hub's original
-attempt returned Not Found for the placeholder repository. The maintainer has
-since supplied the correct owner, BlackThrive, and the repository has been
-created with corrected metadata. Fresh URL and hosted checks remain pending.
-The RAND reprint URL previously returned 403 to the automated checker.
+Spelling, lint and all 16 checked URLs are clean in the 2026-09-21 local
+validation. R-hub's original attempt returned Not Found for the placeholder
+repository; the corrected workflow is now running. The public pkgdown site is
+deployed at https://blackthrive.github.io/searchlight/ and all 51 HTML pages
+return HTTP 200. The RAND reprint server's automated HTTP 403 was resolved by
+retaining the verified paper DOI and linking to the author's university
+bibliography. Current run URLs and scope are in M5-external-checks.json.
 
 ## Reverse dependencies
 

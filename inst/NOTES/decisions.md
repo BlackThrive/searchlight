@@ -334,3 +334,14 @@
 * Replace the inaccessible RAND reprint link with the author's verified
   university bibliography and retain the full paper citation and publisher-
   verified DOI. This is a bibliography link, not a claim to host the paper.
+* The published pkgdown site passes HTTP checks for all 51 HTML pages. Local
+  spelling, lint and all 16 package URLs pass after replacing the possessive
+  surname in the citation label with "selected publications by Ridgeway".
+* Seven full hosted checks now pass, including PDF manuals on all three Windows
+  R versions. Linux/macOS R-devel dependencies and two R-hub platforms are still
+  running; R-hub Windows passes with --no-manual. Keep their run URLs and exact
+  scope in the release evidence. Rebuild and check the corrected source archive
+  before sending it for another win-builder check; preserve the earlier result.
+* Let an active check matrix finish before the next revision starts. R-devel
+  compiles dependencies from source, and repeatedly cancelling it for evidence
+  or documentation commits discards that installation work before caching.

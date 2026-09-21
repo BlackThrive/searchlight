@@ -214,7 +214,7 @@ no disparity.
 * Grogger, J. and Ridgeway, G. (2006). Testing for racial profiling in traffic
   stops from behind a veil of darkness. *JASA* 101(475):878-887.
   doi:10.1198/016214506000000168. Listed in
-  [Ridgeway's selected publications](https://crim.sas.upenn.edu/people/greg-ridgeway).
+  [selected publications by Ridgeway](https://crim.sas.upenn.edu/people/greg-ridgeway).
   The evening overlap motivates the darkness design, subject to the transfer
   assumptions for pedestrian search stated above.
 * Knowles, J., Persico, N. and Todd, P. (2001). Racial bias in motor vehicle
