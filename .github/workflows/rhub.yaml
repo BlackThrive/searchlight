@@ -94,7 +94,6 @@ jobs:
           # s2 1.1.12 bundles Abseil by default; use matching CRAN headers/libraries.
           echo "S2_FORCE_BUNDLED_ABSEIL=false" >> "$GITHUB_ENV"
           echo "MAKEFLAGS=-j2" >> "$GITHUB_ENV"
-          echo "PKG_BUILD_NCPUS=2" >> "$GITHUB_ENV"
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}

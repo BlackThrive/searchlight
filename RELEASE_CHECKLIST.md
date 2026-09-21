@@ -25,16 +25,20 @@
 - [x] Win-builder incoming URL issues resolved; corrected archive has only New submission NOTE
 - [ ] Full R/OS CI matrix and rhub verified
 - [x] pkgdown deployed; all 51 published HTML pages return HTTP 200
-- [ ] Hosted release pull request reviewed
+- [x] Hosted release pull request technically reviewed; package implementation and author credits unchanged
 
 The maintainer corrected the GitHub owner to BlackThrive on 2026-09-21.
 The public repository https://github.com/BlackThrive/searchlight has been created
 and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Source and
-documentation are published. Release fixes are in pull request 1. Eight of the
-nine manual-inclusive CI jobs pass, including all Linux and Windows versions.
-The updated macOS R-devel job is still installing dependencies after adding
-the previously missing system libraries. R-hub Windows and Linux R-devel pass
-with --no-manual --as-cran; the macOS replacement job remains in progress.
+documentation are published. Release fixes are in pull request 1. All nine
+manual-inclusive CI jobs passed in run 35636569788 after the Abseil fix (the
+earlier runs 35628215618 and 35634359155 also passed). R-hub Windows and Linux
+R-devel pass with --no-manual --as-cran. Its Intel macOS runner exposed an s2
+Abseil header/library mismatch. The workflows now select matching CRAN system
+libraries; R-hub macOS run 35636576062 is verifying that fix on Intel macOS.
+BlackThrive-ci-matrix.json and ci-2026-09-21 contain all nine clean check logs
+and their hashes. BlackThrive-rhub.json and rhub-2026-09-21 preserve the clean
+R-hub Linux/Windows logs, with their --no-manual scope stated explicitly.
 See M5-external-checks.json for run URLs
 and the status snapshot. The earlier R-hub attempts and failed runner checks are
 retained as historical evidence, not treated as passing checks.
@@ -57,5 +61,9 @@ BlackThrive-win-builder.json records the result URL, hashes and normalized logs
 under inst/validation/win-builder-2026-09-21. BlackThrive-source-check.json records
 the same archive's local manual-inclusive check (0/0/0). The earlier result is
 retained separately in M5-win-builder.json. The checked archive is unchanged.
+An archive comparison verified 222 matching files, including normalized
+DESCRIPTION fields; only three existing decision/progress/evidence files differ.
+The review found no remaining implementation or authorship issues. External
+validation remains pending; this technical review is not a maintainer approval.
 
 No release-ready assertion is made until every required check has evidence.

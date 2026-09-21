@@ -7,11 +7,12 @@ release gates remain pending and no RELEASE_READY.md has been produced.
 
 Local: Windows 11 x64, R 4.5.2 (ucrt). This is not a substitute for the required
 release/devel/oldrel checks on Linux, macOS and Windows. The nine-job workflow is
-running in BlackThrive/searchlight, published on 2026-09-21. Eight jobs pass:
-Windows and Linux release/devel/oldrel, and macOS release/oldrel. macOS R-devel
-is still installing dependencies with the corrected system-library setup.
+running in BlackThrive/searchlight, published on 2026-09-21. All nine jobs passed
+in run 35636569788: Windows, Linux and macOS release/devel/oldrel.
 All nine jobs include PDF manuals and treat check notes as failures. R-hub
-Windows and Linux R-devel pass --no-manual --as-cran; macOS remains in progress.
+Windows and Linux R-devel pass --no-manual --as-cran. Its Intel macOS runner
+exposed an s2 Abseil header/library mismatch; matching CRAN system libraries
+are now selected, with the replacement macOS check in progress.
 
 M0-M4 local `--as-cran --no-manual` checks: 0 errors, 0 warnings, 0 notes.
 M5 local `--as-cran`, including PDF and HTML manuals: 0 errors, 0 warnings,

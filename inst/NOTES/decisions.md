@@ -383,8 +383,19 @@
 * Install CRAN's absl system library and use s2 1.1.12's documented configure
   switch S2_FORCE_BUNDLED_ABSEIL=false on macOS. This keeps the headers and
   static libraries from the same CRAN toolchain. Retain every package check,
-  and verify the correction with another R-hub macOS run. Bound its source
-  builds to two workers and two make jobs to reduce the long serial install.
+  and verify the correction with another R-hub macOS run. Bound each source
+  build to two make jobs to reduce the long install. Package-install workers
+  retain R-hub's Ncpus setting; pkgdepends reads that R option directly.
 * Preserve normalized win-builder evidence with LF checkout attributes so its
   recorded hashes remain reproducible on Windows. The checked source archive
   and package implementation remain unchanged.
+* The corrected workflow passed all nine jobs in run 35636569788. Preserve
+  the complete check output and hashes for each platform under ci-2026-09-21.
+  The original R-hub Linux/Windows artifacts also confirm Status: OK; preserve
+  those logs separately and identify their --no-manual scope. The final Intel
+  macOS R-hub run is still installing dependencies.
+* Technical review confirmed 222 matching archive files (DESCRIPTION compared
+  after build normalization), with changes limited to three existing evidence
+  and decision/progress files. The archived source hash and all five preserved
+  win-builder log hashes match. No analysis implementation or author-credit
+  changes are required; retain the checked archive as the submission candidate.
