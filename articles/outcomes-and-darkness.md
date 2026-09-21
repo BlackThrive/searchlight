@@ -243,14 +243,14 @@ knitr::kable(attr(dst, "steps"))
 | design window                     |         0 |
 
 Grogger and Ridgeway (2006; <doi:10.1198/016214506000000168>), listed in
-[Ridgeway’s selected
-publications](https://crim.sas.upenn.edu/people/greg-ridgeway),
-developed the veil-of-darkness approach for vehicle stops. Its use for
-pedestrian stop and search requires separate justification: ethnicity
-may be visible before the decision despite darkness, pedestrian and
-police activity can vary by light, and selection or reporting can
-change. These observational diagnostics do not establish a causal effect
-or, alone, establish discrimination.
+[selected publications by
+Ridgeway](https://crim.sas.upenn.edu/people/greg-ridgeway), developed
+the veil-of-darkness approach for vehicle stops. Its use for pedestrian
+stop and search requires separate justification: ethnicity may be
+visible before the decision despite darkness, pedestrian and police
+activity can vary by light, and selection or reporting can change. These
+observational diagnostics do not establish a causal effect or, alone,
+establish discrimination.
 
 Astronomical field names and the time-zone interface were verified
 against the [suncalc package and

@@ -72,7 +72,7 @@ rates <- readRDS(system.file("extdata", "example-rates.rds",
 ))
 path <- tempfile(fileext = ".html")
 sl_report(sl_sample(), path, estimates = list(ratios = sl_rate_ratio(rates)))
-#> Report written to /tmp/RtmpmjGARD/file1e48429c16a7.html.
+#> Report written to /tmp/RtmpPaV2pC/file1e102a6b5935.html.
 file.exists(path)
 #> [1] TRUE
 ```
