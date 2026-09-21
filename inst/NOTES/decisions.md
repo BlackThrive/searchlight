@@ -309,3 +309,12 @@
   archive separately before rebuilding. Publish the completed package with its
   existing six milestone commits intact as the new repository's initial main
   history; subsequent changes can be reviewed against that populated baseline.
+* The first hosted checks exposed missing runner prerequisites: HTML Tidy on
+  Linux/macOS, gettext headers for macOS R-devel, and roxygen2 for styler's
+  documentation-example checks. Install these explicitly. The macOS dotCall64
+  binary also fails to load an OpenMP symbol; rebuild the same CRAN release from
+  source, linking CRAN R's supplied libomp runtime, and verify namespace loading.
+  Keep all package tests enabled and retain these environment differences.
+* Configure the documentation publisher's GitHub Actions build identity so its
+  initial gh-pages commit succeeds. This is an automated deployment identity,
+  not an AI author or co-author; package/source authorship remains unchanged.

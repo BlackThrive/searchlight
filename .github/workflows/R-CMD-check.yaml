@@ -38,10 +38,33 @@ jobs:
         with:
           r-version: ${{ matrix.r }}
           use-public-rspm: true
+      - name: Install HTML validation tool on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y tidy
+      - name: Install HTML validation tool on macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew install tidy-html5
+          echo "$(brew --prefix tidy-html5)/bin" >> "$GITHUB_PATH"
+      - name: Install CRAN macOS gettext headers
+        if: runner.os == 'macOS'
+        run: sudo Rscript -e 'source("https://mac.r-project.org/bin/install.R"); install.libs("gettext")'
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
+      - name: Rebuild macOS dotCall64 with the CRAN OpenMP runtime
+        if: runner.os == 'macOS'
+        shell: Rscript {0}
+        run: |
+          openmp <- file.path(R.home("lib"), "libomp.dylib")
+          stopifnot(file.exists(openmp))
+          makevars <- tempfile("dotcall64-Makevars-")
+          writeLines(paste("PKG_LIBS +=", shQuote(openmp)), makevars)
+          withr::with_envvar(c(R_MAKEVARS_USER = makevars), {
+            install.packages("dotCall64", type = "source")
+          })
+          loadNamespace("dotCall64")
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--as-cran")'

@@ -18,4 +18,10 @@ jobs:
         with:
           extra-packages: any::pkgdown
           needs: website
+      - name: Configure documentation commit identity
+        run: |
+          git config --local user.name 'github-actions[bot]'
+          git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
       - run: Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
