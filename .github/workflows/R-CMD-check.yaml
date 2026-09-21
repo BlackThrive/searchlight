@@ -26,6 +26,7 @@ jobs:
       OMP_NUM_THREADS: 2
       OPENBLAS_NUM_THREADS: 2
       _R_CHECK_SYSTEM_CLOCK_: false
+      R_TEXI2DVICMD: emulation
     steps:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-pandoc@v2

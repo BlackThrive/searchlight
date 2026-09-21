@@ -318,3 +318,7 @@
 * Configure the documentation publisher's GitHub Actions build identity so its
   initial gh-pages commit succeeds. This is an automated deployment identity,
   not an AI author or co-author; package/source authorship remains unchanged.
+* The Windows runner's TeX log contains a completed 33-page PDF with no LaTeX
+  errors, but the external manual driver returns failure. Use R's documented
+  texi2dvi emulation, which directly runs LaTeX and indexing until references
+  resolve. This changes the driver, not the manual checks or their pass criteria.
