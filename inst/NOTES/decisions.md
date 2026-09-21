@@ -351,3 +351,9 @@
   receipt are retained separately from the earlier September 16 result. Await
   the maintainer's new result email and the outstanding hosted R-devel checks.
   No CRAN submission or release-ready assertion has been made.
+* The remaining macOS R-devel job failed while building the terra dependency:
+  gdal-config was missing. R-devel has no current CRAN macOS binaries, so install
+  CRAN's matching GDAL and udunits system libraries (including their recursive
+  dependencies) and expose the CRAN bin/pkg-config paths before R dependencies.
+  Apply the same prerequisites and OpenMP rebuild to R-hub's macOS runner.
+  The latest hosted quality workflow now passes after the citation correction.
