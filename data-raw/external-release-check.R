@@ -2,7 +2,7 @@
 rhub_result <- tryCatch(
   {
     rhub::rhub_check(
-      gh_url = "https://github.com/black-thrive-global/searchlight",
+      gh_url = "https://github.com/BlackThrive/searchlight",
       platforms = c("linux", "windows", "macos"),
       branch = "feat/m5-reporting-release"
     )
@@ -12,6 +12,6 @@ rhub_result <- tryCatch(
 )
 jsonlite::write_json(list(
   attempted = as.character(Sys.time()), rhub = rhub_result,
-  ci_matrix = "Pending: specified GitHub repository is unavailable",
-  pkgdown_deployment = "Pending: specified GitHub repository is unavailable"
+  ci_matrix = "Pending: inspect BlackThrive/searchlight Actions results",
+  pkgdown_deployment = "Pending: verify https://blackthrive.github.io/searchlight/"
 ), "inst/validation/M5-external-checks.json", pretty = TRUE, auto_unbox = TRUE)

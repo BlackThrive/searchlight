@@ -6,7 +6,7 @@
   "source_file": "searchlight_0.1.0.tar.gz",
   "source_sha256": "623aa0a80117858f19f025bcad8944e98812ec9a84018c913d17924150793028",
   "source_bytes": 1618183,
-  "check_verified": false,
+  "check_verified": true,
   "previous_attempt": {
     "attempted": "2026-09-16T14:06:25.151725+00:00",
     "service": "https://win-builder.r-project.org/",
@@ -20,8 +20,82 @@
     "status": "submission not confirmed",
     "reason": "[WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond"
   },
-  "status": "uploaded via HTTPS; check result pending",
+  "status": "check completed: 0 errors, 0 warnings, 1 incoming NOTE; URL issues remain",
   "http_status": 200,
   "response_confirmation": "File name: searchlight_0.1.0.tar.gz File Size: 1618183 bytes Content type: application/gzip",
-  "result_delivery": "DESCRIPTION maintainer email"
+  "result_delivery": "DESCRIPTION maintainer email",
+  "result_url": "https://win-builder.r-project.org/WA4Y0kgDW0d6/",
+  "retrieved_utc": "2026-09-16T20:56:29.663148+00:00",
+  "check_started_utc": "2026-09-16T14:38:33+00:00",
+  "r_version": "R Under development (unstable) (2026-09-15 r90540 ucrt)",
+  "platform": "x86_64-w64-mingw32",
+  "operating_system": "Windows Server 2022 x64 (build 20348)",
+  "check_errors": 0,
+  "check_warnings": 0,
+  "check_notes": 1,
+  "incoming_note": {
+    "new_submission": true,
+    "invalid_urls": [
+      "https://black-thrive-global.github.io/searchlight/",
+      "https://github.com/black-thrive-global/searchlight",
+      "https://github.com/black-thrive-global/searchlight/issues"
+    ],
+    "invalid_file_uris": [
+      "AGENTS.md",
+      "RELEASE_CHECKLIST.md"
+    ],
+    "file_uri_source": "README.md"
+  },
+  "test_assertions_passed": 392,
+  "test_failures": 0,
+  "test_warnings": 0,
+  "test_skips": 2,
+  "maximum_example_elapsed_seconds": 0.55,
+  "installation_seconds_email": 16,
+  "check_seconds_email": 188,
+  "pdf_manual_checked": true,
+  "html_manual_checked": true,
+  "saved_logs": [
+    {
+      "path": "inst/validation/win-builder-2026-09-16/00check.log",
+      "download_sha256": "d0d6ab5c177ce6ccdf8efc835345a88dc363625aa5adefd6710339c22b27fcd2",
+      "saved_sha256": "586ef66dcfb7afa5901c933e37d84693d1e2e32fb6cdf92c89760ac8d2be7d48",
+      "download_bytes": 3679
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-16/00install.out",
+      "download_sha256": "e9ab9fe0fac82acccf16d6fe729249228d6fca16aea9e47b9f295330e784b527",
+      "saved_sha256": "08ba5fbb5db5f0a1be14c0711da17ac53a270ec3984063d218d83b6176ffab54",
+      "download_bytes": 606
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-16/searchlight-Ex.Rout",
+      "download_sha256": "77067c87a44a14848c9f75c5f78f5ad34d26e105c9e451df9a67201959970d32",
+      "saved_sha256": "33025cef3f0405ad7dabb57f345aeb47e15768ad7a04a0f0f6c2fb32dbdebc8f",
+      "download_bytes": 53172
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-16/searchlight-Ex.timings",
+      "download_sha256": "cda5370a50f349bcbeb642f81e657b5b1c591ae26eba7547b49b21c49915aa6e",
+      "saved_sha256": "b7e6360161c6fef75ba9886f6ea9e3dd68cc2176812f9225ec439a77db9a5b05",
+      "download_bytes": 1169
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-16/testthat.Rout",
+      "download_sha256": "e1b9ad01cf89ca3326aab72192de96add5fd839d57bda32e9fbdbb08633cb6ea",
+      "saved_sha256": "f0b945d5db46974e2b76d02f1a969b5b24d077e32e39f055e958b6d10f1f0d4b",
+      "download_bytes": 3966
+    }
+  ],
+  "saved_log_normalization": "UTF-8 with LF newlines; trailing spaces and tabs removed. Original downloads retained under data-raw/work/win-builder-2026-09-16.",
+  "binary": {
+    "path": "data-raw/work/win-builder-2026-09-16/searchlight_0.1.0.zip",
+    "bytes": 1851175,
+    "sha256": "29d8a1199c1be744c7c5ca20fb4537662efe11c1d1cd6c8e476e96fd9c3dff76",
+    "zip_integrity_verified": true
+  },
+  "follow_up": "README file links replaced with plain filename references. Required repository/site placeholders retained. Corrected source has not been resubmitted to win-builder.",
+  "release_gate_satisfied": false,
+  "cran_submitted": false,
+  "source_archive_preserved_path": "data-raw/work/win-builder-2026-09-16/searchlight_0.1.0.tar.gz"
 }

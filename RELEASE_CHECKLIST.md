@@ -20,17 +20,26 @@
 - [ ] URL check clean
 - [x] Local pkgdown site built and inspected; 51 pages have valid local links
 - [x] Win-builder R-devel upload acknowledged over HTTPS; receipt and hash saved
-- [ ] Full R/OS CI matrix, rhub and win-builder verified
+- [x] Win-builder R-devel result retrieved: 0 errors, 0 warnings, 1 incoming NOTE
+- [ ] Win-builder incoming URL issues resolved and corrected archive rechecked
+- [ ] Full R/OS CI matrix and rhub verified
 - [ ] pkgdown deployed and milestone pull requests reviewed
 
-The specified GitHub repository remains unavailable. Remote CI, R-hub,
-deployment and milestone PR publication are pending. R-hub was attempted and
-returned Not Found. The required placeholder
-URLs are retained. URL checking also encountered a 403 response from the RAND
-paper server; its source was verified separately and the automatic failure is
-not treated as a pass.
+The maintainer corrected the GitHub owner to BlackThrive on 2026-09-21.
+The public repository https://github.com/BlackThrive/searchlight has been created
+and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Publication,
+remote CI, R-hub and documentation deployment are being verified. The earlier
+R-hub attempt returned Not Found for the old placeholder repository. URL checking
+also encountered a 403 response from the RAND paper server; its source was
+verified separately and the automatic failure is not treated as a pass.
 
-Win-builder's check result is pending delivery to the DESCRIPTION maintainer
-email. Upload confirmation is not a successful check result.
+Win-builder checked version 0.1.0 on R-devel (2026-09-15 r90540 ucrt), Windows
+Server 2022, with 0 errors, 0 warnings and 1 NOTE. Installation, tests, examples,
+vignettes and PDF/HTML manuals passed. The incoming NOTE groups the expected
+new-submission notice, three URLs using the old placeholder owner, and README
+file links to AGENTS.md and RELEASE_CHECKLIST.md, which are excluded from the
+source archive. The two README links are now plain filename references; the
+corrected README has not been rechecked by win-builder. The exact checked source
+hash and preserved logs are recorded in `inst/validation/M5-win-builder.json`.
 
 No release-ready assertion is made until every required check has evidence.

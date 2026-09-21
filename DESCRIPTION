@@ -35,9 +35,9 @@ Imports:
     tibble,
     withr,
     xml2
-URL: https://github.com/black-thrive-global/searchlight,
-    https://black-thrive-global.github.io/searchlight/
-BugReports: https://github.com/black-thrive-global/searchlight/issues
+URL: https://github.com/BlackThrive/searchlight,
+    https://blackthrive.github.io/searchlight/
+BugReports: https://github.com/BlackThrive/searchlight/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests: 

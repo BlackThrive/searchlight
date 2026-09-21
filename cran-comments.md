@@ -7,7 +7,8 @@ release gates remain pending and no RELEASE_READY.md has been produced.
 
 Local: Windows 11 x64, R 4.5.2 (ucrt). This is not a substitute for the required
 release/devel/oldrel checks on Linux, macOS and Windows. The nine-job workflow is
-prepared, but the specified GitHub repository is unavailable.
+prepared; the BlackThrive/searchlight repository was created on 2026-09-21 and
+its hosted checks are being verified.
 
 M0-M4 local `--as-cran --no-manual` checks: 0 errors, 0 warnings, 0 notes.
 M5 local `--as-cran`, including PDF and HTML manuals: 0 errors, 0 warnings,
@@ -27,11 +28,20 @@ methods gave identical assignments and 116,551 aggregate count rows. Four
 precomputed vignettes, the offline report and the local pkgdown site are built
 and visually checked; the published fifteen-line quick start executes offline.
 
-Spelling and lint are clean. R-hub was attempted and returned Not Found for the
-specified repository. Win-builder R-devel acknowledged the HTTPS source upload;
-its emailed check result remains to be verified. The required
-repository, issue tracker and website URLs returned 404; the RAND reprint URL
-returned 403 to the automated checker. These failures have not been hidden.
+Win-builder: R Under development (2026-09-15 r90540 ucrt), Windows Server 2022
+x64. The uploaded source archive completed with 0 errors, 0 warnings and 1 NOTE;
+installation, examples, tests, vignettes and PDF/HTML manuals passed. The incoming
+NOTE includes "New submission", three unavailable GitHub/site URLs, and two
+README file links to excluded repository files (AGENTS.md and
+RELEASE_CHECKLIST.md). The README links have since been replaced with plain
+filename references; that edit has not been rechecked by win-builder. Logs and
+the checked source hash are retained in `inst/validation/M5-win-builder.json`.
+
+Spelling and lint are clean in the recorded local validation. R-hub's original
+attempt returned Not Found for the placeholder repository. The maintainer has
+since supplied the correct owner, BlackThrive, and the repository has been
+created with corrected metadata. Fresh URL and hosted checks remain pending.
+The RAND reprint URL previously returned 403 to the automated checker.
 
 ## Reverse dependencies
 

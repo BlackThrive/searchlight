@@ -273,3 +273,39 @@
   HTTPS R-devel form then acknowledged searchlight_0.1.0.tar.gz and its exact
   1,618,183-byte size. Save both attempts with the archive SHA-256; the emailed
   check result remains unverified. An upload receipt is not a passing check.
+
+## 2026-09-16: Win-builder result review
+
+* Retrieved the result URL supplied by the maintainer and preserved the logs
+  and Windows binary before their expiry. R-devel on Windows Server 2022 reports
+  zero errors, zero warnings and one incoming NOTE. All 392 assertions passed;
+  the two intended CRAN skips remain. Examples, vignettes and both manuals pass.
+* The NOTE combines the expected new-submission notice, three unavailable
+  GitHub/site URLs, and two README links to repository files excluded from the
+  source archive. Replace the latter with plain filename references. Keep the
+  required repository placeholders until the maintainer supplies an accessible
+  repository; do not report this result as clean apart from new submission.
+* Preserve the uploaded source archive and its recorded hash. This receipt
+  describes that artifact, before the README edit; no new win-builder upload or
+  CRAN submission is performed. Normalise only line endings and trailing blanks
+  in committed console transcripts; retain raw downloads and both hashes.
+
+## 2026-09-21: Maintainer-confirmed GitHub owner
+
+* The maintainer supplied https://github.com/BlackThrive as the intended owner.
+  Replace the original placeholder owner in package metadata, pkgdown and R-hub
+  configuration. Keep historical check logs unchanged, including the URLs that
+  were actually tested. The intended package repository is BlackThrive/searchlight
+  and the documentation site is https://blackthrive.github.io/searchlight/.
+* GitHub confirms that the authenticated maintainer is an active organization
+  member and that members may create public repositories. The searchlight
+  repository does not yet resolve. Create it for the requested original package,
+  preserving the existing milestone history and using it for checks and docs.
+* The maintainer explicitly requests no AI or Codex co-author attribution.
+  Keep package authorship as Mustapha Wasseja (author and maintainer) and Black
+  Thrive Global (copyright holder and funder); add no AI co-author commit trailers.
+* The corrected metadata and README pass the local manual-inclusive as-CRAN
+  check with zero errors, warnings and notes. Preserve the earlier uploaded
+  archive separately before rebuilding. Publish the completed package with its
+  existing six milestone commits intact as the new repository's initial main
+  history; subsequent changes can be reviewed against that populated baseline.

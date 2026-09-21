@@ -21,3 +21,7 @@ Next: M5 offline report, remaining validation studies, national benchmark and re
 Milestone: M5 implemented and verified locally; external release gates pending (2026-09-16).
 Completed: offline report, four vignettes, local pkgdown, all four validation studies, clean manual-inclusive local as-CRAN check, 94.9358% coverage, style/lint/spelling and example/size gates.
 Next: make the configured GitHub repository accessible, verify the full CI/R-hub/win-builder results, resolve URL checks and deploy pkgdown; the maintainer decides CRAN submission.
+
+Milestone: M5 GitHub publication (2026-09-21).
+Completed: confirmed BlackThrive as owner, created its public searchlight repository, corrected metadata and README links, preserved win-builder evidence, and passed the local manual-inclusive as-CRAN check with no errors, warnings or notes.
+Next: publish source, verify hosted checks and documentation, then rebuild the source artifact; retain human authorship and leave CRAN submission to the maintainer.

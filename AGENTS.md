@@ -349,8 +349,9 @@ The maintainer will not be available to answer routine questions. Do not stop to
 |---|---|
 | Licence | MIT + file LICENSE, copyright holder "Black Thrive Global" |
 | Maintainer | Mustapha Wasseja, role `c("aut", "cre")`; leave ORCID out until supplied |
+| Attribution | Do not credit AI or Codex as an author or co-author in package metadata, documentation or commits (maintainer instruction, 2026-09-21). |
 | Copyright/funder | Black Thrive Global, role `c("cph", "fnd")` |
-| Repository URL | `https://github.com/black-thrive-global/searchlight` (placeholder; keep in DESCRIPTION until maintainer corrects) |
+| Repository URL | `https://github.com/BlackThrive/searchlight` (owner corrected by the maintainer on 2026-09-21) |
 | Sample forces | Metropolitan: `west-yorkshire`. Rural: `dyfed-powys`. Months: the three most recent complete months available in the archive at build time. If a force has a missing month in that window, keep it (it is a useful test of coverage logic). |
 | Sample geographies | LSOA 2021 and MSOA 2021 boundaries clipped to those two force areas, simplified to keep `inst/extdata` under 2 MB |
 | Cache location | `tools::R_user_dir("searchlight", "cache")` |

@@ -6,3 +6,4 @@
 *.csv text eol=lf
 *.gz binary
 *.rds binary
+inst/validation/win-builder-2026-09-16/* text eol=lf
