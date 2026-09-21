@@ -1,5 +1,5 @@
 {
-  "checked": "2026-09-21T16:32:38.940224+00:00",
+  "checked": "2026-09-21T16:48:13.044726+00:00",
   "repository": "https://github.com/BlackThrive/searchlight",
   "local_rhub_dispatch_attempt": {
     "status": "failed",
@@ -49,6 +49,35 @@
     "status": "in_progress",
     "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910"
   },
+  "rhub_macos_retry": {
+    "conclusion": "",
+    "headSha": "201d0c1d1a1b120a5fd665b702d2414283cf0e16",
+    "jobs": [
+      {
+        "databaseId": 106426561776,
+        "name": "setup",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235/job/106426561776"
+      },
+      {
+        "databaseId": 106426615115,
+        "name": "macos (R-devel)",
+        "status": "in_progress",
+        "conclusion": "",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235/job/106426615115"
+      },
+      {
+        "databaseId": 106426617351,
+        "name": "matrix.config.label",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235/job/106426617351"
+      }
+    ],
+    "status": "in_progress",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235"
+  },
   "rhub_flags": [
     "--no-manual",
     "--as-cran"
@@ -81,8 +110,8 @@
       {
         "databaseId": 106418332179,
         "name": "check (macos-latest, devel)",
-        "status": "in_progress",
-        "conclusion": "",
+        "status": "completed",
+        "conclusion": "failure",
         "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625282084/job/106418332179"
       },
       {
@@ -124,64 +153,64 @@
     "status": "in_progress",
     "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625282084"
   },
-  "quality_prior_pass": {
+  "quality": {
     "conclusion": "success",
-    "headSha": "81b02749e6ae16b042e89933e3d5c05c66121281",
+    "headSha": "a939c52a38a77d9e881dbe75bc5f3379261c179c",
     "jobs": [
       {
-        "databaseId": 106413658195,
+        "databaseId": 106424912238,
         "name": "quality",
         "status": "completed",
         "conclusion": "success",
-        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623927233/job/106413658195"
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627253791/job/106424912238"
       }
     ],
     "status": "completed",
-    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623927233"
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627253791"
   },
   "pkgdown_build": {
     "conclusion": "success",
-    "headSha": "4c4d2291304626f71f16a6399596b950c3211061",
+    "headSha": "0d7aea91cadd34a82d0d87e4cba067bc3b598350",
     "jobs": [
       {
-        "databaseId": 106418022573,
+        "databaseId": 106424006118,
         "name": "pkgdown",
         "status": "completed",
         "conclusion": "success",
-        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625279435/job/106418022573"
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627093027/job/106424006118"
       }
     ],
     "status": "completed",
-    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625279435"
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627093027"
   },
   "pages_deployment": {
     "conclusion": "success",
-    "headSha": "4e28b60fea136fed8fef7e75325e373f9fcdcb72",
+    "headSha": "b81a647718de6280f743076aac9b59df93c348e1",
     "jobs": [
       {
-        "databaseId": 106419299205,
+        "databaseId": 106425083041,
         "name": "build",
         "status": "completed",
         "conclusion": "success",
-        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625539545/job/106419299205"
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131/job/106425083041"
       },
       {
-        "databaseId": 106419367776,
-        "name": "report-build-status",
-        "status": "completed",
-        "conclusion": "success",
-        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625539545/job/106419367776"
-      },
-      {
-        "databaseId": 106419368163,
+        "databaseId": 106425149069,
         "name": "deploy",
         "status": "completed",
         "conclusion": "success",
-        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625539545/job/106419368163"
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131/job/106425149069"
+      },
+      {
+        "databaseId": 106425149079,
+        "name": "report-build-status",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131/job/106425149079"
       }
     ],
     "status": "completed",
-    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35625539545"
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131"
   },
   "public_site": "https://blackthrive.github.io/searchlight/",
   "site_verification": "BlackThrive-live-site.json",

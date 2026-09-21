@@ -28,4 +28,4 @@ Next: publish source, verify hosted checks and documentation, then rebuild the s
 
 Milestone: M5 hosted validation and release evidence (2026-09-21).
 Completed: published BlackThrive/searchlight and its 51-page site; seven matrix jobs pass; spelling/lint/URLs and exact source archive check pass; fresh win-builder upload acknowledged; no AI co-author credits.
-Next: verify the remaining Linux/macOS R-devel and R-hub jobs, review pull request 1, and inspect the new win-builder email before declaring release readiness; CRAN submission remains with the maintainer.
+Next: verify Linux R-devel and the macOS system-library fix in the queued matrix and R-hub jobs, review pull request 1, and inspect the new win-builder email before declaring release readiness; CRAN submission remains with the maintainer.

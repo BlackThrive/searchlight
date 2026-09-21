@@ -9,7 +9,9 @@ Local: Windows 11 x64, R 4.5.2 (ucrt). This is not a substitute for the required
 release/devel/oldrel checks on Linux, macOS and Windows. The nine-job workflow is
 running in BlackThrive/searchlight, published on 2026-09-21. Seven jobs pass:
 Windows release/devel/oldrel, Linux release/oldrel and macOS release/oldrel.
-Linux/macOS R-devel dependency installations remain in progress. All nine jobs
+macOS R-devel failed to build terra because its runner lacked gdal-config;
+matching CRAN system libraries have been added and replacement checks queued.
+Linux R-devel is still installing dependencies. All nine jobs
 include PDF manuals and treat check notes as failures. R-hub Windows R-devel
 passes --no-manual --as-cran; its Linux/macOS jobs are still running.
 

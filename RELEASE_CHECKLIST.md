@@ -31,15 +31,18 @@ The maintainer corrected the GitHub owner to BlackThrive on 2026-09-21.
 The public repository https://github.com/BlackThrive/searchlight has been created
 and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Source and
 documentation are published. Release fixes are in pull request 1. Seven of the
-nine manual-inclusive CI jobs pass; Linux/macOS R-devel dependency installation
-remains in progress. R-hub Windows R-devel passes with --no-manual --as-cran;
+nine manual-inclusive CI jobs pass. macOS R-devel failed while building terra
+because gdal-config was missing; matching CRAN system libraries are now added
+and replacement checks are queued. Linux R-devel remains in progress.
+R-hub Windows R-devel passes with --no-manual --as-cran;
 its Linux/macOS jobs remain in progress. See M5-external-checks.json for run URLs
 and the status snapshot. The earlier R-hub attempts and failed runner checks are
 retained as historical evidence, not treated as passing checks.
 
 The RAND reprint server returned HTTP 403 to automated checks. Its paper citation
 now retains the verified DOI and links to the author's university bibliography.
-Fresh URL checking, spelling and lint all pass. BlackThrive-live-site.json records
+Fresh URL checking, spelling and lint all pass. The hosted quality workflow also
+passes after the citation correction. BlackThrive-live-site.json records
 the deployed site revision and successful HTTP checks for all 51 HTML pages.
 
 Win-builder checked version 0.1.0 on R-devel (2026-09-15 r90540 ucrt), Windows
