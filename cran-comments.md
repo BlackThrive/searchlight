@@ -7,13 +7,11 @@ release gates remain pending and no RELEASE_READY.md has been produced.
 
 Local: Windows 11 x64, R 4.5.2 (ucrt). This is not a substitute for the required
 release/devel/oldrel checks on Linux, macOS and Windows. The nine-job workflow is
-running in BlackThrive/searchlight, published on 2026-09-21. Seven jobs pass:
-Windows release/devel/oldrel, Linux release/oldrel and macOS release/oldrel.
-macOS R-devel failed to build terra because its runner lacked gdal-config;
-matching CRAN system libraries have been added and replacement checks queued.
-Linux R-devel is still installing dependencies. All nine jobs
-include PDF manuals and treat check notes as failures. R-hub Windows R-devel
-passes --no-manual --as-cran; its Linux/macOS jobs are still running.
+running in BlackThrive/searchlight, published on 2026-09-21. Eight jobs pass:
+Windows and Linux release/devel/oldrel, and macOS release/oldrel. macOS R-devel
+is still installing dependencies with the corrected system-library setup.
+All nine jobs include PDF manuals and treat check notes as failures. R-hub
+Windows and Linux R-devel pass --no-manual --as-cran; macOS remains in progress.
 
 M0-M4 local `--as-cran --no-manual` checks: 0 errors, 0 warnings, 0 notes.
 M5 local `--as-cran`, including PDF and HTML manuals: 0 errors, 0 warnings,
@@ -38,17 +36,14 @@ methods gave identical assignments and 116,551 aggregate count rows. Four
 precomputed vignettes, the offline report and the local pkgdown site are built
 and visually checked; the published fifteen-line quick start executes offline.
 
-Win-builder: R Under development (2026-09-15 r90540 ucrt), Windows Server 2022
-x64. The uploaded source archive completed with 0 errors, 0 warnings and 1 NOTE;
-installation, examples, tests, vignettes and PDF/HTML manuals passed. The incoming
-NOTE includes "New submission", three unavailable GitHub/site URLs, and two
-README file links to excluded repository files (AGENTS.md and
-RELEASE_CHECKLIST.md). The README links have since been replaced with plain
-filename references, and all current package URLs pass the URL checker. A fresh
-win-builder result for the corrected archive is still required. Win-builder
-acknowledged the new 1,635,822-byte archive on 2026-09-21 and will email the
-maintainer; the receipt and hash are in BlackThrive-win-builder.json. Logs and
-the checked source hash are retained in `inst/validation/M5-win-builder.json`.
+Win-builder: R Under development (2026-09-20 r90574 ucrt), Windows Server 2022
+x64. The corrected source archive completed with 0 errors, 0 warnings and 1 NOTE:
+"New submission". There are no remaining incoming URL or README-file findings.
+All 392 assertions passed, with two intended CRAN skips; installation, examples,
+vignettes and PDF/HTML manuals passed. The maximum example time was 0.36 seconds.
+The source archive hash and verified result are in BlackThrive-win-builder.json;
+logs are retained under inst/validation/win-builder-2026-09-21. The earlier
+September 16 result is preserved separately as historical evidence.
 
 Spelling, lint and all 16 checked URLs are clean in the 2026-09-21 local
 validation. R-hub's original attempt returned Not Found for the placeholder

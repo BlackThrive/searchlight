@@ -1,0 +1,1222 @@
+
+R Under development (unstable) (2026-09-20 r90574 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "searchlight"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> base::assign(".ExTimings", "searchlight-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+>
+> ### * </HEADER>
+> library('searchlight')
+>
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("sl_archive_download")
+> ### * sl_archive_download
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_archive_download
+> ### Title: Download and verify the necessary archive snapshots
+> ### Aliases: sl_archive_download
+>
+> ### ** Examples
+>
+> index <- readRDS(system.file("extdata", "archive-index.rds",
++   package = "searchlight"
++ ))
+> index$archive_file[1]
+[1] "2026-07.zip"
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_archive_download", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_archive_index")
+> ### * sl_archive_index
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_archive_index
+> ### Title: List available bulk archive snapshots
+> ### Aliases: sl_archive_index
+>
+> ### ** Examples
+>
+> index <- readRDS(system.file("extdata", "archive-index.rds",
++   package = "searchlight"
++ ))
+> index[, c("archive_file", "month_start", "month_end")]
+# A tibble: 3 × 3
+  archive_file month_start month_end
+  <chr>        <chr>       <chr>
+1 2026-07.zip  2023-08     2026-07
+2 2026-06.zip  2023-07     2026-06
+3 2026-05.zip  2023-06     2026-05
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_archive_index", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_archive_snapshot")
+> ### * sl_archive_snapshot
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_archive_snapshot
+> ### Title: Extract immutable stop and search CSV snapshots
+> ### Aliases: sl_archive_snapshot
+>
+> ### ** Examples
+>
+> sl_list_versions(system.file("extdata", "sample", package = "searchlight"))
+# A tibble: 3 × 11
+  force_id       month archive_file snapshot_month csv_path csv_sha256 n_records
+  <chr>          <chr> <chr>        <chr>          <chr>    <chr>          <int>
+1 west-yorkshire 2026… 2026-07.zip  2026-07        2026-05… aa07c0933…      1659
+2 west-yorkshire 2026… 2026-07.zip  2026-07        2026-06… a302977a9…      1466
+3 west-yorkshire 2026… 2026-07.zip  2026-07        2026-07… c72a1a84f…      1532
+# ℹ 4 more variables: archive_sha256 <chr>, downloaded_at <dttm>, url <chr>,
+#   source_csv_sha256 <chr>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_archive_snapshot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_assign_geography")
+> ### * sl_assign_geography
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_assign_geography
+> ### Title: Assign anonymised points to local geographies
+> ### Aliases: sl_assign_geography
+>
+> ### ** Examples
+>
+> b <- readRDS(system.file("extdata", "sample-boundaries.rds",
++   package = "searchlight"
++ ))
+> x <- sl_sample()[1:3, ]
+> b$msoa21 <- b$msoa21[b$msoa21$geography_code %in% x$msoa21, ]
+> sl_assign_geography(x, b, "msoa21")
+# A tibble: 3 × 38
+  type    date                part_of_a_policing_o…¹ policing_operation latitude
+  <fct>   <dttm>              <lgl>                  <chr>                 <dbl>
+1 Person… 2026-05-01 00:03:00 FALSE                  <NA>                   53.8
+2 Person… 2026-05-01 00:15:00 FALSE                  <NA>                   53.8
+3 Person… 2026-05-01 00:30:00 FALSE                  <NA>                   53.7
+# ℹ abbreviated name: ¹​part_of_a_policing_operation
+# ℹ 33 more variables: longitude <dbl>, gender <fct>, age_range <fct>,
+#   self_defined_ethnicity_raw <chr>, officer_defined_ethnicity <chr>,
+#   legislation <chr>, object_of_search <chr>, outcome <chr>,
+#   outcome_linked_to_object_of_search <chr>,
+#   removal_of_more_than_just_outer_clothing <chr>, date_raw <chr>,
+#   force_id <chr>, month <chr>, ethnicity_5 <fct>, ethnicity_19 <fct>, …
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_assign_geography", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_benchmark")
+> ### * sl_benchmark
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_benchmark
+> ### Title: Cross-check annual totals against the Home Office
+> ### Aliases: sl_benchmark
+>
+> ### ** Examples
+>
+> ppap <- utils::read.csv(system.file("extdata", "ppap-totals.csv",
++   package = "searchlight"
++ ))
+> sl_benchmark(sl_sample(), ppap)
+        force_id  pfa_code year_end published_total
+1 west-yorkshire E23000010     2025           18039
+2    dyfed-powys W15000004     2025            3696
+                            scope  retrieved
+1 All relevant legislation; SS_20 2026-09-16
+2 All relevant legislation; SS_20 2026-09-16
+                                                                                                    source
+1 https://www.gov.uk/government/statistics/stop-and-search-arrests-and-mental-health-detentions-march-2025
+2 https://www.gov.uk/government/statistics/stop-and-search-arrests-and-mental-health-detentions-march-2025
+  observed_total submitted_months complete ratio beyond_tolerance
+1             NA                0    FALSE    NA               NA
+2             NA                0    FALSE    NA               NA
+                                                 reason
+1 incomplete year, suspect coverage or filtered records
+2 incomplete year, suspect coverage or filtered records
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_benchmark", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_boundaries")
+> ### * sl_boundaries
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_boundaries
+> ### Title: Fetch a versioned ONS boundary layer
+> ### Aliases: sl_boundaries
+>
+> ### ** Examples
+>
+> boundaries <- readRDS(system.file("extdata", "sample-boundaries.rds",
++   package = "searchlight"
++ ))
+> boundaries$lsoa21[1, "geography_code"]
+Simple feature collection with 1 feature and 1 field
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -1.764669 ymin: 53.84234 xmax: -1.746633 ymax: 53.85079
+Geodetic CRS:  WGS 84
+  geography_code                       geometry
+1      E01010568 POLYGON ((-1.749345 53.8490...
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_boundaries", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_cache_clear")
+> ### * sl_cache_clear
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_cache_clear
+> ### Title: Clear a marked searchlight cache
+> ### Aliases: sl_cache_clear
+>
+> ### ** Examples
+>
+> d <- tempfile()
+> dir.create(d)
+> file.create(file.path(d, ".searchlight-cache"))
+[1] TRUE
+> sl_cache_clear(d)
+> unlink(d, recursive = TRUE)
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_cache_clear", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_cache_dir")
+> ### * sl_cache_dir
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_cache_dir
+> ### Title: Locate the searchlight cache
+> ### Aliases: sl_cache_dir
+>
+> ### ** Examples
+>
+> sl_cache_dir()
+[1] "C:\\Users\\CRAN\\AppData\\Local/R/cache/R/searchlight"
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_cache_dir", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_contract")
+> ### * sl_contract
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_contract
+> ### Title: Inspect an ingestion contract
+> ### Aliases: sl_contract
+>
+> ### ** Examples
+>
+> sl_contract(sl_sample())
+
+── searchlight ingestion contract ──
+
+Source: data.police.uk archive
+Snapshots: 1; selected versions: 3
+Ethnicity: self-defined (PACE-2023/archive-labels-2026-09-16)
+Audited force-months: 6
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_contract", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_count_model")
+> ### * sl_count_model
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_count_model
+> ### Title: Fit count models with population-time exposure
+> ### Aliases: sl_count_model
+>
+> ### ** Examples
+>
+> r <- readRDS(system.file("extdata", "example-rates.rds",
++   package = "searchlight"
++ ))
+> r <- r[r$ethnicity %in% c("White", "Black"), ]
+> sl_count_model(r, n ~ ethnicity)
+# A tibble: 2 × 8
+  term     estimate std_error statistic  p_value exp_estimate conf_low conf_high
+  <chr>       <dbl>     <dbl>     <dbl>    <dbl>        <dbl>    <dbl>     <dbl>
+1 (Interc…    -3.81     0.354    -10.8  4.93e-27       0.0222   0.0111    0.0444
+2 ethnici…     1.24     0.357      3.47 5.27e- 4       3.45     1.71      6.95
+> # Supply matching boundaries to request the residual Moran diagnostic.
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_count_model", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_counts")
+> ### * sl_counts
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_counts
+> ### Title: Count events while preserving submission strata
+> ### Aliases: sl_counts
+>
+> ### ** Examples
+>
+> counts <- sl_counts(sl_sample())
+> head(counts)
+# A tibble: 6 × 9
+  force_id       month   status pfa   ethnicity_5     n geography_code ethnicity
+  <chr>          <chr>   <chr>  <chr> <chr>       <int> <chr>          <chr>
+1 dyfed-powys    2026-05 missi… W150… Asian          NA W15000004      Asian
+2 dyfed-powys    2026-06 missi… W150… Asian          NA W15000004      Asian
+3 dyfed-powys    2026-07 missi… W150… Asian          NA W15000004      Asian
+4 west-yorkshire 2026-05 submi… E230… Asian          38 E23000010      Asian
+5 west-yorkshire 2026-05 submi… <NA>  Asian           1 <NA>           Asian
+6 west-yorkshire 2026-06 submi… E230… Asian          44 E23000010      Asian
+# ℹ 1 more variable: months_submitted <int>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_counts", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_coverage")
+> ### * sl_coverage
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_coverage
+> ### Title: Audit submission coverage on a full force-month grid
+> ### Aliases: sl_coverage
+>
+> ### ** Examples
+>
+> audit <- sl_coverage(sl_sample())
+> audit
+# A tibble: 6 × 6
+  force_id       month   n_records status    trailing_median changelog_note
+  <chr>          <chr>       <int> <chr>               <dbl> <chr>
+1 dyfed-powys    2026-05        NA missing               NA  Dyfed-Powys Police…
+2 dyfed-powys    2026-06        NA missing               NA  Dyfed-Powys Police…
+3 dyfed-powys    2026-07        NA missing               NA  Dyfed-Powys Police…
+4 west-yorkshire 2026-05      1659 submitted             NA  <NA>
+5 west-yorkshire 2026-06      1466 submitted           1659  <NA>
+6 west-yorkshire 2026-07      1532 submitted           1562. <NA>
+> # plot(audit) displays the submission heatmap.
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_coverage", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_coverage_compare")
+> ### * sl_coverage_compare
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_coverage_compare
+> ### Title: Compare coverage patterns across two periods
+> ### Aliases: sl_coverage_compare
+>
+> ### ** Examples
+>
+> sl_coverage_compare(sl_coverage(sl_sample()), "2026-05", "2026-06")
+# A tibble: 2 × 5
+  force_id       comparable submitted_a submitted_b breaking_months
+  <chr>          <lgl>      <list>      <list>      <list>
+1 dyfed-powys    FALSE      <int [0]>   <int [0]>   <tibble [2 × 5]>
+2 west-yorkshire TRUE       <int [1]>   <int [1]>   <tibble [0 × 5]>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_coverage_compare", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_denominator_scenarios")
+> ### * sl_denominator_scenarios
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_denominator_scenarios
+> ### Title: Compare compatible population denominator scenarios
+> ### Aliases: sl_denominator_scenarios
+>
+> ### ** Examples
+>
+> p <- readRDS(system.file("extdata", "sample-population.rds",
++   package = "searchlight"
++ ))$msoa21
+> c <- readRDS(system.file("extdata", "example-counts.rds",
++   package = "searchlight"
++ ))
+> head(sl_denominator_scenarios(c, list(resident = p)))
+sampling uncertainty: not evaluated
+conf_low/conf_high are conditional on each exposure scenario
+assumption range: E02002237 [0, 0]; E02002454 [0.201, 0.201]; E02006875 [0.281,
+0.281]; ... see table for remaining areas
+lower_bound/upper_bound span scenario point estimates only
+# A tibble: 4 × 21
+  force_id       geography_code reference comparison ratio conf_low conf_high
+  <chr>          <chr>          <chr>     <chr>      <dbl>    <dbl>     <dbl>
+1 west-yorkshire E02002237      White     Black      0      0           7.45
+2 west-yorkshire E02002454      White     Black      0.201  0.00502     1.16
+3 west-yorkshire E02006875      White     Black      0.281  0.0574      0.833
+4 west-yorkshire E02006948      White     Black      0.147  0.0391      0.390
+# ℹ 14 more variables: conf_level <dbl>, method <chr>, dispersion <dbl>,
+#   n_reference <int>, n_comparison <int>, exposure_reference <dbl>,
+#   exposure_comparison <dbl>, estimable <lgl>, model <list>,
+#   excluded_pair_events <int>, unknown_events <int>, scenario <chr>,
+#   lower_bound <dbl>, upper_bound <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_denominator_scenarios", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_exposure")
+> ### * sl_exposure
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_exposure
+> ### Title: Construct an explicit exposure table
+> ### Aliases: sl_exposure
+>
+> ### ** Examples
+>
+> sl_exposure(data.frame(
++   geography_code = "area1", ethnicity = "White",
++   population = 1000
++ ), geography = "example")
+# A tibble: 1 × 3
+  geography_code ethnicity population
+  <chr>          <chr>          <dbl>
+1 area1          White           1000
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_exposure", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_hit_rates")
+> ### * sl_hit_rates
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_hit_rates
+> ### Title: Describe three separate outcomes conditional on being searched
+> ### Aliases: sl_hit_rates
+>
+> ### ** Examples
+>
+> hits <- sl_hit_rates(sl_sample())
+> head(hits)
+# A tibble: 6 × 11
+  pfa       object_group ethnicity_5 searches observed successes missing_outcome
+  <chr>     <chr>        <chr>          <int>    <int>     <dbl>           <int>
+1 E23000010 Drugs        Asian             96       95        23               1
+2 E23000010 Drugs        Black             40       40        17               0
+3 E23000010 Drugs        Other             34       34         9               0
+4 E23000010 Drugs        Unknown         1670     1663       669               7
+5 E23000010 Drugs        White           1297     1295       493               2
+6 E23000010 Other        Asian              9        9         1               0
+# ℹ 4 more variables: hit_rate <dbl>, conf_low <dbl>, conf_high <dbl>,
+#   outcome <chr>
+> attr(hits, "coefficients")
+# A tibble: 3 × 10
+  term   odds_ratio conf_low conf_high log_std_error     n status model_warnings
+  <chr>       <dbl>    <dbl>     <dbl>         <dbl> <int> <chr>  <chr>
+1 .comp…      1.08     0.630      1.86         0.276  2196 estim… ""
+2 .comp…      0.991    0.506      1.94         0.343  2196 estim… ""
+3 .comp…      0.585    0.271      1.26         0.392  2199 estim… ""
+# ℹ 2 more variables: outcome <chr>, omitted_constant_controls <chr>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_hit_rates", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_list_versions")
+> ### * sl_list_versions
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_list_versions
+> ### Title: List force-month archive versions
+> ### Aliases: sl_list_versions
+>
+> ### ** Examples
+>
+> sl_list_versions(system.file("extdata", "sample", package = "searchlight"))
+# A tibble: 3 × 11
+  force_id       month archive_file snapshot_month csv_path csv_sha256 n_records
+  <chr>          <chr> <chr>        <chr>          <chr>    <chr>          <int>
+1 west-yorkshire 2026… 2026-07.zip  2026-07        2026-05… aa07c0933…      1659
+2 west-yorkshire 2026… 2026-07.zip  2026-07        2026-06… a302977a9…      1466
+3 west-yorkshire 2026… 2026-07.zip  2026-07        2026-07… c72a1a84f…      1532
+# ℹ 4 more variables: archive_sha256 <chr>, downloaded_at <dttm>, url <chr>,
+#   source_csv_sha256 <chr>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_list_versions", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_location_quality")
+> ### * sl_location_quality
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_location_quality
+> ### Title: Diagnose anonymised location quality
+> ### Aliases: sl_location_quality
+>
+> ### ** Examples
+>
+> sl_location_quality(sl_sample()[1:100, ])
+# A tibble: 59 × 7
+   force_id month lsoa21 n_records missing_coordinate_s…¹ snap_point_concentra…²
+   <chr>    <chr> <chr>      <int>                  <dbl>                  <dbl>
+ 1 west-yo… 2026… E0101…         1                      0                      1
+ 2 west-yo… 2026… E0101…         2                      0                      1
+ 3 west-yo… 2026… E0101…         1                      0                      1
+ 4 west-yo… 2026… E0101…         1                      0                      1
+ 5 west-yo… 2026… E0101…         1                      0                      1
+ 6 west-yo… 2026… E0101…         2                      0                      1
+ 7 west-yo… 2026… E0101…         2                      0                      1
+ 8 west-yo… 2026… E0101…         2                      0                      1
+ 9 west-yo… 2026… E0101…         1                      0                      1
+10 west-yo… 2026… E0101…         1                      0                      1
+# ℹ 49 more rows
+# ℹ abbreviated names: ¹​missing_coordinate_share, ²​snap_point_concentration
+# ℹ 1 more variable: boundary_sensitive_share <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_location_quality", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_missing_ethnicity_bounds")
+> ### * sl_missing_ethnicity_bounds
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_missing_ethnicity_bounds
+> ### Title: Bound disparity under allocations of Unknown ethnicity
+> ### Aliases: sl_missing_ethnicity_bounds
+>
+> ### ** Examples
+>
+> c <- readRDS(system.file("extdata", "example-counts.rds",
++   package = "searchlight"
++ ))
+> p <- readRDS(system.file("extdata", "sample-population.rds",
++   package = "searchlight"
++ ))$msoa21
+> head(sl_missing_ethnicity_bounds(c, p))
+sampling uncertainty: E02002237 [0, 7.45]; E02002454 [0.00502, 1.16]; E02006875
+[0.0574, 0.833]; ... see table for remaining areas
+baseline exact Poisson intervals conditional on recorded ethnicity
+assumption range: E02002237 [0, 85.5]; E02002454 [0.141, 6.44]
+lower_bound and upper_bound allocate all Unknown between the two groups
+# A tibble: 6 × 15
+  force_id       geography_code scenario       ratio unknown allocated_reference
+  <chr>          <chr>          <chr>          <dbl>   <int>               <dbl>
+1 west-yorkshire E02002237      all_to_refer…  0          47                47
+2 west-yorkshire E02002237      all_to_compa… 85.5        47                 0
+3 west-yorkshire E02002237      proportional   0          47                35.2
+4 west-yorkshire E02002237      force_object…  0.486      47                42.2
+5 west-yorkshire E02002454      all_to_refer…  0.141      31                31
+6 west-yorkshire E02002454      all_to_compa…  6.44       31                 0
+# ℹ 9 more variables: allocated_comparison <dbl>, lower_bound <dbl>,
+#   upper_bound <dbl>, tipping_allocation <dbl>, available <lgl>,
+#   tipping_feasible <lgl>, observed_ratio <dbl>, conf_low <dbl>,
+#   conf_high <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_missing_ethnicity_bounds", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_population")
+> ### * sl_population
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_population
+> ### Title: Census 2021 ethnicity populations
+> ### Aliases: sl_population
+>
+> ### ** Examples
+>
+> p <- readRDS(system.file("extdata", "sample-population.rds",
++   package = "searchlight"
++ ))
+> head(p$msoa21)
+# A tibble: 6 × 3
+  geography_code ethnicity population
+  <chr>          <chr>          <dbl>
+1 E02002183      Asian             57
+2 E02002183      Black             17
+3 E02002183      Mixed             65
+4 E02002183      Other              5
+5 E02002183      White           5558
+6 E02002184      Asian            219
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_population", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_population_crosstab")
+> ### * sl_population_crosstab
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_population_crosstab
+> ### Title: Census ethnicity by age and sex
+> ### Aliases: sl_population_crosstab
+>
+> ### ** Examples
+>
+> p <- readRDS(system.file("extdata", "sample-crosstab.rds",
++   package = "searchlight"
++ ))
+> head(p)
+# A tibble: 6 × 5
+  geography_code ethnicity age_band sex    population
+  <chr>          <chr>     <chr>    <chr>       <dbl>
+1 E02002183      Asian     25-34    Female          4
+2 E02002183      Asian     25-34    Male            2
+3 E02002183      Asian     35+      Female         22
+4 E02002183      Asian     35+      Male           23
+5 E02002183      Asian     under 25 Female          2
+6 E02002183      Asian     under 25 Male            5
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_population_crosstab", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_quality")
+> ### * sl_quality
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_quality
+> ### Title: Attach submission, timestamp and location diagnostics
+> ### Aliases: sl_quality
+>
+> ### ** Examples
+>
+> records <- sl_quality(sl_sample()[1:100, ])
+> sl_contract(records)$timestamps
+# A tibble: 6 × 10
+  force_id       month   n_records midnight_share missing_time_share
+  <chr>          <chr>       <int>          <dbl>              <dbl>
+1 dyfed-powys    2026-05        NA             NA                 NA
+2 dyfed-powys    2026-06        NA             NA                 NA
+3 dyfed-powys    2026-07        NA             NA                 NA
+4 west-yorkshire 2026-05       100              0                  0
+5 west-yorkshire 2026-06        NA             NA                 NA
+6 west-yorkshire 2026-07        NA             NA                 NA
+# ℹ 5 more variables: source_midnight_share <dbl>, gating_midnight_share <dbl>,
+#   london_month_mismatch_share <dbl>, time_reliable <lgl>,
+#   force_midnight_range <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_quality", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_ranking_stability")
+> ### * sl_ranking_stability
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_ranking_stability
+> ### Title: Assess area rank uncertainty under count models or posterior
+> ###   draws
+> ### Aliases: sl_ranking_stability
+>
+> ### ** Examples
+>
+> # Posterior draws can also be supplied by an independently fitted model.
+> x <- tibble::tibble(geography_code = c("a", "b"))
+> attr(x, "contract") <- sl_contract(sl_sample())
+> attr(x, "posterior_draws") <- cbind(a = c(1, 2, 3), b = c(3, 2, 1))
+> sl_ranking_stability(x, "posterior", n = 3)
+sampling uncertainty: not evaluated
+rank_low/rank_high describe conditional sampling or posterior ranks
+assumption range: not evaluated
+not evaluated for this single scenario
+# A tibble: 2 × 6
+  geography_code median_rank rank_low rank_high effective_draws method
+  <chr>                <int>    <dbl>     <dbl>           <int> <chr>
+1 a                        1        1         2               3 posterior
+2 b                        2        1         2               3 posterior
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_ranking_stability", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_rate_ratio")
+> ### * sl_rate_ratio
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_rate_ratio
+> ### Title: Estimate an event stop-rate ratio with exposure offsets
+> ### Aliases: sl_rate_ratio
+>
+> ### ** Examples
+>
+> r <- readRDS(system.file("extdata", "example-rates.rds",
++   package = "searchlight"
++ ))
+> head(sl_rate_ratio(r))
+# A tibble: 4 × 18
+  force_id       geography_code reference comparison ratio conf_low conf_high
+  <chr>          <chr>          <chr>     <chr>      <dbl>    <dbl>     <dbl>
+1 west-yorkshire E02002237      White     Black      0      0           7.45
+2 west-yorkshire E02002454      White     Black      0.201  0.00502     1.16
+3 west-yorkshire E02006875      White     Black      0.281  0.0574      0.833
+4 west-yorkshire E02006948      White     Black      0.147  0.0391      0.390
+# ℹ 11 more variables: conf_level <dbl>, method <chr>, dispersion <dbl>,
+#   n_reference <int>, n_comparison <int>, exposure_reference <dbl>,
+#   exposure_comparison <dbl>, estimable <lgl>, model <list>,
+#   excluded_pair_events <int>, unknown_events <int>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_rate_ratio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_rates")
+> ### * sl_rates
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_rates
+> ### Title: Calculate rates using observed population-time exposure
+> ### Aliases: sl_rates
+>
+> ### ** Examples
+>
+> c <- readRDS(system.file("extdata", "example-counts.rds",
++   package = "searchlight"
++ ))
+> p <- readRDS(system.file("extdata", "sample-population.rds",
++   package = "searchlight"
++ ))$msoa21
+> head(sl_rates(c, p))
+# A tibble: 6 × 14
+  force_id     month status msoa21 ethnicity_5 object_group     n geography_code
+  <chr>        <chr> <chr>  <chr>  <chr>       <chr>        <int> <chr>
+1 west-yorksh… 2026… submi… E0200… Asian       Drugs            0 E02002237
+2 west-yorksh… 2026… submi… E0200… Asian       Drugs            0 E02006948
+3 west-yorksh… 2026… submi… E0200… Asian       Drugs            1 E02002454
+4 west-yorksh… 2026… submi… E0200… Asian       Drugs            3 E02006875
+5 west-yorksh… 2026… submi… E0200… Asian       Drugs            0 E02002237
+6 west-yorksh… 2026… submi… E0200… Asian       Drugs            4 E02006948
+# ℹ 6 more variables: ethnicity <chr>, months_submitted <int>,
+#   population <dbl>, exposure <dbl>, period_rate <dbl>, rate <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_rates", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_read_records")
+> ### * sl_read_records
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_read_records
+> ### Title: Read selected immutable archive records
+> ### Aliases: sl_read_records
+>
+> ### ** Examples
+>
+> d <- system.file("extdata", "sample", package = "searchlight")
+> v <- sl_select_version(sl_list_versions(d))
+> records <- sl_read_records(d, v[1, ])
+> summary(sl_contract(records))
+# A tibble: 6 × 5
+  force_id       month   status    n_records changelog_note
+  <chr>          <chr>   <chr>         <int> <chr>
+1 west-yorkshire 2026-05 submitted      1659 <NA>
+2 dyfed-powys    2026-05 missing          NA <NA>
+3 west-yorkshire 2026-06 missing          NA <NA>
+4 dyfed-powys    2026-06 missing          NA <NA>
+5 west-yorkshire 2026-07 missing          NA <NA>
+6 dyfed-powys    2026-07 missing          NA <NA>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_read_records", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_report")
+> ### * sl_report
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_report
+> ### Title: Write an offline report of audited records and analysis results
+> ### Aliases: sl_report
+>
+> ### ** Examples
+>
+> rates <- readRDS(system.file("extdata", "example-rates.rds",
++   package = "searchlight"
++ ))
+> path <- tempfile(fileext = ".html")
+> sl_report(sl_sample(), path, estimates = list(ratios = sl_rate_ratio(rates)))
+Report written to
+'D:\temp\2026_09_21_18_49_01_32136\Rtmp4gnV4P\file245087c446403.html'.
+> file.exists(path)
+[1] TRUE
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_report", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_sample")
+> ### * sl_sample
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_sample
+> ### Title: Load the bundled real archive sample
+> ### Aliases: sl_sample
+>
+> ### ** Examples
+>
+> x <- sl_sample()
+> table(x$force_id, x$month)
+
+                 2026-05 2026-06 2026-07
+  west-yorkshire    1659    1466    1532
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_sample", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_select_version")
+> ### * sl_select_version
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_select_version
+> ### Title: Select one complete version per force-month
+> ### Aliases: sl_select_version
+>
+> ### ** Examples
+>
+> d <- system.file("extdata", "sample", package = "searchlight")
+> v <- sl_list_versions(d)
+> sl_select_version(v)
+# A tibble: 3 × 13
+  force_id       month archive_file snapshot_month csv_path csv_sha256 n_records
+  <chr>          <chr> <chr>        <chr>          <chr>    <chr>          <int>
+1 west-yorkshire 2026… 2026-07.zip  2026-07        2026-05… aa07c0933…      1659
+2 west-yorkshire 2026… 2026-07.zip  2026-07        2026-06… a302977a9…      1466
+3 west-yorkshire 2026… 2026-07.zip  2026-07        2026-07… c72a1a84f…      1532
+# ℹ 6 more variables: archive_sha256 <chr>, downloaded_at <dttm>, url <chr>,
+#   source_csv_sha256 <chr>, alternatives <list>, selection_rule <chr>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_select_version", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_simulate")
+> ### * sl_simulate
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_simulate
+> ### Title: Simulate event counts with independent disparity and total
+> ###   intensity
+> ### Aliases: sl_simulate
+>
+> ### ** Examples
+>
+> s <- sl_simulate(side = 3, missingness = "mnar", missing_rate = 0.3)
+> s$truth
+# A tibble: 9 × 8
+  geography_code force_id          x     y ratio annual_intensity rate_reference
+  <chr>          <chr>         <int> <int> <dbl>            <dbl>          <dbl>
+1 SIM0001        synthetic-we…     1     1 0.899             82.3        0.0140
+2 SIM0002        synthetic-ea…     2     1 2                 82.3        0.0118
+3 SIM0003        synthetic-ea…     3     1 4.45              82.3        0.00871
+4 SIM0004        synthetic-we…     1     2 0.899            150          0.0254
+5 SIM0005        synthetic-ea…     2     2 2                150          0.0214
+6 SIM0006        synthetic-ea…     3     2 4.45             150          0.0159
+7 SIM0007        synthetic-we…     1     3 0.899            273.         0.0463
+8 SIM0008        synthetic-ea…     2     3 2                273.         0.0390
+9 SIM0009        synthetic-ea…     3     3 4.45             273.         0.0289
+# ℹ 1 more variable: rate_comparison <dbl>
+> sl_missing_ethnicity_bounds(s$counts, s$population,
++   scenarios = c("all_to_reference", "all_to_comparison")
++ )
+sampling uncertainty: SIM0002 [0.449, 2.18]; SIM0003 [1.76, 5.37]; SIM0005
+[0.584, 1.58]; ... see table for remaining areas
+baseline exact Poisson intervals conditional on recorded ethnicity
+assumption range: SIM0002 [0.714, 3.37]; SIM0003 [1.72, 7.16]; SIM0005 [0.682,
+3.18]; ... see table for remaining areas
+lower_bound and upper_bound allocate all Unknown between the two groups
+# A tibble: 18 × 15
+   force_id       geography_code scenario      ratio unknown allocated_reference
+   <chr>          <chr>          <chr>         <dbl>   <int>               <dbl>
+ 1 synthetic-east SIM0002        all_to_refer… 0.714      20                  20
+ 2 synthetic-east SIM0002        all_to_compa… 3.37       20                   0
+ 3 synthetic-east SIM0003        all_to_refer… 1.72       30                  30
+ 4 synthetic-east SIM0003        all_to_compa… 7.16       30                   0
+ 5 synthetic-east SIM0005        all_to_refer… 0.682      47                  47
+ 6 synthetic-east SIM0005        all_to_compa… 3.18       47                   0
+ 7 synthetic-east SIM0006        all_to_refer… 1.35       48                  48
+ 8 synthetic-east SIM0006        all_to_compa… 5.90       48                   0
+ 9 synthetic-east SIM0008        all_to_refer… 0.745      62                  62
+10 synthetic-east SIM0008        all_to_compa… 2.80       62                   0
+11 synthetic-east SIM0009        all_to_refer… 1.43       96                  96
+12 synthetic-east SIM0009        all_to_compa… 6.98       96                   0
+13 synthetic-west SIM0001        all_to_refer… 0.132      18                  18
+14 synthetic-west SIM0001        all_to_compa… 1.72       18                   0
+15 synthetic-west SIM0004        all_to_refer… 0.442      30                  30
+16 synthetic-west SIM0004        all_to_compa… 1.84       30                   0
+17 synthetic-west SIM0007        all_to_refer… 0.391      52                  52
+18 synthetic-west SIM0007        all_to_compa… 1.76       52                   0
+# ℹ 9 more variables: allocated_comparison <dbl>, lower_bound <dbl>,
+#   upper_bound <dbl>, tipping_allocation <dbl>, available <lgl>,
+#   tipping_feasible <lgl>, observed_ratio <dbl>, conf_low <dbl>,
+#   conf_high <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_simulate", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_spatial_disparity")
+> ### * sl_spatial_disparity
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_spatial_disparity
+> ### Title: Estimate a multivariate spatial stop-rate disparity surface
+> ### Aliases: sl_spatial_disparity
+>
+> ### ** Examples
+>
+> # A precomputed synthetic fit avoids MCMC in installed examples.
+> path <- system.file("extdata", "example-spatial.rds",
++   package = "searchlight"
++ )
+> if (nzchar(path)) {
++   fit <- readRDS(path)
++   head(fit)
++   head(sl_spatial_map(fit))
++ }
+Simple feature collection with 6 features and 17 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 4e+05 ymin: 3e+05 xmax: 405000 ymax: 302000
+Projected CRS: OSGB36 / British National Grid
+  geography_code reference comparison     ratio credible_low_90
+1        SIM0001     White      Black 0.7861381       0.4842667
+2        SIM0002     White      Black 1.1014396       0.7400085
+3        SIM0003     White      Black 1.6685917       1.1774143
+4        SIM0004     White      Black 2.6745578       1.9197267
+5        SIM0005     White      Black 5.2500392       3.8530215
+6        SIM0006     White      Black 0.7652769       0.5148710
+  credible_high_90 credible_low_95 credible_high_95 probability_above_1
+1         1.212122       0.4412384         1.313809              0.1830
+2         1.626751       0.6885038         1.761656              0.6550
+3         2.318432       1.1100240         2.491010              0.9920
+4         3.675372       1.7760321         3.910899              1.0000
+5         7.338089       3.6863251         7.853770              1.0000
+6         1.077468       0.4696151         1.139070              0.1065
+  probability_above_k k crude_ratio unknown_events     rhat ess_bulk ess_tail
+1               0.000 2   0.6250000              0 1.004023  971.495 1260.724
+2               0.006 2   0.9016393              0 1.000098 1148.122 1321.585
+3               0.203 2   1.5833333              0 1.000795 1295.299 1780.364
+4               0.923 2   2.5454545              0 1.000154 1331.485 1582.539
+5               1.000 2   6.2162162              0 1.001120 1397.858 1716.206
+6               0.000 2   0.6355932              0 1.001286 1042.901 1315.013
+  converged                       geometry
+1      TRUE POLYGON ((4e+05 3e+05, 4010...
+2      TRUE POLYGON ((401000 3e+05, 402...
+3      TRUE POLYGON ((402000 3e+05, 403...
+4      TRUE POLYGON ((403000 3e+05, 404...
+5      TRUE POLYGON ((404000 3e+05, 405...
+6      TRUE POLYGON ((4e+05 301000, 401...
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_spatial_disparity", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_spatial_map")
+> ### * sl_spatial_map
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_spatial_map
+> ### Title: Join spatial posterior summaries to their polygons
+> ### Aliases: sl_spatial_map
+>
+> ### ** Examples
+>
+> path <- system.file("extdata", "example-spatial.rds",
++   package = "searchlight"
++ )
+> if (nzchar(path)) head(sl_spatial_map(readRDS(path)))
+Simple feature collection with 6 features and 17 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 4e+05 ymin: 3e+05 xmax: 405000 ymax: 302000
+Projected CRS: OSGB36 / British National Grid
+  geography_code reference comparison     ratio credible_low_90
+1        SIM0001     White      Black 0.7861381       0.4842667
+2        SIM0002     White      Black 1.1014396       0.7400085
+3        SIM0003     White      Black 1.6685917       1.1774143
+4        SIM0004     White      Black 2.6745578       1.9197267
+5        SIM0005     White      Black 5.2500392       3.8530215
+6        SIM0006     White      Black 0.7652769       0.5148710
+  credible_high_90 credible_low_95 credible_high_95 probability_above_1
+1         1.212122       0.4412384         1.313809              0.1830
+2         1.626751       0.6885038         1.761656              0.6550
+3         2.318432       1.1100240         2.491010              0.9920
+4         3.675372       1.7760321         3.910899              1.0000
+5         7.338089       3.6863251         7.853770              1.0000
+6         1.077468       0.4696151         1.139070              0.1065
+  probability_above_k k crude_ratio unknown_events     rhat ess_bulk ess_tail
+1               0.000 2   0.6250000              0 1.004023  971.495 1260.724
+2               0.006 2   0.9016393              0 1.000098 1148.122 1321.585
+3               0.203 2   1.5833333              0 1.000795 1295.299 1780.364
+4               0.923 2   2.5454545              0 1.000154 1331.485 1582.539
+5               1.000 2   6.2162162              0 1.001120 1397.858 1716.206
+6               0.000 2   0.6355932              0 1.001286 1042.901 1315.013
+  converged                       geometry
+1      TRUE POLYGON ((4e+05 3e+05, 4010...
+2      TRUE POLYGON ((401000 3e+05, 402...
+3      TRUE POLYGON ((402000 3e+05, 403...
+4      TRUE POLYGON ((403000 3e+05, 404...
+5      TRUE POLYGON ((404000 3e+05, 405...
+6      TRUE POLYGON ((4e+05 301000, 401...
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_spatial_map", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_standardise")
+> ### * sl_standardise
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_standardise
+> ### Title: Directly standardise age-sex stop-event rates
+> ### Aliases: sl_standardise
+>
+> ### ** Examples
+>
+> p <- readRDS(system.file("extdata", "sample-crosstab.rds",
++   package = "searchlight"
++ ))
+> c <- readRDS(system.file("extdata", "example-demographic-counts.rds",
++   package = "searchlight"
++ ))
+> head(suppressWarnings(sl_standardise(c, p)))
+sampling uncertainty: not evaluated
+conf_low/conf_high combine simultaneous exact Poisson stratum intervals
+assumption range: not evaluated
+not evaluated; one declared standard population
+# A tibble: 6 × 10
+  force_id       geography_code ethnicity crude_rate standardised_rate conf_low
+  <chr>          <chr>          <chr>          <dbl>             <dbl>    <dbl>
+1 west-yorkshire E02002237      Asian           4.69              3.40  0.0142
+2 west-yorkshire E02002237      Black           0                 0     0
+3 west-yorkshire E02002237      Mixed           0                 0     0
+4 west-yorkshire E02002237      Other          83.3              67.6   1.66
+5 west-yorkshire E02002237      White          12.7              13.0   2.70
+6 west-yorkshire E02002454      Asian           1.58              1.19  0.00495
+# ℹ 4 more variables: conf_high <dbl>, complete_strata <lgl>, standard <chr>,
+#   excluded_events <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_standardise", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_timestamp_quality")
+> ### * sl_timestamp_quality
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_timestamp_quality
+> ### Title: Diagnose timestamp completeness and midnight heaping
+> ### Aliases: sl_timestamp_quality
+>
+> ### ** Examples
+>
+> sl_timestamp_quality(sl_sample())
+# A tibble: 6 × 10
+  force_id       month   n_records midnight_share missing_time_share
+  <chr>          <chr>       <int>          <dbl>              <dbl>
+1 dyfed-powys    2026-05        NA       NA                       NA
+2 dyfed-powys    2026-06        NA       NA                       NA
+3 dyfed-powys    2026-07        NA       NA                       NA
+4 west-yorkshire 2026-05      1659        0.0102                   0
+5 west-yorkshire 2026-06      1466        0.00750                  0
+6 west-yorkshire 2026-07      1532        0.0111                   0
+# ℹ 5 more variables: source_midnight_share <dbl>, gating_midnight_share <dbl>,
+#   london_month_mismatch_share <dbl>, time_reliable <lgl>,
+#   force_midnight_range <dbl>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_timestamp_quality", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("sl_veil_of_darkness")
+> ### * sl_veil_of_darkness
+>
+> flush(stderr()); flush(stdout())
+>
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: sl_veil_of_darkness
+> ### Title: Diagnose ethnicity composition in daylight and darkness
+> ### Aliases: sl_veil_of_darkness
+>
+> ### ** Examples
+>
+> # Date-only records are explicitly refused by the time-quality screen.
+> x <- sl_sample()[1:10, ]
+> day <- as.Date(x$date, tz = "Europe/London")
+> x$date <- as.POSIXct(paste(day, "00:00:00"), tz = "Europe/London")
+> x$date_raw <- format(x$date, "%Y-%m-%dT%H:%M:%S%z")
+> attr(x, "contract")$timestamps <- sl_timestamp_quality(x)
+> sl_veil_of_darkness(x)
+Excluded 1 unreliable force-month(s).
+# A tibble: 1 × 14
+  term  odds_ratio conf_low conf_high log_std_error     n status  model_warnings
+  <chr>      <dbl>    <dbl>     <dbl>         <dbl> <int> <chr>   <chr>
+1 dark          NA       NA        NA            NA     0 insuff… ""
+# ℹ 6 more variables: reference <chr>, comparison <chr>, design <chr>,
+#   twilight <chr>, dark_stops <int>, daylight_stops <int>
+>
+>
+>
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sl_veil_of_darkness", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  6.44 0.65 7.08 NA NA
+> grDevices::dev.off()
+null device
+          1
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

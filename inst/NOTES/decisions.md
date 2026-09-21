@@ -357,3 +357,19 @@
   dependencies) and expose the CRAN bin/pkg-config paths before R dependencies.
   Apply the same prerequisites and OpenMP rebuild to R-hub's macOS runner.
   The latest hosted quality workflow now passes after the citation correction.
+
+## 2026-09-21: Corrected win-builder result verified
+
+* The maintainer supplied the fresh result at
+  https://win-builder.r-project.org/x5fBiE4ieQOI/. Its only NOTE is "New
+  submission", explicitly permitted by section 8.2. There are no errors,
+  warnings, incoming URL findings or README-file findings. All 392 assertions
+  passed, with two intended CRAN skips; both manuals and all vignettes passed.
+* Preserve the exact 1,635,822-byte uploaded archive, original logs and Windows
+  binary before expiry. Verify the ZIP integrity and match the installed release
+  evidence metadata against that archive. Record download and normalized-log
+  hashes separately. Keep the original September 16 result unchanged.
+* Eight of nine current CI jobs now pass, including Linux R-devel; R-hub Windows
+  and Linux also pass. The macOS R-devel jobs remain in progress. Update the
+  checklist and CRAN comments, but retain the pending release status until those
+  checks complete. This result is a pre-submission check, not a CRAN submission.

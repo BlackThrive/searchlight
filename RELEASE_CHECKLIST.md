@@ -15,14 +15,14 @@
 - [x] Final coverage at least 85%: 94.9358%, including full recovery and snapshots
 - [x] Package lint clean after report and missing-submission fixes
 - [x] Final local M5 as-CRAN check: 0 errors/warnings/notes, PDF/HTML manuals included
-- [x] Examples below five seconds (maximum 2.25); installed 2.94 MB, extdata 0.81 MB
+- [x] Examples below five seconds (local maximum 2.21); installed 3.04 MB, extdata 0.81 MB
 - [x] Final spelling check clean
 - [x] URL check clean (2026-09-21, all 16 checked URLs)
 - [x] Local pkgdown site built and inspected; 51 pages have valid local links
 - [x] Win-builder R-devel upload acknowledged over HTTPS; receipt and hash saved
 - [x] Win-builder R-devel result retrieved: 0 errors, 0 warnings, 1 incoming NOTE
 - [x] Corrected archive rebuilt, checked locally (0/0/0), and accepted by win-builder
-- [ ] Win-builder incoming URL issues resolved and corrected archive rechecked
+- [x] Win-builder incoming URL issues resolved; corrected archive has only New submission NOTE
 - [ ] Full R/OS CI matrix and rhub verified
 - [x] pkgdown deployed; all 51 published HTML pages return HTTP 200
 - [ ] Hosted release pull request reviewed
@@ -30,12 +30,12 @@
 The maintainer corrected the GitHub owner to BlackThrive on 2026-09-21.
 The public repository https://github.com/BlackThrive/searchlight has been created
 and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Source and
-documentation are published. Release fixes are in pull request 1. Seven of the
-nine manual-inclusive CI jobs pass. macOS R-devel failed while building terra
-because gdal-config was missing; matching CRAN system libraries are now added
-and replacement checks are queued. Linux R-devel remains in progress.
-R-hub Windows R-devel passes with --no-manual --as-cran;
-its Linux/macOS jobs remain in progress. See M5-external-checks.json for run URLs
+documentation are published. Release fixes are in pull request 1. Eight of the
+nine manual-inclusive CI jobs pass, including all Linux and Windows versions.
+The updated macOS R-devel job is still installing dependencies after adding
+the previously missing system libraries. R-hub Windows and Linux R-devel pass
+with --no-manual --as-cran; the macOS replacement job remains in progress.
+See M5-external-checks.json for run URLs
 and the status snapshot. The earlier R-hub attempts and failed runner checks are
 retained as historical evidence, not treated as passing checks.
 
@@ -45,17 +45,17 @@ Fresh URL checking, spelling and lint all pass. The hosted quality workflow also
 passes after the citation correction. BlackThrive-live-site.json records
 the deployed site revision and successful HTTP checks for all 51 HTML pages.
 
-Win-builder checked version 0.1.0 on R-devel (2026-09-15 r90540 ucrt), Windows
-Server 2022, with 0 errors, 0 warnings and 1 NOTE. Installation, tests, examples,
-vignettes and PDF/HTML manuals passed. The incoming NOTE groups the expected
-new-submission notice, three URLs using the old placeholder owner, and README
-file links to AGENTS.md and RELEASE_CHECKLIST.md, which are excluded from the
-source archive. The two README links are now plain filename references and all
-current package URLs pass. The corrected archive passed a local manual-inclusive
-check (0/0/0) and win-builder acknowledged its 1,635,822-byte upload on 2026-09-21.
-Its SHA-256 is recorded in BlackThrive-source-check.json and
-BlackThrive-win-builder.json. The fresh win-builder result is pending delivery
-to the maintainer email. The exact previously checked source
-hash and preserved logs are recorded in `inst/validation/M5-win-builder.json`.
+Win-builder rechecked the corrected 1,635,822-byte archive on R-devel
+(2026-09-20 r90574 ucrt), Windows Server 2022: 0 errors, 0 warnings and 1 NOTE,
+solely "New submission". The former URL and README-file issues are resolved.
+All 392 assertions passed, with two intended CRAN skips. Examples, vignettes
+and PDF/HTML manuals passed; the longest example took 0.36 seconds.
+This satisfies the win-builder gate and the permitted new-submission exception.
+
+The exact source archive, Windows binary and original logs have been preserved.
+BlackThrive-win-builder.json records the result URL, hashes and normalized logs
+under inst/validation/win-builder-2026-09-21. BlackThrive-source-check.json records
+the same archive's local manual-inclusive check (0/0/0). The earlier result is
+retained separately in M5-win-builder.json. The checked archive is unchanged.
 
 No release-ready assertion is made until every required check has evidence.

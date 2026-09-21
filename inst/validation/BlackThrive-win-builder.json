@@ -6,10 +6,77 @@
   "source_file": "searchlight_0.1.0.tar.gz",
   "source_sha256": "4a57eee0d39888ff514f87cb7d0adcf3e12bea8a6809e0bfdbc725edc5006a45",
   "source_bytes": 1635822,
-  "check_verified": false,
+  "check_verified": true,
   "previous_attempt": null,
-  "status": "uploaded via HTTPS; check result pending",
+  "status": "check completed: 0 errors, 0 warnings, 1 NOTE (New submission only)",
   "http_status": 200,
   "response_confirmation": "File name: searchlight_0.1.0.tar.gz File Size: 1635822 bytes Content type: application/gzip",
-  "result_delivery": "DESCRIPTION maintainer email"
+  "result_delivery": "DESCRIPTION maintainer email",
+  "result_url": "https://win-builder.r-project.org/x5fBiE4ieQOI/",
+  "retrieved_utc": "2026-09-21T17:45:37.600231+00:00",
+  "check_started_utc": "2026-09-21T16:50:56+00:00",
+  "r_version": "R Under development (unstable) (2026-09-20 r90574 ucrt)",
+  "platform": "x86_64-w64-mingw32",
+  "operating_system": "Windows Server 2022 x64 (build 20348)",
+  "check_errors": 0,
+  "check_warnings": 0,
+  "check_notes": 1,
+  "incoming_note": {
+    "new_submission": true,
+    "invalid_urls": [],
+    "invalid_file_uris": []
+  },
+  "test_assertions_passed": 392,
+  "test_failures": 0,
+  "test_warnings": 0,
+  "test_skips": 2,
+  "maximum_example_elapsed_seconds": 0.36,
+  "installation_seconds_email": 10,
+  "check_seconds_email": 120,
+  "pdf_manual_checked": true,
+  "html_manual_checked": true,
+  "saved_logs": [
+    {
+      "path": "inst/validation/win-builder-2026-09-21/00check.log",
+      "download_bytes": 2993,
+      "download_sha256": "ea9a56ef58274e1a2fee3e8c623dd83265e7a5d3b984f2c8d26254988c674d8f",
+      "saved_sha256": "41b1bdd8abce1af865475f04212cc9baada0c62ae270e247eebabf85ee311f2a"
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-21/00install.out",
+      "download_bytes": 606,
+      "download_sha256": "e9ab9fe0fac82acccf16d6fe729249228d6fca16aea9e47b9f295330e784b527",
+      "saved_sha256": "08ba5fbb5db5f0a1be14c0711da17ac53a270ec3984063d218d83b6176ffab54"
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-21/searchlight-Ex.Rout",
+      "download_bytes": 53176,
+      "download_sha256": "2657d55fb208e8bf3ff81fa8227390ee57650b441f1237d42019929df49e7ec4",
+      "saved_sha256": "44c658f82ad4b292e7402628dbe7cb951000c72c9a26306835eca6a329a35abe"
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-21/searchlight-Ex.timings",
+      "download_bytes": 1160,
+      "download_sha256": "cc7bd67f33bb523fe25642582175850912976147b8d3ce630b0a110436b4eb06",
+      "saved_sha256": "dec07b3d4749cfc7566446ed71d02155eaa5daea9f3f1073b57ea1a69b421e99"
+    },
+    {
+      "path": "inst/validation/win-builder-2026-09-21/testthat.Rout",
+      "download_bytes": 3966,
+      "download_sha256": "8f28a79d3f4473023e1bc34d317322904655758de4e61746436ea7f3a2a02aae",
+      "saved_sha256": "942722a351f4a9fddc41de2411a29ff1590c16c25e32ecbd7968ab84baa88286"
+    }
+  ],
+  "saved_log_normalization": "UTF-8, LF newlines, trailing whitespace removed; original downloads preserved separately.",
+  "binary": {
+    "path": "data-raw/work/win-builder-2026-09-21/searchlight_0.1.0.zip",
+    "bytes": 1872599,
+    "sha256": "4321bc9e60bfd04b78d99668f8e798a61a40410eeb13fe040212dc96b5d7413a",
+    "zip_integrity_verified": true,
+    "archive_evidence_metadata_matches": true
+  },
+  "source_archive_preserved_path": "data-raw/work/win-builder-2026-09-21/searchlight_0.1.0.tar.gz",
+  "release_gate_satisfied": true,
+  "follow_up": "Win-builder gate passed. Complete remaining macOS R-devel CI/R-hub validation and release review.",
+  "cran_submitted": false
 }
