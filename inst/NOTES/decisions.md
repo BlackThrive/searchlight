@@ -493,3 +493,25 @@ suppress the gate. The isolated runs pass; keep release_ready false and inspect
 fresh hosted/win-builder timings before maintainer submission. If those also
 exceed the limit, rerun the full timing gate on a stable host and investigate
 file I/O before release.
+
+## 2026-09-22: Verified current checks and requested CRAN submission
+
+* The maintainer explicitly requested submission in the current session. This
+  authorizes the CRAN form action and supersedes the earlier repository default
+  that the maintainer handles submission. Keep the agreed human authorship.
+* Match the latest 07:51 Nairobi win-builder email to the 04:34 UTC upload
+  receipt. Preserve original log hashes and normalized logs. Both binary report
+  templates match the submitted source after newline normalization and the
+  binary contains both coauthors. Win-builder does not expose the source hash;
+  record this association without claiming a server-side checksum comparison.
+* Win-builder has only New submission NOTE, 407 assertions and both manuals
+  passing; maximum example elapsed time is 0.35 seconds. All nine CI jobs on
+  c28b4f0 pass with both manuals, and quality coverage is 95.0433%. This resolves
+  the pending external verification gate; retain the local elapsed-time outlier.
+* Submit the existing 1,667,884-byte archive without rebuilding. The form
+  extracted the correct version, maintainer and three human authors. Upload ID
+  356075 and the final submission acknowledgement are recorded. CRAN says an
+  email was sent and requires the maintainer to confirm before review. Do not
+  represent this pending confirmation as acceptance or publication, or upload
+  another copy while it is pending. Repository evidence additions postdate the
+  archive and do not change the checked/submitted bytes.

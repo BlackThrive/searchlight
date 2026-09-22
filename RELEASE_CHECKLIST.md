@@ -1,5 +1,13 @@
 # Release evidence
 
+Current status (2026-09-22): the redesigned archive passes all nine current CI
+checks and win-builder (only the expected New submission NOTE). Coverage is
+95.0433%; 407 CRAN-mode assertions pass. CRAN form submission 356075 is awaiting
+maintainer email confirmation before review. It is not yet accepted or published.
+See RELEASE_READY.md and BlackThrive-cran-submission-2026-09-22.json.
+
+Earlier milestone entries below retain their original archive/revision scope.
+
 - [x] M0: skeleton and clean local R CMD check (see `inst/validation/M0-check.log`)
 - [x] M1: archive ingestion, revision selection and contract fixtures
 - [x] M2: verified geography, population, coverage and quality
@@ -103,3 +111,20 @@ A fresh installation regenerates the redesigned demo with eleven tables; all
 ten numerical CSV outputs are unchanged. Lint, spelling, desktop and narrow
 browser inspections pass. Fresh external check results remain to be inspected.
 See BlackThrive-report-design-source-check.json and BlackThrive-report-design-demo.json.
+
+## 2026-09-22 final checks and CRAN submission
+
+- [x] Exact submitted archive remains SHA-256
+  `7087728ccd171841319149d8d1614b80a429dc5af5ffabac440280dfb1f213f5`
+- [x] Latest win-builder R-devel: 0 errors, 0 warnings, only New submission NOTE
+- [x] Current Linux/macOS/Windows release/devel/oldrel CI: all nine Status: OK
+- [x] Current quality workflow passes; line coverage 95.0433%
+- [x] External example timing verified: maximum 0.35 seconds
+- [x] CRAN upload and Submit package action acknowledged, ID 356075
+- [ ] Maintainer clicks the confirmation email link
+- [ ] CRAN review and acceptance (not yet known)
+
+The original 16.28-second local elapsed-time outlier and passing isolated reruns
+are retained. Current external checks resolve the pending timing verification.
+No package code, report template, tests or submitted archive changed during
+submission; only repository evidence and submission comments were updated.

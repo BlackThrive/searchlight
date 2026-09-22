@@ -13,3 +13,6 @@ inst/validation/win-builder-2026-09-16/* text eol=lf
 inst/validation/win-builder-2026-09-21/* text eol=lf
 inst/validation/ci-2026-09-21/* text eol=lf
 inst/validation/rhub-2026-09-21/* text eol=lf
+
+inst/validation/win-builder-report-design-2026-09-22/* text eol=lf
+inst/validation/ci-report-design-2026-09-22/* text eol=lf

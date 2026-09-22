@@ -53,3 +53,7 @@ Next: inspect fresh hosted checks and the latest win-builder email for the corre
 Milestone: M5 report design refinement (2026-09-22).
 Completed: redesigned the installed HTML template; verified responsive navigation and disclosures, unchanged numerical CSVs, 407 assertions and both manuals with 0 errors/warnings/notes.
 Next: inspect fresh hosted and win-builder checks for the redesigned archive; the maintainer submits to CRAN.
+
+Milestone: M5 final external verification and CRAN submission (2026-09-22).
+Completed: verified the latest win-builder and nine-job CI results, 407 assertions, 95.0433% coverage and 0.35-second maximum external example; submitted the unchanged checked archive through the CRAN form, ID 356075.
+Next: maintainer confirms the email link; CRAN review and acceptance remain pending.
