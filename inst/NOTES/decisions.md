@@ -434,3 +434,33 @@
   files match the previous archive. Win-builder accepted the new archive
   for R-devel; the maintainer email will receive its result. Preserve the
   new hash and scoped evidence separately from the previous receipts.
+
+## 2026-09-22: Test the installed user workflow and report presentation
+
+* Install the actual submission archive into a new temporary package library,
+  reusing existing dependency libraries. Exercise only its public functions:
+  parse packaged CSVs, audit coverage and quality, recompute counts/rates and
+  missingness bounds, fit count/outcome models, check ranking and geographic
+  assignment, verify timestamp gating, and generate an offline HTML report.
+  Keep the demonstration in a separate workspace folder with CSVs, R objects,
+  plots, a console transcript, installation log and reproducible script.
+* The first installed run passed on 4,657 events with 2,280 unknown ethnicities;
+  the four-MSOA example contains 769 events. The report exposed a numeric
+  presentation bug: formatting an entire column without scientific notation
+  made tiny p-values force excessive decimals onto ordinary values. Format
+  each numeric cell with five significant figures using formatC's general
+  format. Add a regression check covering ordinary, tiny, zero, infinite and
+  missing values; numeric result objects and statistical methods are unchanged.
+* Preserve the coauthor archive and its receipts before building the corrected
+  archive. Reinstall and rerun the demonstration, including a rendered-table
+  check for excessive decimal strings, then check the exact source archive.
+  Previous exact-source receipts remain historical rather than covering a
+  different hash. CRAN submission remains with the maintainer.
+* The corrected archive passed the installed workflow and its full local
+  --as-cran check: 394 assertions, two intended skips, both manuals, and no
+  errors, warnings or notes. All ten result CSVs are byte-identical to the first
+  run. Browser inspection confirms compact numeric cells and a working report.
+  Package lint and changed-file style checks pass. Preserve the results in
+  BlackThrive-installed-demo.json and BlackThrive-demo-source-check.json.
+  Win-builder accepted the corrected archive; the maintainer receives its
+  result by email. Do not treat an earlier archive's email as this one's result.

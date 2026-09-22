@@ -36,9 +36,23 @@ the longest example takes 1.47 seconds. A fresh
 win-builder check has been requested; its result must be recorded before
 submission. The current archive hash and check evidence are in RELEASE_READY.md.
 
+## Installed-user verification and report formatting, 2026-09-22
+
+A fresh installation of the current archive reparsed all 4,657 bundled events,
+recomputed rates and sensitivity analyses, exercised diagnostics and rendered
+an offline HTML report. This exposed and fixed a presentation issue where tiny
+values made other numbers in a report column excessively long. Numeric result
+tables are unchanged; all ten exported CSVs match before and after the fix.
+The corrected archive passes local --as-cran checks with 0 errors, warnings or
+notes, including both manuals and 394 assertions (two intended CRAN skips).
+Its maximum example time is 0.65 seconds; installed size is
+3,173,589 bytes. Earlier external results above predate this display
+change. The new win-builder result remains pending and must be inspected before
+submission. Current source hash and scoped receipts are in RELEASE_READY.md.
+
 ## Additional validation
 
-All 392 CRAN-mode assertions pass, with two intended CRAN skips. Full developer
+All 394 CRAN-mode assertions pass, with two intended CRAN skips. Full developer
 tests include recovery and visual snapshots; line coverage is 94.9358%.
 Examples, tests and precomputed vignettes use offline data. Test resources are
 capped at two threads. Before the authorship update, the maximum example time was 2.21 seconds locally and

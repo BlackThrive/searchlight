@@ -150,7 +150,7 @@ sl_report_table <- function(x, max_rows) {
         as.character(jsonlite::toJSON(y, auto_unbox = TRUE, na = "null"))
       }, character(1))
     } else if (is.numeric(column)) {
-      column <- format(signif(column, 5), trim = TRUE, scientific = FALSE)
+      column <- trimws(formatC(column, digits = 5, format = "g"))
     } else {
       column <- as.character(column)
     }

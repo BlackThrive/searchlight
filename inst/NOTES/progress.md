@@ -45,3 +45,7 @@ Next: maintainer review of pull request 1 and CRAN submission of the checked sou
 Milestone: M5 agreed coauthor metadata (2026-09-22).
 Completed: added Sarah Hamed and Souci Frissa as authors; rebuilt archive and installed citation verified; 392 assertions and both manuals pass with 0 errors, warnings or notes; fresh win-builder upload accepted.
 Next: inspect the new win-builder email before submitting the updated archive; the maintainer retains responsibility for CRAN submission.
+
+Milestone: M5 installed-package demonstration and report formatting (2026-09-22).
+Completed: tested a fresh archive installation, produced report/plots/ten CSVs, fixed numeric display, verified unchanged results, and passed 394 assertions plus both manuals with 0 errors/warnings/notes.
+Next: inspect fresh hosted checks and the latest win-builder email for the corrected archive; the maintainer submits to CRAN.

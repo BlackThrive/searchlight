@@ -1,5 +1,6 @@
 * text=auto
 inst/validation/BlackThrive-authorship-source-check.log text eol=lf
+inst/validation/BlackThrive-demo-source-check.log text eol=lf
 *.R text eol=lf
 *.Rmd text eol=lf
 *.md text eol=lf

@@ -79,3 +79,15 @@ emails. Analysis code, tests, data and vignette sources are unchanged. The
 previous source archive and check receipts remain historical evidence; inspect
 the fresh win-builder result for the new archive before submission. See
 RELEASE_READY.md for the current archive hash and check status.
+
+## 2026-09-22 installed-user demonstration
+
+The actual archive installs into a fresh package library and runs the offline
+workflow, including CSV parsing, coverage, counts, rates, sensitivity, regression,
+outcomes, geography, timestamp gating and HTML reporting. A report formatting
+issue found during visual inspection is fixed, with a regression test. The ten
+numeric output CSVs are unchanged. The corrected source archive passes local
+--as-cran checks including both manuals: 0 errors, 0 warnings, 0 notes and 394
+passing assertions with two intended skips. The corrected archive has a new
+hash and fresh win-builder receipt; prior exact-source results remain historical.
+See BlackThrive-installed-demo.json and BlackThrive-demo-source-check.json.

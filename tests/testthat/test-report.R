@@ -44,6 +44,14 @@ test_that("offline reports retain coverage and separate uncertainty types", {
   expect_match(paste(readLines(path), collapse = "\n"), "No estimates supplied")
 })
 
+test_that("tiny values do not expand every numeric cell in a report column", {
+  values <- data.frame(value = c(0.123456, 1.23456e-100, 0, Inf, NA_real_))
+  html <- xml2::read_html(sl_report_table(values, 10))
+  cells <- xml2::xml_text(xml2::xml_find_all(html, ".//td"))
+  expect_equal(cells, c("0.12346", "1.2346e-100", "0", "Inf", "NA"))
+  expect_true(all(nchar(cells) <= 12L))
+})
+
 test_that("reports reject invalid paths and mismatched provenance", {
   x <- sl_sample()
   path <- tempfile(fileext = ".html")
