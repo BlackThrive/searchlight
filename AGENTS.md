@@ -446,7 +446,8 @@ spatial effect on total intensity.
 - `Package: searchlight`, `Title` in title case, `Version: 0.1.0`,
   `License: MIT + file LICENSE`.
 - `Authors@R`: Mustapha Wasseja (aut, cre, with ORCID if provided),
-  Black Thrive Global (cph, fnd). Add collaborators as agreed.
+  Sarah Hamed (aut), Souci Frissa (aut), Black Thrive Global (cph, fnd).
+  Add collaborators as agreed.
 - `Depends: R (>= 4.1.0)`.
 - `Imports` (keep lean): cli, rlang, dplyr, tibble, tidyr, readr, httr2,
   jsonlite, sf, digest, ggplot2, MASS, CARBayes, spdep, suncalc,
@@ -712,6 +713,7 @@ maintainer reviews that file at each milestone.
 |----|----|
 | Licence | MIT + file LICENSE, copyright holder “Black Thrive Global” |
 | Maintainer | Mustapha Wasseja, role `c("aut", "cre")`; leave ORCID out until supplied |
+| Coauthors | Sarah Hamed (`Sarah.Hamed@blackthrive.org`) and Souci Frissa (`Souci.Frissa@blackthrive.org`), each with role `"aut"` (maintainer instruction, 2026-09-22). |
 | Attribution | Do not credit AI or Codex as an author or co-author in package metadata, documentation or commits (maintainer instruction, 2026-09-21). |
 | Copyright/funder | Black Thrive Global, role `c("cph", "fnd")` |
 | Repository URL | `https://github.com/BlackThrive/searchlight` (owner corrected by the maintainer on 2026-09-21) |

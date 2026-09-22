@@ -19,6 +19,12 @@ Useful links:
 
 **Maintainer**: Mustapha Wasseja <mustapha.wasseja.mohammed@gmail.com>
 
+Authors:
+
+- Sarah Hamed <Sarah.Hamed@blackthrive.org>
+
+- Souci Frissa <Souci.Frissa@blackthrive.org>
+
 Other contributors:
 
 - Black Thrive Global \[copyright holder, funder\]
