@@ -41,3 +41,7 @@ Next: finish the active Intel macOS R-hub validation and finalize RELEASE_READY.
 Milestone: M5 technical release readiness complete (2026-09-21).
 Completed: all nine full CI checks, Quality and all three R-hub platforms pass; win-builder has only the permitted New submission NOTE; exact archive and check evidence preserved; release checklist and submission notes complete.
 Next: maintainer review of pull request 1 and CRAN submission of the checked source archive; retain the agreed human authorship.
+
+Milestone: M5 agreed coauthor metadata (2026-09-22).
+Completed: added Sarah Hamed and Souci Frissa as authors; rebuilt archive and installed citation verified; 392 assertions and both manuals pass with 0 errors, warnings or notes; fresh win-builder upload accepted.
+Next: inspect the new win-builder email before submitting the updated archive; the maintainer retains responsibility for CRAN submission.

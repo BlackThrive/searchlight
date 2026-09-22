@@ -64,9 +64,18 @@ the same archive's local manual-inclusive check (0/0/0). The earlier result is
 retained separately in M5-win-builder.json. The checked archive is unchanged.
 An archive comparison verified 222 matching files, including normalized
 DESCRIPTION fields; only three existing decision/progress/evidence files differ.
-The review found no remaining implementation or authorship issues. All required
-technical release gates now pass. This technical review is not a maintainer
+The review found no remaining implementation or authorship issues at that time.
+All required technical release gates passed on 2026-09-21. This technical review is not a maintainer
 approval or a CRAN submission.
 
 RELEASE_READY.md identifies the checked archive and summarizes the completed
 evidence. The maintainer submits the package to CRAN.
+
+## 2026-09-22 authorship update
+
+Sarah Hamed and Souci Frissa are now coauthors, with Mustapha Wasseja remaining
+the maintainer. The rebuilt archive contains their names and supplied work
+emails. Analysis code, tests, data and vignette sources are unchanged. The
+previous source archive and check receipts remain historical evidence; inspect
+the fresh win-builder result for the new archive before submission. See
+RELEASE_READY.md for the current archive hash and check status.

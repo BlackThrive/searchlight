@@ -412,3 +412,25 @@
   and win-builder results apply to that exact SHA-256. Complete cran-comments
   and RELEASE_READY.md with the verified scope and results. The maintainer
   reviews the release pull request and submits to CRAN; no submission was made.
+
+## 2026-09-22: Add the agreed Black Thrive coauthors
+
+* The maintainer requested Sarah Hamed and Souci Frissa as package coauthors.
+  Add each with the author role, using the work email supplied in their contact
+  cards: Sarah.Hamed@blackthrive.org and Souci.Frissa@blackthrive.org. Mustapha
+  Wasseja remains author and sole maintainer; Black Thrive Global retains its
+  copyright-holder and funder roles. No ORCIDs were supplied.
+* Regenerate package documentation and rebuild the submission archive so its
+  metadata and automatic citation include all three human authors. Preserve
+  the previous checked archive and its evidence as historical records; its
+  exact-source check hashes do not cover this authorship update. Recheck the
+  new archive, keeping all analysis code, tests and data unchanged.
+* The session-start check was interrupted by inherited C.UTF-8 locale
+  settings unsupported by Windows R. Set LC_ALL, LANG and LC_CTYPE to C
+  for the verification process; the rebuilt archive's full --as-cran
+  check then passed with no errors, warnings or notes and both manuals.
+  No checks were removed. Spelling is clean, the installed citation lists
+  all three authors, and 83 analysis/test/data/validation/vignette-source
+  files match the previous archive. Win-builder accepted the new archive
+  for R-devel; the maintainer email will receive its result. Preserve the
+  new hash and scoped evidence separately from the previous receipts.

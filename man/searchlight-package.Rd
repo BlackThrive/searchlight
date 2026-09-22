@@ -25,6 +25,12 @@ Useful links:
 \author{
 \strong{Maintainer}: Mustapha Wasseja \email{mustapha.wasseja.mohammed@gmail.com}
 
+Authors:
+\itemize{
+  \item Sarah Hamed \email{Sarah.Hamed@blackthrive.org}
+  \item Souci Frissa \email{Souci.Frissa@blackthrive.org}
+}
+
 Other contributors:
 \itemize{
   \item Black Thrive Global [copyright holder, funder]
