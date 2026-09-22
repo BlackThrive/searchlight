@@ -146,7 +146,7 @@ sl_report(records, report,
     "Missing-ethnicity allocation" = bounds,
     "Count regression" = regression,
     "Three separate outcomes" = outcomes
-  ), title = "Installed searchlight demonstration: May-July 2026",
+  ), title = "Stop and search: West Yorkshire sample",
   assumptions = "Resident Census 2021 exposure is held fixed over the submitted months.",
   limitations = c(
     "Rates, bounds and count regression cover the four sample MSOAs with most recorded events.",

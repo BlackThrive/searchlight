@@ -65,3 +65,18 @@ committed under inst/validation/. The offline report and four vignettes are
 rendered and checked. The published fifteen-line quick start executes offline.
 The public pkgdown site is deployed at https://blackthrive.github.io/searchlight/;
 all 51 HTML pages return HTTP 200.
+
+## Report design update, 2026-09-22
+
+The offline report now has a responsive layout, section navigation, summary
+cards and expandable audit details. Statistical computations are unchanged;
+all ten installed-workflow CSVs match the previous results byte for byte.
+The new exact archive passes local --as-cran checks with 0 errors, 0 warnings
+and 0 notes, both manuals and 407 assertions with two intended skips.
+Installed size is 3,200,250 bytes; the maximum example takes
+16.28 seconds. Package lint and spelling are clean.
+The fresh-install workflow and browser inspection pass. A new win-builder
+R-devel result is pending; earlier platform receipts predate this redesign.
+RELEASE_READY.md identifies the current archive and its scoped evidence.
+
+The initial check recorded a 16.28-second elapsed-time outlier for sl_read_records (0.73 CPU seconds). The identical example from the same installed archive passed isolated reruns in 0.53 and 0.17 seconds. The original result and both reruns are retained.

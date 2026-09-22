@@ -464,3 +464,32 @@
   BlackThrive-installed-demo.json and BlackThrive-demo-source-check.json.
   Win-builder accepted the corrected archive; the maintainer receives its
   result by email. Do not treat an earlier archive's email as this one's result.
+
+## 2026-09-22: Improve the generated report's visual design
+
+* Replace the package template with a responsive green-and-cream report layout,
+  a prominent user title, source period, section navigation and summary cards.
+  Summary event counts and unknown shares describe the supplied records;
+  source coverage remains unchanged by filtering. Empty records show an
+  unavailable percentage, and missing submissions remain NA in tables.
+* Show a concise coverage table with text status labels. Keep the full coverage
+  audit, changelog and source metadata in native expandable disclosures. Retain
+  every result column, diagnostic, exclusion and analysis scope. Move ratio
+  estimates and intervals ahead of secondary columns, right-align numeric
+  cells and retain technical variable names in column header titles.
+* Keep sampling uncertainty and assumption ranges separately labelled. Use
+  only inline CSS and native HTML, with keyboard-scrollable tables, a skip
+  link and print styles. Add no fonts, scripts, images or network dependencies.
+* Preserve the previous archive and report under
+  data-raw/work/report-before-redesign/. Verify the new installed workflow
+  against the unchanged ten numerical CSV outputs and record archive-specific
+  check evidence separately. CRAN submission remains with the maintainer.
+
+The initial check recorded a 16.28-second elapsed-time outlier for sl_read_records (0.73 CPU seconds). The identical example from the same installed archive passed isolated reruns in 0.53 and 0.17 seconds. The original result and both reruns are retained.
+
+The local release wrapper's five-second elapsed-time assertion failed on that
+outlier even though R CMD check itself returned Status: OK. Do not hide or
+suppress the gate. The isolated runs pass; keep release_ready false and inspect
+fresh hosted/win-builder timings before maintainer submission. If those also
+exceed the limit, rerun the full timing gate on a stable host and investigate
+file I/O before release.

@@ -49,3 +49,7 @@ Next: inspect the new win-builder email before submitting the updated archive; t
 Milestone: M5 installed-package demonstration and report formatting (2026-09-22).
 Completed: tested a fresh archive installation, produced report/plots/ten CSVs, fixed numeric display, verified unchanged results, and passed 394 assertions plus both manuals with 0 errors/warnings/notes.
 Next: inspect fresh hosted checks and the latest win-builder email for the corrected archive; the maintainer submits to CRAN.
+
+Milestone: M5 report design refinement (2026-09-22).
+Completed: redesigned the installed HTML template; verified responsive navigation and disclosures, unchanged numerical CSVs, 407 assertions and both manuals with 0 errors/warnings/notes.
+Next: inspect fresh hosted and win-builder checks for the redesigned archive; the maintainer submits to CRAN.

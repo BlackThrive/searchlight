@@ -91,3 +91,15 @@ numeric output CSVs are unchanged. The corrected source archive passes local
 passing assertions with two intended skips. The corrected archive has a new
 hash and fresh win-builder receipt; prior exact-source results remain historical.
 See BlackThrive-installed-demo.json and BlackThrive-demo-source-check.json.
+
+## 2026-09-22 report design update
+
+The package's generated HTML now has a responsive header and navigation,
+summary cards, readable tables and expandable audit/source details. It remains
+self-contained and keeps missing coverage and the two uncertainty types explicit.
+The exact rebuilt archive passes local --as-cran checks with both manuals,
+407 passing assertions, two intended skips and 0 errors/warnings/notes.
+A fresh installation regenerates the redesigned demo with eleven tables; all
+ten numerical CSV outputs are unchanged. Lint, spelling, desktop and narrow
+browser inspections pass. Fresh external check results remain to be inspected.
+See BlackThrive-report-design-source-check.json and BlackThrive-report-design-demo.json.

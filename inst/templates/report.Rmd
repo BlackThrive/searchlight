@@ -1,76 +1,106 @@
-<p class="eyebrow">BLACK THRIVE GLOBAL / SEARCHLIGHT</p>
-
-# Evidence and assumptions
+<div><a class="skip-link" href="#overview">Skip to report</a></div>
+<header class="report-header" id="top">
+<div class="masthead"><a class="wordmark" href="#top">searchlight<span aria-hidden="true">.</span></a><span class="publisher">BLACK THRIVE GLOBAL</span></div>
+<div class="hero">
+<p class="eyebrow">STOP AND SEARCH / EVIDENCE REPORT</p>
 
 {{title}}
 
-{{summary}}
+<p class="hero-description">Recorded events, ethnic disparity and the assumptions behind the evidence.</p>
 
-Recorded searches are events, not unique people. An event-rate ratio is not a
-person's probability of being searched. Unknown ethnicity remains visible.
+{{metadata}}
 
-## Submission coverage
+</div>
+</header>
+<div class="report-layout">
+<nav class="contents" aria-label="Report sections">
+<p class="nav-label">IN THIS REPORT</p>
+<a href="#overview"><span>01</span> Overview</a>
+<a href="#coverage"><span>02</span> Submission coverage</a>
+<a href="#quality"><span>03</span> Data quality</a>
+<a href="#estimates"><span>04</span> Estimates</a>
+<a href="#interpretation"><span>05</span> Interpretation</a>
+<a href="#sources"><span>06</span> Sources</a>
+<p class="nav-footnote">An offline report<br>Generated with searchlight</p>
+</nav>
+<main id="report-content">
+<section id="overview" aria-labelledby="overview-heading">
+<div class="section-heading"><span class="section-number" aria-hidden="true">01</span><div><p class="eyebrow">THE STARTING POINT</p><h2 id="overview-heading">At a glance</h2></div></div>
 
-This table describes the selected source files, including after records are
-filtered. A missing submission is unavailable data, never zero searches. The
-event count above describes the records supplied to this report. Suspected
-partial submissions and revisions remain flagged.
+{{overview}}
+
+<p class="reading-note"><strong>Read these as events.</strong> Recorded searches are events, not unique people. An event-rate ratio is not a person's probability of being searched. Unknown ethnicity remains visible throughout the analysis.</p>
+</section>
+<section id="coverage" aria-labelledby="coverage-heading">
+<div class="section-heading"><span class="section-number" aria-hidden="true">02</span><div><p class="eyebrow">WHAT IS AVAILABLE</p><h2 id="coverage-heading">Submission coverage</h2></div></div>
+<p>This table describes the selected source files, including after records are filtered. The event count above describes the records supplied to this report. Suspected partial submissions and revisions remain flagged.</p>
+
+{{coverage_summary}}
+
+<details class="audit-details"><summary>Full coverage audit and changelog notes</summary>
 
 {{coverage}}
 
-## Time and location quality
-
-Timestamp diagnostics are screening rules, not proof that times are accurate.
-Darkness analysis excludes force-months that fail or lack a reliable-time flag.
+</details>
+</section>
+<section id="quality" aria-labelledby="quality-heading">
+<div class="section-heading"><span class="section-number" aria-hidden="true">03</span><div><p class="eyebrow">BEFORE INTERPRETING RESULTS</p><h2 id="quality-heading">Time and location quality</h2></div></div>
+<div class="quality-block"><h3>Timestamp reliability</h3>
+<p>Timestamp diagnostics are screening rules, not proof that times are accurate. Darkness analysis excludes force-months that fail or lack a reliable-time flag.</p>
 
 {{timestamps}}
 
-Coordinates are anonymised snap points. Boundary sensitivity measures proximity
-to a geography edge; it does not measure or correct true location error.
-The boundary-sensitive share uses assigned events with measured distances.
-Missing-coordinate and unassigned shares use all supplied events.
+</div>
+<div class="quality-block"><h3>Location and boundary sensitivity</h3>
+<p>Coordinates are anonymised snap points. Boundary sensitivity measures proximity to a geography edge; it does not measure or correct true location error. The boundary-sensitive share uses assigned events with measured distances. Missing-coordinate and unassigned shares use all supplied events.</p>
 
 {{geography}}
 
-## Estimates
-
-Each supplied analysis retains its own scope, exposures and exclusions. Rates
-use submitted population-time. Sampling intervals condition on the model and
-denominator. They do not quantify uncertainty about unobserved ethnicity,
-population movement, Census measurement or incomplete submissions.
+</div>
+</section>
+<section id="estimates" aria-labelledby="estimates-heading">
+<div class="section-heading"><span class="section-number" aria-hidden="true">04</span><div><p class="eyebrow">RESULTS WITH CONTEXT</p><h2 id="estimates-heading">Estimates</h2></div></div>
+<p>Each supplied analysis retains its own scope, exposures and exclusions. Rates use submitted population-time. Consult the scope details beneath each result before comparing analyses.</p>
+<div class="uncertainty-guide">
+<div><span class="guide-label">SAMPLING UNCERTAINTY</span><p>Intervals condition on the model and denominator. They do not cover missing ethnicity, population movement, Census measurement or incomplete submissions.</p></div>
+<div><span class="guide-label">ASSUMPTION RANGE</span><p>Sensitivity ranges describe stated scenarios. They are reported separately and are not confidence intervals.</p></div>
+</div>
+<p class="table-help">Wide tables scroll horizontally. Column headings show the original R variable names on hover.</p>
 
 {{estimates}}
 
-## Assumptions
-
-Resident Census population is an exposure choice. It may differ from the people
-present or exposed to police activity. Missing-ethnicity allocations are stated
-scenarios. Their ranges are not confidence intervals and are not combined with
-sampling uncertainty. Spatial smoothing stabilises under its model assumptions;
-inspect unsmoothed data, local changes and convergence diagnostics.
+</section>
+<section id="interpretation" aria-labelledby="interpretation-heading">
+<div class="section-heading"><span class="section-number" aria-hidden="true">05</span><div><p class="eyebrow">HOW TO READ THE EVIDENCE</p><h2 id="interpretation-heading">Assumptions and limitations</h2></div></div>
+<div class="interpretation-card"><h3>Assumptions</h3>
+<p>Resident Census population is an exposure choice. It may differ from the people present or exposed to police activity. Missing-ethnicity allocations are stated scenarios. Their ranges are not confidence intervals and are not combined with sampling uncertainty. Spatial smoothing stabilises under its model assumptions; inspect unsmoothed data, local changes and convergence diagnostics.</p>
+<h4>Statements supplied for this report</h4>
 
 {{assumptions}}
 
-## Limitations
-
-Repeated events, deployment, activity, selection and measurement can affect
-comparisons. Hit rates condition on being searched and do not by themselves
-establish discrimination. Darkness associations require assumptions about
-visibility and comparable activity and deployment. The method originated for
-vehicle stops; its transfer to pedestrian searches requires justification.
-Neither an undefined result nor a wide interval establishes absence of disparity.
+</div>
+<div class="interpretation-card"><h3>Limitations</h3>
+<p>Repeated events, deployment, activity, selection and measurement can affect comparisons. Hit rates condition on being searched and do not by themselves establish discrimination. Darkness associations require assumptions about visibility and comparable activity and deployment. The method originated for vehicle stops; its transfer to pedestrian searches requires justification. Neither an undefined result nor a wide interval establishes absence of disparity.</p>
+<h4>Statements supplied for this report</h4>
 
 {{limitations}}
 
-## Sources and reproducibility
-
-[data.police.uk archive](https://data.police.uk/data/archive/),
-[ONS geography](https://geoportal.statistics.gov.uk/) and
-[NOMIS Census data](https://www.nomisweb.co.uk/) supply the public inputs.
-
-Public archive and ONS/NOMIS data retain their Open Government Licence v3.0
-attribution. The following metadata identify snapshots, source hashes, geography
-vintages, population sources and classification. No external assets or scripts
-are loaded when this report is viewed.
+</div>
+</section>
+<section id="sources" aria-labelledby="sources-heading">
+<div class="section-heading"><span class="section-number" aria-hidden="true">06</span><div><p class="eyebrow">TRACEABLE TO THE SOURCE</p><h2 id="sources-heading">Sources and reproducibility</h2></div></div>
+<div class="source-links">
+<a href="https://data.police.uk/data/archive/">Police archive <span>Recorded stop and search events</span></a>
+<a href="https://geoportal.statistics.gov.uk/">ONS geography <span>Boundaries and area definitions</span></a>
+<a href="https://www.nomisweb.co.uk/">NOMIS Census data <span>Population and exposure inputs</span></a>
+</div>
+<p>Public archive and ONS/NOMIS data retain their Open Government Licence v3.0 attribution. The metadata below identify snapshots, source hashes, geography vintages, population sources and classification.</p>
+<details class="audit-details"><summary>Source metadata and reproducibility record</summary>
 
 {{sources}}
+
+</details>
+</section>
+<footer class="report-footer"><div><strong>searchlight / Black Thrive Global</strong><p>Evidence with its assumptions in view.</p></div><a href="#top">Back to top &uarr;</a><p class="footer-note">Self-contained HTML. No external assets or scripts are loaded. Use your browser's print command to save a PDF.</p></footer>
+</main>
+</div>
