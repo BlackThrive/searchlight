@@ -1,0 +1,41 @@
+{
+  "checked": "2026-09-22 07:11:16.338456",
+  "source_sha256": "6e08bf8f5f325d9b5624a2f1fd3c9dcd39e4f9d8c06c1455be5f0c641115703a",
+  "package_version": "0.1.0",
+  "installation": "Fresh temporary package library; existing dependency libraries reused",
+  "installed_package_path_verified": true,
+  "offline_analysis": true,
+  "records": 4657,
+  "parsed_raw_records": 4657,
+  "unknown_ethnicity": 2280,
+  "submitted_force_months": 3,
+  "missing_force_months": 3,
+  "rate_analysis_areas": [
+    "E02006875",
+    "E02006948",
+    "E02002454",
+    "E02002237"
+  ],
+  "rate_analysis_records": 769,
+  "installed_vignettes": 4,
+  "date_only_guard_passed": true,
+  "report_tables": 10,
+  "elapsed_seconds": 28.7524,
+  "passed": true,
+  "package_test_assertions_passed": 394,
+  "package_test_skips": 2,
+  "result_csvs_unchanged_after_display_fix": [
+    "count_regression.csv",
+    "counts.csv",
+    "coverage.csv",
+    "location_quality.csv",
+    "missing_ethnicity.csv",
+    "outcomes.csv",
+    "ranking.csv",
+    "rate_ratios.csv",
+    "rates.csv",
+    "timestamp_quality.csv"
+  ],
+  "report_sha256": "97334998f6ef203b7d2f55ee91e4e50e2d0072c02c2eb577bc2f15d0a7a4405c",
+  "source_check": "BlackThrive-demo-source-check.json"
+}

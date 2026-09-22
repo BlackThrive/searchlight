@@ -1,9 +1,329 @@
 {
-  "attempted": "2026-09-16 17:00:55.858334",
-  "rhub": {
-    "status": "blocked",
-    "reason": "! :( Failed to start check: Not Found.\nℹ If you think this is a bug in the rhub package, please open an issues at\n  <https://github.com/r-hub/rhub/issues>."
+  "checked": "2026-09-21T19:34:20.385213+00:00",
+  "repository": "https://github.com/BlackThrive/searchlight",
+  "local_rhub_dispatch_attempt": {
+    "status": "failed",
+    "reason": "R curl could not resolve api.github.com",
+    "resolution": "Dispatched the canonical R-hub workflow using GitHub CLI"
   },
-  "ci_matrix": "Pending: specified GitHub repository is unavailable",
-  "pkgdown_deployment": "Pending: specified GitHub repository is unavailable"
+  "rhub": {
+    "status": "completed",
+    "conclusion": "failure",
+    "headSha": "e80332946e2c13a2257c169ef035cd961826a439",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910",
+    "jobs": [
+      {
+        "databaseId": 106410817630,
+        "name": "setup",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910/job/106410817630"
+      },
+      {
+        "databaseId": 106410875874,
+        "name": "windows (R-devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910/job/106410875874"
+      },
+      {
+        "databaseId": 106410875906,
+        "name": "linux (R-devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910/job/106410875906"
+      },
+      {
+        "databaseId": 106410875953,
+        "name": "macos (R-devel)",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910/job/106410875953"
+      },
+      {
+        "databaseId": 106410877615,
+        "name": "matrix.config.label",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35623123910/job/106410877615"
+      }
+    ]
+  },
+  "rhub_macos_retry": {
+    "status": "completed",
+    "conclusion": "failure",
+    "headSha": "201d0c1d1a1b120a5fd665b702d2414283cf0e16",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235",
+    "jobs": [
+      {
+        "databaseId": 106426561776,
+        "name": "setup",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235/job/106426561776"
+      },
+      {
+        "databaseId": 106426615115,
+        "name": "macos (R-devel)",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235/job/106426615115"
+      },
+      {
+        "databaseId": 106426617351,
+        "name": "matrix.config.label",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627866235/job/106426617351"
+      }
+    ]
+  },
+  "rhub_flags": [
+    "--no-manual",
+    "--as-cran"
+  ],
+  "ci_matrix": {
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "f6edadf035403bcd6dc95be9f3af9f5d648229e0",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618",
+    "jobs": [
+      {
+        "databaseId": 106436883534,
+        "name": "check (ubuntu-latest, devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883534"
+      },
+      {
+        "databaseId": 106436883775,
+        "name": "check (windows-latest, devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883775"
+      },
+      {
+        "databaseId": 106436883853,
+        "name": "check (windows-latest, release)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883853"
+      },
+      {
+        "databaseId": 106436883864,
+        "name": "check (macos-latest, release)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883864"
+      },
+      {
+        "databaseId": 106436883876,
+        "name": "check (ubuntu-latest, release)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883876"
+      },
+      {
+        "databaseId": 106436883917,
+        "name": "check (ubuntu-latest, oldrel-1)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883917"
+      },
+      {
+        "databaseId": 106436883950,
+        "name": "check (macos-latest, oldrel-1)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883950"
+      },
+      {
+        "databaseId": 106436883962,
+        "name": "check (macos-latest, devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436883962"
+      },
+      {
+        "databaseId": 106436884241,
+        "name": "check (windows-latest, oldrel-1)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35628215618/job/106436884241"
+      }
+    ]
+  },
+  "quality": {
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "9fa60ccf06d360e14bf2b75f9d54e58fcf0db289",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959921",
+    "jobs": [
+      {
+        "databaseId": 106466578771,
+        "name": "quality",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959921/job/106466578771"
+      }
+    ]
+  },
+  "pkgdown_build": {
+    "conclusion": "success",
+    "headSha": "0d7aea91cadd34a82d0d87e4cba067bc3b598350",
+    "jobs": [
+      {
+        "databaseId": 106424006118,
+        "name": "pkgdown",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627093027/job/106424006118"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627093027"
+  },
+  "pages_deployment": {
+    "conclusion": "success",
+    "headSha": "b81a647718de6280f743076aac9b59df93c348e1",
+    "jobs": [
+      {
+        "databaseId": 106425083041,
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131/job/106425083041"
+      },
+      {
+        "databaseId": 106425149069,
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131/job/106425149069"
+      },
+      {
+        "databaseId": 106425149079,
+        "name": "report-build-status",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131/job/106425149079"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35627415131"
+  },
+  "public_site": "https://blackthrive.github.io/searchlight/",
+  "site_verification": "BlackThrive-live-site.json",
+  "cran_submitted": false,
+  "rhub_macos_abseil_retry": {
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "6af6952753253645633eaecdd34967bc60115c3c",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35636576062",
+    "jobs": [
+      {
+        "databaseId": 106455358298,
+        "name": "setup",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35636576062/job/106455358298"
+      },
+      {
+        "databaseId": 106455413526,
+        "name": "macos (R-devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35636576062/job/106455413526"
+      },
+      {
+        "databaseId": 106455415122,
+        "name": "matrix.config.label",
+        "status": "completed",
+        "conclusion": "skipped",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35636576062/job/106455415122"
+      }
+    ]
+  },
+  "ci_matrix_latest": {
+    "status": "completed",
+    "conclusion": "success",
+    "headSha": "9fa60ccf06d360e14bf2b75f9d54e58fcf0db289",
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856",
+    "jobs": [
+      {
+        "databaseId": 106466578954,
+        "name": "check (ubuntu-latest, release)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466578954"
+      },
+      {
+        "databaseId": 106466579212,
+        "name": "check (macos-latest, oldrel-1)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579212"
+      },
+      {
+        "databaseId": 106466579303,
+        "name": "check (macos-latest, release)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579303"
+      },
+      {
+        "databaseId": 106466579334,
+        "name": "check (ubuntu-latest, oldrel-1)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579334"
+      },
+      {
+        "databaseId": 106466579336,
+        "name": "check (macos-latest, devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579336"
+      },
+      {
+        "databaseId": 106466579381,
+        "name": "check (ubuntu-latest, devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579381"
+      },
+      {
+        "databaseId": 106466579414,
+        "name": "check (windows-latest, oldrel-1)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579414"
+      },
+      {
+        "databaseId": 106466579450,
+        "name": "check (windows-latest, release)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579450"
+      },
+      {
+        "databaseId": 106466579555,
+        "name": "check (windows-latest, devel)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/BlackThrive/searchlight/actions/runs/35639959856/job/106466579555"
+      }
+    ]
+  },
+  "rhub_effective_result": {
+    "status": "success",
+    "platforms": [
+      "windows-devel",
+      "linux-devel",
+      "macos-devel"
+    ],
+    "evidence": "inst/validation/BlackThrive-rhub.json",
+    "earlier_failed_runs_retained_as_history": true
+  },
+  "all_required_release_gates_verified": true
 }

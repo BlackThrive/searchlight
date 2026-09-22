@@ -85,6 +85,15 @@ jobs:
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+      - name: Install CRAN macOS system libraries
+        if: runner.os == 'macOS'
+        run: |
+          sudo Rscript -e 'source("https://mac.r-project.org/bin/install.R"); install.libs(c("gettext", "gdal", "udunits", "absl"))'
+          echo "/opt/R/$(uname -m)/bin" >> "$GITHUB_PATH"
+          echo "PKG_CONFIG_PATH=/opt/R/$(uname -m)/lib/pkgconfig" >> "$GITHUB_ENV"
+          # s2 1.1.12 bundles Abseil by default; use matching CRAN headers/libraries.
+          echo "S2_FORCE_BUNDLED_ABSEIL=false" >> "$GITHUB_ENV"
+          echo "MAKEFLAGS=-j2" >> "$GITHUB_ENV"
       - uses: r-hub/actions/platform-info@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
@@ -93,6 +102,18 @@ jobs:
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+      - name: Rebuild macOS dotCall64 with the CRAN OpenMP runtime
+        if: runner.os == 'macOS'
+        shell: Rscript {0}
+        run: |
+          openmp <- file.path(R.home("lib"), "libomp.dylib")
+          stopifnot(file.exists(openmp))
+          makevars <- tempfile("dotcall64-Makevars-")
+          writeLines(paste("PKG_LIBS +=", shQuote(openmp)), makevars)
+          withr::with_envvar(c(R_MAKEVARS_USER = makevars), {
+            install.packages("dotCall64", type = "source")
+          })
+          loadNamespace("dotCall64")
       - uses: r-hub/actions/run-check@v1
         with:
           job-config: ${{ matrix.config.job-config }}

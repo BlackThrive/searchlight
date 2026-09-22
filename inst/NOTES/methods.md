@@ -212,8 +212,9 @@ no disparity.
   [DOI](https://doi.org/10.1177/0962280216660421). BYM2 background; that backend is
   deferred beyond 0.1.0 and is not a description of the current MCAR prior.
 * Grogger, J. and Ridgeway, G. (2006). Testing for racial profiling in traffic
-  stops from behind a veil of darkness. *JASA* 101(475).
-  [Author-hosted reprint](https://www.rand.org/content/dam/rand/pubs/reprints/2007/RAND_RP1253.pdf).
+  stops from behind a veil of darkness. *JASA* 101(475):878-887.
+  doi:10.1198/016214506000000168. Listed in
+  [selected publications by Ridgeway](https://crim.sas.upenn.edu/people/greg-ridgeway).
   The evening overlap motivates the darkness design, subject to the transfer
   assumptions for pedestrian search stated above.
 * Knowles, J., Persico, N. and Todd, P. (2001). Racial bias in motor vehicle

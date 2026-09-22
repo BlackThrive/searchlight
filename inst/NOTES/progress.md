@@ -25,3 +25,35 @@ Next: make the configured GitHub repository accessible, verify the full CI/R-hub
 Milestone: M5 GitHub publication (2026-09-21).
 Completed: confirmed BlackThrive as owner, created its public searchlight repository, corrected metadata and README links, preserved win-builder evidence, and passed the local manual-inclusive as-CRAN check with no errors, warnings or notes.
 Next: publish source, verify hosted checks and documentation, then rebuild the source artifact; retain human authorship and leave CRAN submission to the maintainer.
+
+Milestone: M5 hosted validation and release evidence (2026-09-21).
+Completed: published BlackThrive/searchlight and its 51-page site; seven matrix jobs pass; spelling/lint/URLs and exact source archive check pass; fresh win-builder upload acknowledged; no AI co-author credits.
+Next: verify Linux R-devel and the macOS system-library fix in the queued matrix and R-hub jobs, review pull request 1, and inspect the new win-builder email before declaring release readiness; CRAN submission remains with the maintainer.
+
+Milestone: M5 corrected win-builder result verified (2026-09-21).
+Completed: win-builder 0 errors, 0 warnings, only New submission NOTE; all 392 assertions and both manuals pass; logs, binary and exact archive preserved; eight CI jobs and R-hub Linux/Windows pass.
+Next: verify the remaining macOS R-devel CI/R-hub results and release review before declaring readiness; the maintainer submits to CRAN.
+
+Milestone: M5 macOS build correction and full-matrix verification (2026-09-21).
+Completed: matched s2's macOS Abseil headers/libraries; all nine manual-inclusive CI jobs and Quality pass; clean CI and R-hub Linux/Windows logs preserved; source archive and human authorship technically reviewed.
+Next: finish the active Intel macOS R-hub validation and finalize RELEASE_READY.md; the maintainer submits the preserved archive to CRAN.
+
+Milestone: M5 technical release readiness complete (2026-09-21).
+Completed: all nine full CI checks, Quality and all three R-hub platforms pass; win-builder has only the permitted New submission NOTE; exact archive and check evidence preserved; release checklist and submission notes complete.
+Next: maintainer review of pull request 1 and CRAN submission of the checked source archive; retain the agreed human authorship.
+
+Milestone: M5 agreed coauthor metadata (2026-09-22).
+Completed: added Sarah Hamed and Souci Frissa as authors; rebuilt archive and installed citation verified; 392 assertions and both manuals pass with 0 errors, warnings or notes; fresh win-builder upload accepted.
+Next: inspect the new win-builder email before submitting the updated archive; the maintainer retains responsibility for CRAN submission.
+
+Milestone: M5 installed-package demonstration and report formatting (2026-09-22).
+Completed: tested a fresh archive installation, produced report/plots/ten CSVs, fixed numeric display, verified unchanged results, and passed 394 assertions plus both manuals with 0 errors/warnings/notes.
+Next: inspect fresh hosted checks and the latest win-builder email for the corrected archive; the maintainer submits to CRAN.
+
+Milestone: M5 report design refinement (2026-09-22).
+Completed: redesigned the installed HTML template; verified responsive navigation and disclosures, unchanged numerical CSVs, 407 assertions and both manuals with 0 errors/warnings/notes.
+Next: inspect fresh hosted and win-builder checks for the redesigned archive; the maintainer submits to CRAN.
+
+Milestone: M5 final external verification and CRAN submission (2026-09-22).
+Completed: verified the latest win-builder and nine-job CI results, 407 assertions, 95.0433% coverage and 0.35-second maximum external example; submitted the unchanged checked archive through the CRAN form, ID 356075.
+Next: maintainer confirms the email link; CRAN review and acceptance remain pending.

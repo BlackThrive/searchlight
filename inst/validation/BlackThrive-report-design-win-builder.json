@@ -1,0 +1,73 @@
+{
+  "attempted": "2026-09-22T04:34:34.954919+00:00",
+  "service": "https://win-builder.r-project.org/upload.aspx",
+  "target": "R-devel",
+  "transport": "HTTPS",
+  "source_file": "searchlight_0.1.0.tar.gz",
+  "source_sha256": "7087728ccd171841319149d8d1614b80a429dc5af5ffabac440280dfb1f213f5",
+  "source_bytes": 1667884,
+  "check_verified": true,
+  "previous_attempt": null,
+  "status": "checked; 0 errors, 0 warnings, 1 NOTE: New submission",
+  "http_status": 200,
+  "response_confirmation": "File name: searchlight_0.1.0.tar.gz File Size: 1667884 bytes Content type: application/gzip",
+  "result_delivery": "DESCRIPTION maintainer email",
+  "verified_at": "2026-09-22T06:24:04.522857+00:00",
+  "result_url": "https://win-builder.r-project.org/J16WE4Ec1bDE",
+  "r_version": "R-devel (2026-09-21 r90579 ucrt)",
+  "checked_at": "2026-09-22T04:49:11Z",
+  "platform": "Windows Server 2022 x64 (build 20348)",
+  "errors": 0,
+  "warnings": 0,
+  "notes": [
+    "New submission"
+  ],
+  "tests": {
+    "pass": 407,
+    "fail": 0,
+    "warn": 0,
+    "skip": 2
+  },
+  "manuals": {
+    "pdf": true,
+    "html": true
+  },
+  "source_association": "Maintainer email and upload receipt; binary report templates match the source after newline normalization and binary metadata includes both added coauthors. The service does not expose a source-archive checksum.",
+  "logs": [
+    {
+      "file": "inst/validation/win-builder-report-design-2026-09-22/00check.log",
+      "url": "https://win-builder.r-project.org/J16WE4Ec1bDE/00check.log",
+      "original_sha256": "a42ccb6dc2516c4308df80f946c80c2fbdef407b73aee4cab80845e7242c201a",
+      "normalized_sha256": "7c8d7b9f685ca988a651d6e8a15745d54292f76ace6ea04308d861f3e2a4e483",
+      "normalization": "LF line endings; trailing whitespace removed; original downloaded files and hashes retained separately"
+    },
+    {
+      "file": "inst/validation/win-builder-report-design-2026-09-22/searchlight-Ex.timings",
+      "url": "https://win-builder.r-project.org/J16WE4Ec1bDE/examples_and_tests/searchlight-Ex.timings",
+      "original_sha256": "f75ac97d6f6f4c90fc9d7c0dc49ec4b0d766dbf370eb7c204d0959ea35f15b64",
+      "normalized_sha256": "9ca617778ac0a2966df88c65a376556c387d0a799e8b47b5470ad382a02df2ee",
+      "normalization": "LF line endings; trailing whitespace removed; original downloaded files and hashes retained separately"
+    },
+    {
+      "file": "inst/validation/win-builder-report-design-2026-09-22/testthat.Rout",
+      "url": "https://win-builder.r-project.org/J16WE4Ec1bDE/examples_and_tests/tests/testthat.Rout",
+      "original_sha256": "8052fe316932f1b64c7615953e2afa24b1e1d67464821ebf6f7c781eaa3bfdf8",
+      "normalized_sha256": "a19a9e649fa0cc2b5891ccd1c5b1325dd096992bd6bca15c5a13692e33678fb8",
+      "normalization": "LF line endings; trailing whitespace removed; original downloaded files and hashes retained separately"
+    }
+  ],
+  "maximum_example_seconds": 0.35,
+  "binary_template_comparison": [
+    {
+      "file": "report.css",
+      "normalized_sha256": "9cbb5196b28d10117a1d5d542bd27024810020b30fcb18bbe1b7817a4b6cfd4a",
+      "matches": true
+    },
+    {
+      "file": "report.Rmd",
+      "normalized_sha256": "286a94066bdd40da6a636fdc6da2ecf032bd40558a9ae15de52b1a764b439035",
+      "matches": true
+    }
+  ],
+  "binary_sha256": "377bae34ed5222185192d9123915d253a6eaba6ecf5500154175a872cd9ef307"
+}

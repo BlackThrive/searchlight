@@ -4,6 +4,10 @@ Version: 0.1.0
 Authors@R: 
     c(person("Mustapha", "Wasseja", email = "mustapha.wasseja.mohammed@gmail.com",
              role = c("aut", "cre")),
+      person("Sarah", "Hamed", email = "Sarah.Hamed@blackthrive.org",
+             role = "aut"),
+      person("Souci", "Frissa", email = "Souci.Frissa@blackthrive.org",
+             role = "aut"),
       person("Black Thrive Global", role = c("cph", "fnd")))
 Description: Acquire and audit public police stop and search archives for
     England and Wales, retaining provenance and explicit coverage information.

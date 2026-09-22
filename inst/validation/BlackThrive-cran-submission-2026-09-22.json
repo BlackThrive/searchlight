@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-09-22T06:24:04.522857+00:00",
+  "package": "searchlight",
+  "version": "0.1.0",
+  "source_file": "searchlight_0.1.0.tar.gz",
+  "source_sha256": "7087728ccd171841319149d8d1614b80a429dc5af5ffabac440280dfb1f213f5",
+  "source_bytes": 1667884,
+  "submission_id_observed_after_upload": "356075",
+  "submission_service": "https://xmpalantir.wu.ac.at/cransubmit/",
+  "acknowledgement_url": "https://xmpalantir.wu.ac.at/cransubmit/index.php?strErr=0&submit=1",
+  "maintainer_name": "Mustapha Wasseja",
+  "maintainer_email": "mustapha.wasseja.mohammed@gmail.com",
+  "detected_authors": [
+    "Mustapha Wasseja [aut, cre]",
+    "Sarah Hamed [aut]",
+    "Souci Frissa [aut]",
+    "Black Thrive Global [cph, fnd]"
+  ],
+  "upload_acknowledged": true,
+  "submit_button_completed": true,
+  "status": "awaiting maintainer email confirmation",
+  "maintainer_email_confirmed": false,
+  "accepted_by_cran": false,
+  "page_acknowledgement": "The maintainer of this package has been sent an email to confirm the submission. After their confirmation the package will be passed to CRAN for review. Please note that the submission is not completed until it is confirmed by the maintainer (via the link in the e-mail)."
+}

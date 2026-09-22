@@ -24,9 +24,10 @@ jobs:
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr, any::styler, any::lintr, any::pkgload, any::spelling
+          extra-packages: any::covr, any::styler, any::roxygen2, any::lintr, any::pkgload, any::spelling
       - name: Style and lint
         run: |
+          options(warn = 1)
           stopifnot(!any(styler::style_pkg(dry = "on")$changed))
           pkgload::load_all(quiet = TRUE)
           stopifnot(length(lintr::lint_package()) == 0L)

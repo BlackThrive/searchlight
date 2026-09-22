@@ -309,3 +309,209 @@
   archive separately before rebuilding. Publish the completed package with its
   existing six milestone commits intact as the new repository's initial main
   history; subsequent changes can be reviewed against that populated baseline.
+* The first hosted checks exposed missing runner prerequisites: HTML Tidy on
+  Linux/macOS, gettext headers for macOS R-devel, and roxygen2 for styler's
+  documentation-example checks. Install these explicitly. The macOS dotCall64
+  binary also fails to load an OpenMP symbol; rebuild the same CRAN release from
+  source, linking CRAN R's supplied libomp runtime, and verify namespace loading.
+  Keep all package tests enabled and retain these environment differences.
+* Configure the documentation publisher's GitHub Actions build identity so its
+  initial gh-pages commit succeeds. This is an automated deployment identity,
+  not an AI author or co-author; package/source authorship remains unchanged.
+* The Windows runner's TeX log contains a completed 33-page PDF with no LaTeX
+  errors, but the external manual driver returns failure. Use R's documented
+  texi2dvi emulation, which directly runs LaTeX and indexing until references
+  resolve. This changes the driver, not the manual checks or their pass criteria.
+* The emulation attempt did not resolve the Windows failure and introduced the
+  same manual-driver symptom on macOS. Restore the default driver and add a
+  direct Windows Rd2pdf preflight with retained intermediate files, so the
+  underlying error is visible before installing the full dependency tree.
+* Install the local package explicitly in the documentation workflow before
+  rendering reference examples. Keep example acquisition offline and cap threads.
+* The direct Windows manual preflight identifies the actual failure: makeindex
+  is absent from TinyTeX. Install its TeX Live package along with the fonts,
+  keeping PDF manual checks enabled on every OS and R version.
+* Replace the inaccessible RAND reprint link with the author's verified
+  university bibliography and retain the full paper citation and publisher-
+  verified DOI. This is a bibliography link, not a claim to host the paper.
+* The published pkgdown site passes HTTP checks for all 51 HTML pages. Local
+  spelling, lint and all 16 package URLs pass after replacing the possessive
+  surname in the citation label with "selected publications by Ridgeway".
+* Seven full hosted checks now pass, including PDF manuals on all three Windows
+  R versions. Linux/macOS R-devel dependencies and two R-hub platforms are still
+  running; R-hub Windows passes with --no-manual. Keep their run URLs and exact
+  scope in the release evidence. Rebuild and check the corrected source archive
+  before sending it for another win-builder check; preserve the earlier result.
+* Let an active check matrix finish before the next revision starts. R-devel
+  compiles dependencies from source, and repeatedly cancelling it for evidence
+  or documentation commits discards that installation work before caching.
+* The corrected 1,635,822-byte source archive passed its own manual-inclusive
+  as-CRAN check (0/0/0), maximum example 2.21 seconds, installed 3,039,622 bytes.
+  Win-builder acknowledged that exact archive over HTTPS; its SHA-256 and
+  receipt are retained separately from the earlier September 16 result. Await
+  the maintainer's new result email and the outstanding hosted R-devel checks.
+  No CRAN submission or release-ready assertion has been made.
+* The remaining macOS R-devel job failed while building the terra dependency:
+  gdal-config was missing. R-devel has no current CRAN macOS binaries, so install
+  CRAN's matching GDAL and udunits system libraries (including their recursive
+  dependencies) and expose the CRAN bin/pkg-config paths before R dependencies.
+  Apply the same prerequisites and OpenMP rebuild to R-hub's macOS runner.
+  The latest hosted quality workflow now passes after the citation correction.
+
+## 2026-09-21: Corrected win-builder result verified
+
+* The maintainer supplied the fresh result at
+  https://win-builder.r-project.org/x5fBiE4ieQOI/. Its only NOTE is "New
+  submission", explicitly permitted by section 8.2. There are no errors,
+  warnings, incoming URL findings or README-file findings. All 392 assertions
+  passed, with two intended CRAN skips; both manuals and all vignettes passed.
+* Preserve the exact 1,635,822-byte uploaded archive, original logs and Windows
+  binary before expiry. Verify the ZIP integrity and match the installed release
+  evidence metadata against that archive. Record download and normalized-log
+  hashes separately. Keep the original September 16 result unchanged.
+* Eight of nine current CI jobs now pass, including Linux R-devel; R-hub Windows
+  and Linux also pass. The macOS R-devel jobs remain in progress. Update the
+  checklist and CRAN comments, but retain the pending release status until those
+  checks complete. This result is a pre-submission check, not a CRAN submission.
+
+## 2026-09-21: Match macOS Abseil headers and libraries
+
+* All nine manual-inclusive hosted R/OS checks passed in run 35628215618.
+  R-hub's Intel macOS runner separately failed loading s2 1.1.12: its compile
+  command selected CRAN's Abseil 20250127 headers ahead of the bundled headers,
+  then linked the bundled libraries, leaving DoIgnoreLeak unresolved.
+* Install CRAN's absl system library and use s2 1.1.12's documented configure
+  switch S2_FORCE_BUNDLED_ABSEIL=false on macOS. This keeps the headers and
+  static libraries from the same CRAN toolchain. Retain every package check,
+  and verify the correction with another R-hub macOS run. Bound each source
+  build to two make jobs to reduce the long install. Package-install workers
+  retain R-hub's Ncpus setting; pkgdepends reads that R option directly.
+* Preserve normalized win-builder evidence with LF checkout attributes so its
+  recorded hashes remain reproducible on Windows. The checked source archive
+  and package implementation remain unchanged.
+* The corrected workflow passed all nine jobs in run 35636569788. Preserve
+  the complete check output and hashes for each platform under ci-2026-09-21.
+  The original R-hub Linux/Windows artifacts also confirm Status: OK; preserve
+  those logs separately and identify their --no-manual scope. The final Intel
+  macOS R-hub run is still installing dependencies.
+* Technical review confirmed 222 matching archive files (DESCRIPTION compared
+  after build normalization), with changes limited to three existing evidence
+  and decision/progress files. The archived source hash and all five preserved
+  win-builder log hashes match. No analysis implementation or author-credit
+  changes are required; retain the checked archive as the submission candidate.
+
+## 2026-09-21: Final R-hub validation and release readiness
+
+* R-hub Intel macOS run 35636576062 completed successfully. Both dependency
+  installation and the OpenMP rebuild passed; the package's --no-manual
+  --as-cran check reports Status: OK, with no errors, warnings or notes.
+  Preserve its actual 00check.log and hash alongside the clean Linux/Windows
+  results in BlackThrive-rhub.json. This closes the final external release gate.
+* All nine full checks and Quality also pass on the release-evidence commit
+  9fa60cc. Preserve the checked source archive without rebuilding it; its local
+  and win-builder results apply to that exact SHA-256. Complete cran-comments
+  and RELEASE_READY.md with the verified scope and results. The maintainer
+  reviews the release pull request and submits to CRAN; no submission was made.
+
+## 2026-09-22: Add the agreed Black Thrive coauthors
+
+* The maintainer requested Sarah Hamed and Souci Frissa as package coauthors.
+  Add each with the author role, using the work email supplied in their contact
+  cards: Sarah.Hamed@blackthrive.org and Souci.Frissa@blackthrive.org. Mustapha
+  Wasseja remains author and sole maintainer; Black Thrive Global retains its
+  copyright-holder and funder roles. No ORCIDs were supplied.
+* Regenerate package documentation and rebuild the submission archive so its
+  metadata and automatic citation include all three human authors. Preserve
+  the previous checked archive and its evidence as historical records; its
+  exact-source check hashes do not cover this authorship update. Recheck the
+  new archive, keeping all analysis code, tests and data unchanged.
+* The session-start check was interrupted by inherited C.UTF-8 locale
+  settings unsupported by Windows R. Set LC_ALL, LANG and LC_CTYPE to C
+  for the verification process; the rebuilt archive's full --as-cran
+  check then passed with no errors, warnings or notes and both manuals.
+  No checks were removed. Spelling is clean, the installed citation lists
+  all three authors, and 83 analysis/test/data/validation/vignette-source
+  files match the previous archive. Win-builder accepted the new archive
+  for R-devel; the maintainer email will receive its result. Preserve the
+  new hash and scoped evidence separately from the previous receipts.
+
+## 2026-09-22: Test the installed user workflow and report presentation
+
+* Install the actual submission archive into a new temporary package library,
+  reusing existing dependency libraries. Exercise only its public functions:
+  parse packaged CSVs, audit coverage and quality, recompute counts/rates and
+  missingness bounds, fit count/outcome models, check ranking and geographic
+  assignment, verify timestamp gating, and generate an offline HTML report.
+  Keep the demonstration in a separate workspace folder with CSVs, R objects,
+  plots, a console transcript, installation log and reproducible script.
+* The first installed run passed on 4,657 events with 2,280 unknown ethnicities;
+  the four-MSOA example contains 769 events. The report exposed a numeric
+  presentation bug: formatting an entire column without scientific notation
+  made tiny p-values force excessive decimals onto ordinary values. Format
+  each numeric cell with five significant figures using formatC's general
+  format. Add a regression check covering ordinary, tiny, zero, infinite and
+  missing values; numeric result objects and statistical methods are unchanged.
+* Preserve the coauthor archive and its receipts before building the corrected
+  archive. Reinstall and rerun the demonstration, including a rendered-table
+  check for excessive decimal strings, then check the exact source archive.
+  Previous exact-source receipts remain historical rather than covering a
+  different hash. CRAN submission remains with the maintainer.
+* The corrected archive passed the installed workflow and its full local
+  --as-cran check: 394 assertions, two intended skips, both manuals, and no
+  errors, warnings or notes. All ten result CSVs are byte-identical to the first
+  run. Browser inspection confirms compact numeric cells and a working report.
+  Package lint and changed-file style checks pass. Preserve the results in
+  BlackThrive-installed-demo.json and BlackThrive-demo-source-check.json.
+  Win-builder accepted the corrected archive; the maintainer receives its
+  result by email. Do not treat an earlier archive's email as this one's result.
+
+## 2026-09-22: Improve the generated report's visual design
+
+* Replace the package template with a responsive green-and-cream report layout,
+  a prominent user title, source period, section navigation and summary cards.
+  Summary event counts and unknown shares describe the supplied records;
+  source coverage remains unchanged by filtering. Empty records show an
+  unavailable percentage, and missing submissions remain NA in tables.
+* Show a concise coverage table with text status labels. Keep the full coverage
+  audit, changelog and source metadata in native expandable disclosures. Retain
+  every result column, diagnostic, exclusion and analysis scope. Move ratio
+  estimates and intervals ahead of secondary columns, right-align numeric
+  cells and retain technical variable names in column header titles.
+* Keep sampling uncertainty and assumption ranges separately labelled. Use
+  only inline CSS and native HTML, with keyboard-scrollable tables, a skip
+  link and print styles. Add no fonts, scripts, images or network dependencies.
+* Preserve the previous archive and report under
+  data-raw/work/report-before-redesign/. Verify the new installed workflow
+  against the unchanged ten numerical CSV outputs and record archive-specific
+  check evidence separately. CRAN submission remains with the maintainer.
+
+The initial check recorded a 16.28-second elapsed-time outlier for sl_read_records (0.73 CPU seconds). The identical example from the same installed archive passed isolated reruns in 0.53 and 0.17 seconds. The original result and both reruns are retained.
+
+The local release wrapper's five-second elapsed-time assertion failed on that
+outlier even though R CMD check itself returned Status: OK. Do not hide or
+suppress the gate. The isolated runs pass; keep release_ready false and inspect
+fresh hosted/win-builder timings before maintainer submission. If those also
+exceed the limit, rerun the full timing gate on a stable host and investigate
+file I/O before release.
+
+## 2026-09-22: Verified current checks and requested CRAN submission
+
+* The maintainer explicitly requested submission in the current session. This
+  authorizes the CRAN form action and supersedes the earlier repository default
+  that the maintainer handles submission. Keep the agreed human authorship.
+* Match the latest 07:51 Nairobi win-builder email to the 04:34 UTC upload
+  receipt. Preserve original log hashes and normalized logs. Both binary report
+  templates match the submitted source after newline normalization and the
+  binary contains both coauthors. Win-builder does not expose the source hash;
+  record this association without claiming a server-side checksum comparison.
+* Win-builder has only New submission NOTE, 407 assertions and both manuals
+  passing; maximum example elapsed time is 0.35 seconds. All nine CI jobs on
+  c28b4f0 pass with both manuals, and quality coverage is 95.0433%. This resolves
+  the pending external verification gate; retain the local elapsed-time outlier.
+* Submit the existing 1,667,884-byte archive without rebuilding. The form
+  extracted the correct version, maintainer and three human authors. Upload ID
+  356075 and the final submission acknowledgement are recorded. CRAN says an
+  email was sent and requires the maintainer to confirm before review. Do not
+  represent this pending confirmation as acceptance or publication, or upload
+  another copy while it is pending. Repository evidence additions postdate the
+  archive and do not change the checked/submitted bytes.
