@@ -1,0 +1,50 @@
+{
+  "prepared_at": "2026-09-29T09:47:48.502683+00:00",
+  "old_main": "e80332946e2c13a2257c169ef035cd961826a439",
+  "new_main": "0fe099ab316963781dbad62823968ef4f8fa428e",
+  "old_gh_pages": "174c75a0acaf56d1a0a385f1de41cfbe5207cd30",
+  "new_gh_pages": "1f32cea8d619530a1b14a1aa9fc6231b3c0f3286",
+  "backup_bundle": "data-raw/work/publishing-attribution-2026-09-29/before-attribution-change.bundle",
+  "backup_sha256": "f08dc76ead2f831fe7613b63bc6520ead8be8d0b120ecdb156652f88adb2df81",
+  "documentation_commits": [
+    {
+      "old_commit": "ddef19a53f5a47a1a8cf55965caa1a2263543d04",
+      "new_commit": "39942d2f20c8444f48f83684346e2305ce7928f8",
+      "unchanged_tree": "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    },
+    {
+      "old_commit": "75ca046c5975166e407f916b228e3c6b45a8d148",
+      "new_commit": "c5a38e2e77ffb8c930402a4d3745ec9420e3ab49",
+      "unchanged_tree": "31e5e90ef7d02f871b14de6e75427ee220868169"
+    },
+    {
+      "old_commit": "4e28b60fea136fed8fef7e75325e373f9fcdcb72",
+      "new_commit": "4f50b313cc6be6803930572a25e4d72ffdaa6f32",
+      "unchanged_tree": "291a4fe4e2c013f331697946f878772cfdae83c5"
+    },
+    {
+      "old_commit": "b81a647718de6280f743076aac9b59df93c348e1",
+      "new_commit": "68303604be2051c6ee96f910ef291942e3f49b00",
+      "unchanged_tree": "ef7e4a03cd5745306328bdc309f93424ca92c8e4"
+    },
+    {
+      "old_commit": "174c75a0acaf56d1a0a385f1de41cfbe5207cd30",
+      "new_commit": "1f32cea8d619530a1b14a1aa9fc6231b3c0f3286",
+      "unchanged_tree": "136cc7268ca224353fbd72d7f8af20c5e4b3d6a0"
+    }
+  ],
+  "source_archive_sha256": "7087728ccd171841319149d8d1614b80a429dc5af5ffabac440280dfb1f213f5",
+  "note": "Five generated-documentation commits retain identical trees, dates and messages; only author/committer identity and descendant parent IDs change. Main change is one publishing-identity step. Skip CI prevents a rebuild from older main from replacing the current published site.",
+  "verified_at": "2026-09-29T09:50:24.043758+00:00",
+  "remote_commits_verified": 5,
+  "remote_author_and_committer": "Mustapha-Wasseja",
+  "main_and_release_workflow_yaml_valid": true,
+  "published_site": {
+    "url": "https://blackthrive.github.io/searchlight/",
+    "http_status": 200,
+    "coauthors_present": true
+  },
+  "sidebar_status": "Bot still visible in the GitHub page immediately after update; contributor cache refresh pending",
+  "commit_page_status": "Verified all five displayed commits now name Mustapha-Wasseja; screenshot saved locally",
+  "github_cache_guidance": "https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/viewing-a-projects-contributors#contributor-data-is-stale-after-history-changes"
+}

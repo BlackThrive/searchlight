@@ -515,3 +515,25 @@ file I/O before release.
   represent this pending confirmation as acceptance or publication, or upload
   another copy while it is pending. Repository evidence additions postdate the
   archive and do not change the checked/submitted bytes.
+
+## 2026-09-29: Remove the documentation bot's contributor attribution
+
+* The maintainer requested removal of github-actions[bot] from the repository
+  contributor list. Its five commits were confined to generated documentation
+  on gh-pages. Preserve a verified local Git bundle before changing this history.
+* Replace only those commits' author and committer identities with the existing
+  maintainer Git identity. Preserve every tree, commit message and timestamp,
+  mapping descendant parents to the corresponding corrected commits. Publish
+  using an explicit force-with-lease against the previously verified branch tip.
+* Configure the maintainer identity in the live main publishing workflow and
+  the release branch workflow, so future documentation commits use the same
+  identity. The main commit only adds that step. Skip CI for this metadata change
+  to avoid rebuilding the current site from the older main package revision.
+* GitHub's API and commit page now identify Mustapha-Wasseja for all five commits.
+  Both workflow YAML files parse correctly, the site returns HTTP 200 with both
+  coauthors, and the submitted archive checksum is unchanged. No package code or
+  test changes require repeating the package checks for this attribution task.
+* The sidebar still showed its cached bot entry immediately after the change.
+  GitHub documents a refresh delay of about 24 hours after rewriting history;
+  do not claim that the visible list has already refreshed. The original bundle,
+  commit mapping and screenshot are retained under data-raw/work/publishing-attribution-2026-09-29/.

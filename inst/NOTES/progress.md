@@ -57,3 +57,7 @@ Next: inspect fresh hosted and win-builder checks for the redesigned archive; th
 Milestone: M5 final external verification and CRAN submission (2026-09-22).
 Completed: verified the latest win-builder and nine-job CI results, 407 assertions, 95.0433% coverage and 0.35-second maximum external example; submitted the unchanged checked archive through the CRAN form, ID 356075.
 Next: maintainer confirms the email link; CRAN review and acceptance remain pending.
+
+Milestone: Repository contributor attribution (2026-09-29).
+Completed: backed up and corrected five documentation commits, configured the maintainer publishing identity on main and the release branch, and verified remote authors, workflow YAML and the live documentation site.
+Next: allow GitHub's cached contributor sidebar to refresh; no package rebuild or CRAN resubmission is required.
