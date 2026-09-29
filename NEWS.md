@@ -1,5 +1,7 @@
 # searchlight 0.1.0 (in development)
 
+* Give offline reports a responsive editorial layout, summary cards, section
+  navigation, readable tables and expandable audit and source details.
 * Add an offline HTML report with source coverage, analysis scope, diagnostics,
   separate uncertainty sections and an installed Markdown/Rmd template.
 * Preserve submission months across valid UTC-to-London calendar crossings and

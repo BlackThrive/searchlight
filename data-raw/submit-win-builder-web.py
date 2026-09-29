@@ -1,5 +1,6 @@
-"""Explicit HTTPS fallback for a win-builder upload without confirmation."""
+"""Explicit HTTPS win-builder check upload, retaining earlier receipts."""
 
+import argparse
 import datetime
 import hashlib
 import json
@@ -37,12 +38,26 @@ class Form(HTMLParser):
 
 
 root = Path(__file__).resolve().parents[1]
-receipt_path = root / "inst/validation/M5-win-builder.json"
-previous = json.loads(receipt_path.read_text())
-assert previous["status"] == "submission not confirmed"
-source = root / previous["source_file"]
+parser = argparse.ArgumentParser()
+parser.add_argument("--artifact-manifest")
+parser.add_argument("--receipt", default="inst/validation/M5-win-builder.json")
+args = parser.parse_args()
+receipt_path = root / args.receipt
+previous = (json.loads(receipt_path.read_text())
+            if receipt_path.exists() else None)
+if args.artifact_manifest:
+    artifact = json.loads((root / args.artifact_manifest).read_text())
+    source = root / artifact["file"]
+    source_sha256 = artifact["sha256"]
+    assert not (previous and previous.get("source_sha256") == source_sha256
+                and previous["status"] != "submission not confirmed"), (
+                    "This artifact already has a receipt; inspect it before retrying.")
+else:
+    assert previous and previous["status"] == "submission not confirmed"
+    source = root / previous["source_file"]
+    source_sha256 = previous["source_sha256"]
 payload = source.read_bytes()
-assert hashlib.sha256(payload).hexdigest() == previous["source_sha256"]
+assert hashlib.sha256(payload).hexdigest() == source_sha256
 url = "https://win-builder.r-project.org/upload.aspx"
 opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor())
 with opener.open(url, timeout=45) as response:
@@ -64,7 +79,7 @@ request = urllib.request.Request(url, data=b"".join(parts), headers={
 receipt = {
     "attempted": datetime.datetime.now(datetime.timezone.utc).isoformat(),
     "service": url, "target": "R-devel", "transport": "HTTPS",
-    "source_file": source.name, "source_sha256": previous["source_sha256"],
+    "source_file": source.name, "source_sha256": source_sha256,
     "source_bytes": len(payload), "check_verified": False,
     "previous_attempt": previous,
 }

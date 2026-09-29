@@ -1,48 +1,39 @@
-## Development status
+## First submission
 
-Not a CRAN submission. Version 0.1.0 is the intended first release. External
-release gates remain pending and no RELEASE_READY.md has been produced.
+This is the first CRAN submission of searchlight 0.1.0, for audited analysis
+of police stop and search records. The package has no reverse dependencies.
 
-## Test environments
+## Current checks (2026-09-22)
 
-Local: Windows 11 x64, R 4.5.2 (ucrt). This is not a substitute for the required
-release/devel/oldrel checks on Linux, macOS and Windows. The nine-job workflow is
-prepared; the BlackThrive/searchlight repository was created on 2026-09-21 and
-its hosted checks are being verified.
+* Win-builder, R-devel (2026-09-21 r90579 ucrt), Windows Server 2022 x64:
+  0 errors, 0 warnings, 1 NOTE, solely "New submission". Examples, tests,
+  vignettes and PDF/HTML manuals pass. Results:
+  https://win-builder.r-project.org/J16WE4Ec1bDE/00check.log
+* Linux, macOS and Windows, each with R release 4.6.1, R-devel and R 4.5.3:
+  all nine --as-cran checks pass with 0 errors, warnings or notes, including
+  PDF/HTML manuals. These checks cover the current report implementation:
+  https://github.com/BlackThrive/searchlight/actions/runs/35688724233
+* Exact source archive, Windows 11 x64, R 4.5.2: --as-cran passes with
+  0 errors, warnings or notes, including both manuals. Local online incoming
+  checks and the network clock probe are disabled; win-builder provides the
+  current online incoming check.
 
-M0-M4 local `--as-cran --no-manual` checks: 0 errors, 0 warnings, 0 notes.
-M5 local `--as-cran`, including PDF and HTML manuals: 0 errors, 0 warnings,
-0 notes; 392 assertions passed, with two CRAN-only skips. Local runs disable
-online incoming checks and the network clock probe. Tests, examples
-and precomputed vignettes require no network, and test resources are capped
-at two threads. Logs and timings are retained in `inst/validation/`.
+All 407 CRAN-mode assertions pass, with two intended CRAN skips. The full
+developer suite includes spatial recovery and visual snapshots; line coverage
+is 95.0433%. Tests and examples run offline with resources capped at two threads.
+The four precomputed vignettes are included. Lint and spelling are clean;
+the 16 package URLs were verified on 2026-09-21 and are unchanged.
 
-Full developer tests, including recovery and visual snapshots, passed in the
-coverage run at 94.9358%. The slowest installed example took 2.25 seconds.
-The checked installed package was 2,943,212 bytes; extdata was 810,818 bytes.
-The completed studies include an
-18-fit spatial pilot and 180 missingness simulations, with failed spatial
-convergence retained and labelled. National validation reproduced all 3,096
-monthly count cells exactly and 43 force ratios within 1.8e-15. Both batching
-methods gave identical assignments and 116,551 aggregate count rows. Four
-precomputed vignettes, the offline report and the local pkgdown site are built
-and visually checked; the published fifteen-line quick start executes offline.
+Installed size is 3,200,250 bytes; bundled extdata is 810,818 bytes. Win-builder's
+longest example takes 0.35 seconds. An initial local check had a 16.28-second
+elapsed-time outlier for sl_read_records (0.73 CPU seconds); isolated reruns
+from the same installed archive took 0.53 and 0.17 seconds. The original
+timing and reruns are retained in the validation evidence.
 
-Win-builder: R Under development (2026-09-15 r90540 ucrt), Windows Server 2022
-x64. The uploaded source archive completed with 0 errors, 0 warnings and 1 NOTE;
-installation, examples, tests, vignettes and PDF/HTML manuals passed. The incoming
-NOTE includes "New submission", three unavailable GitHub/site URLs, and two
-README file links to excluded repository files (AGENTS.md and
-RELEASE_CHECKLIST.md). The README links have since been replaced with plain
-filename references; that edit has not been rechecked by win-builder. Logs and
-the checked source hash are retained in `inst/validation/M5-win-builder.json`.
+A fresh installation reparses all 4,657 bundled events, recomputes analyses,
+exercises diagnostics and produces a self-contained HTML report. Sarah Hamed
+and Souci Frissa are coauthors; Mustapha Wasseja is the sole maintainer.
 
-Spelling and lint are clean in the recorded local validation. R-hub's original
-attempt returned Not Found for the placeholder repository. The maintainer has
-since supplied the correct owner, BlackThrive, and the repository has been
-created with corrected metadata. Fresh URL and hosted checks remain pending.
-The RAND reprint URL previously returned 403 to the automated checker.
-
-## Reverse dependencies
-
-None (new package).
+Earlier R-hub checks passed on Linux, Windows and Intel macOS R-devel before
+the report presentation changes, with --no-manual --as-cran. They are retained
+as historical evidence, separately from the current checks above.

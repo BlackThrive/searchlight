@@ -1,5 +1,13 @@
 # Release evidence
 
+Current status (2026-09-22): the redesigned archive passes all nine current CI
+checks and win-builder (only the expected New submission NOTE). Coverage is
+95.0433%; 407 CRAN-mode assertions pass. CRAN form submission 356075 is awaiting
+maintainer email confirmation before review. It is not yet accepted or published.
+See RELEASE_READY.md and BlackThrive-cran-submission-2026-09-22.json.
+
+Earlier milestone entries below retain their original archive/revision scope.
+
 - [x] M0: skeleton and clean local R CMD check (see `inst/validation/M0-check.log`)
 - [x] M1: archive ingestion, revision selection and contract fixtures
 - [x] M2: verified geography, population, coverage and quality
@@ -15,31 +23,108 @@
 - [x] Final coverage at least 85%: 94.9358%, including full recovery and snapshots
 - [x] Package lint clean after report and missing-submission fixes
 - [x] Final local M5 as-CRAN check: 0 errors/warnings/notes, PDF/HTML manuals included
-- [x] Examples below five seconds (maximum 2.25); installed 2.94 MB, extdata 0.81 MB
+- [x] Examples below five seconds (local maximum 2.21); installed 3.04 MB, extdata 0.81 MB
 - [x] Final spelling check clean
-- [ ] URL check clean
+- [x] URL check clean (2026-09-21, all 16 checked URLs)
 - [x] Local pkgdown site built and inspected; 51 pages have valid local links
 - [x] Win-builder R-devel upload acknowledged over HTTPS; receipt and hash saved
 - [x] Win-builder R-devel result retrieved: 0 errors, 0 warnings, 1 incoming NOTE
-- [ ] Win-builder incoming URL issues resolved and corrected archive rechecked
-- [ ] Full R/OS CI matrix and rhub verified
-- [ ] pkgdown deployed and milestone pull requests reviewed
+- [x] Corrected archive rebuilt, checked locally (0/0/0), and accepted by win-builder
+- [x] Win-builder incoming URL issues resolved; corrected archive has only New submission NOTE
+- [x] Full R/OS CI matrix and rhub verified
+- [x] pkgdown deployed; all 51 published HTML pages return HTTP 200
+- [x] Hosted release pull request technically reviewed; package implementation and author credits unchanged
 
 The maintainer corrected the GitHub owner to BlackThrive on 2026-09-21.
 The public repository https://github.com/BlackThrive/searchlight has been created
-and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Publication,
-remote CI, R-hub and documentation deployment are being verified. The earlier
-R-hub attempt returned Not Found for the old placeholder repository. URL checking
-also encountered a 403 response from the RAND paper server; its source was
-verified separately and the automatic failure is not treated as a pass.
+and package, issue-tracker, pkgdown and R-hub URLs now use that owner. Source and
+documentation are published. Release fixes are in pull request 1. All nine
+manual-inclusive CI jobs passed in run 35636569788 after the Abseil fix (the
+earlier runs 35628215618 and 35634359155 also passed). The subsequent
+release-evidence commit also passed all nine checks in run 35639959856.
+R-hub Windows, Linux and Intel macOS R-devel pass with --no-manual --as-cran.
+Selecting matching CRAN Abseil headers and libraries resolved the Intel macOS
+s2 dependency failure; R-hub run 35636576062 completed with Status: OK.
+BlackThrive-ci-matrix.json and ci-2026-09-21 contain all nine clean check logs
+and their hashes. BlackThrive-rhub.json and rhub-2026-09-21 preserve the clean
+R-hub logs for all three platforms, with their --no-manual scope stated explicitly.
+See M5-external-checks.json for run URLs
+and the status snapshot. The earlier R-hub attempts and failed runner checks are
+retained as historical evidence, not treated as passing checks.
 
-Win-builder checked version 0.1.0 on R-devel (2026-09-15 r90540 ucrt), Windows
-Server 2022, with 0 errors, 0 warnings and 1 NOTE. Installation, tests, examples,
-vignettes and PDF/HTML manuals passed. The incoming NOTE groups the expected
-new-submission notice, three URLs using the old placeholder owner, and README
-file links to AGENTS.md and RELEASE_CHECKLIST.md, which are excluded from the
-source archive. The two README links are now plain filename references; the
-corrected README has not been rechecked by win-builder. The exact checked source
-hash and preserved logs are recorded in `inst/validation/M5-win-builder.json`.
+The RAND reprint server returned HTTP 403 to automated checks. Its paper citation
+now retains the verified DOI and links to the author's university bibliography.
+Fresh URL checking, spelling and lint all pass. The hosted quality workflow also
+passes after the citation correction. BlackThrive-live-site.json records
+the deployed site revision and successful HTTP checks for all 51 HTML pages.
 
-No release-ready assertion is made until every required check has evidence.
+Win-builder rechecked the corrected 1,635,822-byte archive on R-devel
+(2026-09-20 r90574 ucrt), Windows Server 2022: 0 errors, 0 warnings and 1 NOTE,
+solely "New submission". The former URL and README-file issues are resolved.
+All 392 assertions passed, with two intended CRAN skips. Examples, vignettes
+and PDF/HTML manuals passed; the longest example took 0.36 seconds.
+This satisfies the win-builder gate and the permitted new-submission exception.
+
+The exact source archive, Windows binary and original logs have been preserved.
+BlackThrive-win-builder.json records the result URL, hashes and normalized logs
+under inst/validation/win-builder-2026-09-21. BlackThrive-source-check.json records
+the same archive's local manual-inclusive check (0/0/0). The earlier result is
+retained separately in M5-win-builder.json. The checked archive is unchanged.
+An archive comparison verified 222 matching files, including normalized
+DESCRIPTION fields; only three existing decision/progress/evidence files differ.
+The review found no remaining implementation or authorship issues at that time.
+All required technical release gates passed on 2026-09-21. This technical review is not a maintainer
+approval or a CRAN submission.
+
+RELEASE_READY.md identifies the checked archive and summarizes the completed
+evidence. The maintainer submits the package to CRAN.
+
+## 2026-09-22 authorship update
+
+Sarah Hamed and Souci Frissa are now coauthors, with Mustapha Wasseja remaining
+the maintainer. The rebuilt archive contains their names and supplied work
+emails. Analysis code, tests, data and vignette sources are unchanged. The
+previous source archive and check receipts remain historical evidence; inspect
+the fresh win-builder result for the new archive before submission. See
+RELEASE_READY.md for the current archive hash and check status.
+
+## 2026-09-22 installed-user demonstration
+
+The actual archive installs into a fresh package library and runs the offline
+workflow, including CSV parsing, coverage, counts, rates, sensitivity, regression,
+outcomes, geography, timestamp gating and HTML reporting. A report formatting
+issue found during visual inspection is fixed, with a regression test. The ten
+numeric output CSVs are unchanged. The corrected source archive passes local
+--as-cran checks including both manuals: 0 errors, 0 warnings, 0 notes and 394
+passing assertions with two intended skips. The corrected archive has a new
+hash and fresh win-builder receipt; prior exact-source results remain historical.
+See BlackThrive-installed-demo.json and BlackThrive-demo-source-check.json.
+
+## 2026-09-22 report design update
+
+The package's generated HTML now has a responsive header and navigation,
+summary cards, readable tables and expandable audit/source details. It remains
+self-contained and keeps missing coverage and the two uncertainty types explicit.
+The exact rebuilt archive passes local --as-cran checks with both manuals,
+407 passing assertions, two intended skips and 0 errors/warnings/notes.
+A fresh installation regenerates the redesigned demo with eleven tables; all
+ten numerical CSV outputs are unchanged. Lint, spelling, desktop and narrow
+browser inspections pass. Fresh external check results remain to be inspected.
+See BlackThrive-report-design-source-check.json and BlackThrive-report-design-demo.json.
+
+## 2026-09-22 final checks and CRAN submission
+
+- [x] Exact submitted archive remains SHA-256
+  `7087728ccd171841319149d8d1614b80a429dc5af5ffabac440280dfb1f213f5`
+- [x] Latest win-builder R-devel: 0 errors, 0 warnings, only New submission NOTE
+- [x] Current Linux/macOS/Windows release/devel/oldrel CI: all nine Status: OK
+- [x] Current quality workflow passes; line coverage 95.0433%
+- [x] External example timing verified: maximum 0.35 seconds
+- [x] CRAN upload and Submit package action acknowledged, ID 356075
+- [ ] Maintainer clicks the confirmation email link
+- [ ] CRAN review and acceptance (not yet known)
+
+The original 16.28-second local elapsed-time outlier and passing isolated reruns
+are retained. Current external checks resolve the pending timing verification.
+No package code, report template, tests or submitted archive changed during
+submission; only repository evidence and submission comments were updated.

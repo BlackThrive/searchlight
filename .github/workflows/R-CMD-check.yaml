@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  # Let source installations on R-devel finish and populate dependency caches.
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
@@ -30,18 +31,66 @@ jobs:
       - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-pandoc@v2
       - uses: r-lib/actions/setup-tinytex@v2
-      - name: Prepare manual fonts
+      - name: Prepare manual fonts and indexing
         run: |
           tlmgr update --self
-          tlmgr install inconsolata helvetic times
+          tlmgr install inconsolata helvetic times makeindex
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.r }}
           use-public-rspm: true
+      - name: Install HTML validation tool on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y tidy
+      - name: Install HTML validation tool on macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew install tidy-html5
+          echo "$(brew --prefix tidy-html5)/bin" >> "$GITHUB_PATH"
+      - name: Install CRAN macOS system libraries
+        if: runner.os == 'macOS'
+        run: |
+          sudo Rscript -e 'source("https://mac.r-project.org/bin/install.R"); install.libs(c("gettext", "gdal", "udunits", "absl"))'
+          echo "/opt/R/$(uname -m)/bin" >> "$GITHUB_PATH"
+          echo "PKG_CONFIG_PATH=/opt/R/$(uname -m)/lib/pkgconfig" >> "$GITHUB_ENV"
+          # s2 1.1.12 bundles Abseil by default; use matching CRAN headers/libraries.
+          echo "S2_FORCE_BUNDLED_ABSEIL=false" >> "$GITHUB_ENV"
+      - name: Verify Windows manual toolchain
+        if: runner.os == 'Windows'
+        shell: Rscript {0}
+        run: |
+          print(Sys.which(c("pdflatex", "makeindex", "texi2dvi")))
+          package_dir <- normalizePath(".", winslash = "/")
+          manual_dir <- file.path(Sys.getenv("RUNNER_TEMP"), "manual-diagnostics")
+          dir.create(manual_dir, showWarnings = FALSE)
+          setwd(manual_dir)
+          status <- system2(file.path(R.home("bin"), "R.exe"), c(
+            "CMD", "Rd2pdf", "--no-preview", "--force", "--no-clean",
+            "--output=searchlight.pdf", shQuote(package_dir)
+          ))
+          stopifnot(status == 0L, file.exists("searchlight.pdf"))
+      - uses: actions/upload-artifact@v4
+        if: failure() && runner.os == 'Windows'
+        with:
+          name: manual-diagnostics-${{ matrix.r }}
+          path: ${{ runner.temp }}/manual-diagnostics/
+          include-hidden-files: true
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
+      - name: Rebuild macOS dotCall64 with the CRAN OpenMP runtime
+        if: runner.os == 'macOS'
+        shell: Rscript {0}
+        run: |
+          openmp <- file.path(R.home("lib"), "libomp.dylib")
+          stopifnot(file.exists(openmp))
+          makevars <- tempfile("dotcall64-Makevars-")
+          writeLines(paste("PKG_LIBS +=", shQuote(openmp)), makevars)
+          withr::with_envvar(c(R_MAKEVARS_USER = makevars), {
+            install.packages("dotCall64", type = "source")
+          })
+          loadNamespace("dotCall64")
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--as-cran")'

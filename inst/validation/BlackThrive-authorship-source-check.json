@@ -1,0 +1,18 @@
+{
+  "checked": "2026-09-22 06:53:35.814507",
+  "source_file": "searchlight_0.1.0.tar.gz",
+  "source_sha256": "32b45a2ecf72c4e627e472dbf83bdd3c92cc0af1fe3618aabfa96dd88302cfdd",
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "manual_checked": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "maximum_example_seconds": 1.47,
+  "installed_bytes": 3165187,
+  "exceptions": [
+    "online incoming checks disabled",
+    "network clock probe disabled"
+  ],
+  "log_file": "BlackThrive-authorship-source-check.log",
+  "log_sha256": "fd5468572796d1b85be7aacf5b9cdf32558dcdc93b08fbfbe94ee96799f5bf2f"
+}

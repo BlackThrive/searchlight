@@ -1,0 +1,25 @@
+{
+  "checked_utc": "2026-09-21T19:36:18.268966+00:00",
+  "reviewed_commit": "9fa60ccf06d360e14bf2b75f9d54e58fcf0db289",
+  "required_technical_release_gates_complete": true,
+  "source_artifact": {
+    "file": "searchlight_0.1.0.tar.gz",
+    "sha256": "4a57eee0d39888ff514f87cb7d0adcf3e12bea8a6809e0bfdbc725edc5006a45",
+    "bytes": 1635822
+  },
+  "archive_comparison": {
+    "source_sha256": "4a57eee0d39888ff514f87cb7d0adcf3e12bea8a6809e0bfdbc725edc5006a45",
+    "matching_files": 222,
+    "changed_files": [
+      "inst/NOTES/decisions.md",
+      "inst/NOTES/progress.md",
+      "inst/validation/M5-external-checks.json"
+    ],
+    "core_changes": []
+  },
+  "preserved_ci_checks": 9,
+  "preserved_rhub_checks": 3,
+  "source_implementation_and_author_credits_unchanged": true,
+  "pull_request": "https://github.com/BlackThrive/searchlight/pull/1",
+  "cran_submitted": false
+}

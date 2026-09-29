@@ -1,0 +1,90 @@
+
+R Under development (unstable) (2026-09-21 r90579 ucrt) -- "Unsuffered Consequences"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # This file is part of the standard setup for testthat.
+> # It is recommended that you do not modify it.
+> #
+> # Where should you do additional test configuration?
+> # Learn more about the roles of various files in:
+> # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+> # * https://testthat.r-lib.org/articles/special-files.html
+>
+> library(testthat)
+> library(searchlight)
+>
+> test_check("searchlight")
+Census table unavailable for this geography selection.
+Downloading 2026-06.zip.
+Downloading 2026-06.zip.
+Source unavailable: https://data.police.uk/data/archive/
+i An unexpected request was made: GET https://data.police.uk/data/archive/
+i Use a cached snapshot or retry acquisition later.
+Archive row counts differ by more than 1%:
+dyfed-powys 2026-06 3 to 4 records
+west-yorkshire 2026-06 3 to 4 records
+Archive row counts differ by more than 1%:
+dyfed-powys 2026-06 3 to 4 records
+west-yorkshire 2026-06 3 to 4 records
+Archive row counts differ by more than 1%:
+dyfed-powys 2026-06 3 to 4 records
+west-yorkshire 2026-06 3 to 4 records
+Archive row counts differ by more than 1%:
+dyfed-powys 2026-06 3 to 4 records
+west-yorkshire 2026-06 3 to 4 records
+
+
+Source: data.police.uk archive
+Snapshots: 1; selected versions: 2
+Ethnicity: self-defined (PACE-2023/archive-labels-2026-09-16)
+Audited force-months: 2
+MAR unavailable: retain object_group in counts.
+# A tibble: 4 x 15
+  force_id       geography_code scenario       ratio unknown allocated_reference
+  <chr>          <chr>          <chr>          <dbl>   <dbl>               <dbl>
+1 west-yorkshire a              all_to_refer~  0.833      40                40
+2 west-yorkshire a              all_to_compa~ 12.5        40                 0
+3 west-yorkshire a              proportional   2.5        40                26.7
+4 west-yorkshire a              force_object~ NA          40                NA
+# i 9 more variables: allocated_comparison <dbl>, lower_bound <dbl>,
+#   upper_bound <dbl>, tipping_allocation <dbl>, available <lgl>,
+#   tipping_feasible <lgl>, observed_ratio <dbl>, conf_low <dbl>,
+#   conf_high <dbl>
+NOMIS table is unavailable or has changed its schema.
+NOMIS returned incomplete or duplicate cells.
+Population cells are suppressed or unmapped; unavailable.
+Boundary query unavailable for lsoa21.
+No boundaries available for the requested codes.
+Network disabled; use cached data or bundled fixtures.
+Network disabled; use cached data or bundled fixtures.
+Network disabled; use cached data or bundled fixtures.
+Network disabled; use cached data or bundled fixtures.
+Excluded 12 unreliable force-month(s).
+Excluded 12 unreliable force-month(s).
+Excluded 12 unreliable force-month(s).
+Excluded 1 unreliable force-month(s).
+[ FAIL 0 | WARN 0 | SKIP 2 | PASS 407 ]
+
+══ Skipped tests (2) ═══════════════════════════════════════════════════════════
+• On CRAN (2): 'test-inference.R:114:3', 'test-plot-snapshots.R:2:3'
+
+[ FAIL 0 | WARN 0 | SKIP 2 | PASS 407 ]
+Deleting unused snapshots: 'plot-snapshots/coverage-with-missing-force.svg' and
+'plot-snapshots/crude-and-spatial-disparity.svg'
+>
+> proc.time()
+   user  system elapsed
+  20.00    2.48   22.48

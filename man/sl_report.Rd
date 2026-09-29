@@ -41,6 +41,8 @@ Supplied estimates must retain the same source snapshots and ethnicity
 classification as records. Their analysis scope and diagnostics are shown.
 Coverage describes source files; filtering does not redefine coverage.
 Sampling intervals and assumption ranges have separate labelled sections.
+The report includes a summary, section navigation and expandable audit
+details. Tables retain their original column names in header tooltips.
 }
 \examples{
 rates <- readRDS(system.file("extdata", "example-rates.rds",

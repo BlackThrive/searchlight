@@ -1,0 +1,171 @@
+{
+  "verified_at": "2026-09-22T06:24:04.522857+00:00",
+  "commit": "c28b4f0bdf966665f24bc01b4773356d772e3f47",
+  "run_id": 35688724233,
+  "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233",
+  "scope": "All nine jobs check the report implementation at this commit; their rebuilt CI archives are not asserted to have the local submission archive checksum.",
+  "jobs": [
+    {
+      "name": "check (windows-latest, oldrel-1)",
+      "job_id": 106620968046,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968046",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T05:00:21Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/windows-latest-oldrel-1.log",
+      "sha256": "8332214787deb603f2b1fe1c9ce7509ec71c6e2da2d6022548e7c304a49b9de6"
+    },
+    {
+      "name": "check (macos-latest, release)",
+      "job_id": 106620968162,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968162",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:58:27Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/macos-latest-release.log",
+      "sha256": "8c39943c7293210408c8a28daa2d1fdbdd1e0c0e300cbab003fe5110a90a1638"
+    },
+    {
+      "name": "check (macos-latest, oldrel-1)",
+      "job_id": 106620968184,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968184",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:28Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/macos-latest-oldrel-1.log",
+      "sha256": "91605eeb90e2e8c50515f284a3e148c1ad66cc52d8aa4d920667aaa1831ef146"
+    },
+    {
+      "name": "check (windows-latest, devel)",
+      "job_id": 106620968186,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968186",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:44Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/windows-latest-devel.log",
+      "sha256": "e9325b5f74cb569e93a4f992502356fb966eac54cf8682440b2c13b4c4c0a0eb"
+    },
+    {
+      "name": "check (ubuntu-latest, oldrel-1)",
+      "job_id": 106620968202,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968202",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:13Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/ubuntu-latest-oldrel-1.log",
+      "sha256": "f6392574f471268ab4041f8a5f1f1ec5a44ac532d0f3f032afbaeee97f0a4273"
+    },
+    {
+      "name": "check (macos-latest, devel)",
+      "job_id": 106620968223,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968223",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:11Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/macos-latest-devel.log",
+      "sha256": "13de13d28d1f27e4fe9889e7d9aceab0cc651d0237d308dd7da95a38b4081a24"
+    },
+    {
+      "name": "check (windows-latest, release)",
+      "job_id": 106620968226,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968226",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:37Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/windows-latest-release.log",
+      "sha256": "af0b911ed30cfcf6411456077148b897f3d8966a6e95f989723ae2de61c8045d"
+    },
+    {
+      "name": "check (ubuntu-latest, release)",
+      "job_id": 106620968246,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968246",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:04Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/ubuntu-latest-release.log",
+      "sha256": "031562cfabf6522146d5ccabd591204a6f6b978794f20356fe1fd7139554f738"
+    },
+    {
+      "name": "check (ubuntu-latest, devel)",
+      "job_id": 106620968257,
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724233/job/106620968257",
+      "conclusion": "success",
+      "completed_at": "2026-09-22T04:59:50Z",
+      "status": "OK",
+      "errors": 0,
+      "warnings": 0,
+      "notes": 0,
+      "manuals": {
+        "pdf": true,
+        "html": true
+      },
+      "log": "inst/validation/ci-report-design-2026-09-22/ubuntu-latest-devel.log",
+      "sha256": "708dc8b3b3a839870b26cb9e79e3d6b92f506de00d6acfb2491a208543af725d"
+    }
+  ],
+  "quality": {
+    "run_id": 35688724230,
+    "url": "https://github.com/BlackThrive/searchlight/actions/runs/35688724230",
+    "conclusion": "success",
+    "line_coverage_percent": 95.04332755632579,
+    "lines_covered": 2742,
+    "lines_valid": 2885,
+    "coverage_xml_sha256": "980bae02ad3eb455bdfe46e3a2540c13a65d2121a510558f22e15c650f1e0367"
+  }
+}

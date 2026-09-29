@@ -1,0 +1,213 @@
+{
+  "checked": "2026-09-21T16:31:17.384213+00:00",
+  "site": "https://blackthrive.github.io/searchlight/",
+  "gh_pages_sha": "4e28b60fea136fed8fef7e75325e373f9fcdcb72",
+  "html_pages": 51,
+  "all_return_http_200": true,
+  "results": [
+    {
+      "path": "404.html",
+      "status": 200
+    },
+    {
+      "path": "AGENTS.html",
+      "status": 200
+    },
+    {
+      "path": "LICENSE-text.html",
+      "status": 200
+    },
+    {
+      "path": "LICENSE.html",
+      "status": 200
+    },
+    {
+      "path": "RELEASE_CHECKLIST.html",
+      "status": 200
+    },
+    {
+      "path": "articles/archive-to-audit.html",
+      "status": 200
+    },
+    {
+      "path": "articles/estimating-disparity.html",
+      "status": 200
+    },
+    {
+      "path": "articles/index.html",
+      "status": 200
+    },
+    {
+      "path": "articles/outcomes-and-darkness.html",
+      "status": 200
+    },
+    {
+      "path": "articles/spatial-simulation.html",
+      "status": 200
+    },
+    {
+      "path": "authors.html",
+      "status": 200
+    },
+    {
+      "path": "index.html",
+      "status": 200
+    },
+    {
+      "path": "news/index.html",
+      "status": 200
+    },
+    {
+      "path": "reference/index.html",
+      "status": 200
+    },
+    {
+      "path": "reference/searchlight-package.html",
+      "status": 200
+    },
+    {
+      "path": "reference/searchlight.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_archive_download.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_archive_index.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_archive_snapshot.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_assign_geography.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_benchmark.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_boundaries.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_cache_clear.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_cache_dir.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_contract.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_count_model.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_counts.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_coverage.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_coverage_compare.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_denominator_scenarios.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_exposure.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_hit_rates.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_list_versions.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_location_quality.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_missing_ethnicity_bounds.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_population.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_population_crosstab.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_quality.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_ranking_stability.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_rate_ratio.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_rates.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_read_records.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_report.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_sample.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_select_version.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_simulate.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_spatial_disparity.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_spatial_map.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_standardise.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_timestamp_quality.html",
+      "status": 200
+    },
+    {
+      "path": "reference/sl_veil_of_darkness.html",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "checked": "2026-09-22 07:51:17.204458",
+  "source_sha256": "7087728ccd171841319149d8d1614b80a429dc5af5ffabac440280dfb1f213f5",
+  "installed_package": "C:/Users/musta/AppData/Local/Temp/RtmpO2Wqrw/searchlight-archive-check-850c62a03fdf/searchlight.Rcheck/searchlight",
+  "example": "sl_read_records",
+  "timings": [
+    {
+      "user.self": 0.36,
+      "sys.self": 0.12,
+      "elapsed": 0.53
+    },
+    {
+      "user.self": 0.14,
+      "sys.self": 0,
+      "elapsed": 0.17
+    }
+  ],
+  "passed": true
+}
