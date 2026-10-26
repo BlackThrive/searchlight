@@ -1,0 +1,95 @@
+{
+  "verified_utc": "2026-10-26T22:14:45.515461+00:00",
+  "runs": [
+    {
+      "name": "R-CMD-check",
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314",
+      "head_sha": "ebf02a8040ceba3639c47bc4e6d0a2b32d79c2a1",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "check (macos-latest, devel)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284543",
+          "completed_at": "2026-10-26T08:45:10Z"
+        },
+        {
+          "name": "check (windows-latest, release)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284704",
+          "completed_at": "2026-10-26T07:53:12Z"
+        },
+        {
+          "name": "check (macos-latest, release)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284707",
+          "completed_at": "2026-10-26T07:53:56Z"
+        },
+        {
+          "name": "check (macos-latest, oldrel-1)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284745",
+          "completed_at": "2026-10-26T07:53:42Z"
+        },
+        {
+          "name": "check (ubuntu-latest, release)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284839",
+          "completed_at": "2026-10-26T07:54:09Z"
+        },
+        {
+          "name": "check (ubuntu-latest, oldrel-1)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284890",
+          "completed_at": "2026-10-26T07:53:06Z"
+        },
+        {
+          "name": "check (ubuntu-latest, devel)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284902",
+          "completed_at": "2026-10-26T08:27:13Z"
+        },
+        {
+          "name": "check (windows-latest, oldrel-1)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284932",
+          "completed_at": "2026-10-26T07:53:08Z"
+        },
+        {
+          "name": "check (windows-latest, devel)",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047314/job/121456284937",
+          "completed_at": "2026-10-26T07:52:24Z"
+        }
+      ]
+    },
+    {
+      "name": "Quality",
+      "url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047352",
+      "head_sha": "ebf02a8040ceba3639c47bc4e6d0a2b32d79c2a1",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "quality",
+          "conclusion": "success",
+          "html_url": "https://github.com/BlackThrive/searchlight/actions/runs/40288047352/job/121456285088",
+          "completed_at": "2026-10-26T07:54:12Z"
+        }
+      ]
+    }
+  ],
+  "matrix_jobs_status_ok": [
+    "check (macos-latest, devel)",
+    "check (macos-latest, oldrel-1)",
+    "check (macos-latest, release)",
+    "check (ubuntu-latest, devel)",
+    "check (ubuntu-latest, oldrel-1)",
+    "check (ubuntu-latest, release)",
+    "check (windows-latest, devel)",
+    "check (windows-latest, oldrel-1)",
+    "check (windows-latest, release)"
+  ],
+  "assertions_per_matrix_job": 489,
+  "intentional_skips_per_matrix_job": 2,
+  "scope": "Hosted source checks at the recorded commit; exact local archive checked separately"
+}

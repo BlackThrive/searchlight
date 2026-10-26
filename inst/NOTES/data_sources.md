@@ -1,5 +1,24 @@
 # Source register
 
+## Verified 2026-10-27: upstream fix and independent checks
+
+* CRAN publishes suncalc 0.5.4 dated 2026-10-26:
+  https://cran.r-project.org/web/packages/suncalc/index.html . Its NEWS describes
+  the getMoonTimes fix and calendar/time-zone corrections:
+  https://github.com/datastorm-open/suncalc/blob/master/NEWS.md . This supersedes
+  the public-status observation made on the morning of 2026-10-26 below.
+* The live CRAN check page, updated 2026-10-26 22:53:51 CET, shows all displayed
+  checks OK, with mixed 0.5.3/0.5.4 versions during rollout. This is not a
+  separate confirmation withdrawing the archival notice.
+* Executed the unmodified 0.5.4 source archive in an isolated reference library
+  (SHA-256 dee42da5bd90996eb3a54605c0cac104747ffe24f7c224891018e0901a367894).
+  All 17,532 frozen UK sunset and civil-dusk times agree exactly. The source
+  implementation was not inspected or copied; reference receipts are in
+  data-raw/validation/solar-replacement/upstream-0.5.4-comparison.json.
+* All nine searchlight CI checks and the quality workflow succeeded at ebf02a8:
+  https://github.com/BlackThrive/searchlight/actions/runs/40288047314 and
+  https://github.com/BlackThrive/searchlight/actions/runs/40288047352 .
+
 ## Verified 2026-10-26: solar dependency replacement
 
 * The CRAN suncalc 0.5.3 check page reports a getMoonTimes example failure on

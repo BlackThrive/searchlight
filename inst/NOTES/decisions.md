@@ -565,3 +565,27 @@ file I/O before release.
   crossings, event thresholds and exclusion audits. Document that these are
   approximate sea-level astronomical events, without terrain/weather effects.
   Model comparisons omit only the run-specific contract creation timestamp.
+
+## 2026-10-27: Dependency safeguards and updated upstream status
+
+* All nine hosted checks and the quality workflow passed for ebf02a8. The
+  original 0.1.1 archive remains unchanged; no analysis changes are needed.
+* Upstream released suncalc 0.5.4 on 2026-10-26, after the prior status check.
+  Its NEWS fixes the reported moon-time failure and calendar/time-zone cases.
+  CRAN currently shows OK statuses while versions 0.5.3 and 0.5.4 roll through
+  the check farm. No separate archival-withdrawal message has been supplied.
+  Keep the dependency removal as protection against future upstream archival.
+* Executing unmodified suncalc 0.5.4 as a black box reproduces all 17,532 frozen
+  UK solar event times exactly. Do not add it back as a dependency or change
+  the reference fixture. No upstream R implementation code was inspected.
+* Audit the installed strong dependency graph: 156 packages, none suncalc.
+  Add a developer guard against direct, suggested or transitive strong
+  dependencies on suncalc. Prove that a simulated transitive dependency is
+  rejected and that incomplete metadata cannot silently pass.
+* Run every future CI matrix and quality job without suncalc installed,
+  removing only its optional cached installation on the ephemeral CI runner.
+  The developer guard itself never installs/removes packages or uses network.
+* Win-builder accepted the unchanged final 1,947,280-byte archive at about
+  01:10 Nairobi time on 2026-10-27. Its result remains separate from upload
+  acknowledgment. All follow-up edits are developer safeguards and release
+  records; do not rebuild the already tested archive solely for these records.

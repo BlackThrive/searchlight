@@ -91,6 +91,18 @@ jobs:
             install.packages("dotCall64", type = "source")
           })
           loadNamespace("dotCall64")
+      - name: Verify dependencies and check without suncalc
+        shell: Rscript {0}
+        run: |
+          source("data-raw/check-dependencies.R")
+          check_searchlight_dependencies()
+          # A restored CI cache may contain this former dependency.
+          for (lib in .libPaths()) {
+            if (dir.exists(file.path(lib, "suncalc"))) {
+              remove.packages("suncalc", lib = lib)
+            }
+          }
+          check_searchlight_dependencies(require_absent = TRUE)
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--as-cran")'
