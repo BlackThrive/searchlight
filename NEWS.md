@@ -1,4 +1,13 @@
-# searchlight 0.1.0 (in development)
+# searchlight 0.1.1
+
+* Remove the dependency on the R package suncalc following its announced CRAN
+  archival. Calculate sunset and civil dusk internally using a documented,
+  BSD-licensed solar algorithm, without adding another package dependency.
+* Preserve daylight classifications, annual windows and model results against
+  frozen reference outputs, with regression coverage for leap years, UK clock
+  changes, event boundaries and unavailable polar crossings.
+
+# searchlight 0.1.0
 
 * Give offline reports a responsive editorial layout, summary cards, section
   navigation, readable tables and expandable audit and source details.

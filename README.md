@@ -3,22 +3,25 @@
 An original R package for audited analysis of police stop and search records in
 England and Wales, published by Black Thrive Global.
 
-Development follows the acceptance gates in the repository's `AGENTS.md`. See
-the repository's `RELEASE_CHECKLIST.md` for verified progress. A package
-version of 0.1.0 denotes the intended release; it does not assert release readiness.
+Version 0.1.0 was published on CRAN on 30 September 2026. Version 0.1.1 is a
+maintenance update that removes the R suncalc dependency while preserving the
+sunset and civil-twilight calculations. See `RELEASE_READY.md` for the current
+candidate's validation and submission status.
 
 Records are events, not unique people. Missing force submissions are not zeros.
 Self-defined ethnicity remains separate from officer-defined ethnicity. Sampling
 uncertainty and assumptions about missing data and exposure are reported separately.
 
-MIT licensed code. Bundled public data retain their Open Government Licence v3.0
-attribution in `inst/extdata/README.md`. No code from policedatR, ExtractSS, or
-ukpolice is used or imported.
+The package's original code is MIT licensed; the solar calculator retains its
+upstream BSD licence in `inst/COPYRIGHTS`. Bundled public data retain their Open
+Government Licence v3.0 attribution in `inst/extdata/README.md`. No code from
+policedatR, ExtractSS, or ukpolice is used or imported.
 
-This is a development package. To install a locally built source archive, run
-`R CMD INSTALL searchlight_0.1.0.tar.gz` after installing the dependencies listed
-in `DESCRIPTION`. Network access is needed for explicit data acquisition;
-the bundled examples, vignettes and report run offline.
+Install the published release with `install.packages("searchlight")`. To test
+the maintenance candidate, run `R CMD INSTALL searchlight_0.1.1.tar.gz` after
+installing the dependencies listed in `DESCRIPTION`. Network access is needed
+for explicit data acquisition; the bundled examples, vignettes and report run
+offline.
 
 ## Offline quick start
 

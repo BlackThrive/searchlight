@@ -1,0 +1,10 @@
+{
+  "checked_utc": "2026-10-26 22:10:49 UTC",
+  "dependency_count": 156,
+  "dependencies": ["CARBayes", "CARBayesdata", "DBI", "GGally", "KernSmooth", "MASS", "MCMCpack", "Matrix", "MatrixModels", "R6", "RColorBrewer", "Rcpp", "RcppEigen", "S7", "SparseM", "abind", "askpass", "backports", "base64enc", "bit", "bit64", "boot", "brew", "bslib", "cachem", "checkmate", "class", "classInt", "cli", "clipr", "coda", "codetools", "commonmark", "compiler", "cpp11", "crayon", "crosstalk", "curl", "deldir", "digest", "distributional", "dotCall64", "dplyr", "e1071", "evaluate", "farver", "fastmap", "fontawesome", "forcats", "foreach", "fs", "generics", "geojsonsf", "geometries", "ggplot2", "ggstats", "glmnet", "glue", "grDevices", "graphics", "grid", "gtable", "highr", "hms", "htmltools", "htmlwidgets", "httpuv", "httr2", "igraph", "isoband", "iterators", "jquerylib", "jsonify", "jsonlite", "knitr", "labeling", "later", "lattice", "lazyeval", "leafem", "leaflet", "leaflet.providers", "leafpop", "lifecycle", "magrittr", "mapview", "matrixStats", "mcmc", "memoise", "methods", "mime", "numDeriv", "openssl", "otel", "parallel", "patchwork", "pillar", "pkgconfig", "plyr", "png", "posterior", "prettyunits", "progress", "promises", "proxy", "purrr", "quantreg", "rapidjsonr", "rappdirs", "raster", "readr", "rlang", "rmarkdown", "s2", "sass", "satellite", "scales", "servr", "sf", "sfheaders", "shape", "sp", "spData", "spam", "spdep", "splines", "stats", "stats4", "stringi", "stringr", "survival", "svglite", "sys", "systemfonts", "tensorA", "terra", "textshaping", "tibble", "tidyr", "tidyselect", "tinytex", "tools", "truncnorm", "tzdb", "units", "utf8", "utils", "uuid", "vctrs", "viridisLite", "vroom", "withr", "wk", "xfun", "xml2", "yaml"],
+  "suncalc_available": false,
+  "direct_suggestion_rejected": true,
+  "transitive_dependency_rejected": true,
+  "incomplete_metadata_rejected": true,
+  "clean_graph_accepted": true
+}

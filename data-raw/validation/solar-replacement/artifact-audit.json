@@ -1,0 +1,9 @@
+{
+  "source_sha256": "b485dec92ea71d11c9f2a823c84e45e6df3ccd6bfcbfb8ace2d00545b491a852",
+  "runtime_and_test_R_files_match_working_tree": 45,
+  "suncalc_imports": false,
+  "suncalc_namespace_calls_in_runtime_or_tests": false,
+  "BSD_notice_included": true,
+  "reference_generator_excluded": true,
+  "reference_fixture_sha256": "9a1bd20c22c5aea32571607f979609f849769e5299006ee0cccee903ac6ed66e"
+}

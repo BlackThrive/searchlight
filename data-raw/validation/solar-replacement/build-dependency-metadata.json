@@ -1,0 +1,10 @@
+{
+  "checked_utc": "2026-10-26 22:19:06 UTC",
+  "omitted_build_dependencies": ["cpp11", "geometries", "jsonify", "rapidjsonr", "RcppEigen", "sfheaders"],
+  "strong_dependency_count": 156,
+  "missing_headers_resolved": true,
+  "indirect_suncalc_rejected": true,
+  "installed_metadata_takes_priority": true,
+  "missing_metadata_fails_closed": true,
+  "suncalc_available": false
+}

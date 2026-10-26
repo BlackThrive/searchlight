@@ -1,4 +1,68 @@
-# searchlight 0.1.0 release evidence
+# searchlight 0.1.1 maintenance release
+
+Status (2026-10-27): local checks and all nine hosted package checks pass;
+final win-builder result pending. Additional CI dependency safeguards are added.
+Version 0.1.1 has not been submitted to CRAN.
+Version 0.1.0 was published on CRAN on 2026-09-30. CRAN has warned that
+archival of suncalc on 2026-11-16 would also affect its strong reverse dependencies.
+
+Version 0.1.1 removes suncalc from Imports and replaces its two solar-event calls
+with an internal base-R calculator. No new dependency is introduced. The complete
+BSD-2-Clause attribution for the original SunCalc.js equations is in
+`inst/COPYRIGHTS`. Human authorship and the statistical models are unchanged.
+
+Upstream released suncalc 0.5.4 on 2026-10-26 after the original status check.
+CRAN lists that release, its NEWS addresses the reported moon-time error, and
+all currently displayed CRAN checks are OK (mixed 0.5.3/0.5.4 during rollout).
+The specific upstream fault has therefore received a published fix. No separate
+withdrawal of the archival notice has been supplied. Version 0.1.1 still removes
+the dependency to protect against future suncalc maintenance or archival issues.
+
+Current validation:
+
+- All 17,532 sunset/civil-dusk times agree exactly with frozen suncalc 0.5.3
+  results, across six locations and every day of four years (including 2024).
+- Both darkness designs and both twilight definitions retain their data,
+  exclusions, coefficients and uncertainty intervals.
+- All 17,532 reference solar times also match the new suncalc 0.5.4 exactly.
+- The installed graph of 156 strong dependencies contains no suncalc. New CI
+  safeguards reject direct/suggested or transitive strong dependencies on it;
+  matrix and quality jobs explicitly run without it installed.
+- Tests cover leap day, UK clock changes, host time zones, event boundaries
+  and missing polar crossings. All 489 CRAN-mode assertions pass, with two
+  intended skips. Full developer tests include those skipped cases and pass
+  with 95.2071% line coverage, with suncalc unavailable.
+- Building 0.1.1 succeeds with suncalc absent from the available R libraries.
+- The exact final archive passes R CMD check --as-cran on Windows/R 4.5.2:
+  0 errors, 0 warnings and 0 notes; PDF and HTML manuals included. Maximum
+  example elapsed time is 0.86 seconds; installed size is 3,271,011 bytes.
+  Local online incoming checks and the network clock probe were disabled.
+- A fresh installation without suncalc reparses all 4,657 bundled records,
+  exercises the analyses and safeguards, and writes the offline report.
+- Style, lint and spelling are clean. Receipts and logs are under
+  `data-raw/validation/solar-replacement/`.
+- All nine hosted release/devel/oldrel checks on Windows, macOS and Linux pass,
+  each with Status: OK and 489 passing assertions. The quality workflow passes.
+  See `hosted-checks.json` for commit ebf02a8 and the run URLs. Follow-up CI
+  verifies the newly added dependency guard; runtime package code is unchanged.
+- Win-builder accepted the unchanged final archive on 2026-10-27 at about
+  01:10 Nairobi time. The earlier queue refusals are retained as history.
+  Verify the new email results link before recording a passing result;
+  `win-builder-2026-10-27.json` currently records upload acknowledgment only.
+
+Final source archive: `searchlight_0.1.1.tar.gz` (1,947,280 bytes).
+SHA-256: `b485dec92ea71d11c9f2a823c84e45e6df3ccd6bfcbfb8ace2d00545b491a852`.
+All 45 runtime and test R files in the archive match the working source;
+the original 0.1.0 submitted archive remains unchanged.
+
+Acceptance of 0.1.1 by CRAN is required for the published package itself to
+become independent of suncalc. The upstream 0.5.4 fix reduces the immediate
+concern, but does not change our dependency-removal plan. The earlier checks
+below describe version 0.1.0 only and do not certify this maintenance release.
+
+## Historical 0.1.0 release evidence (retained as recorded)
+
+The September submission below was subsequently published on 2026-09-30.
 
 The checked archive was uploaded through CRAN's official submission form on
 2026-09-22 (submission ID 356075). CRAN acknowledged the submission action and

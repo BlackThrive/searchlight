@@ -25,6 +25,23 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::covr, any::styler, any::roxygen2, any::lintr, any::pkgload, any::spelling
+      - name: Verify dependencies and test without suncalc
+        shell: Rscript {0}
+        run: |
+          source("data-raw/check-dependencies.R")
+          source("data-raw/test-dependencies.R")
+          repository <- available.packages(
+            repos = "https://cran.r-project.org", type = "source"
+          )
+          check_searchlight_dependencies(repository_database = repository)
+          for (lib in .libPaths()) {
+            if (dir.exists(file.path(lib, "suncalc"))) {
+              remove.packages("suncalc", lib = lib)
+            }
+          }
+          check_searchlight_dependencies(
+            repository_database = repository, require_absent = TRUE
+          )
       - name: Style and lint
         run: |
           options(warn = 1)

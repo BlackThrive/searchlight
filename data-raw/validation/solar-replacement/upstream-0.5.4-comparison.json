@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-10-26 22:10:49 UTC",
+  "upstream_version": "0.5.4",
+  "events": 17532,
+  "unavailable_events": 0,
+  "changed_events": 0,
+  "maximum_difference_seconds": 0,
+  "upstream_source_sha256": "dee42da5bd90996eb3a54605c0cac104747ffe24f7c224891018e0901a367894"
+}
