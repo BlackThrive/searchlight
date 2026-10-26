@@ -2,9 +2,19 @@
 # Does not install or remove packages and makes no network requests.
 check_searchlight_dependencies <- function(
   description = "DESCRIPTION", database = utils::installed.packages(),
-  require_absent = FALSE
+  repository_database = NULL, require_absent = FALSE
 ) {
   strong_fields <- c("Depends", "Imports", "LinkingTo")
+  columns <- c("Package", strong_fields)
+  database <- database[, columns, drop = FALSE]
+  if (!is.null(repository_database)) {
+    # Binary installations may omit LinkingTo-only header packages. Use the
+    # supplied repository metadata for those; installed versions take priority.
+    extra <- !repository_database[, "Package"] %in% database[, "Package"]
+    database <- rbind(
+      database, repository_database[extra, columns, drop = FALSE]
+    )
+  }
   fields <- c(strong_fields, "Suggests", "Enhances")
   metadata <- read.dcf(description, fields = fields)
   package_names <- function(values) {

@@ -95,14 +95,20 @@ jobs:
         shell: Rscript {0}
         run: |
           source("data-raw/check-dependencies.R")
-          check_searchlight_dependencies()
+          source("data-raw/test-dependencies.R")
+          repository <- available.packages(
+            repos = "https://cran.r-project.org", type = "source"
+          )
+          check_searchlight_dependencies(repository_database = repository)
           # A restored CI cache may contain this former dependency.
           for (lib in .libPaths()) {
             if (dir.exists(file.path(lib, "suncalc"))) {
               remove.packages("suncalc", lib = lib)
             }
           }
-          check_searchlight_dependencies(require_absent = TRUE)
+          check_searchlight_dependencies(
+            repository_database = repository, require_absent = TRUE
+          )
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--as-cran")'

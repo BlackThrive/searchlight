@@ -589,3 +589,9 @@ file I/O before release.
   01:10 Nairobi time on 2026-10-27. Its result remains separate from upload
   acknowledgment. All follow-up edits are developer safeguards and release
   records; do not rebuild the already tested archive solely for these records.
+* The first guard run exposed absent LinkingTo-only headers in binary CI
+  installations. Resolve absent metadata from the CRAN source-package index,
+  retaining installed metadata where present. Fail if metadata remains missing.
+  Permanent developer regression checks cover this case, indirect suncalc
+  introduction, direct Imports/Suggests and installed-version precedence.
+  Metadata fetching occurs only in CI setup, never in package checks or runtime.
