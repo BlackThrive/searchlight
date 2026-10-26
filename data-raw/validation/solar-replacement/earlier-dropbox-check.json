@@ -1,0 +1,14 @@
+{
+  "checked": "2026-10-26 10:36:38.809837",
+  "source_file": "searchlight_0.1.1.tar.gz",
+  "source_sha256": "503b737295e7d5d02b062718d356adf182548d8b72c8cbb03031c6b88035f366",
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "suncalc_available": false,
+  "manual_checked": true,
+  "errors": [],
+  "warnings": "checking whether package 'searchlight' can be installed ... [29s] WARNING\nFound the following significant warnings:\n  WARNING: moving package to final location failed, copying instead\nSee 'C:/Users/musta/Dropbox/stop and search/searchlight/data-raw/work/solar-replacement/searchlight.Rcheck/00install.out' for details.",
+  "notes": [],
+  "maximum_example_seconds": 1.47,
+  "installed_bytes": 3270411,
+  "exceptions": ["online incoming checks disabled", "network clock probe disabled"]
+}

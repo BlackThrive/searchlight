@@ -537,3 +537,31 @@ file I/O before release.
   GitHub documents a refresh delay of about 24 hours after rewriting history;
   do not claim that the visible list has already refreshed. The original bundle,
   commit mapping and screenshot are retained under data-raw/work/publishing-attribution-2026-09-29/.
+
+## 2026-10-26: Remove the astronomy dependency at risk of archival
+
+* CRAN notified the maintainer that suncalc and its strong reverse dependencies
+  are scheduled for archival on 2026-11-16. The maintainer requested an upstream
+  status check and a replacement. The public upstream master remains at
+  ffd9e6a (2026-07-15, version 0.5.3); no open pull request or recent issue
+  comment announces a fix for the reported Windows moon-time example failure.
+  This is a public-source check, not a claim about private maintainer plans.
+* The current CRAN searchlight 0.1.0 archive was downloaded for comparison.
+  All 24 R source files match the local release branch. Prepare version 0.1.1
+  from that branch so the previously published report and author metadata stay
+  intact. The earlier instruction to use suncalc is superseded by this request.
+* Replace only sunset and civil-dusk calculations with an internal, vectorised
+  adaptation of the SunCalc.js 1.9.0 solar-event equations. Retain its complete
+  BSD-2-Clause notice in inst/COPYRIGHTS and identify the source in the R file.
+  No code from the GPL-licensed R suncalc package is copied. No additional
+  dependency is introduced. The package's own MIT licence is unchanged.
+* Before switching calls, freeze black-box outputs from suncalc 0.5.3 over
+  8,766 location-days: six England/Wales locations, every day of 2014, 2024,
+  2026 and 2030. Freeze annual bounds and all four darkness-design/twilight
+  combinations. The fixture generator is developer-only and excluded from
+  builds; the installed tests read the frozen data without loading suncalc.
+* The 17,532 solar event times match exactly at whole-second resolution.
+  Preserve noon-UTC anchoring, Europe/London clock changes, missing polar
+  crossings, event thresholds and exclusion audits. Document that these are
+  approximate sea-level astronomical events, without terrain/weather effects.
+  Model comparisons omit only the run-specific contract creation timestamp.

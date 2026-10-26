@@ -1,0 +1,14 @@
+{
+  "checked": "2026-10-26 10:46:30.577268",
+  "source_file": "searchlight_0.1.1.tar.gz",
+  "source_sha256": "b485dec92ea71d11c9f2a823c84e45e6df3ccd6bfcbfb8ace2d00545b491a852",
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "suncalc_available": false,
+  "manual_checked": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "maximum_example_seconds": 0.86,
+  "installed_bytes": 3271011,
+  "exceptions": ["online incoming checks disabled", "network clock probe disabled"]
+}

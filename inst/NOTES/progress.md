@@ -61,3 +61,7 @@ Next: maintainer confirms the email link; CRAN review and acceptance remain pend
 Milestone: Repository contributor attribution (2026-09-29).
 Completed: backed up and corrected five documentation commits, configured the maintainer publishing identity on main and the release branch, and verified remote authors, workflow YAML and the live documentation site.
 Next: allow GitHub's cached contributor sidebar to refresh; no package rebuild or CRAN resubmission is required.
+
+Milestone: Remove the threatened suncalc dependency (2026-10-26).
+Completed: prepared 0.1.1 with an internal BSD-attributed solar calculator; all 17,532 reference event times and four darkness analyses agree; the full CRAN-mode test suite and a build without suncalc pass.
+Next: verify the exact archive, fresh installation, hosted checks and win-builder, then submit the maintenance release before the 2026-11-16 archival deadline; release status is tracked in RELEASE_READY.md.

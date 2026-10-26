@@ -13,7 +13,7 @@ jsonlite::write_json(list(
   built = as.character(Sys.time()), file = basename(artifact),
   sha256 = digest::digest(file = artifact, algo = "sha256"),
   bytes = file.info(artifact)$size,
-  intended_version = "0.1.0",
+  intended_version = unname(read.dcf("DESCRIPTION")[1, "Version"]),
   release_ready = FALSE,
   reason = "External release gates must be verified separately"
 ), "data-raw/work/source-artifact.json", pretty = TRUE, auto_unbox = TRUE)

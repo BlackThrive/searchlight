@@ -1,0 +1,7 @@
+{
+  "checked": "2026-10-26 10:46:06.272623",
+  "r_version": "R version 4.5.2 (2025-10-31 ucrt)",
+  "suncalc_available": false,
+  "line_coverage_percent": 95.2071,
+  "scope": "Full developer tests, including spatial recovery and visual snapshots"
+}

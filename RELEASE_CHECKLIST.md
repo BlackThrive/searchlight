@@ -1,5 +1,24 @@
 # Release evidence
 
+## Version 0.1.1 (2026-10-26)
+
+- [x] Check public upstream status; no announced fix found.
+- [x] Remove the suncalc dependency without adding another package dependency.
+- [x] Preserve all 17,532 reference event times and all four darkness analyses.
+- [x] Test calendar/clock boundaries and unavailable solar crossings.
+- [x] Retain BSD attribution and existing human authorship.
+- [x] Build with suncalc unavailable.
+- [x] Verify final source archive and fresh installation without suncalc.
+- [x] Verify local style, lint, spelling and full developer coverage (95.2071%).
+- [ ] Verify hosted R/OS checks.
+- [ ] Retrieve the fresh win-builder result for the final archive.
+- [ ] Submit and obtain CRAN acceptance before 2026-11-16.
+
+See `RELEASE_READY.md` for current evidence. Version 0.1.0 was published on CRAN
+on 2026-09-30; the original milestone record below is historical.
+
+## Version 0.1.0 historical evidence
+
 Current status (2026-09-22): the redesigned archive passes all nine current CI
 checks and win-builder (only the expected New submission NOTE). Coverage is
 95.0433%; 407 CRAN-mode assertions pass. CRAN form submission 356075 is awaiting

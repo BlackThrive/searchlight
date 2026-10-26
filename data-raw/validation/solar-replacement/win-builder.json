@@ -1,0 +1,29 @@
+{
+  "attempted": "2026-10-26T07:42:55.133260+00:00",
+  "service": "https://win-builder.r-project.org/upload.aspx",
+  "target": "R-devel",
+  "transport": "HTTPS",
+  "source_file": "searchlight_0.1.1.tar.gz",
+  "source_sha256": "b485dec92ea71d11c9f2a823c84e45e6df3ccd6bfcbfb8ace2d00545b491a852",
+  "source_bytes": 1947280,
+  "check_verified": false,
+  "previous_attempt": {
+    "attempted": "2026-10-26T07:36:22.192668+00:00",
+    "service": "https://win-builder.r-project.org/upload.aspx",
+    "target": "R-devel",
+    "transport": "HTTPS",
+    "source_file": "searchlight_0.1.1.tar.gz",
+    "source_sha256": "144ab52a516500fa21e4a54f2c5472a6a9af24f1b7d9eb6927b39b169bc29ee5",
+    "source_bytes": 1947178,
+    "check_verified": false,
+    "previous_attempt": null,
+    "status": "uploaded via HTTPS; check result pending",
+    "http_status": 200,
+    "response_confirmation": "File name: searchlight_0.1.1.tar.gz File Size: 1947178 bytes Content type: application/gzip",
+    "result_delivery": "DESCRIPTION maintainer email"
+  },
+  "status": "HTTP response received; inspect receipt",
+  "http_status": 200,
+  "response_confirmation": "ERROR: Access to the path 'C:\\Inetpub\\ftproot\\R-devel\\searchlight_0.1.1.tar.gz' is denied. (perhaps you uploaded already and the file has not been processed yet?)",
+  "result_delivery": "DESCRIPTION maintainer email"
+}

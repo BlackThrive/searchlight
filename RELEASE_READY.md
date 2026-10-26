@@ -1,4 +1,56 @@
-# searchlight 0.1.0 release evidence
+# searchlight 0.1.1 maintenance release
+
+Status (2026-10-26): local validation complete; external verification pending.
+Version 0.1.1 has not been submitted to CRAN.
+Version 0.1.0 was published on CRAN on 2026-09-30. CRAN has warned that
+archival of suncalc on 2026-11-16 would also affect its strong reverse dependencies.
+
+Version 0.1.1 removes suncalc from Imports and replaces its two solar-event calls
+with an internal base-R calculator. No new dependency is introduced. The complete
+BSD-2-Clause attribution for the original SunCalc.js equations is in
+`inst/COPYRIGHTS`. Human authorship and the statistical models are unchanged.
+
+The upstream suncalc repository was checked on 2026-10-26: its latest public
+commit remains the July 0.5.3 release, with no announced fix for the current
+Windows moon-time failure. This does not establish the maintainer's private plans.
+
+Current validation:
+
+- All 17,532 sunset/civil-dusk times agree exactly with frozen suncalc 0.5.3
+  results, across six locations and every day of four years (including 2024).
+- Both darkness designs and both twilight definitions retain their data,
+  exclusions, coefficients and uncertainty intervals.
+- Tests cover leap day, UK clock changes, host time zones, event boundaries
+  and missing polar crossings. All 489 CRAN-mode assertions pass, with two
+  intended skips. Full developer tests include those skipped cases and pass
+  with 95.2071% line coverage, with suncalc unavailable.
+- Building 0.1.1 succeeds with suncalc absent from the available R libraries.
+- The exact final archive passes R CMD check --as-cran on Windows/R 4.5.2:
+  0 errors, 0 warnings and 0 notes; PDF and HTML manuals included. Maximum
+  example elapsed time is 0.86 seconds; installed size is 3,271,011 bytes.
+  Local online incoming checks and the network clock probe were disabled.
+- A fresh installation without suncalc reparses all 4,657 bundled records,
+  exercises the analyses and safeguards, and writes the offline report.
+- Style, lint and spelling are clean. Receipts and logs are under
+  `data-raw/validation/solar-replacement/`.
+- Hosted checks are to be reviewed on the maintenance pull request.
+- Win-builder acknowledged an earlier 0.1.1 candidate at 10:36 Nairobi time.
+  Two attempts to upload the final archive were explicitly refused while that
+  filename remains in its processing queue. The earlier result will not certify
+  the final archive. Retry after processing finishes, then verify the email link.
+
+Final source archive: `searchlight_0.1.1.tar.gz` (1,947,280 bytes).
+SHA-256: `b485dec92ea71d11c9f2a823c84e45e6df3ccd6bfcbfb8ace2d00545b491a852`.
+All 45 runtime and test R files in the archive match the working source;
+the original 0.1.0 submitted archive remains unchanged.
+
+The final acceptance of 0.1.1 by CRAN is still required to remove the current
+published package's exposure to suncalc archival. The earlier checks below
+describe version 0.1.0 only and do not certify this maintenance release.
+
+## Historical 0.1.0 release evidence (retained as recorded)
+
+The September submission below was subsequently published on 2026-09-30.
 
 The checked archive was uploaded through CRAN's official submission form on
 2026-09-22 (submission ID 356075). CRAN acknowledged the submission action and

@@ -187,7 +187,7 @@ sl_sun_design <- function(data, twilight) {
     date = data$local_date, lat = data$latitude,
     lon = data$longitude
   ))
-  sun <- suncalc::getSunlightTimes(
+  sun <- sl_solar_times(
     data = request, keep = c("sunset", "dusk"),
     tz = "Europe/London"
   )
@@ -221,7 +221,7 @@ sl_annual_sun_bounds <- function(locations, selected) {
       )
     }))
     keys <- c("date", "lat", "lon")
-    sun <- suncalc::getSunlightTimes(
+    sun <- sl_solar_times(
       data = as.data.frame(request[keys]),
       keep = selected, tz = "Europe/London"
     )

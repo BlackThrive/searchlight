@@ -1,0 +1,21 @@
+{
+  "checked": "2026-10-26 10:43:17.540901",
+  "source_sha256": "b485dec92ea71d11c9f2a823c84e45e6df3ccd6bfcbfb8ace2d00545b491a852",
+  "package_version": "0.1.1",
+  "installation": "Fresh temporary package library; existing dependency libraries reused",
+  "installed_package_path_verified": true,
+  "offline_analysis": true,
+  "records": 4657,
+  "parsed_raw_records": 4657,
+  "unknown_ethnicity": 2280,
+  "submitted_force_months": 3,
+  "missing_force_months": 3,
+  "rate_analysis_areas": ["E02006875", "E02006948", "E02002454", "E02002237"],
+  "rate_analysis_records": 769,
+  "installed_vignettes": 4,
+  "date_only_guard_passed": true,
+  "report_tables": 11,
+  "elapsed_seconds": 70.2143,
+  "passed": true,
+  "output": "C:/Users/musta/Dropbox/stop and search/searchlight/data-raw/work/solar-replacement/release-demo"
+}

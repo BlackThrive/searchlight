@@ -60,7 +60,7 @@ Do not hardcode assumptions from this document without checking the live documen
 
 ### 2.5 Astronomical data for veil of darkness
 
-- Use the CRAN package `suncalc` to compute sunset and end of civil twilight from date, latitude, longitude. Handle UK daylight saving transitions explicitly.
+- Compute sunset and end of civil twilight internally with the attributed solar algorithm in `R/solar-times.R`. The maintainer requested removal of the R `suncalc` dependency on 2026-10-26 following its announced archival. Handle UK daylight saving transitions explicitly and preserve the frozen solar and darkness-analysis reference results.
 
 ---
 

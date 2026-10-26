@@ -15,28 +15,12 @@ test_that("unreliable or absent timestamp audits gate all affected records", {
   expect_equal(sl_veil_of_darkness(x)$n, 0)
 })
 
-test_that("batched annual solar bounds match independent location-year calls", {
-  locations <- data.frame(
-    latitude = c(51.5, 53.8, 51.5),
-    longitude = c(-0.1, -1.5, -0.1), year = c(2024L, 2026L, 2026L),
-    location = c(9L, 3L, 7L)
-  )
+test_that("batched annual solar bounds retain the released reference values", {
+  reference <- readRDS(test_path("fixtures", "solar-reference.rds"))
+  locations <- reference$locations
   for (selected in c("sunset", "dusk")) {
     batched <- sl_annual_sun_bounds(locations, selected)
-    for (i in seq_len(nrow(locations))) {
-      x <- locations[i, ]
-      dates <- seq(as.Date(paste0(x$year, "-01-01")),
-        as.Date(paste0(x$year, "-12-31")),
-        by = "day"
-      )
-      solar <- suncalc::getSunlightTimes(
-        date = dates, lat = x$latitude,
-        lon = x$longitude, keep = selected, tz = "Europe/London"
-      )
-      expected <- range(sl_clock_minutes(solar[[selected]]))
-      actual <- batched[batched$location == x$location, ]
-      expect_equal(c(actual$earliest, actual$latest), expected)
-    }
+    expect_equal(batched, reference$bounds[[selected]])
   }
 })
 

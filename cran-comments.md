@@ -1,39 +1,35 @@
-## First submission
+## Maintenance update: searchlight 0.1.1
 
-This is the first CRAN submission of searchlight 0.1.0, for audited analysis
-of police stop and search records. The package has no reverse dependencies.
+This update addresses the CRAN notification that suncalc and its strong reverse
+dependencies are scheduled for archival on 2026-11-16. It removes suncalc from
+Imports. Only sunset and civil-dusk calculations are replaced, using internal
+base-R equations adapted from SunCalc.js 1.9.0, with the complete BSD-2-Clause
+notice included in inst/COPYRIGHTS. No replacement dependency is introduced.
 
-## Current checks (2026-09-22)
+Regression tests compare 17,532 solar-event times with frozen outputs from
+suncalc 0.5.3: all match exactly at whole-second resolution. Both darkness
+designs and both twilight definitions retain the same classifications,
+exclusion audits, coefficients and intervals. Tests also cover leap day,
+UK clock changes, host time-zone independence and unavailable polar events.
 
-* Win-builder, R-devel (2026-09-21 r90579 ucrt), Windows Server 2022 x64:
-  0 errors, 0 warnings, 1 NOTE, solely "New submission". Examples, tests,
-  vignettes and PDF/HTML manuals pass. Results:
-  https://win-builder.r-project.org/J16WE4Ec1bDE/00check.log
-* Linux, macOS and Windows, each with R release 4.6.1, R-devel and R 4.5.3:
-  all nine --as-cran checks pass with 0 errors, warnings or notes, including
-  PDF/HTML manuals. These checks cover the current report implementation:
-  https://github.com/BlackThrive/searchlight/actions/runs/35688724233
-* Exact source archive, Windows 11 x64, R 4.5.2: --as-cran passes with
-  0 errors, warnings or notes, including both manuals. Local online incoming
-  checks and the network clock probe are disabled; win-builder provides the
-  current online incoming check.
+## Current checks (2026-10-26)
 
-All 407 CRAN-mode assertions pass, with two intended CRAN skips. The full
-developer suite includes spatial recovery and visual snapshots; line coverage
-is 95.0433%. Tests and examples run offline with resources capped at two threads.
-The four precomputed vignettes are included. Lint and spelling are clean;
-the 16 package URLs were verified on 2026-09-21 and are unchanged.
+The exact source archive passes R CMD check --as-cran on Windows 11 x64,
+R 4.5.2, with 0 errors, 0 warnings and 0 notes, including PDF/HTML manuals.
+All 489 CRAN-mode assertions pass, with two intended CRAN skips. The full
+developer suite includes spatial recovery and visual snapshots and has
+95.2071% line coverage. Style, lint and spelling checks are clean.
 
-Installed size is 3,200,250 bytes; bundled extdata is 810,818 bytes. Win-builder's
-longest example takes 0.35 seconds. An initial local check had a 16.28-second
-elapsed-time outlier for sl_read_records (0.73 CPU seconds); isolated reruns
-from the same installed archive took 0.53 and 0.17 seconds. The original
-timing and reruns are retained in the validation evidence.
+Build, check, installation and developer coverage were run with suncalc
+unavailable. A fresh installation reparses 4,657 bundled records and produces
+the offline report. Maximum example elapsed time is 0.86 seconds; installed
+size is 3,271,011 bytes.
 
-A fresh installation reparses all 4,657 bundled events, recomputes analyses,
-exercises diagnostics and produces a self-contained HTML report. Sarah Hamed
-and Souci Frissa are coauthors; Mustapha Wasseja is the sole maintainer.
+Local online incoming checks and the network clock probe were disabled.
+Hosted and final win-builder checks remain pending; record their verified
+results here before submitting to CRAN. The earlier win-builder upload
+is still processing and has temporarily blocked upload of the final archive.
 
-Earlier R-hub checks passed on Linux, Windows and Intel macOS R-devel before
-the report presentation changes, with --no-manual --as-cran. They are retained
-as historical evidence, separately from the current checks above.
+Tests, examples and the four precomputed vignettes run offline. Resources
+are capped at two threads. The package's statistical models, public interface
+and agreed human authorship are unchanged.
